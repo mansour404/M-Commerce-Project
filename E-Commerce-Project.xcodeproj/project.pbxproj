@@ -79,6 +79,85 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8413493E2ADEE0C600336B89 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E59AAEE12ADE91F400683168 /* AppDelegate.swift */,
+				E59AAEE32ADE91F400683168 /* SceneDelegate.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8413493F2ADEE0D600336B89 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				E59AAEED2ADE91F500683168 /* Assets.xcassets */,
+				E59AAEEF2ADE91F500683168 /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		841349402ADEE10300336B89 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				841349422ADEE11300336B89 /* CoreData */,
+				841349412ADEE10C00336B89 /* Networking */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		841349412ADEE10C00336B89 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		841349422ADEE11300336B89 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		841349432ADEE14B00336B89 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		841349442ADEE15400336B89 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		841349452ADEE1BF00336B89 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		841349462ADEE1D400336B89 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				841349472ADEE20300336B89 /* ViewModel */,
+				841349432ADEE14B00336B89 /* Model */,
+				841349452ADEE1BF00336B89 /* View */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		841349472ADEE20300336B89 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		E59AAED52ADE91F400683168 = {
 			isa = PBXGroup;
 			children = (
@@ -103,12 +182,13 @@
 		E59AAEE02ADE91F400683168 /* E-Commerce-Project */ = {
 			isa = PBXGroup;
 			children = (
-				E59AAEE12ADE91F400683168 /* AppDelegate.swift */,
-				E59AAEE32ADE91F400683168 /* SceneDelegate.swift */,
+				841349462ADEE1D400336B89 /* Common */,
+				841349442ADEE15400336B89 /* Screens */,
+				841349402ADEE10300336B89 /* Services */,
+				8413493F2ADEE0D600336B89 /* SupportingFiles */,
+				8413493E2ADEE0C600336B89 /* Core */,
 				E59AAEE52ADE91F400683168 /* ViewController.swift */,
 				E59AAEE72ADE91F400683168 /* Main.storyboard */,
-				E59AAEED2ADE91F500683168 /* Assets.xcassets */,
-				E59AAEEF2ADE91F500683168 /* LaunchScreen.storyboard */,
 				E59AAEF22ADE91F500683168 /* Info.plist */,
 				E59AAEEA2ADE91F400683168 /* E_Commerce_Project.xcdatamodeld */,
 			);
