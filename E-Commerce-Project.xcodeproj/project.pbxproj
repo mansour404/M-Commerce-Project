@@ -17,6 +17,12 @@
 		E59AAEFC2ADE91F500683168 /* E_Commerce_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59AAEFB2ADE91F500683168 /* E_Commerce_ProjectTests.swift */; };
 		E59AAF062ADE91F500683168 /* E_Commerce_ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59AAF052ADE91F500683168 /* E_Commerce_ProjectUITests.swift */; };
 		E59AAF082ADE91F500683168 /* E_Commerce_ProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59AAF072ADE91F500683168 /* E_Commerce_ProjectUITestsLaunchTests.swift */; };
+		E59AAF182ADEE70700683168 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = E59AAF172ADEE70700683168 /* SwiftMessages */; };
+		E59AAF1B2ADEE73100683168 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E59AAF1A2ADEE73100683168 /* Alamofire */; };
+		E59AAF1E2ADEE75C00683168 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E59AAF1D2ADEE75C00683168 /* Lottie */; };
+		E59AAF212ADEE78600683168 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = E59AAF202ADEE78600683168 /* Cosmos */; };
+		E59AAF242ADEE81400683168 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E59AAF232ADEE81400683168 /* Kingfisher */; };
+		E59AAF272ADEE84D00683168 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = E59AAF262ADEE84D00683168 /* Reachability */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +65,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E59AAF182ADEE70700683168 /* SwiftMessages in Frameworks */,
+				E59AAF272ADEE84D00683168 /* Reachability in Frameworks */,
+				E59AAF1B2ADEE73100683168 /* Alamofire in Frameworks */,
+				E59AAF212ADEE78600683168 /* Cosmos in Frameworks */,
+				E59AAF1E2ADEE75C00683168 /* Lottie in Frameworks */,
+				E59AAF242ADEE81400683168 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +240,14 @@
 			dependencies = (
 			);
 			name = "E-Commerce-Project";
+			packageProductDependencies = (
+				E59AAF172ADEE70700683168 /* SwiftMessages */,
+				E59AAF1A2ADEE73100683168 /* Alamofire */,
+				E59AAF1D2ADEE75C00683168 /* Lottie */,
+				E59AAF202ADEE78600683168 /* Cosmos */,
+				E59AAF232ADEE81400683168 /* Kingfisher */,
+				E59AAF262ADEE84D00683168 /* Reachability */,
+			);
 			productName = "E-Commerce-Project";
 			productReference = E59AAEDE2ADE91F400683168 /* E-Commerce-Project.app */;
 			productType = "com.apple.product-type.application";
@@ -300,6 +320,14 @@
 				Base,
 			);
 			mainGroup = E59AAED52ADE91F400683168;
+			packageReferences = (
+				E59AAF162ADEE70700683168 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
+				E59AAF192ADEE73100683168 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E59AAF1C2ADEE75C00683168 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				E59AAF1F2ADEE78600683168 /* XCRemoteSwiftPackageReference "Cosmos" */,
+				E59AAF222ADEE81400683168 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				E59AAF252ADEE84D00683168 /* XCRemoteSwiftPackageReference "Reachability" */,
+			);
 			productRefGroup = E59AAEDF2ADE91F400683168 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -682,6 +710,90 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E59AAF162ADEE70700683168 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = exactVersion;
+				version = 9.0.8;
+			};
+		};
+		E59AAF192ADEE73100683168 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = exactVersion;
+				version = 5.8.0;
+			};
+		};
+		E59AAF1C2ADEE75C00683168 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = exactVersion;
+				version = 4.3.3;
+			};
+		};
+		E59AAF1F2ADEE78600683168 /* XCRemoteSwiftPackageReference "Cosmos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/Cosmos";
+			requirement = {
+				kind = exactVersion;
+				version = 23.0.0;
+			};
+		};
+		E59AAF222ADEE81400683168 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = exactVersion;
+				version = 7.9.1;
+			};
+		};
+		E59AAF252ADEE84D00683168 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = exactVersion;
+				version = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E59AAF172ADEE70700683168 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E59AAF162ADEE70700683168 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
+		};
+		E59AAF1A2ADEE73100683168 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E59AAF192ADEE73100683168 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		E59AAF1D2ADEE75C00683168 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E59AAF1C2ADEE75C00683168 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		E59AAF202ADEE78600683168 /* Cosmos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E59AAF1F2ADEE78600683168 /* XCRemoteSwiftPackageReference "Cosmos" */;
+			productName = Cosmos;
+		};
+		E59AAF232ADEE81400683168 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E59AAF222ADEE81400683168 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		E59AAF262ADEE84D00683168 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E59AAF252ADEE84D00683168 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E59AAEEA2ADE91F400683168 /* E_Commerce_Project.xcdatamodeld */ = {
