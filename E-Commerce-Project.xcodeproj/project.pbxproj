@@ -51,6 +51,7 @@
 		E59AAF012ADE91F500683168 /* E-Commerce-ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "E-Commerce-ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59AAF052ADE91F500683168 /* E_Commerce_ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = E_Commerce_ProjectUITests.swift; sourceTree = "<group>"; };
 		E59AAF072ADE91F500683168 /* E_Commerce_ProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = E_Commerce_ProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E59AAF142ADE94D400683168 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +82,7 @@
 		E59AAED52ADE91F400683168 = {
 			isa = PBXGroup;
 			children = (
+				E59AAF142ADE94D400683168 /* README.md */,
 				E59AAEE02ADE91F400683168 /* E-Commerce-Project */,
 				E59AAEFA2ADE91F500683168 /* E-Commerce-ProjectTests */,
 				E59AAF042ADE91F500683168 /* E-Commerce-ProjectUITests */,
