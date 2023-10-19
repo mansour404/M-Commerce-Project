@@ -186,9 +186,12 @@
 		841349442ADEE15400336B89 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				B22B4CE02ADF4A9800CB6954 /* Home */,
 				B22B4CEF2AE0319300CB6954 /* Categories */,
+=======
 				E5814B262AE0E67000D4D60F /* Payment */,
+>>>>>>> 409c5d0 (Start Payment UI)
 				E5814B192AE0BF8F00D4D60F /* Order */,
 				E5814B032ADFD11B00D4D60F /* ShoppingCart */,
 			);
