@@ -10,7 +10,7 @@ import UIKit
 class SettingCell: UITableViewCell {
     
     // MARK: - Vars
-    var settingCellViewModel : SettingCellViewModel? {
+    var settingCellViewModel: SettingCellViewModel? {
         didSet {
             titleLabel.text = settingCellViewModel?.titleText
         }

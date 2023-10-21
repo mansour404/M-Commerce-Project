@@ -18,5 +18,11 @@ class CurrencyCell: UITableViewCell {
         // Initialization code
     }
     
+    var currencyCellViewModel: CurrencyCellViewModel? {
+        didSet {
+            currencyLabel.text = currencyCellViewModel?.currencyCode
+            currencySymbolLabel.text = "\(currencyCellViewModel?.currencyValue ?? 0.0)"
+        }
+    }
     
 }

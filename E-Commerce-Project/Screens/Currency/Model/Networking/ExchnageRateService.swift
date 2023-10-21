@@ -7,9 +7,9 @@
 
 import Foundation
 
-//struct ExchangeRates: Decodable {
-//    let rates: [String: Double]
-//}
+protocol ExchnageRateServiceProtocol {
+    func fetchData(completion: @escaping (Result<ExchangeRatesData?, DataError>) -> Void)
+}
 
 enum DataError: Error {
     case invalidData
@@ -18,16 +18,16 @@ enum DataError: Error {
 }
 
 // MARK: - Exchnage Rate Manager
-final class ExchnageRateManager {
+final class ExchnageRateService: ExchnageRateServiceProtocol {
     
-    static let shared = ExchnageRateManager()
+    static let shared = ExchnageRateService()
     private init() { }
     
     // API Link:  https://www.exchangerate-api.com/docs/free
     let url = URL(string: "https://open.er-api.com/v6/latest/USD")
     //let url2 = URL(string: "https://open.exchangerate-api.com/vp/latest")
     
-    func fetchData(completion: @escaping (Result<ExchangeRates?, DataError>) -> Void) {
+    func fetchData(completion: @escaping (Result<ExchangeRatesData?, DataError>) -> Void) {
         URLSession.shared.dataTask(with: url!) { data, response, error in
             guard let data = data else {
                 completion(.failure(.invalidData))
@@ -39,8 +39,7 @@ final class ExchnageRateManager {
             }
             
             do {
-                let results = try JSONDecoder().decode(ExchangeRates?.self, from: data)
-                //                print(results?.rates ?? "SIIIIII")
+                let results = try JSONDecoder().decode(ExchangeRatesData?.self, from: data)
                 completion(.success(results))
             }
             catch {
@@ -58,7 +57,7 @@ final class MockExchnageRateManager {
     static let shared = MockExchnageRateManager()
     private init() { }
     
-    func fetchDataFromJsonFile() -> ExchangeRates {
+    func fetchDataFromJsonFile() -> ExchangeRatesData {
         let bundle = Bundle(for: type(of: self))
         guard let fileUrl = bundle.url(forResource: "exchangeData.json", withExtension: nil) else {
             fatalError("Could not find exchangeData.json")
@@ -68,7 +67,7 @@ final class MockExchnageRateManager {
         }
         
         let decoder = JSONDecoder()
-        guard let result = try? decoder.decode(ExchangeRates.self, from: exchangeData) else {
+        guard let result = try? decoder.decode(ExchangeRatesData.self, from: exchangeData) else {
             fatalError("There was a problem decoding the data....")
         }
         

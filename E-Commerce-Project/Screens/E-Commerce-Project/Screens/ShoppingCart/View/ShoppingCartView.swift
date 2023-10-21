@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ShoppingCartViewController: UIViewController {
+class ShoppingCartView: UIViewController {
     // MARK: - Vars
     
     
     // MARK: - Outlets
-    @IBOutlet weak var cartTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var orderInfoView: UIView!
     @IBOutlet weak var subtotalLabel: UILabel!
@@ -36,10 +36,10 @@ class ShoppingCartViewController: UIViewController {
 
     // MARK: - Functions
     func configureCartTableView() {
-        cartTableView.dataSource = self
-        cartTableView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
         let nib = UINib(nibName: "ShoppingCartCell", bundle: nil)
-        cartTableView.register(nib, forCellReuseIdentifier: "ShoppingCartCell")
+        tableView.register(nib, forCellReuseIdentifier: "ShoppingCartCell")
     }
     
     func configureCheckoutButton() {
@@ -48,7 +48,7 @@ class ShoppingCartViewController: UIViewController {
 }
 
 // MARK: - Data source
-extension ShoppingCartViewController: UITableViewDataSource {
+extension ShoppingCartView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 7
     }
@@ -60,7 +60,7 @@ extension ShoppingCartViewController: UITableViewDataSource {
 }
 
 // MARK: - Delegate
-extension ShoppingCartViewController: UITableViewDelegate {
+extension ShoppingCartView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 152
     }

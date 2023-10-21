@@ -35,6 +35,7 @@ class SettingViewModel {
         return cellViewModels[indexPath.row]
     }
     
+    // MARK: - Init fetch
     func initFetch() {
         let items = SettingModel.fetchSettings()
         processFetchedItems(items)

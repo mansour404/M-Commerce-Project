@@ -8,6 +8,6 @@
 import Foundation
 
 struct CurrencyCellViewModel {
-    let currencyText: String
-    let currencySymbolText: String
+    var currencyCode: String?
+    var currencyValue: Double?
 }

@@ -110,7 +110,7 @@ extension SettingsView {
 
     func navigateToNextScreen() {
         let vc = AddressListView(nibName: "AddressListView", bundle: nil)
-        vc.passedData = viewModel.selectedItem?.title
+//        vc.passedData = viewModel.selectedItem?.title
         navigationController?.pushViewController(vc, animated: true)
     }
 }
