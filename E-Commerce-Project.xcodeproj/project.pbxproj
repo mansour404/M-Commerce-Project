@@ -77,6 +77,7 @@
 		E5D227D92AE39EE600A56A9A /* exchangeData.json in Resources */ = {isa = PBXBuildFile; fileRef = E5D227D82AE39EE600A56A9A /* exchangeData.json */; };
 		E5D227DD2AE3E3F600A56A9A /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227DC2AE3E3F600A56A9A /* CurrencyViewModel.swift */; };
 		E5D227DF2AE3E41C00A56A9A /* CurrencyCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227DE2AE3E41C00A56A9A /* CurrencyCellViewModel.swift */; };
+		E5D227E22AE41C6600A56A9A /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E5D227E12AE41C6600A56A9A /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5D227E22AE41C6600A56A9A /* IQKeyboardManagerSwift in Frameworks */,
 				E59AAF182ADEE70700683168 /* SwiftMessages in Frameworks */,
 				E59AAF272ADEE84D00683168 /* Reachability in Frameworks */,
 				E59AAF1B2ADEE73100683168 /* Alamofire in Frameworks */,
@@ -682,6 +684,7 @@
 				E59AAF202ADEE78600683168 /* Cosmos */,
 				E59AAF232ADEE81400683168 /* Kingfisher */,
 				E59AAF262ADEE84D00683168 /* Reachability */,
+				E5D227E12AE41C6600A56A9A /* IQKeyboardManagerSwift */,
 			);
 			productName = "E-Commerce-Project";
 			productReference = E59AAEDE2ADE91F400683168 /* E-Commerce-Project.app */;
@@ -762,6 +765,7 @@
 				E59AAF1F2ADEE78600683168 /* XCRemoteSwiftPackageReference "Cosmos" */,
 				E59AAF222ADEE81400683168 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E59AAF252ADEE84D00683168 /* XCRemoteSwiftPackageReference "Reachability" */,
+				E5D227E02AE41C6600A56A9A /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = E59AAEDF2ADE91F400683168 /* Products */;
 			projectDirPath = "";
@@ -1241,6 +1245,14 @@
 				version = 5.1.0;
 			};
 		};
+		E5D227E02AE41C6600A56A9A /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.16;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1273,6 +1285,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E59AAF252ADEE84D00683168 /* XCRemoteSwiftPackageReference "Reachability" */;
 			productName = Reachability;
+		};
+		E5D227E12AE41C6600A56A9A /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5D227E02AE41C6600A56A9A /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 
