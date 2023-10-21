@@ -38,7 +38,6 @@
 		E5814B2E2AE0E6D300D4D60F /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5814B2C2AE0E6D300D4D60F /* PaymentViewController.xib */; };
 		E59AAEE22ADE91F400683168 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59AAEE12ADE91F400683168 /* AppDelegate.swift */; };
 		E59AAEE42ADE91F400683168 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59AAEE32ADE91F400683168 /* SceneDelegate.swift */; };
-		E59AAEEC2ADE91F400683168 /* E_Commerce_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E59AAEEA2ADE91F400683168 /* E_Commerce_Project.xcdatamodeld */; };
 		E59AAEEE2ADE91F500683168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E59AAEED2ADE91F500683168 /* Assets.xcassets */; };
 		E59AAEF12ADE91F500683168 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E59AAEEF2ADE91F500683168 /* LaunchScreen.storyboard */; };
 		E59AAEFC2ADE91F500683168 /* E_Commerce_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59AAEFB2ADE91F500683168 /* E_Commerce_ProjectTests.swift */; };
@@ -79,6 +78,8 @@
 		E5D227E92AE470BA00A56A9A /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227E72AE470B900A56A9A /* AddressCell.swift */; };
 		E5D227EA2AE470BA00A56A9A /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5D227E82AE470B900A56A9A /* AddressCell.xib */; };
 		E5D227EC2AE48BD600A56A9A /* ShoppingCartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5D227EB2AE48BD500A56A9A /* ShoppingCartView.xib */; };
+		E5D227EF2AE495C300A56A9A /* AddressDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227EE2AE495C300A56A9A /* AddressDB.swift */; };
+		E5FF2B972AE49888001D12A2 /* E_Commerce_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5FF2B962AE49888001D12A2 /* E_Commerce_Project.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,7 +132,6 @@
 		E59AAEDE2ADE91F400683168 /* E-Commerce-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Commerce-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59AAEE12ADE91F400683168 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E59AAEE32ADE91F400683168 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E59AAEEB2ADE91F400683168 /* E_Commerce_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = E_Commerce_Project.xcdatamodel; sourceTree = "<group>"; };
 		E59AAEED2ADE91F500683168 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E59AAEF02ADE91F500683168 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E59AAEF22ADE91F500683168 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -169,6 +169,7 @@
 		E5D227E72AE470B900A56A9A /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		E5D227E82AE470B900A56A9A /* AddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCell.xib; sourceTree = "<group>"; };
 		E5D227EB2AE48BD500A56A9A /* ShoppingCartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingCartView.xib; sourceTree = "<group>"; };
+		E5D227EE2AE495C300A56A9A /* AddressDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddressDB.swift; path = CoreData/Model/AddressDB.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +242,8 @@
 		841349422ADEE11300336B89 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				E5FF2B962AE49888001D12A2 /* E_Commerce_Project.xcdatamodeld */,
+				E5D227ED2AE4959C00A56A9A /* Model */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -490,7 +493,6 @@
 				841349402ADEE10300336B89 /* Services */,
 				8413493F2ADEE0D600336B89 /* SupportingFiles */,
 				8413493E2ADEE0C600336B89 /* Core */,
-				E59AAEEA2ADE91F400683168 /* E_Commerce_Project.xcdatamodeld */,
 			);
 			path = "E-Commerce-Project";
 			sourceTree = "<group>";
@@ -680,6 +682,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		E5D227ED2AE4959C00A56A9A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E5D227EE2AE495C300A56A9A /* AddressDB.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -855,7 +865,6 @@
 				E5D227DD2AE3E3F600A56A9A /* CurrencyViewModel.swift in Sources */,
 				E5D227D42AE3799900A56A9A /* Rates.swift in Sources */,
 				E5814B092ADFD19800D4D60F /* ShoppingCartView.swift in Sources */,
-				E59AAEEC2ADE91F400683168 /* E_Commerce_Project.xcdatamodeld in Sources */,
 				B22B4CE72ADFC53300CB6954 /* CopounCollectionViewCell.swift in Sources */,
 				E5D227CE2AE370C300A56A9A /* CurrencyCell.swift in Sources */,
 				E5D2279B2AE321E900A56A9A /* NewAddressView.swift in Sources */,
@@ -876,6 +885,7 @@
 				E5D227B12AE32D1900A56A9A /* SettingViewModel.swift in Sources */,
 				E5814B122AE09BCE00D4D60F /* UIView + Extensions.swift in Sources */,
 				E5D227E92AE470BA00A56A9A /* AddressCell.swift in Sources */,
+				E5D227EF2AE495C300A56A9A /* AddressDB.swift in Sources */,
 				E5814B162AE09C7B00D4D60F /* UIViewController + Extensions.swift in Sources */,
 				E5D227D52AE3799900A56A9A /* ExchangeRatesData.swift in Sources */,
 				E5D227C02AE3598900A56A9A /* ContactUsView.swift in Sources */,
@@ -887,6 +897,7 @@
 				E5814B202AE0C0E500D4D60F /* OrderViewController.swift in Sources */,
 				E5814B182AE0B6AD00D4D60F /* UIButton + Extensions.swift in Sources */,
 				E5D227D72AE37A9B00A56A9A /* ExchnageRateService.swift in Sources */,
+				E5FF2B972AE49888001D12A2 /* E_Commerce_Project.xcdatamodeld in Sources */,
 				E5814B142AE09BF800D4D60F /* UIImageView + Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1314,13 +1325,12 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		E59AAEEA2ADE91F400683168 /* E_Commerce_Project.xcdatamodeld */ = {
+		E5FF2B962AE49888001D12A2 /* E_Commerce_Project.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				E59AAEEB2ADE91F400683168 /* E_Commerce_Project.xcdatamodel */,
 			);
-			currentVersion = E59AAEEB2ADE91F400683168 /* E_Commerce_Project.xcdatamodel */;
-			path = E_Commerce_Project.xcdatamodeld;
+			name = E_Commerce_Project.xcdatamodeld;
+			path = ../../../CoreData/Model/E_Commerce_Project.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
