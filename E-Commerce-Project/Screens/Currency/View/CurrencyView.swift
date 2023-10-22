@@ -15,9 +15,10 @@ class CurrencyView: UIViewController {
     }()
     
     var rates: [String: Double]? = [:]
-
+    
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -28,7 +29,7 @@ class CurrencyView: UIViewController {
         // init view model
         initVM()
     }
-
+    
 }
 
 
@@ -54,7 +55,7 @@ extension CurrencyView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showCurrencyAlert()
+        //showCurrencyAlert()
         //viewModel.userPressed(at: indexPath)
     }
 }
@@ -74,35 +75,84 @@ extension CurrencyView {
         self.navigationItem.title = "Currency"
     }
     
-    private func showCurrencyAlert(_ msg: String = "you are going to change payment currency") {
-        let alert = showAlert(title: "Change currency", msg: msg) { action in
-            print("SIIIIIIIIII")
-            self.dismiss(animated: true)
-        }
-        self.present(alert, animated: true)
+    func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
+    
+//    private func showCurrencyAlert(_ msg: String = "you are going to change payment currency") {
+//        let alert = showAlert(title: "Change currency", msg: msg) { action in
+//            print("SIIIIIIIIII")
+//            self.dismiss(animated: true)
+//        }
+//        self.present(alert, animated: true)
+//    }
 }
 
 // MARK: - Binding
 extension CurrencyView {
     func initVM() {
-        // Naive binding
+        
+        // MARK: Naive binding: Set the 3 closure implementation
+        
+        // 1
+        viewModel.showAlertClosure = { [weak self] () in
+            DispatchQueue.main.async {
+                if let message = self?.viewModel.alertMessage {
+                    self?.showAlert(message)
+                }
+            }
+        }
+        
+        // 2
         viewModel.reloadTableViewClosure = { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
         }
         
-        viewModel.initFetch()
-    }
-    
-    func alertClosure() {
-        viewModel.showAlertClosure = { [weak self] in
-            DispatchQueue.main.async {
-                if let message = self?.viewModel.alertMessage {
-                    self?.showCurrencyAlert(message)
+        // 3
+        viewModel.updateLoadingStatus = { [weak self] () in
+            guard let self = self else {
+                return
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                switch self.viewModel.state {
+                case .empty, .error:
+                    self.activityIndicator.stopAnimating()
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.tableView.alpha = 0.0
+                    })
+                case .loading:
+                    self.activityIndicator.startAnimating()
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.tableView.alpha = 0.0
+                    })
+                case .populated:
+                    self.activityIndicator.stopAnimating()
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.tableView.alpha = 1.0
+                    })
                 }
             }
         }
+        
+        // Finally
+        viewModel.initFetch()
     }
+    
+//    func alertClosure() {
+//        viewModel.showAlertClosure = { [weak self] in
+//            DispatchQueue.main.async {
+//                if let message = self?.viewModel.alertMessage {
+//                    self?.showCurrencyAlert(message)
+//                }
+//            }
+//        }
+//    }
 }

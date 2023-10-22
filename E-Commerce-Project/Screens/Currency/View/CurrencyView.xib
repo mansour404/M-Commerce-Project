@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrencyView" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="Oki-Nv-00J" id="sgP-j4-Gbe"/>
                 <outlet property="tableView" destination="I9i-xq-I7D" id="Oqm-Ue-Wd0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,13 +25,18 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Oki-Nv-00J">
+                    <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="Oki-Nv-00J" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="BcD-CR-esa"/>
                 <constraint firstItem="I9i-xq-I7D" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VDd-ds-gPp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="I9i-xq-I7D" secondAttribute="trailing" id="W2G-sD-aIx"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="I9i-xq-I7D" secondAttribute="bottom" id="eES-IL-647"/>
+                <constraint firstItem="Oki-Nv-00J" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="fDs-FR-Ssv"/>
                 <constraint firstItem="I9i-xq-I7D" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="pog-fT-m2R"/>
             </constraints>
             <point key="canvasLocation" x="63" y="20"/>

@@ -11,14 +11,6 @@ class CurrencyViewModel {
     
     // MARK: - Variables
     let exchnageRateService: ExchnageRateServiceProtocol
-    private var cellViewModels: [CurrencyCellViewModel] = [CurrencyCellViewModel]() {
-        didSet {
-            self.reloadTableViewClosure?()
-        }
-    }
-    
-    
-    
     var selectedCell: String?
     
     // MARK: - Proberties
@@ -34,8 +26,16 @@ class CurrencyViewModel {
     
     // MARK: - Callback
     // callback for interface
-    var numberOfCells: Int {
-        return cellViewModels.count
+    private var cellViewModels: [CurrencyCellViewModel] = [CurrencyCellViewModel]() {
+        didSet {
+            self.reloadTableViewClosure?()
+        }
+    }
+    
+    var state: State = .empty {
+        didSet {
+            self.updateLoadingStatus?()
+        }
     }
     
     var alertMessage: String? {
@@ -44,10 +44,15 @@ class CurrencyViewModel {
         }
     }
     
+    var numberOfCells: Int {
+        return cellViewModels.count
+    }
+    
     // MARK: - Closure
-    // One closure, Implement UI Changes in View By ViewModel object
+    // Three closure, Implement UI Changes in View By ViewModel object, when state is changed.
     var reloadTableViewClosure: (() -> ())?
     var showAlertClosure: (() -> ())?
+    var updateLoadingStatus: (() -> ())?
 
     
     func getCellViewModel( at indexPath: IndexPath ) -> CurrencyCellViewModel {
@@ -56,6 +61,7 @@ class CurrencyViewModel {
     
     // MARK: - Init fetch
     func initFetch() {
+        state = .loading
         exchnageRateService.fetchData { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -65,27 +71,31 @@ class CurrencyViewModel {
                 var values: [Double] = []
                 codes.append(contentsOf: rates.keys)
                 values.append(contentsOf: rates.values)
-                print(codes.count)
-                print(values.count)
+                
                 self.processFetcheditems(codes, values)
+                state = .populated
             case .failure(let error):
+                state = .error
                 print(error.localizedDescription)
             }
         }
     }
     
     func createCellViewModel(_ code: String, _ value: Double) -> CurrencyCellViewModel{
+        
+        // Mainpulate data before return it do what I wish before return.
         return CurrencyCellViewModel(currencyCode: code, currencyValue: value)
     }
     
     private func processFetcheditems(_ currencyCodes: [String], _ currencyValues: [Double]) {
         self.currencyCodes  = currencyCodes
         self.currencyValues = currencyValues
-        var vms = [CurrencyCellViewModel]()
+        var vms = [CurrencyCellViewModel]()  // vms enhance performance, reload tableView only once when vms filled
         for i in 0..<currencyCodes.count {
-            vms.append(createCellViewModel(currencyCodes[i], currencyValues[i]))
+            vms.append(createCellViewModel(currencyCodes[i], currencyValues[i])) // return cellVM with same count of displayed cell, will save them temporally in vms to enhance performance, prevent reload table view for each cell.
         }
-        cellViewModels = vms
+        cellViewModels = vms // cellViewModels has been changed, automatically table view will be reloaded.
+        // cellViewModels will call the closure (reloadTableViewClosure?()), which implemented by viewController in initVM() function.
     }
     
 }

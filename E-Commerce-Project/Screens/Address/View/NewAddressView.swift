@@ -33,3 +33,25 @@ class NewAddressView: UIViewController {
     }
     
 }
+
+/*
+ "addresses": [
+     {
+       "id": 207119551,
+       "customer_id": 6940095564,
+       "first_name": "Bob",
+       "last_name": "Norman",
+       "company": null,
+       "address1": "Chestnut Street 92",
+       "address2": "Apartment 2",
+       "city": "Louisville",
+       "province": "Kentucky",
+       "country": "United States",
+       "zip": "40202",
+       "phone": "555-625-1199",
+       "province_code": "KY",
+       "country_code": "US",
+       "country_name": "United States",
+       "default": true
+     }
+ */

@@ -48,10 +48,10 @@ extension UIViewController {
 // MARK: - Showing alert
 extension UIViewController {
     
-    func showAlert(title: String, msg: String, completion: @escaping (UIAlertAction) -> ()) -> UIAlertController {
-        let alert : UIAlertController = UIAlertController(title: title, message:msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: completion))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        return alert
-    }
+//    func showAlert(title: String, msg: String, completion: @escaping (UIAlertAction) -> ()) -> UIAlertController {
+//        let alert : UIAlertController = UIAlertController(title: title, message:msg, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: completion))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        return alert
+//    }
 }
