@@ -79,10 +79,12 @@
 		E5D227E92AE470BA00A56A9A /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227E72AE470B900A56A9A /* AddressCell.swift */; };
 		E5D227EA2AE470BA00A56A9A /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5D227E82AE470B900A56A9A /* AddressCell.xib */; };
 		E5D227EC2AE48BD600A56A9A /* ShoppingCartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5D227EB2AE48BD500A56A9A /* ShoppingCartView.xib */; };
-		E5E792F92AE5D4FD00311077 /* BaseNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E792F82AE5D4FD00311077 /* BaseNetworkManager.swift */; };
 		E5E792FD2AE5D53E00311077 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E792FA2AE5D53E00311077 /* TargetType.swift */; };
 		E5E792FE2AE5D53E00311077 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E792FB2AE5D53E00311077 /* URLs.swift */; };
 		E5E792FF2AE5D53E00311077 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E792FC2AE5D53E00311077 /* BaseAPI.swift */; };
+		E5E793022AE5D93500311077 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E793012AE5D93500311077 /* ReachabilityManager.swift */; };
+		E5E793052AE5D96A00311077 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E793042AE5D96A00311077 /* BaseViewModel.swift */; };
+		E5E793082AE5D9D500311077 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E793072AE5D9D500311077 /* BaseView.swift */; };
 		E5FF2BA02AE49B2C001D12A2 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FF2B9F2AE49B2C001D12A2 /* Constans.swift */; };
 		E5FF2BA32AE4C4EE001D12A2 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FF2BA22AE4C4EE001D12A2 /* State.swift */; };
 /* End PBXBuildFile section */
@@ -175,10 +177,12 @@
 		E5D227E72AE470B900A56A9A /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		E5D227E82AE470B900A56A9A /* AddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCell.xib; sourceTree = "<group>"; };
 		E5D227EB2AE48BD500A56A9A /* ShoppingCartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingCartView.xib; sourceTree = "<group>"; };
-		E5E792F82AE5D4FD00311077 /* BaseNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkManager.swift; sourceTree = "<group>"; };
 		E5E792FA2AE5D53E00311077 /* TargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		E5E792FB2AE5D53E00311077 /* URLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		E5E792FC2AE5D53E00311077 /* BaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		E5E793012AE5D93500311077 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
+		E5E793042AE5D96A00311077 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		E5E793072AE5D9D500311077 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		E5FF2B9A2AE49A7F001D12A2 /* AddressDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressDB.swift; sourceTree = "<group>"; };
 		E5FF2B9C2AE49A7F001D12A2 /* E_Commerce_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = E_Commerce_Project.xcdatamodel; sourceTree = "<group>"; };
 		E5FF2B9F2AE49B2C001D12A2 /* Constans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
@@ -599,9 +603,32 @@
 				E5E792FC2AE5D53E00311077 /* BaseAPI.swift */,
 				E5E792FA2AE5D53E00311077 /* TargetType.swift */,
 				E5E792FB2AE5D53E00311077 /* URLs.swift */,
-				E5E792F82AE5D4FD00311077 /* BaseNetworkManager.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		E5E793002AE5D90A00311077 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				E5E793012AE5D93500311077 /* ReachabilityManager.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		E5E793032AE5D95700311077 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E5E793042AE5D96A00311077 /* BaseViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E5E793062AE5D9B600311077 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5E793072AE5D9D500311077 /* BaseView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E5FF2B982AE49A7F001D12A2 /* CoreData */ = {
@@ -624,6 +651,8 @@
 		E5FF2B9D2AE49AE6001D12A2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E5E793032AE5D95700311077 /* ViewModel */,
+				E5E793062AE5D9B600311077 /* View */,
 				E5FF2B9E2AE49B2C001D12A2 /* Model */,
 			);
 			path = Common;
@@ -640,6 +669,7 @@
 		E5FF2BA12AE49BB3001D12A2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E5E793002AE5D90A00311077 /* Reachability */,
 				E5E792F72AE5D4D500311077 /* Networking */,
 				E5FF2B982AE49A7F001D12A2 /* CoreData */,
 			);
@@ -820,7 +850,6 @@
 				84AF87A62AE1991A00B7A07E /* ProductInfoViewController.swift in Sources */,
 				E5D227AE2AE3273400A56A9A /* SettingModel.swift in Sources */,
 				E5D227DD2AE3E3F600A56A9A /* CurrencyViewModel.swift in Sources */,
-				E5E792F92AE5D4FD00311077 /* BaseNetworkManager.swift in Sources */,
 				E5D227D42AE3799900A56A9A /* Rates.swift in Sources */,
 				E5814B092ADFD19800D4D60F /* ShoppingCartView.swift in Sources */,
 				B22B4CE72ADFC53300CB6954 /* CopounCollectionViewCell.swift in Sources */,
@@ -829,12 +858,14 @@
 				E5D2279B2AE321E900A56A9A /* NewAddressView.swift in Sources */,
 				E5D227B72AE3302400A56A9A /* SettingCellViewModel.swift in Sources */,
 				E59AAEE22ADE91F400683168 /* AppDelegate.swift in Sources */,
+				E5E793022AE5D93500311077 /* ReachabilityManager.swift in Sources */,
 				E5D227C92AE3707F00A56A9A /* CurrencyView.swift in Sources */,
 				E5D227A42AE3235A00A56A9A /* SettingsView.swift in Sources */,
 				E59AAEE42ADE91F400683168 /* SceneDelegate.swift in Sources */,
 				E5E792FF2AE5D53E00311077 /* BaseAPI.swift in Sources */,
 				E5FF2BA32AE4C4EE001D12A2 /* State.swift in Sources */,
 				E56E66552AE512AF00B42335 /* MeView.swift in Sources */,
+				E5E793082AE5D9D500311077 /* BaseView.swift in Sources */,
 				B22B4CEB2ADFC55600CB6954 /* BrandsCollectionViewCell.swift in Sources */,
 				841816F72AE522A8007B674C /* ReviewCollectionViewCell.swift in Sources */,
 				845B19E62AE31FDA008D196B /* sectionHeader.swift in Sources */,
@@ -857,6 +888,7 @@
 				E5D227BC2AE3571C00A56A9A /* AboutAppView.swift in Sources */,
 				E5D227DF2AE3E41C00A56A9A /* CurrencyCellViewModel.swift in Sources */,
 				E5814B202AE0C0E500D4D60F /* OrderViewController.swift in Sources */,
+				E5E793052AE5D96A00311077 /* BaseViewModel.swift in Sources */,
 				E5814B182AE0B6AD00D4D60F /* UIButton + Extensions.swift in Sources */,
 				E5D227D72AE37A9B00A56A9A /* ExchnageRateService.swift in Sources */,
 				E5814B142AE09BF800D4D60F /* UIImageView + Extensions.swift in Sources */,

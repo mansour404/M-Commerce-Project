@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+// mapping http metods with almofire
 enum HTTPMethod: String {
     case get = "GET"
     case delete = "DELETE"
