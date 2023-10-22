@@ -11,3 +11,16 @@ struct CellIdentifier {
     static let copounCollectionViewCell = "CopounCollectionViewCell"
     static let brandsCollectionViewCell = "BrandsCollectionViewCell"
 }
+
+struct ErrorMessage {
+    static let genericError = "Some Thing going wrong, Please try again later."
+}
+
+struct ConnectivityMessage {
+    static let alertTitle = "No internet connection!"
+    static let alertMessage = "Please connect to the internet and try again."
+    
+    static let noInternet = "No internet connection!"
+    static let wifiConnect = "Connected by wifi"
+    static let cellularConnect = "Connected by cellular"
+}
