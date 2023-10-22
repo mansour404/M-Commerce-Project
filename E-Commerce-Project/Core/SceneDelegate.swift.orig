@@ -16,7 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
    
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+<<<<<<< HEAD
+        let rootViewController = ProductInfoViewController()
+=======
         let rootViewController = CurrencyView()
+>>>>>>> 094255f (Add setting, about app, contact us, and currency screen ui.)
         window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.makeKeyAndVisible()
     }

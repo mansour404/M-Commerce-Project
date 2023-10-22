@@ -39,6 +39,7 @@ class OrderViewController: UIViewController {
     func configureCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        // Register cell
         let nib = UINib(nibName: "ProductItemCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "ProductItemCell")
     }
