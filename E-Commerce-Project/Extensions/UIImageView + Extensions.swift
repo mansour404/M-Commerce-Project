@@ -21,10 +21,10 @@ extension UIImageView {
             guard let self = self else { return }
             switch result {
             case .success(let imageRes):
-                image = imageRes.image
+                self.image = imageRes.image
             case .failure(let error):
                 print(error.localizedDescription)
-                image = UIImage(named: placeHolder)
+                self.image = UIImage(named: placeHolder)
             }
         }
     }
