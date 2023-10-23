@@ -286,26 +286,6 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		841349442ADEE15400336B89 /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				DCE146DC2AE6877500B37C03 /* profile */,
-				B2DD780E2AE683540082CADE /* Products */,
-				B2DD78002AE6834B0082CADE /* userOrders */,
-				B2DD77F62AE6833F0082CADE /* Category */,
-				B2DD77E62AE6831A0082CADE /* Home */,
-				DCE146C22AE64EAF00B37C03 /* Favourites */,
-				DCE146C72AE64EB000B37C03 /* Login and SignUp */,
-				E5D227C22AE36F4200A56A9A /* Currency */,
-				E5D227A12AE3233200A56A9A /* Settings */,
-				E5D2278F2AE3214300A56A9A /* Address */,
-				E5814B192AE0BF8F00D4D60F /* Order */,
-				E5E793102AE5F3F100311077 /* Payment */,
-				E5814B032ADFD11B00D4D60F /* ShoppingCart */,
-			);
-			path = Screens;
-			sourceTree = "<group>";
-		};
 		B2DD77E62AE6831A0082CADE /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,13 +422,47 @@
 			path = Product_Info;
 			sourceTree = "<group>";
 		};
+		DCE147142AE6D41800B37C03 /* Set 1 */ = {
+			isa = PBXGroup;
+			children = (
+				B2DD780E2AE683540082CADE /* Products */,
+				B2DD77F62AE6833F0082CADE /* Category */,
+				B2DD77E62AE6831A0082CADE /* Home */,
+			);
+			path = "Set 1";
+			sourceTree = "<group>";
+		};
+		DCE147152AE6D43E00B37C03 /* Set 2 */ = {
+			isa = PBXGroup;
+			children = (
+				DCE146DC2AE6877500B37C03 /* profile */,
+				B2DD78002AE6834B0082CADE /* userOrders */,
+				E5D227C22AE36F4200A56A9A /* Currency */,
+				E5D227A12AE3233200A56A9A /* Settings */,
+				E5D2278F2AE3214300A56A9A /* Address */,
+				E5814B192AE0BF8F00D4D60F /* Order */,
+				E5E793102AE5F3F100311077 /* Payment */,
+				E5814B032ADFD11B00D4D60F /* ShoppingCart */,
+			);
+			path = "Set 2";
+			sourceTree = "<group>";
+		};
+		DCE147162AE6D45900B37C03 /* set 3 */ = {
+			isa = PBXGroup;
+			children = (
+				DCE147042AE6CED300B37C03 /* Product_Info */,
+				DCE146C22AE64EAF00B37C03 /* Favourites */,
+				DCE146C72AE64EB000B37C03 /* Login and SignUp */,
+			);
+			path = "set 3";
+			sourceTree = "<group>";
+		};
 		E5814B032ADFD11B00D4D60F /* ShoppingCart */ = {
 			isa = PBXGroup;
 			children = (
 				E5814B042ADFD13600D4D60F /* View */,
 			);
-			name = ShoppingCart;
-			path = "E-Commerce-Project/Screens/ShoppingCart";
+			path = ShoppingCart;
 			sourceTree = "<group>";
 		};
 		E5814B042ADFD13600D4D60F /* View */ = {
@@ -532,11 +546,12 @@
 		E59AAEE02ADE91F400683168 /* E-Commerce-Project */ = {
 			isa = PBXGroup;
 			children = (
-				DCE147042AE6CED300B37C03 /* Product_Info */,
+				DCE147162AE6D45900B37C03 /* set 3 */,
+				DCE147152AE6D43E00B37C03 /* Set 2 */,
+				DCE147142AE6D41800B37C03 /* Set 1 */,
 				E5FF2BA12AE49BB3001D12A2 /* Services */,
 				E5FF2B9D2AE49AE6001D12A2 /* Common */,
 				E5814B102AE09B9500D4D60F /* Extensions */,
-				841349442ADEE15400336B89 /* Screens */,
 				8413493F2ADEE0D600336B89 /* SupportingFiles */,
 				8413493E2ADEE0C600336B89 /* Core */,
 			);
