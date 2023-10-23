@@ -16,9 +16,9 @@ enum MessagesTheme {
     case error
 }
 
+// MARK: - Display message for network connection
 extension UIViewController {
     
-    // MARK: - Display message for network connection
     func displayMessage(_ message: String, theme: MessagesTheme) {
         let view = MessageView.viewFromNib(layout: MessageView.Layout.cardView)
         switch theme {
@@ -42,5 +42,16 @@ extension UIViewController {
         view.button?.isHidden = true
         SwiftMessages.show(view: view)
     }
+}
+
+
+// MARK: - Showing alert
+extension UIViewController {
     
+//    func showAlert(title: String, msg: String, completion: @escaping (UIAlertAction) -> ()) -> UIAlertController {
+//        let alert : UIAlertController = UIAlertController(title: title, message:msg, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: completion))
+//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//        return alert
+//    }
 }

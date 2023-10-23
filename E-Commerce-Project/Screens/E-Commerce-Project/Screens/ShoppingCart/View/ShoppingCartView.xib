@@ -9,14 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShoppingCartViewController" customModule="E_Commerce_Project" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShoppingCartView" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
-                <outlet property="cartTableView" destination="qbF-y5-EDu" id="QTo-qx-0bM"/>
                 <outlet property="checkoutButton" destination="Dbd-ij-sOv" id="xcq-Ww-E6f"/>
                 <outlet property="emptyView" destination="Ghh-x4-erE" id="Fjr-Zc-bvL"/>
                 <outlet property="orderInfoView" destination="rai-jf-tZg" id="DUA-gi-2E9"/>
                 <outlet property="shippingCostLabel" destination="ePu-Hc-NVs" id="8Uk-RC-NnM"/>
                 <outlet property="subtotalLabel" destination="ofL-Hh-G2Y" id="gWi-9c-XlW"/>
+                <outlet property="tableView" destination="qbF-y5-EDu" id="QTo-qx-0bM"/>
                 <outlet property="totalLabel" destination="Euw-GU-6SU" id="Sr9-Pn-LLF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -26,7 +26,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghh-x4-erE" userLabel="Container View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ghh-x4-erE" userLabel="emptyView">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.fill.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="RMa-VU-iBb">
