@@ -9,6 +9,29 @@ import UIKit
 
 class ProductInfoViewController: UIViewController {
     
+    @IBAction func tap_on_text(_ sender: AnyObject) {
+        if (addToCartView.isHidden == true) {
+            showAddToCart()
+        }
+        else {
+            hideAddToCart()
+        }
+        
+        print("toggle add to cart")
+    }
+    
+    let heartButton = UIButton(type: .custom) // treat it as an outlet
+    var heartIsFilled : Bool = true;
+    
+    func toggleHeart () {
+        if heartIsFilled {
+            heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        else {
+            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        heartIsFilled = !heartIsFilled
+    }
     
     @IBOutlet weak var addToCartView: UIView!
     @IBOutlet weak var scroll_and_add_to_cart_vertical_spacing: NSLayoutConstraint!
@@ -112,6 +135,28 @@ class ProductInfoViewController: UIViewController {
         
     }
     
+    private func addFavouriteButton() -> UIBarButtonItem {
+        
+        heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        heartButton.tintColor = UIColor.systemPurple
+        heartButton.addTarget(self, action: #selector(heartButtonPressed), for: .touchUpInside)
+
+        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
+        return heartBarButtonItem
+    }
+    
+    @objc func heartButtonPressed(sender: UIButton) {
+//        let vc = FavouriteListVCViewController(nibName: "FavouriteListVCViewController", bundle: nil)
+//        // passing data before navigation
+//        //navigationController?.pushViewController(vc, animated: true)
+//        vc.modalPresentationStyle = .automatic
+//        self.present(vc, animated: true)
+        print("heart button is pressed")
+        
+        toggleHeart()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,6 +165,8 @@ class ProductInfoViewController: UIViewController {
         setReviewsView()
         
         hideAddToCart()
+        
+        navigationItem.setRightBarButtonItems([addFavouriteButton()], animated: true)
         
     }
     

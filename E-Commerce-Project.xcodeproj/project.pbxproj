@@ -425,6 +425,7 @@
 		DCE147142AE6D41800B37C03 /* Set 1 */ = {
 			isa = PBXGroup;
 			children = (
+				B2DD78002AE6834B0082CADE /* userOrders */,
 				B2DD780E2AE683540082CADE /* Products */,
 				B2DD77F62AE6833F0082CADE /* Category */,
 				B2DD77E62AE6831A0082CADE /* Home */,
@@ -436,7 +437,6 @@
 			isa = PBXGroup;
 			children = (
 				DCE146DC2AE6877500B37C03 /* profile */,
-				B2DD78002AE6834B0082CADE /* userOrders */,
 				E5D227C22AE36F4200A56A9A /* Currency */,
 				E5D227A12AE3233200A56A9A /* Settings */,
 				E5D2278F2AE3214300A56A9A /* Address */,
