@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddressListView" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
+                <outlet property="addNewAddressButton" destination="a7d-MW-371" id="qew-Ni-5eo"/>
                 <outlet property="continueButton" destination="aew-Zh-YhQ" id="nX9-Xh-wN9"/>
                 <outlet property="emptyView" destination="j3Q-GF-nKr" id="ZNg-9H-cvg"/>
                 <outlet property="tableView" destination="nxz-hG-I9s" id="WHv-B4-0n1"/>
@@ -22,11 +23,11 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3Q-GF-nKr" userLabel="emptyView">
+                <view contentMode="scaleToFill" restorationIdentifier="AddressListView" translatesAutoresizingMaskIntoConstraints="NO" id="j3Q-GF-nKr" userLabel="emptyView">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="818"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.slash.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9FJ-bV-cr4">
-                            <rect key="frame" x="76.666666666666686" y="310" width="240" height="118.33333333333331"/>
+                            <rect key="frame" x="76.666666666666686" y="309.33333333333331" width="240" height="119"/>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" id="EDN-XN-NsQ"/>
@@ -59,7 +60,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="nxz-hG-I9s">
-                    <rect key="frame" x="0.0" y="59" width="393" height="699"/>
+                    <rect key="frame" x="0.0" y="99" width="393" height="659"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mSo-qP-6aP" userLabel="checkoutView">
@@ -87,19 +88,35 @@
                         <constraint firstItem="aew-Zh-YhQ" firstAttribute="centerX" secondItem="mSo-qP-6aP" secondAttribute="centerX" id="zjV-fU-VaX"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7d-MW-371">
+                    <rect key="frame" x="225" y="49" width="160" height="50"/>
+                    <color key="backgroundColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="AQx-dF-Bd1"/>
+                        <constraint firstAttribute="width" constant="160" id="YRB-3I-YCm"/>
+                    </constraints>
+                    <color key="tintColor" red="0.90588235859999999" green="0.90980386729999996" blue="0.91764706370000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="add new address"/>
+                    <connections>
+                        <action selector="addNewAddressButtonPressed:" destination="-1" eventType="touchUpInside" id="asc-ce-g7A"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="mSo-qP-6aP" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="53v-d1-exP"/>
                 <constraint firstItem="j3Q-GF-nKr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9PR-jy-An4"/>
-                <constraint firstItem="nxz-hG-I9s" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="AVn-3a-jpH"/>
+                <constraint firstItem="nxz-hG-I9s" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="AVn-3a-jpH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="a7d-MW-371" secondAttribute="trailing" constant="8" id="AaU-oZ-cJW"/>
                 <constraint firstItem="mSo-qP-6aP" firstAttribute="top" secondItem="nxz-hG-I9s" secondAttribute="bottom" id="JM0-eP-Gbm"/>
                 <constraint firstItem="mSo-qP-6aP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="LlR-nB-7yh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="j3Q-GF-nKr" secondAttribute="bottom" id="RaB-z8-hlS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="mSo-qP-6aP" secondAttribute="bottom" id="To4-bN-Zei"/>
                 <constraint firstItem="nxz-hG-I9s" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WPw-TK-0FW"/>
                 <constraint firstItem="nxz-hG-I9s" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="gFH-CH-tLv"/>
+                <constraint firstItem="nxz-hG-I9s" firstAttribute="top" secondItem="a7d-MW-371" secondAttribute="bottom" id="qmX-bj-dFt"/>
                 <constraint firstItem="j3Q-GF-nKr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vKX-Yl-lvQ"/>
                 <constraint firstItem="j3Q-GF-nKr" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="vaT-yZ-do5"/>
             </constraints>
@@ -108,7 +125,7 @@
     </objects>
     <resources>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="104"/>
-        <image name="location.slash.fill" catalog="system" width="128" height="119"/>
+        <image name="location.slash.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

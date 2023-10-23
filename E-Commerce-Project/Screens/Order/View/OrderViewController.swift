@@ -33,6 +33,12 @@ class OrderViewController: UIViewController {
     }
     
     @IBAction func checkoutButtonPressed(_ sender: Any) {
+        // PaymentView
+        let vc = PaymentView(nibName: "PaymentView", bundle: nil)
+        // passing data before navigation
+        //navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
     }
     
     // MARK: - Function

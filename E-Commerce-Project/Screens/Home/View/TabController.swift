@@ -22,6 +22,8 @@ class TabController: UITabBarController {
     private func setUpTabs(){
         let homeController = HomeViewController()
         let categoryController = CategoriesViewController()
+        let profileController = ProfileView()
+
         
 //        let home = UINavigationController(rootViewController: homeController)
 //        let category = UINavigationController(rootViewController: categoryController)
@@ -30,9 +32,11 @@ class TabController: UITabBarController {
         
         let categoryVC = self.createNav(with: "Category", and: UIImage(named: "Category"), vc: categoryController)
         
+        let profileVC = self.createNav(with: "Me", and: UIImage(named: "Me1"), vc: profileController)
+        
         
 //        let me = self.createNav(with: "Me", and: UIImage(named: "Me"), vc: HomeViewController())
-        self.setViewControllers([homeVC , categoryVC], animated: true)
+        self.setViewControllers([homeVC , categoryVC , profileVC], animated: true)
         
     }
     

@@ -29,7 +29,7 @@ class NewAddressView: UIViewController {
 
     // MARK: - Actions
     @IBAction func saveAddressButtonPressed(_ sender: Any) {
-        
+        self.dismiss(animated: true)
     }
     
 }

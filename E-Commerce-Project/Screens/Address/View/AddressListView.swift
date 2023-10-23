@@ -13,7 +13,7 @@ class AddressListView: UIViewController {
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIView!
-
+    @IBOutlet weak var addNewAddressButton: UIButton!
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -25,7 +25,19 @@ class AddressListView: UIViewController {
 
     // MARK: - Actions
     @IBAction func continueButtonPressed(_ sender: Any) {
-        
+        let vc = OrderViewController(nibName: "OrderViewController", bundle: nil)
+        // passing data before navigation
+        //navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
+    }
+    
+    @IBAction func addNewAddressButtonPressed(_ sender: Any) {
+        let vc = NewAddressView(nibName: "NewAddressView", bundle: nil)
+        // passing data before navigation
+        //navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
     }
     
     // MARK: - Functions
@@ -38,13 +50,14 @@ class AddressListView: UIViewController {
     
     func configureCheckoutButton() {
         continueButton.addCornerRadius()
+        addNewAddressButton.addCornerRadius()
     }
 }
 
 // MARK: - Data source
 extension AddressListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

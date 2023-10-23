@@ -9,7 +9,7 @@ import UIKit
 
 class ShoppingCartView: UIViewController {
     // MARK: - Vars
-    
+     // ProductInfoViewController
     
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -31,6 +31,11 @@ class ShoppingCartView: UIViewController {
     
     // MARK: - Actions
     @IBAction func checkoutButtonPressed(_ sender: Any) {
+        let vc = AddressListView(nibName: "AddressListView", bundle: nil)
+        // passing data before navigation
+        //navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
     }
     
 
@@ -50,7 +55,7 @@ class ShoppingCartView: UIViewController {
 // MARK: - Data source
 extension ShoppingCartView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,4 +69,13 @@ extension ShoppingCartView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 152
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = ProductInfoViewController(nibName: "ProductInfoViewController", bundle: nil)
+        // passing data before navigation
+        //navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
+    }
 }
+

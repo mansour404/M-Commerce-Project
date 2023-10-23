@@ -24,6 +24,8 @@ class HomeViewController: UIViewController {
 //        pageConroller.numberOfPages = coupons.count
 //        startTimer()
         
+        navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
+
     }
     // MARK: - Configure CollectionView
     private func configureCollectionView() {
@@ -37,6 +39,45 @@ class HomeViewController: UIViewController {
         
         brandsCollectionView.register(UINib(nibName: CellIdentifier.brandsCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.brandsCollectionViewCell)
     }
+    
+    private func addFavouriteButton() -> UIBarButtonItem {
+        let heartButton = UIButton(type: .custom)
+        heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        heartButton.tintColor = UIColor.systemPurple
+        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
+
+        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
+        return heartBarButtonItem
+    }
+    
+    private func addShoppingCartButton() -> UIBarButtonItem {
+        let heartButton = UIButton(type: .custom)
+        heartButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        heartButton.tintColor = UIColor.systemPurple
+        heartButton.addTarget(self, action: #selector(navigateToShoppingCart), for: .touchUpInside)
+
+        let shoppingCartBarButtonItem = UIBarButtonItem(customView: heartButton)
+        return shoppingCartBarButtonItem
+    }
+    
+    @objc func navigateToFavourites(sender: UIButton) {
+        let vc = FavouriteListVCViewController(nibName: "FavouriteListVCViewController", bundle: nil)
+        // passing data before navigation
+        //navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
+        
+    }
+    
+    @objc func navigateToShoppingCart(sender: UIButton) {
+        let vc = ShoppingCartView(nibName: "ShoppingCartView", bundle: nil)
+        // passing data before navigation
+        //navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .automatic
+        self.present(vc, animated: true)
+        
+    }
+    
     // MARK: - Go to next coupon
 //    func startTimer(){
 //        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
@@ -78,7 +119,7 @@ extension HomeViewController:UICollectionViewDataSource {
         } else {
                 let vc = ProductsViewController()
         //        navigationController?.pushViewController(vc, animated: true)
-                vc.modalPresentationStyle = .fullScreen
+            vc.modalPresentationStyle = .automatic
                 self.present(vc, animated: true)
             }
         }
