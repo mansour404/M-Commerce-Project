@@ -10,6 +10,9 @@ import UIKit
 class OptionCollectionViewCell: UICollectionViewCell {
     
     
+    @IBOutlet weak var button_container: UIView!
+    
+    
     @IBOutlet weak var optionButton: UIButton!
     
     func setOptionValue (value : String) {
@@ -19,6 +22,9 @@ class OptionCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        button_container.layer.cornerRadius = 20
+        button_container.clipsToBounds = true
+        button_container.dropShadow()
     }
 
 }

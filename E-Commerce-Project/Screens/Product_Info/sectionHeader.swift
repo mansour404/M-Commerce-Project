@@ -23,7 +23,7 @@ class sectionHeader: UICollectionReusableView {
         setupConstraints()
         
         header.text = value
-        header.backgroundColor = .red
+        header.backgroundColor = .systemBackground
     }
     
     private func setupConstraints() {

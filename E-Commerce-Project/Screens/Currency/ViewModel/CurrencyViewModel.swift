@@ -73,9 +73,9 @@ class CurrencyViewModel {
                 values.append(contentsOf: rates.values)
                 
                 self.processFetcheditems(codes, values)
-                state = .populated
+                self.state = .populated
             case .failure(let error):
-                state = .error
+                self.state = .error
                 print(error.localizedDescription)
             }
         }

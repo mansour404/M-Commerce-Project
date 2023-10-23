@@ -31,16 +31,16 @@ class BaseViewModel { // Base ViewModel for connectivity
             guard let self = self else { return }
             switch connection {
             case .none:
-                isConnected = false
+                self.isConnected = false
                 view?.displayMessage(ConnectivityMessage.noInternet, theme: .warning)
             case .unavailable:
-                isConnected = false
+                self.isConnected = false
                 view?.displayMessage(ConnectivityMessage.noInternet, theme: .warning)
             case .wifi:
-                isConnected = true
+                self.isConnected = true
                 view?.displayMessage(ConnectivityMessage.wifiConnect, theme: .success)
             case .cellular:
-                isConnected = true
+                self.isConnected = true
                 view?.displayMessage(ConnectivityMessage.cellularConnect, theme: .success)
             }
         })
