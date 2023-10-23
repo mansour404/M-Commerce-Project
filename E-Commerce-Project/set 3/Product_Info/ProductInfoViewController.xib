@@ -164,25 +164,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Select color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvX-SY-Kyg">
-                                                    <rect key="frame" x="93.333333333333343" y="0.0" width="103.33333333333334" height="30"/>
+                                                    <rect key="frame" x="93.333333333333343" y="0.0" width="299.66666666666663" height="30"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7E-pk-vMF">
-                                                    <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="196.33333333333337" id="fbx-Nk-CmU"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                                    <connections>
-                                                        <action selector="tap_on_text:" destination="-1" eventType="touchUpInside" id="IuG-nt-8Ou"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Z7E-pk-vMF" firstAttribute="leading" secondItem="nvX-SY-Kyg" secondAttribute="trailing" constant="-5.6843418860808015e-14" id="ALe-8p-yhv"/>
                                                 <constraint firstAttribute="height" constant="30" id="UxX-Iw-wNA"/>
                                             </constraints>
                                         </stackView>

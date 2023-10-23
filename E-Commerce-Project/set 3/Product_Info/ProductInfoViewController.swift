@@ -9,17 +9,6 @@ import UIKit
 
 class ProductInfoViewController: UIViewController {
     
-    @IBAction func tap_on_text(_ sender: AnyObject) {
-        if (addToCartView.isHidden == true) {
-            showAddToCart()
-        }
-        else {
-            hideAddToCart()
-        }
-        
-        print("toggle add to cart")
-    }
-    
     let heartButton = UIButton(type: .custom) // treat it as an outlet
     var heartIsFilled : Bool = true;
     
@@ -333,9 +322,15 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if (collectionView == optionsCollectionView) {
-            
+        if (addToCartView.isHidden == true) {
+            showAddToCart()
         }
+        else {
+            hideAddToCart()
+        }
+        
+        print("toggle add to cart")
+        print("an item is pressed")
     }
     
     

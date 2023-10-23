@@ -73,6 +73,12 @@ class ProductsViewController: UIViewController {
             return cell
             
         }
+        
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let vc = ProductInfoViewController(nibName: "ProductInfoViewController", bundle: nil)
+            vc.modalPresentationStyle = .automatic
+            self.present(vc, animated: true)
+        }
     }
 // MARK: - UICollectionView Delegate
 
