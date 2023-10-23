@@ -10,11 +10,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductInfoViewController" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
+                <outlet property="addToCartView" destination="q3b-gI-vJm" id="Xxc-DZ-pxF"/>
                 <outlet property="optionsCollectionView" destination="i9M-8e-mEj" id="Y7S-jf-yDl"/>
                 <outlet property="optionsHeight" destination="m6B-4U-mls" id="AUX-Cb-D8x"/>
                 <outlet property="productImagesCollectionView" destination="pUR-Te-URW" id="c4W-B3-Wn1"/>
                 <outlet property="reviewsCollectionView" destination="zek-UK-BxI" id="UQt-Ds-gHN"/>
                 <outlet property="reviewsHeight" destination="p30-tJ-5Cc" id="yIm-Le-YBu"/>
+                <outlet property="scroll_and_add_to_cart_vertical_spacing" destination="e4M-55-wTs" id="Ql6-GK-Ivl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDt-ki-M2L">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="652"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8yI-2B-Mrc">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="1141"/>
@@ -245,16 +247,26 @@ any time of year.</string>
                     <viewLayoutGuide key="contentLayoutGuide" id="j3v-lL-Hud"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="QQb-Wn-hiz"/>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3b-gI-vJm" userLabel="add_to_cart_view">
+                    <rect key="frame" x="0.0" y="711" width="393" height="107"/>
+                    <color key="backgroundColor" systemColor="systemTealColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="107" id="EqC-Im-Bbv"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="8yI-2B-Mrc" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" id="0sv-Ga-MK2"/>
                 <constraint firstItem="KDt-ki-M2L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="J6g-mM-h7Q"/>
+                <constraint firstItem="q3b-gI-vJm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="N3k-i8-Kho"/>
                 <constraint firstItem="KDt-ki-M2L" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Qxa-wQ-d5v"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q3b-gI-vJm" secondAttribute="trailing" id="ZZQ-tq-vWF"/>
                 <constraint firstItem="KDt-ki-M2L" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="cmC-4I-CI7"/>
+                <constraint firstItem="q3b-gI-vJm" firstAttribute="top" secondItem="KDt-ki-M2L" secondAttribute="bottom" id="e4M-55-wTs"/>
                 <constraint firstItem="8yI-2B-Mrc" firstAttribute="height" secondItem="fnl-2z-Ty3" secondAttribute="height" priority="250" id="l6a-wC-WdF"/>
-                <constraint firstItem="KDt-ki-M2L" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="zIp-8f-9w3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="q3b-gI-vJm" secondAttribute="bottom" id="zUO-dO-e8Q"/>
             </constraints>
             <point key="canvasLocation" x="46.564885496183201" y="20.422535211267608"/>
         </view>
@@ -268,6 +280,9 @@ any time of year.</string>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

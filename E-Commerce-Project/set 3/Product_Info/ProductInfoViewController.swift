@@ -9,6 +9,10 @@ import UIKit
 
 class ProductInfoViewController: UIViewController {
     
+    
+    @IBOutlet weak var addToCartView: UIView!
+    @IBOutlet weak var scroll_and_add_to_cart_vertical_spacing: NSLayoutConstraint!
+    
     @IBOutlet weak var reviewsHeight: NSLayoutConstraint!
     @IBOutlet weak var reviewsCollectionView: UICollectionView!
     
@@ -115,7 +119,27 @@ class ProductInfoViewController: UIViewController {
         setproductImagesCollectionView()
         setReviewsView()
         
+        hideAddToCart()
+        
     }
+    
+    func showAddToCart () {
+        if (addToCartView.isHidden) {
+            scroll_and_add_to_cart_vertical_spacing.constant = 0;
+            addToCartView.isHidden = false;
+            view.layoutIfNeeded()
+        }
+    }
+    
+    func hideAddToCart () {
+        if (!addToCartView.isHidden) {
+            scroll_and_add_to_cart_vertical_spacing.constant = -addToCartView.frame.height;
+            addToCartView.isHidden = true
+            view.layoutIfNeeded()
+        }
+    }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -126,6 +150,8 @@ class ProductInfoViewController: UIViewController {
         
         height = reviewsCollectionView.collectionViewLayout.collectionViewContentSize.height
         reviewsHeight.constant = height
+        
+        
         
         view.layoutIfNeeded()
         
@@ -258,4 +284,12 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
         
         return CGSize (width: 100, height: 100)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (collectionView == optionsCollectionView) {
+            
+        }
+    }
+    
+    
 }
