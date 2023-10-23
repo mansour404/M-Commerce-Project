@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Home"
+//        navigationItem.title = "Home"
         configureCollectionView()
 //        pageConroller.numberOfPages = coupons.count
 //        startTimer()
@@ -75,9 +75,15 @@ extension HomeViewController:UICollectionViewDataSource {
             let alert = UIAlertController(title: "Congratulations", message: "Enjoy your discount", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+        } else {
+                let vc = ProductsViewController()
+        //        navigationController?.pushViewController(vc, animated: true)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
         }
     }
-}
+
         
 // MARK: - UICollectionView Delegate
 extension HomeViewController: UICollectionViewDelegate , UICollectionViewDelegateFlowLayout

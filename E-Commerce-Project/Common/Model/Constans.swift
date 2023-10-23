@@ -10,6 +10,8 @@ import Foundation
 struct CellIdentifier {
     static let copounCollectionViewCell = "CopounCollectionViewCell"
     static let brandsCollectionViewCell = "BrandsCollectionViewCell"
+    static let submainCollectionViewCell = "SubmainCollectionViewCell"
+    static let UserOrderCell = "UserOrderCell"
 }
 
 struct ErrorMessage {
