@@ -32,3 +32,53 @@ protocol TargetType {
     var task: Task { get }
     var headers: [String: String]? { get }
 }
+
+enum EndPoint : TargetType {
+    
+    case brands
+    case all_products
+    
+    var baseURL: String {
+        switch self {
+        case .brands
+            return ""
+        case .all_products
+            return ""
+        }
+        default
+            return ""
+    }
+    
+    var pathURL: String {
+        switch self {
+        case .brands
+            return ""
+        case .all_products
+            return ""
+        }
+    }
+    
+    var method: HTTPMethod {
+        switch self {
+        case .brands
+            return HTTPMethod.get
+        case .all_products
+            return HTTPMethod.get
+        }
+    }
+    
+    var task: Task {
+        switch self {
+        case.brands
+            return requestPlain
+        case .all_products
+            return requestPlain
+        }
+    }
+    
+    var headers: [String : String]? {
+        return nil
+    }
+    
+    
+}
