@@ -32,6 +32,8 @@ class ProductInfoViewController: UIViewController {
         reviewsCollectionView.delegate = self;
         reviewsCollectionView.dataSource = self;
         
+        
+        
         reviewsCollectionView.register(UINib(nibName: "ReviewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ReviewCollectionViewCell")
     }
     
@@ -49,7 +51,7 @@ class ProductInfoViewController: UIViewController {
             
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             
-            group.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15)
+            group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0)
             
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(44))
             let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -147,7 +149,7 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
         if (collectionView == optionsCollectionView) {
             let cell = optionsCollectionView.dequeueReusableCell(withReuseIdentifier: "OptionCollectionViewCell", for: indexPath) as! OptionCollectionViewCell
         
-            cell.setOptionValue(value: "ziad")
+            cell.setOptionValue(value: "White")
             
             return cell;
         }
@@ -168,7 +170,7 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
         
         let cell = optionsCollectionView.dequeueReusableCell(withReuseIdentifier: "OptionCollectionViewCell", for: indexPath) as! OptionCollectionViewCell
     
-        cell.setOptionValue(value: "ziad")
+        cell.setOptionValue(value: "White")
         
         return cell;
     }
