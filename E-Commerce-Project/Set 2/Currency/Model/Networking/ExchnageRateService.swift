@@ -17,15 +17,13 @@ enum DataError: Error {
     case message(_ error: Error?)
 }
 
-// MARK: - Exchnage Rate Manager
-final class ExchnageRateService: ExchnageRateServiceProtocol {
-    
-    static let shared = ExchnageRateService()
-    private init() { }
+// MARK: - Exchnage Rate Service
+class ExchnageRateService: ExchnageRateServiceProtocol {
+//    static let shared = ExchnageRateService()
+//    private init() { }
     
     // API Link:  https://www.exchangerate-api.com/docs/free
     let url = URL(string: "https://open.er-api.com/v6/latest/USD")
-    //let url2 = URL(string: "https://open.exchangerate-api.com/vp/latest")
     
     func fetchData(completion: @escaping (Result<ExchangeRatesData?, DataError>) -> Void) {
         URLSession.shared.dataTask(with: url!) { data, response, error in
@@ -47,13 +45,11 @@ final class ExchnageRateService: ExchnageRateServiceProtocol {
             }
         }.resume()
     }
-    
 }
 
 
 // MARK: - Mock Exchnage Rate Manager
 final class MockExchnageRateManager {
-    
     static let shared = MockExchnageRateManager()
     private init() { }
     
@@ -73,6 +69,5 @@ final class MockExchnageRateManager {
         
         return result
     }
-    
 }
 

@@ -44,12 +44,10 @@ class SettingViewModel {
     func createCellViewModel( item: SettingModel ) -> SettingCellViewModel {
         //Wrap a description
         var descTextContainer: [String] = [String]()
-        if let title = item.title {
-            descTextContainer.append(title)
-        }
+        descTextContainer.append(item.title)
         
         //return SettingCellViewModel(titleText: item.title)
-        return SettingCellViewModel(titleText: item.title ?? "Mansour")
+        return SettingCellViewModel(titleText: item.title)
     }
     
     private func processFetchedItems(_ items: [SettingModel]) {

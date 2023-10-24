@@ -11,7 +11,7 @@ class CurrencyView: UIViewController {
     
     // MARK: - Vars
     lazy var viewModel: CurrencyViewModel = {
-        return CurrencyViewModel()
+        return CurrencyViewModel() // initialized the default parameters
     }()
     
     var rates: [String: Double]? = [:]
@@ -58,6 +58,15 @@ extension CurrencyView: UITableViewDelegate {
         //showCurrencyAlert()
         //viewModel.userPressed(at: indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        viewModel.userPressed(at: indexPath)
+        if viewModel.isAllowSegue {
+            return indexPath
+        }else {
+            return nil
+        }
+    }
 }
 
 // MARK: - Configure View
@@ -93,7 +102,6 @@ extension CurrencyView {
 // MARK: - Binding
 extension CurrencyView {
     func initVM() {
-        
         // MARK: Naive binding: Set the 3 closure implementation
         
         // 1
@@ -114,29 +122,24 @@ extension CurrencyView {
         
         // 3
         viewModel.updateLoadingStatus = { [weak self] () in
-            guard let self = self else {
-                return
-            }
-            
+            guard let self = self else { return }
             DispatchQueue.main.async { [weak self] in
-                guard let self = self else {
-                    return
-                }
+                guard let self = self else { return }
                 switch self.viewModel.state {
                 case .empty, .error:
-                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.stopAnimating() // stop animation
                     UIView.animate(withDuration: 0.2, animations: {
-                        self.tableView.alpha = 0.0
+                        self.tableView.alpha = 0.0 // Hiding table view
                     })
                 case .loading:
-                    self.activityIndicator.startAnimating()
+                    self.activityIndicator.startAnimating() // start animation
                     UIView.animate(withDuration: 0.2, animations: {
-                        self.tableView.alpha = 0.0
+                        self.tableView.alpha = 0.0 //Hiding table view
                     })
                 case .populated:
-                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.stopAnimating() // stop animation
                     UIView.animate(withDuration: 0.2, animations: {
-                        self.tableView.alpha = 1.0
+                        self.tableView.alpha = 1.0 // Showing table view
                     })
                 }
             }

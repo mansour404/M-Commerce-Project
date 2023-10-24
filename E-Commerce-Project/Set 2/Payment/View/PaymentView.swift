@@ -8,9 +8,9 @@
 import UIKit
 import PassKit
 
-@objc enum PaymentState: Int {
-    case selected = 1
-    case notSelected = 0
+enum PaymentState {
+    case selected
+    case notSelected
 }
 
 class PaymentView: UIViewController {
@@ -66,9 +66,6 @@ class PaymentView: UIViewController {
     func setupGestureRecognizer() {
         let creditGesture = UITapGestureRecognizer(target: self, action: #selector(getFiredCredit(_:)))
         let cashGesture = UITapGestureRecognizer(target: self, action: #selector(getFiredCash(_:)))
-        
-//        let creditGesture = UITapGestureRecognizer(target: self, action: #selector(underTest(_, firstState: &creditState, secondState: &cashState, firstView: creditSelectedImageView, secondView: cashSelectedImageView)))
-//        let cashGesture = UITapGestureRecognizer(target: self, action: #selector(underTest(_, firstState: &cashState, secondState: &creditState, firstView: cashSelectedImageView, secondView: creditSelectedImageView)))
 
         addGesture(view: creditCardView, gesture: creditGesture)
         addGesture(view: cashOnDeliveryView, gesture: cashGesture)
@@ -78,23 +75,6 @@ class PaymentView: UIViewController {
         view.addGestureRecognizer(gesture)
         view.isUserInteractionEnabled = true
     }
-
-    
-//    @objc func underTest(_ sender: UITapGestureRecognizer? = nil, firstState: UnsafeMutablePointer<PaymentState>, secondState: UnsafeMutablePointer<PaymentState>, firstView: UIView, secondView: UIView) {
-//
-//        switch firstState.pointee {
-//        case .selected:
-//            firstView.isHidden = true
-//            checkoutButton.isEnabled = false
-//            firstState.pointee = .notSelected
-//        case .notSelected:
-//            firstView.isHidden = false
-//            checkoutButton.isEnabled = true
-//            firstState.pointee = .selected
-//        }
-//        secondView.isHidden = true
-//        secondState.pointee = .notSelected
-//    }
 
     @objc func getFiredCredit(_ sender: UITapGestureRecognizer) {
         switch creditState {
@@ -125,5 +105,21 @@ class PaymentView: UIViewController {
         creditSelectedImageView.isHidden = true
         creditState = .notSelected
     }
-    
 }
+
+/*
+//    @objc func underTest(_ sender: UITapGestureRecognizer? = nil, firstState: UnsafeMutablePointer<PaymentState>, secondState: UnsafeMutablePointer<PaymentState>, firstView: UIView, secondView: UIView) {
+//        switch firstState.pointee {
+//        case .selected:
+//            firstView.isHidden = true
+//            checkoutButton.isEnabled = false
+//            firstState.pointee = .notSelected
+//        case .notSelected:
+//            firstView.isHidden = false
+//            checkoutButton.isEnabled = true
+//            firstState.pointee = .selected
+//        }
+//        secondView.isHidden = true
+//        secondState.pointee = .notSelected
+//    }
+ */

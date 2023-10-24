@@ -15,6 +15,8 @@ class SettingsView: UIViewController {
     }()
     
     // MARK: - Outlets
+    @IBOutlet weak var userProfileImageView: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logoutButton: UIButton!
     
@@ -109,8 +111,8 @@ extension SettingsView {
 extension SettingsView {
 
     func navigateToNextScreen() {
-        let vc = AddressListView(nibName: "AddressListView", bundle: nil)
-//        vc.passedData = viewModel.selectedItem?.title
-        navigationController?.pushViewController(vc, animated: true)
+        guard let vc = viewModel.selectedItem?.vc else { return }
+        vc.modalPresentationStyle = .automatic
+        present(vc, animated: true)
     }
 }
