@@ -11,6 +11,11 @@ class HomeViewController: UIViewController {
     // MARK: - Variables
     var timer : Timer?
     var currentCellIndex = 0
+    
+    var homeViewModel = HomeViewModel()
+
+
+    var brandData : Brands?
     @IBOutlet weak var couponsCollectionView: UICollectionView!
     @IBOutlet weak var pageConroller: UIPageControl!
     @IBOutlet weak var brandsCollectionView: UICollectionView!
@@ -20,13 +25,44 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationItem.title = "Home"
+        self.configureLoadingDataFromApi()
+      
+           
+           
+        homeViewModel.bindresultToHomeViewController = {
+            DispatchQueue.main.async {
+                self.brandsCollectionView.reloadData()
+            }
+            
+        }
         configureCollectionView()
 //        pageConroller.numberOfPages = coupons.count
 //        startTimer()
         
+       
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
-
+        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
     }
+    //MARK: - Configure The Loading Data
+    func configureLoadingDataFromApi(){
+
+        homeViewModel.getDataFromApiForHome()
+        //        homeViewModel.getData(Handler: { (dataValue:Brands?, error: Error?) in
+        //            if let data = dataValue {
+        //                self.brandData = data
+        //                DispatchQueue.main.async {
+        //                    self.brandsCollectionView.reloadData()
+        //                }
+        //                //                        print(self.brandData!.smart_collections)
+        //            }else {
+        //                if let error = error{
+        //                    print(error.localizedDescription)
+        //                }
+        //            }
+        //        }
+        //        )}
+    }
+        
     // MARK: - Configure CollectionView
     private func configureCollectionView() {
         couponsCollectionView.dataSource = self
@@ -52,7 +88,7 @@ class HomeViewController: UIViewController {
     
     private func addShoppingCartButton() -> UIBarButtonItem {
         let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        heartButton.setImage(UIImage(named: "shipped"), for: .normal)
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(navigateToShoppingCart), for: .touchUpInside)
 
@@ -60,21 +96,31 @@ class HomeViewController: UIViewController {
         return shoppingCartBarButtonItem
     }
     
+    private func addFSearchButton() -> UIBarButtonItem {
+        let heartButton = UIButton(type: .custom)
+        heartButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        heartButton.tintColor = UIColor.systemPurple
+//        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
+
+        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
+        return heartBarButtonItem
+    }
+    
     @objc func navigateToFavourites(sender: UIButton) {
         let vc = FavouriteListVCViewController(nibName: "FavouriteListVCViewController", bundle: nil)
         // passing data before navigation
-        //navigationController?.pushViewController(vc, animated: true)
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+//        vc.modalPresentationStyle = .automatic
+//        self.present(vc, animated: true)
         
     }
     
     @objc func navigateToShoppingCart(sender: UIButton) {
         let vc = ShoppingCartView(nibName: "ShoppingCartView", bundle: nil)
         // passing data before navigation
-        //navigationController?.pushViewController(vc, animated: true)
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+//        vc.modalPresentationStyle = .automatic
+//        self.present(vc, animated: true)
         
     }
     
@@ -96,7 +142,7 @@ class HomeViewController: UIViewController {
     // MARK: - UICollectionView DataSource
 extension HomeViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return homeViewModel.getNumberOfBrands() ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -106,6 +152,8 @@ extension HomeViewController:UICollectionViewDataSource {
             return cell
         } else {
             let cell = brandsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.brandsCollectionViewCell, for: indexPath)as! BrandsCollectionViewCell
+            cell.configure(with:homeViewModel.getImage(index: indexPath.row) ?? "bag", titleText: homeViewModel.getTitle(index: indexPath.row) ?? "A")
+            
             cell.layer.cornerRadius = 20
             
             return cell
@@ -139,3 +187,4 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDelegat
         }
     }
 }
+

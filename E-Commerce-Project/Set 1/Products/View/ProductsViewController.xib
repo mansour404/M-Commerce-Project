@@ -40,7 +40,7 @@
                         <constraint firstAttribute="height" constant="40" id="PCy-RJ-1BK"/>
                     </constraints>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="gray" image="Filter" cornerStyle="medium">
+                    <buttonConfiguration key="configuration" style="gray" image="filter" cornerStyle="medium">
                         <color key="baseBackgroundColor" red="0.57254904510000004" green="0.46274507050000002" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </buttonConfiguration>
                     <connections>
@@ -128,8 +128,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Filter" width="14" height="14"/>
         <image name="dollarsign" catalog="system" width="89" height="128"/>
+        <image name="filter" width="14" height="14"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

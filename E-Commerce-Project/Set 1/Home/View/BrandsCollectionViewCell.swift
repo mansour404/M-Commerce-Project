@@ -18,8 +18,12 @@ class BrandsCollectionViewCell: UICollectionViewCell {
     }
     // MARK: - configure Nib
     func configure(with imageName: String , titleText: String) {
-        if let iconImage = brandsImageView {
-            iconImage.image = UIImage(named: imageName)
+        //The error from here from king fisher
+        if imageName.isEmpty {
+            brandsImageView.image = UIImage(named: "handbag")
+        }
+        else {
+            brandsImageView.kf.setImage(with: URL(string: imageName))
         }
         if let titleLabel = brandsNamesLabel {
             titleLabel.text = titleText

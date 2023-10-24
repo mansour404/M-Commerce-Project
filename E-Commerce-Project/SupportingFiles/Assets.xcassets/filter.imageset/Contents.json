@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "image-photo-polaroid-four--photos-camera-polaroid-picture-photography-pictures-four-photo.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
