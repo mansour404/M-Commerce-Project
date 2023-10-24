@@ -22,7 +22,7 @@ class TabController: UITabBarController {
     private func setUpTabs(){
         let homeController = HomeViewController()
         let categoryController = CategoriesViewController()
-        let profileController = ProfileView()
+        let profileController = UserProfileView()
 
         
 //        let home = UINavigationController(rootViewController: homeController)

@@ -7,20 +7,24 @@
 
 import Foundation
 
+protocol CurrencyViewModelProtocol {
+    
+}
+
 class CurrencyViewModel {
     
     // MARK: - Variables
     let exchnageRateService: ExchnageRateServiceProtocol
     var selectedCell: String?
+    var isAllowSegue: Bool = false
     
     // MARK: - Proberties
     var currencyCodes: [String] = []
     var currencyValues: [Double] = []
-    
-//    var rate: Rates?
-    
+    var currencies: [[String: Double]] = [["USD":1.0, "EGP": 1.0, "SAR":1.0, "AED":1.0, "KWD": 1.0, "QAR":1.0]]
+
     // MARK: - Init
-    init(exchnageRateService: ExchnageRateServiceProtocol = ExchnageRateService.shared) {
+    init(exchnageRateService: ExchnageRateServiceProtocol = ExchnageRateService()) {
         self.exchnageRateService = exchnageRateService
     }
     
@@ -103,8 +107,13 @@ class CurrencyViewModel {
 
 extension CurrencyViewModel {
     func userPressed( at indexPath: IndexPath ){
-        let item = self.currencyCodes[indexPath.row]
-        selectedCell = item
-        alertMessage = "OPOPOPOPOP"
+        let item = currencyCodes[indexPath.row]
+        if item == "AED" {
+            selectedCell = item
+            alertMessage = "NOOOOOOOOOOOOOOOOOOOOOPE" // This line will make alert Appear, as long as value is changes
+        } else {
+            selectedCell = item
+            alertMessage = "YEEEEEEEEEEEEEEEEEEEEEES" // This line will make alert showing
+        }
     }
 }

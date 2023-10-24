@@ -19,8 +19,8 @@ struct ExchangeRatesData : Decodable {
 	let time_next_update_utc : String?
 	let time_eol_unix : Int?
 	let base_code : String?
+//    let rates: Rates?
     let rates : [String: Double]?
-    //let rates: Rates?
 
 	enum CodingKeys: String, CodingKey {
 
