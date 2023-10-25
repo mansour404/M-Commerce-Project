@@ -15,14 +15,16 @@ class TabController: UITabBarController {
 //        let categoryController = CategoriesViewController()
         
         self.setUpTabs()
-        self.tabBar.tintColor = .black
+        self.tabBar.tintColor = .systemPurple
         self.tabBar.unselectedItemTintColor = .systemGray
+        self.tabBar.selectedItem?.largeContentSizeImage = .add
+
     }
     
     private func setUpTabs(){
         let homeController = HomeViewController()
         let categoryController = CategoriesViewController()
-        let profileController = UserProfileView()
+        let userProfileViewController = UserProfileView()
 
         
 //        let home = UINavigationController(rootViewController: homeController)
@@ -32,7 +34,7 @@ class TabController: UITabBarController {
         
         let categoryVC = self.createNav(with: "Category", and: UIImage(named: "Category"), vc: categoryController)
         
-        let profileVC = self.createNav(with: "Me", and: UIImage(named: "Me1"), vc: profileController)
+        let profileVC = self.createNav(with: "Me", and: UIImage(named: "Me1"), vc: userProfileViewController)
         
         
 //        let me = self.createNav(with: "Me", and: UIImage(named: "Me"), vc: HomeViewController())
@@ -51,3 +53,4 @@ class TabController: UITabBarController {
         return nav
     }
 }
+

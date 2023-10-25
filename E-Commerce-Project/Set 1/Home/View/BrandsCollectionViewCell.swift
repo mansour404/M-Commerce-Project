@@ -18,9 +18,8 @@ class BrandsCollectionViewCell: UICollectionViewCell {
     }
     // MARK: - configure Nib
     func configure(with imageName: String , titleText: String) {
-        if let iconImage = brandsImageView {
-            iconImage.image = UIImage(named: imageName)
-        }
+        
+        brandsImageView.downloadImageFrom(imageName)
         if let titleLabel = brandsNamesLabel {
             titleLabel.text = titleText
         }
