@@ -34,7 +34,7 @@ class ProductsViewController: UIViewController {
         productsCollectionView.dataSource = self
         productsCollectionView.delegate = self
         //Registers
-        productsCollectionView.register(UINib(nibName: CellIdentifier.submainCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.submainCollectionViewCell)
+        productsCollectionView.register(UINib(nibName: CellIdentifier.productsCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.productsCollectionViewCell)
         
     }
     // MARK: - ACTIONS
@@ -69,7 +69,7 @@ class ProductsViewController: UIViewController {
 
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             
-            let cell = productsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
+            let cell = productsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.productsCollectionViewCell, for: indexPath) as! ProductsCollectionViewCell
             return cell
             
         }

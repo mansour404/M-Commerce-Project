@@ -25,19 +25,19 @@ class SubmainCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - configure Nib
-    func configure(with imageName: String , priceText: String , productNameText: String , exchangeText : String , rating : Double? ) {
-        if let iconImage = imageView {
-            iconImage.image = UIImage(named: imageName)
-        }
+    func configure( imageName: String , priceText: String , productNameText: String ) {
+        
+        imageView.downloadImageFrom(imageName)
+
         if let titleLabel = productNameLabel {
             titleLabel.text = productNameText
         }
         if let titleLabel = priceLabel {
             titleLabel.text = priceText
         }
-        if let titleLabel = exchangeLabel {
-            titleLabel.text = exchangeText
-        }
+//        if let titleLabel = exchangeLabel {
+//            titleLabel.text = exchangeText
+//        }
 //        if let ratingView = rating {
 //            ratingView = rating
 //        }

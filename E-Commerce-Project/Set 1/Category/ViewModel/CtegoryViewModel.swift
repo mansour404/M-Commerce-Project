@@ -2,19 +2,19 @@
 //  HomeViewModel.swift
 //  E-Commerce-Project
 //
-//  Created by Abdallah on 23/10/2023.
+//  Created by Abdallah on 25/10/2023.
 //
 
 import Foundation
 
-class HomeViewModel{
+class CategoryViewModel{
     var  bindresultToHomeViewController: ( () -> () ) = {}
 //    var data : Brands?
    
     var handerDataOfHome: (() -> Void)?
     var services = NetworkServices()
     
-    var getAllBrands: Brands? {
+    var getAllProducts: ProductsResponse? {
         didSet{
             if let validHander =  handerDataOfHome {
                 validHander()
@@ -25,18 +25,18 @@ class HomeViewModel{
    
     
     //MARK: -Get All Model Return From Api
-    func getBrand() -> Brands? {
-        return getAllBrands
+    func getProducts() -> ProductsResponse? {
+        return getAllProducts
     }
     
     
     //MARK: -CAll Request of Api
     func getDataFromApiForHome() {
-        services.getData(Handler: { (dataValue:Brands?, error: Error?) in
-//            print("Success")
+        services.getDataToCategory(Handler: { (dataValue:ProductsResponse?, error: Error?) in
+            print("Success")
 
             if let mydata = dataValue {
-                self.getAllBrands = mydata
+                self.getAllProducts = mydata
                 self.bindresultToHomeViewController()
 
             }else {
@@ -47,17 +47,22 @@ class HomeViewModel{
         })
     }
     //MARK: -Getting Number of Brands
-func getNumberOfBrands() -> Int? {
+func getNumberOfProducts() -> Int? {
 //    print(getAllBrands?.smart_collections.count)
-    return getAllBrands?.smart_collections.count
+    print(getAllProducts?.products.count)
+    return getAllProducts?.products.count
    }
     func getTitle(index: Int) -> String?{
-        return getAllBrands?.smart_collections[index].title ?? "NO"
+        return getAllProducts?.products[index].title ?? "NO"
 
     }
     func getImage(index: Int) -> String?{
-        return getAllBrands?.smart_collections[index].image.src
-
+        return getAllProducts?.products[index].images[0].src
+    }
+    func getPrice(index: Int) -> String?{
+     
+        return getAllProducts?.products[index].variants[0].price
     }
 }
     
+

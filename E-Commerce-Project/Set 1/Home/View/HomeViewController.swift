@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     
     var homeViewModel = HomeViewModel()
 
-
     var brandData : Brands?
     @IBOutlet weak var couponsCollectionView: UICollectionView!
     @IBOutlet weak var pageConroller: UIPageControl!
@@ -26,9 +25,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 //        navigationItem.title = "Home"
         self.configureLoadingDataFromApi()
-      
-           
-           
+        
         homeViewModel.bindresultToHomeViewController = {
             DispatchQueue.main.async {
                 self.brandsCollectionView.reloadData()
@@ -47,20 +44,7 @@ class HomeViewController: UIViewController {
     func configureLoadingDataFromApi(){
 
         homeViewModel.getDataFromApiForHome()
-        //        homeViewModel.getData(Handler: { (dataValue:Brands?, error: Error?) in
-        //            if let data = dataValue {
-        //                self.brandData = data
-        //                DispatchQueue.main.async {
-        //                    self.brandsCollectionView.reloadData()
-        //                }
-        //                //                        print(self.brandData!.smart_collections)
-        //            }else {
-        //                if let error = error{
-        //                    print(error.localizedDescription)
-        //                }
-        //            }
-        //        }
-        //        )}
+
     }
         
     // MARK: - Configure CollectionView
@@ -78,7 +62,7 @@ class HomeViewController: UIViewController {
     
     private func addFavouriteButton() -> UIBarButtonItem {
         let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
 
@@ -88,7 +72,7 @@ class HomeViewController: UIViewController {
     
     private func addShoppingCartButton() -> UIBarButtonItem {
         let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(named: "shipped"), for: .normal)
+        heartButton.setImage(UIImage(systemName: "cart"), for: .normal)
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(navigateToShoppingCart), for: .touchUpInside)
 
@@ -142,7 +126,7 @@ class HomeViewController: UIViewController {
     // MARK: - UICollectionView DataSource
 extension HomeViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return homeViewModel.getNumberOfBrands() ?? 1
+        return homeViewModel.getNumberOfBrands() ?? 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

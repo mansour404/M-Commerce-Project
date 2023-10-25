@@ -20,6 +20,7 @@ class BrandsCollectionViewCell: UICollectionViewCell {
     func configure(with imageName: String , titleText: String) {
         
         brandsImageView.downloadImageFrom(imageName)
+        
         if let titleLabel = brandsNamesLabel {
             titleLabel.text = titleText
         }
