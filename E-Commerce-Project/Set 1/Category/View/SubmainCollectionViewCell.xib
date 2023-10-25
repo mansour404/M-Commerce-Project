@@ -45,12 +45,12 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="c2c-eL-M9Z">
-                        <rect key="frame" x="4" y="146" width="135" height="31.666666666666657"/>
+                        <rect key="frame" x="4" y="146" width="138" height="31.666666666666657"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nike SportWear Club Fleece" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhp-Ai-YfP">
-                                <rect key="frame" x="0.0" y="0.0" width="135" height="12"/>
+                                <rect key="frame" x="0.0" y="0.0" width="138" height="12"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -74,7 +74,7 @@
                         </subviews>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scA-rr-TsQ" customClass="CosmosView" customModule="Cosmos">
-                        <rect key="frame" x="70" y="162" width="68" height="12"/>
+                        <rect key="frame" x="90" y="163" width="63" height="12"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="rating">
                                 <real key="value" value="2.7000000000000002"/>
@@ -111,13 +111,13 @@
             <constraints>
                 <constraint firstItem="c2c-eL-M9Z" firstAttribute="top" secondItem="3uL-xG-0Nf" secondAttribute="bottom" constant="7" id="0Q8-Ed-csO"/>
                 <constraint firstAttribute="trailing" secondItem="3uL-xG-0Nf" secondAttribute="trailing" id="DZJ-U1-oXt"/>
-                <constraint firstItem="scA-rr-TsQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="70" id="Lij-6P-NoW"/>
+                <constraint firstItem="scA-rr-TsQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="90" id="Lij-6P-NoW"/>
                 <constraint firstItem="3uL-xG-0Nf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Nmo-bm-2Pc"/>
-                <constraint firstAttribute="bottom" secondItem="scA-rr-TsQ" secondAttribute="bottom" constant="25" id="P8C-dQ-OwB"/>
-                <constraint firstItem="scA-rr-TsQ" firstAttribute="top" secondItem="3uL-xG-0Nf" secondAttribute="bottom" constant="23" id="WCN-rE-gnz"/>
+                <constraint firstAttribute="bottom" secondItem="scA-rr-TsQ" secondAttribute="bottom" constant="24" id="P8C-dQ-OwB"/>
+                <constraint firstItem="scA-rr-TsQ" firstAttribute="top" secondItem="3uL-xG-0Nf" secondAttribute="bottom" constant="24" id="WCN-rE-gnz"/>
                 <constraint firstAttribute="bottom" secondItem="3uL-xG-0Nf" secondAttribute="bottom" constant="60" id="WOr-Ub-dRT"/>
                 <constraint firstItem="3uL-xG-0Nf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ael-U0-riY"/>
-                <constraint firstAttribute="trailing" secondItem="scA-rr-TsQ" secondAttribute="trailing" constant="30" id="mDY-QF-F4b"/>
+                <constraint firstAttribute="trailing" secondItem="scA-rr-TsQ" secondAttribute="trailing" constant="15" id="mDY-QF-F4b"/>
                 <constraint firstItem="c2c-eL-M9Z" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="uqq-1G-0IA"/>
             </constraints>
             <size key="customSize" width="168" height="199"/>
@@ -126,7 +126,7 @@
                 <outlet property="imageView" destination="FQ6-SN-ZZh" id="GFO-YG-Vz8"/>
                 <outlet property="myView" destination="3uL-xG-0Nf" id="hJs-u6-tSQ"/>
                 <outlet property="priceLabel" destination="2di-PZ-cVJ" id="lq6-0F-KJh"/>
-                <outlet property="productNameLabel" destination="dhp-Ai-YfP" id="HBS-Ph-tLf"/>
+                <outlet property="productNameLabel" destination="dhp-Ai-YfP" id="Z7N-sW-u4D"/>
                 <outlet property="ratingView" destination="scA-rr-TsQ" id="kgC-z3-9bm"/>
             </connections>
             <point key="canvasLocation" x="137.40458015267174" y="72.183098591549296"/>
@@ -136,7 +136,7 @@
         <image name="Heart" width="67" height="80"/>
         <image name="adidasBag" width="840" height="840"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

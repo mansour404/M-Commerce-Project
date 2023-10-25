@@ -78,7 +78,7 @@ class HomeViewController: UIViewController {
     
     private func addFavouriteButton() -> UIBarButtonItem {
         let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
 
@@ -88,7 +88,7 @@ class HomeViewController: UIViewController {
     
     private func addShoppingCartButton() -> UIBarButtonItem {
         let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(named: "shipped"), for: .normal)
+        heartButton.setImage(UIImage(systemName: "cart"), for: .normal)
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(navigateToShoppingCart), for: .touchUpInside)
 
@@ -155,6 +155,9 @@ extension HomeViewController:UICollectionViewDataSource {
             cell.configure(with:homeViewModel.getImage(index: indexPath.row) ?? "bag", titleText: homeViewModel.getTitle(index: indexPath.row) ?? "A")
             
             cell.layer.cornerRadius = 20
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor.lightGray.cgColor
+            
             
             return cell
         }

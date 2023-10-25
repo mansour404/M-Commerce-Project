@@ -30,7 +30,7 @@ struct ProductCompleteModel : Codable {
     var title : String?
     var vendor : String?
     var body_html : String?
-    var images : [ProductImage]
+    var images : [Image]
     var variants : [VariantCompleteModel]?
     var options : [OptionCompleteModel]?
     var tags : String?

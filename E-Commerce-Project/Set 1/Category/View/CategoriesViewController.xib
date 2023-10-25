@@ -30,6 +30,9 @@
                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="menBtnTapped:" destination="-1" eventType="touchUpInside" id="AfF-Rm-3Jq"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8U-YR-S7C">
                     <rect key="frame" x="106" y="92" width="86" height="45"/>
@@ -41,6 +44,9 @@
                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="womenBtnTapped:" destination="-1" eventType="touchUpInside" id="opN-60-6vR"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPL-Fj-xUv">
                     <rect key="frame" x="200" y="91" width="86" height="45"/>
@@ -52,6 +58,9 @@
                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="kidsBtnTapped:" destination="-1" eventType="touchUpInside" id="SQD-kU-SLd"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ywr-pn-IKN">
                     <rect key="frame" x="294" y="92" width="86" height="45"/>
@@ -63,6 +72,9 @@
                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="saleBtnTapped:" destination="-1" eventType="touchUpInside" id="Z32-An-vN6"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTN-xp-NBw">
                     <rect key="frame" x="12" y="146" width="58" height="34"/>
@@ -74,6 +86,9 @@
                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="allBtnTapped:" destination="-1" eventType="touchUpInside" id="dUf-Ma-MKI"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eba-rA-9h6">
                     <rect key="frame" x="78" y="145" width="76" height="35"/>
@@ -85,6 +100,9 @@
                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="shoesBtnTapped:" destination="-1" eventType="touchUpInside" id="mef-eM-LZR"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ptt-uh-gzM">
                     <rect key="frame" x="159" y="146" width="123" height="35"/>
@@ -96,6 +114,9 @@
                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="accessoriesBtnTapped:" destination="-1" eventType="touchUpInside" id="uzZ-Gq-yLZ"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bV-yI-ZVH">
                     <rect key="frame" x="290" y="146" width="90" height="34"/>
@@ -107,6 +128,9 @@
                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="tshirtsBtnTapped:" destination="-1" eventType="touchUpInside" id="1zD-WO-FVQ"/>
+                    </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qlS-Kd-GWF">
                     <rect key="frame" x="12" y="188" width="368" height="579"/>

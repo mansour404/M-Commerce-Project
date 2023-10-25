@@ -12,7 +12,7 @@ class ProductViewModel {
   
     var services = NetworkServices()
     
-    var AllBrandProducts: ProductsList? {
+    var AllBrandProducts: ProductsResponse? {
         didSet{
             if let validHander =  handerDataOfHome {
                 validHander()
@@ -22,7 +22,7 @@ class ProductViewModel {
     
     //MARK: -CAll Request of Api
     func getDataFromApiForProduct() {
-        services.getAllProductsForBrandData(BrandId: HomeViewModel.selectedBrandID ?? 303787573398, Handler: { (dataValue:ProductsList?, error: Error?) in
+        services.getAllProductsForBrandData(BrandId: HomeViewModel.selectedBrandID ?? 303787573398, Handler: { (dataValue:ProductsResponse?, error: Error?) in
             print("Success")
 
             if let mydata = dataValue {
