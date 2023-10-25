@@ -23,26 +23,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N76-7C-gQB">
                                 <rect key="frame" x="8" y="8" width="125" height="117"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPY-dw-oyM">
-                                        <rect key="frame" x="0.0" y="0.0" width="125" height="117"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Option"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsD-uO-94l">
+                                        <rect key="frame" x="41" y="48" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="QPY-dw-oyM" firstAttribute="top" secondItem="N76-7C-gQB" secondAttribute="top" id="59x-OD-Z65"/>
-                                    <constraint firstAttribute="trailing" secondItem="QPY-dw-oyM" secondAttribute="trailing" id="6BJ-nN-dwH"/>
-                                    <constraint firstAttribute="bottom" secondItem="QPY-dw-oyM" secondAttribute="bottom" id="A9u-Cj-nwi"/>
-                                    <constraint firstItem="QPY-dw-oyM" firstAttribute="leading" secondItem="N76-7C-gQB" secondAttribute="leading" id="OLX-y0-CRF"/>
+                                    <constraint firstItem="ZsD-uO-94l" firstAttribute="centerX" secondItem="N76-7C-gQB" secondAttribute="centerX" id="PkE-h1-3I0"/>
+                                    <constraint firstItem="ZsD-uO-94l" firstAttribute="centerY" secondItem="N76-7C-gQB" secondAttribute="centerY" id="WgX-YE-cM1"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -65,7 +56,7 @@
             <size key="customSize" width="141" height="133"/>
             <connections>
                 <outlet property="button_container" destination="N76-7C-gQB" id="TCZ-cJ-LHe"/>
-                <outlet property="optionButton" destination="QPY-dw-oyM" id="gag-kn-MFc"/>
+                <outlet property="optionValue" destination="ZsD-uO-94l" id="eeX-6J-4LF"/>
             </connections>
             <point key="canvasLocation" x="208.3969465648855" y="48.943661971830991"/>
         </collectionViewCell>

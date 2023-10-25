@@ -71,3 +71,74 @@ class NetworkServices   {
         }
     }
 }
+
+protocol end_point_generator {
+    var base_URL : String {get}
+    var method : Alamofire.HTTPMethod {get}
+    var filePath : String {get}
+}
+
+enum EndPoint  : end_point_generator {
+    
+    case Home
+    case all_products
+    case product_info (ProductID : Int64)
+    
+    var base_URL: String {
+        return "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/"
+    }
+    
+    var method: Alamofire.HTTPMethod {
+        switch self {
+        case .Home:
+            return .get
+        case .all_products:
+            return .get
+        case .product_info:
+            return .get
+        }
+    }
+    
+    var filePath: String {
+        switch self {
+        case .Home:
+            return "smart_collections.json"
+        case .all_products:
+            return "products.json"
+        case .product_info (let ProductID):
+            return "products/\(ProductID).json"
+        }
+    }
+    
+    
+}
+
+class AbstractNetworkService   {
+ 
+    //MARK: - Fetching Data From Api
+    func getData<T :Codable>(endPoint : EndPoint, Handler: @escaping (T?,Error?) -> Void) {
+        
+        let urlFile = endPoint.base_URL + endPoint.filePath
+    
+   
+        AF.request(urlFile,method: endPoint.method).response { data in
+        if let validData = data.data {
+            do{
+                let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
+                
+//                let x = dataRetivied as! AllProducts
+//                print(x)
+//
+//                print("product succeeded")
+                Handler(dataRetivied, nil)
+            
+            }catch let error{
+              print (error)
+//                print("product failed")
+                Handler(nil, error)
+            }
+        }
+        else{print("There is error in casting data")}
+    }
+  }
+}

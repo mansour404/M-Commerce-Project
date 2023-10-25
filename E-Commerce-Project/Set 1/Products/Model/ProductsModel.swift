@@ -16,7 +16,7 @@ struct Variant : Codable {
     var option3 : String?
 }
 struct Product : Codable {
-    var id : Int?
+    var id : Int64?
     var title : String?
     var vendor : String?
     var body_html : String?
