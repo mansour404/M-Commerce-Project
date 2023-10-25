@@ -54,6 +54,8 @@
 		E53E899B2AE73F730039B3D0 /* UserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E53E899A2AE73F730039B3D0 /* UserProfileView.xib */; };
 		E53E899E2AE7483E0039B3D0 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53E899D2AE7483E0039B3D0 /* UserDefaultsHelper.swift */; };
 		E53E89A12AE751410039B3D0 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53E89A02AE751410039B3D0 /* OrderViewModel.swift */; };
+		E559C7382AE8921200DBCA22 /* FavouriteCustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E559C7362AE8921200DBCA22 /* FavouriteCustomTableViewCell.xib */; };
+		E559C7392AE8921200DBCA22 /* FavouriteCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E559C7372AE8921200DBCA22 /* FavouriteCustomTableViewCell.swift */; };
 		E5814B092ADFD19800D4D60F /* ShoppingCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5814B072ADFD19800D4D60F /* ShoppingCartView.swift */; };
 		E5814B0E2ADFDCE700D4D60F /* ShoppingCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5814B0C2ADFDCE700D4D60F /* ShoppingCartCell.swift */; };
 		E5814B0F2ADFDCE700D4D60F /* ShoppingCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5814B0D2ADFDCE700D4D60F /* ShoppingCartCell.xib */; };
@@ -184,6 +186,8 @@
 		E53E899A2AE73F730039B3D0 /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
 		E53E899D2AE7483E0039B3D0 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		E53E89A02AE751410039B3D0 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		E559C7362AE8921200DBCA22 /* FavouriteCustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavouriteCustomTableViewCell.xib; sourceTree = "<group>"; };
+		E559C7372AE8921200DBCA22 /* FavouriteCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouriteCustomTableViewCell.swift; sourceTree = "<group>"; };
 		E5814B072ADFD19800D4D60F /* ShoppingCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartView.swift; sourceTree = "<group>"; };
 		E5814B0C2ADFDCE700D4D60F /* ShoppingCartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartCell.swift; sourceTree = "<group>"; };
 		E5814B0D2ADFDCE700D4D60F /* ShoppingCartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCartCell.xib; sourceTree = "<group>"; };
@@ -438,6 +442,8 @@
 				DCE146C32AE64EAF00B37C03 /* FavouriteListVCViewController.swift */,
 				DCE146C42AE64EAF00B37C03 /* FavouriteCell.xib */,
 				DCE146C52AE64EAF00B37C03 /* FavouriteCell.swift */,
+				E559C7372AE8921200DBCA22 /* FavouriteCustomTableViewCell.swift */,
+				E559C7362AE8921200DBCA22 /* FavouriteCustomTableViewCell.xib */,
 				DCE146C62AE64EAF00B37C03 /* FavouriteListVCViewController.xib */,
 			);
 			path = Favourites;
@@ -1035,6 +1041,7 @@
 				DCE147112AE6CED300B37C03 /* OptionCollectionViewCell.xib in Resources */,
 				E5D227AB2AE325BA00A56A9A /* SettingCell.xib in Resources */,
 				B2DD77FD2AE6833F0082CADE /* CategoriesViewController.xib in Resources */,
+				E559C7382AE8921200DBCA22 /* FavouriteCustomTableViewCell.xib in Resources */,
 				E5D227A02AE3220A00A56A9A /* AddressListView.xib in Resources */,
 				E5D227D92AE39EE600A56A9A /* exchangeData.json in Resources */,
 				E5E793172AE5FA2100311077 /* PaymentView.xib in Resources */,
@@ -1140,6 +1147,7 @@
 				E5E792FE2AE5D53E00311077 /* URLs.swift in Sources */,
 				DCE146DA2AE64EB000B37C03 /* SignUpVC.swift in Sources */,
 				B2DD77FE2AE6833F0082CADE /* CategoriesViewController.swift in Sources */,
+				E559C7392AE8921200DBCA22 /* FavouriteCustomTableViewCell.swift in Sources */,
 				E5D227C02AE3598900A56A9A /* ContactUsView.swift in Sources */,
 				E5814B242AE0D30F00D4D60F /* ProductItemCell.swift in Sources */,
 				E5D227BC2AE3571C00A56A9A /* AboutAppView.swift in Sources */,

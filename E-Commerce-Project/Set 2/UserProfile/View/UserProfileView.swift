@@ -24,15 +24,15 @@ class UserProfileView: UIViewController {
         // Setup bar button items
         navigationItem.setRightBarButtonItems([addSettingsButton(), addShoppingCartButton()], animated: true)
         registerNibs()
-        
+        configureTableViews()
     }
 
     private func registerNibs() {
-        let favouriteNib = UINib(nibName: "FavouriteCell", bundle: nil)
-        let orderNib = UINib(nibName: "UserOrderCell", bundle: nil)
+        let favouriteNib = UINib(nibName: "FavouriteCustomTableViewCell", bundle: nil)
+        let orderNib = UINib(nibName: "UserOrderCustomTableViewCell", bundle: nil)
         
-        favouritesTableView.register(favouriteNib, forCellReuseIdentifier: "FavouriteCell")
-        ordersTableView.register(orderNib, forCellReuseIdentifier: "UserOrderCell")
+        favouritesTableView.register(favouriteNib, forCellReuseIdentifier: "FavouriteCustomTableViewCell")
+        ordersTableView.register(orderNib, forCellReuseIdentifier: "UserOrderCustomTableViewCell")
     }
     
     private func configureTableViews() {
@@ -139,24 +139,32 @@ extension UserProfileView {
 extension UserProfileView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ordersTableView {
-            return  orderList.count < 2 ? orderList.count : 2
+            //return  orderList.count < 2 ? orderList.count : 2
+            return 2
         } else {
-            return  favouriteList.count < 2 ? orderList.count : 2
+            //return  favouriteList.count < 2 ? orderList.count : 2
+            return 2
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == ordersTableView {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserOrderCell", for: indexPath) as? UserOrderCell else {return  UITableViewCell() }
-            return UITableViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserOrderCustomTableViewCell", for: indexPath) as? UserOrderCustomTableViewCell else {return  UITableViewCell() }
+            return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavouriteCell", for: indexPath) as? FavouriteCell else { return UITableViewCell() }
-            return UITableViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavouriteCustomTableViewCell", for: indexPath) as? FavouriteCustomTableViewCell else { return UITableViewCell() }
+            return cell
         }
     }
 }
 
 // MARK: - Table view delegate
 extension UserProfileView: UITableViewDelegate {
-   
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView == ordersTableView ? 120 : 105
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: - Run did select function
+    }
 }
