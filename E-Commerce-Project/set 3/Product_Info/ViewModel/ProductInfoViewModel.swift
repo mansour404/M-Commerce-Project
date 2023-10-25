@@ -40,7 +40,7 @@ class ProductInfoViewModel {
                 self.product = mydata.product
                 self.reload_my_view()
                 
-                print(mydata)
+                //print(mydata)
 
             }else {
                 if let error = error{

@@ -21,6 +21,8 @@
                 <outlet property="reviewsCollectionView" destination="zek-UK-BxI" id="UQt-Ds-gHN"/>
                 <outlet property="reviewsHeight" destination="p30-tJ-5Cc" id="yIm-Le-YBu"/>
                 <outlet property="scroll_and_add_to_cart_vertical_spacing" destination="e4M-55-wTs" id="Ql6-GK-Ivl"/>
+                <outlet property="variant_availability" destination="nvX-SY-Kyg" id="9rb-J9-uq7"/>
+                <outlet property="variant_price" destination="fV9-CG-Y8d" id="ZeA-6G-TfY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

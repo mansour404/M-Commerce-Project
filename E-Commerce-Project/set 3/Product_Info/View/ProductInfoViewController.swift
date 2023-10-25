@@ -10,6 +10,54 @@ import UIKit
 class ProductInfoViewController: UIViewController {
     
     // cart code------------------------------------------------------------------------------
+    @IBOutlet weak var variant_price: UILabel!
+    
+    @IBOutlet weak var variant_availability: UILabel!
+    
+    
+    var variant_available_elements : Int = 0
+    
+    var variant_index : Int = 0
+    var variant_Unique_ID : Int = 0
+    
+    func get_variant_data () {
+        
+        print ("get_variant_data")
+        print(view_model.product)
+        var all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
+        
+        var found : VariantCompleteModel = VariantCompleteModel()
+        for v in all_variants {
+            //numOptions
+            
+            print(v)
+            
+            var equal : Bool = true
+            
+            if numOptions >= 1 {
+                equal = equal && (v.option1 == view_model.product?.options?[0].values?[selectedOption[0]])
+            }
+            if numOptions >= 2 {
+                equal = equal && (v.option2 == view_model.product?.options?[1].values?[selectedOption[1]])
+            }
+            if numOptions >= 3 {
+                equal = equal && (v.option3 == view_model.product?.options?[2].values?[selectedOption[2]])
+            }
+            
+            if (equal) {
+                print("variant is found")
+                found = v;
+                break
+            }
+            else {
+                print("variant is NOT found")
+            }
+        }
+        
+        variant_price.text = found.price ?? "not found"
+        variant_availability.text = found.inventory_quantity != nil ? String(found.inventory_quantity!) : "not found"
+        variant_available_elements = found.inventory_quantity ?? 0
+    }
     
     var numberOfCartItems : Int = 0
     
@@ -22,14 +70,20 @@ class ProductInfoViewController: UIViewController {
     }
     
     @IBAction func plus_button_tapped(_ sender: Any) {
-        numberOfCartItems += 1
+        
+        if (numberOfCartItems < variant_available_elements) {
+            numberOfCartItems += 1;
+        }
+        
         updateNumberLabel()
         
         print("plus")
     }
     
     @IBAction func minus_button_tapped(_ sender: Any) {
-        numberOfCartItems -= 1
+        if (numberOfCartItems > 0) {
+            numberOfCartItems -= 1;
+        }
         updateNumberLabel()
         print("minus")
     }
@@ -432,15 +486,7 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
     }
     
     func getOptionsCollectionViewHeaderName (indexPath: IndexPath) -> String{
-//        if indexPath.section == 0 {
-//            return view_model.product?.options?[0].name ?? "default"
-//        }
-//        else if indexPath.section == 1 {
-//            return view_model.product?.options[0].name
-//        }
-//        else if indexPath.section == 2 {
-//            return "third header"
-//        }
+
         return view_model.product?.options?[indexPath.section].name ?? "Nil"
     }
     
@@ -499,6 +545,7 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
             toggleOption(row: row, value: value)
             
             if selectedOptionsCount == get_number_of_options() {
+                get_variant_data()
                 showAddToCart()
             }
             else {
@@ -514,16 +561,6 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
             
         }
         
-//        if (addToCartView.isHidden == true) {
-//            showAddToCart()
-//        }
-//        else {
-//            hideAddToCart()
-//        }
-        
-        
-        
-        //print("an item is pressed")
     }
     
     
