@@ -9,13 +9,16 @@ import UIKit
 
 class BrandsCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var myview: UIView!
     @IBOutlet weak var brandsImageView: UIImageView!
     @IBOutlet weak var brandsNamesLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+//        myview.dropShadow()
         // Initialization code
     }
+    
     // MARK: - configure Nib
     func configure(with imageName: String , titleText: String) {
         

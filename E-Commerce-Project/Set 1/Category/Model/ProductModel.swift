@@ -17,7 +17,8 @@ struct Product: Codable {
     let images: [Image]
     let variants: [Variant]
     let title : String
-    
+    let tags: String
+
 }
 struct Variant: Codable {
     let id, product_id: Int64

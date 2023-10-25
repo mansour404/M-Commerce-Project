@@ -22,8 +22,6 @@ class CategoryViewModel{
         }
     }
 
-   
-    
     //MARK: -Get All Model Return From Api
     func getProducts() -> ProductsResponse? {
         return getAllProducts
@@ -48,20 +46,30 @@ class CategoryViewModel{
     }
     //MARK: -Getting Number of Brands
 func getNumberOfProducts() -> Int? {
-//    print(getAllBrands?.smart_collections.count)
-    print(getAllProducts?.products.count)
+//    print(getAllProducts?.products.count)
     return getAllProducts?.products.count
-   }
+    }
     func getTitle(index: Int) -> String?{
         return getAllProducts?.products[index].title ?? "NO"
-
     }
+    
     func getImage(index: Int) -> String?{
         return getAllProducts?.products[index].images[0].src
     }
+    
     func getPrice(index: Int) -> String?{
      
         return getAllProducts?.products[index].variants[0].price
+    }
+    
+    func filter(mainCategoryName:String)->[Product]{
+        var arr : [Product] = []
+        for i in 0..<(getAllProducts?.products.count ?? 1){
+            if ((getAllProducts?.products[i].tags.contains(mainCategoryName)) == true){
+                arr.append(getAllProducts!.products[i])
+            }
+        }
+        return arr
     }
 }
     

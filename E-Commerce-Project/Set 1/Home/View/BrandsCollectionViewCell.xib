@@ -30,7 +30,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="CY3-7j-j9e" secondAttribute="trailing" constant="20" id="2MN-AQ-8mB"/>
                             <constraint firstItem="CY3-7j-j9e" firstAttribute="leading" secondItem="0nz-Qo-0dP" secondAttribute="leading" constant="20" id="62f-SZ-CvS"/>
@@ -44,7 +44,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" red="0.90516390069999997" green="0.58034432920000001" blue="0.20647052120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="0nz-Qo-0dP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="3O6-tF-slL"/>
                 <constraint firstAttribute="bottom" secondItem="0nz-Qo-0dP" secondAttribute="bottom" id="PEC-ug-3LA"/>
@@ -55,6 +55,7 @@
             <connections>
                 <outlet property="brandsImageView" destination="CY3-7j-j9e" id="H6a-OG-kKG"/>
                 <outlet property="brandsNamesLabel" destination="O6q-Tu-PDb" id="BkV-gk-Pjm"/>
+                <outlet property="myview" destination="0nz-Qo-0dP" id="9se-sq-FxN"/>
             </connections>
             <point key="canvasLocation" x="198.47328244274809" y="77.112676056338032"/>
         </collectionViewCell>

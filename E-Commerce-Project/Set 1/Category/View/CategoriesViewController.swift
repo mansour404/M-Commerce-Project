@@ -90,10 +90,34 @@ class CategoriesViewController: UIViewController {
 //        self.present(vc, animated: true)
         
     }
+    // MARK: - ACTIONS
+    @IBAction func menBtnTapped(_ sender: Any) {
+//        categoryViewModel.filter(mainCategoryName: "men")
+        
+    }
+    @IBAction func womenBtnTapped(_ sender: Any) {
+        
+    }
+    @IBAction func kidsBtnTapped(_ sender: Any) {
+        
+    }
+    @IBAction func saleBtnTapped(_ sender: Any) {
+        
+    }
+    @IBAction func allBtnTapped(_ sender: Any) {
+        
+    }
+    @IBAction func shoesBtnTapped(_ sender: Any) {
+        
+    }
+    @IBAction func accessoriesBtnTapped(_ sender: Any) {
+        
+    }
+    @IBAction func tshirtsBtnTapped(_ sender: Any) {
+        
+    }
+    
 }
-
-
-
 // MARK: - UICollectionView DataSource
 extension CategoriesViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
