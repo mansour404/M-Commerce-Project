@@ -11,14 +11,20 @@ class LoginVC: UIViewController {
 
     @IBOutlet weak var UserPasswordTextField: UITextField!
     @IBOutlet weak var UserNameTextField: UITextField!
+    let loginModel  = LoginViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginModel.getDataFromApiForCustom()
 
-        // Do any additional setup after loading the view.
     }
     @IBAction func LoginButton(_ sender: UIButton) {
         if getUserData() {
-            print("not empty")
+            if loginModel.checkCustomerInfo(userName: UserNameTextField.text!, userPassword: UserPasswordTextField.text!){
+                let vc = TabController()
+            vc.modalPresentationStyle = .automatic
+                self.present(vc, animated: true)
+            }
         }else {
             print("empty")
         }

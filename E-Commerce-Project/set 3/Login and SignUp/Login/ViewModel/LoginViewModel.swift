@@ -21,14 +21,14 @@ class LoginViewModel {
         }
     }
     //MARK: -CAll Request of Api
-    func getDataFromApiForProduct() {
+    func getDataFromApiForCustom() {
         services.getCustomerData(Handler: { (dataValue:CustomerList?, error: Error?) in
             print("Success")
 
             if let mydata = dataValue {
                 self.AllCustomers = mydata
-                self.bindresultToProductsViewController()
-
+//                self.bindresultToProductsViewController()
+                self.printName()
             }else {
                 if let error = error{
                     print(error.localizedDescription)
@@ -38,10 +38,26 @@ class LoginViewModel {
     }
     
     //MARK: -check if customer exist in Api
-//    func checkCustomerInfo(userName : String , userPassword : String) -> Bool {
-//        for i in 0...(AllCustomers?.customers.count)! {
-//            if (AllCustomers?.customers[i].first_name)
-//        }
-//    }
+    func checkCustomerInfo(userName : String , userPassword : String) -> Bool {
+            var flag = false
+        for i in 0..<(AllCustomers?.customers.count)! {
+            var FullName : String = (AllCustomers?.customers[i].first_name)! + " " + (AllCustomers?.customers[i].last_name)!
+            if (FullName == userName){
+                if(AllCustomers?.customers[i].tags == userPassword){
+                    flag = true
+                    UserDefaultsHelper.shared.saveAPI(id: (AllCustomers?.customers[i].id)!)
+                    break
+                }
+            }
+        }
+        return flag
+    }
+    func printName () {
+        for i in 0..<(AllCustomers?.customers.count)! {
+            print("======================")
+            print( (AllCustomers?.customers[i].first_name)! + " " + (AllCustomers?.customers[i].last_name)!)
+            print("======================")
+
+        }}
 }
 

@@ -16,5 +16,8 @@ class FavouriteCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    func configureCell (imageURL : String , productname : String ){
+        
+    }
 
 }

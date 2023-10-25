@@ -15,6 +15,7 @@ struct Customer : Codable {
     var first_name : String?
     var last_name : String?
     var phone : String?
+    var tags : String?
     var addresses : [Adress]
 }
 struct Adress : Codable {

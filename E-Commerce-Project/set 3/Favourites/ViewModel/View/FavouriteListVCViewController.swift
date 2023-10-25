@@ -11,11 +11,20 @@ class FavouriteListVCViewController: UIViewController {
     var namearray : [String] = []
     var pricearray : [String] = []
     var FavouriteCollectionView : UICollectionView!
+    var favouriteViewModel = FavouriteViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         namearray = ["Product 1","Product 2","Product 3","Product 4","Product 5","Product 6","Product 7","Product 8","Product 9"]
         pricearray = ["USD 1","USD 2","USD 3","USD 4","USD 5","USD 6","USD 7","USD 8","USD 9"]
         self.ConfigureUI()
+        favouriteViewModel.bindresultToProductsViewController = {
+            self.FavouriteCollectionView.reloadData()
+        }
+        DispatchQueue.main.async {
+            self.favouriteViewModel.getDataFromApiForProduct()
+        }
+        favouriteViewModel.getproducts()
+        
         // Do any additional setup after loading the view.
     }
     func ConfigureUI() {
@@ -64,17 +73,18 @@ class FavouriteListVCViewController: UIViewController {
 }
 extension FavouriteListVCViewController :UICollectionViewDelegate,UICollectionViewDataSource{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return  1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return namearray.count
+        return favouriteViewModel.getNumberOfProduct() ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = FavouriteCollectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCell", for: indexPath) as! FavouriteCell
-        cell.FavouriteProductImage.image = UIImage(named: "producr_Bag")
-        cell.FavouriteProductName.text = namearray[indexPath.row]
+        cell.FavouriteProductImage.image = UIImage(named: "bag")
+        cell.FavouriteProductName.text = favouriteViewModel.getTitle(index: indexPath.row)
         cell.FavouriteProductPrice.text = pricearray[indexPath.row]
+    
         return cell
     }
     

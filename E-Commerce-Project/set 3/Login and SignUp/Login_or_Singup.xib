@@ -53,6 +53,9 @@
                                                     </fragment>
                                                 </attributedString>
                                             </buttonConfiguration>
+                                            <connections>
+                                                <action selector="SkipButtons:" destination="-1" eventType="touchUpInside" id="BHk-f6-nuf"/>
+                                            </connections>
                                         </button>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="h7i-pP-0qF">
                                             <rect key="frame" x="45" y="547" width="300" height="115"/>
@@ -75,6 +78,9 @@
                                                             </fragment>
                                                         </attributedString>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="LoginButton:" destination="-1" eventType="touchUpInside" id="U4B-K2-3v9"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCY-WA-HIS">
                                                     <rect key="frame" x="0.0" y="65" width="300" height="50"/>
@@ -89,6 +95,9 @@
                                                             </fragment>
                                                         </attributedString>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="SignUpButton:" destination="-1" eventType="touchUpInside" id="vPe-Yo-Gsb"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -129,111 +138,9 @@
                         <constraint firstItem="FaP-Jf-818" firstAttribute="bottom" secondItem="Wn9-0O-qU7" secondAttribute="bottom" id="tlU-7N-t5o"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VtU-JK-wAA">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feW-RX-iWD" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="390" height="759"/>
-                            <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100" translatesAutoresizingMaskIntoConstraints="NO" id="KKh-8L-L1y">
-                                    <rect key="frame" x="20" y="104" width="350" height="300"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="350" id="1Rd-K3-rTL"/>
-                                        <constraint firstAttribute="height" constant="300" id="nDa-uD-HcF"/>
-                                    </constraints>
-                                </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snK-Ff-LVR">
-                                    <rect key="frame" x="307" y="7" width="83" height="49"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="49" id="LM2-ZH-jpZ"/>
-                                        <constraint firstAttribute="width" constant="83" id="ra8-bX-WOU"/>
-                                    </constraints>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain">
-                                        <attributedString key="attributedTitle">
-                                            <fragment content="Skip">
-                                                <attributes>
-                                                    <font key="NSFont" size="30" name="Helvetica"/>
-                                                    <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                    </buttonConfiguration>
-                                </button>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="E2O-bb-vjQ">
-                                    <rect key="frame" x="45" y="547" width="300" height="115"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPv-6W-P0V">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="PiG-gK-t10"/>
-                                                <constraint firstAttribute="width" constant="300" id="hq9-wO-jT2"/>
-                                            </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="filled" cornerStyle="capsule">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="Login">
-                                                        <attributes>
-                                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <font key="NSFont" size="21" name="Helvetica"/>
-                                                            <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </buttonConfiguration>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZe-C4-hJr">
-                                            <rect key="frame" x="0.0" y="65" width="300" height="50"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="filled" cornerStyle="capsule">
-                                                <attributedString key="attributedTitle">
-                                                    <fragment content="Sign Up">
-                                                        <attributes>
-                                                            <font key="NSFont" size="22" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </buttonConfiguration>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="uZe-C4-hJr" firstAttribute="top" secondItem="tPv-6W-P0V" secondAttribute="bottom" constant="15" id="qIE-D4-n4U"/>
-                                    </constraints>
-                                </stackView>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="E2O-bb-vjQ" secondAttribute="bottom" constant="97" id="7wc-if-lIk"/>
-                                <constraint firstItem="E2O-bb-vjQ" firstAttribute="centerX" secondItem="feW-RX-iWD" secondAttribute="centerX" id="KHd-LR-CeY"/>
-                                <constraint firstItem="KKh-8L-L1y" firstAttribute="top" secondItem="snK-Ff-LVR" secondAttribute="bottom" constant="48" id="NdI-MA-WaQ"/>
-                                <constraint firstItem="E2O-bb-vjQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KKh-8L-L1y" secondAttribute="bottom" constant="143" id="Oux-pP-TWw"/>
-                                <constraint firstItem="KKh-8L-L1y" firstAttribute="centerX" secondItem="feW-RX-iWD" secondAttribute="centerX" id="Vlx-nT-Hiv"/>
-                                <constraint firstItem="snK-Ff-LVR" firstAttribute="top" secondItem="feW-RX-iWD" secondAttribute="top" constant="7" id="fsN-YF-nnB"/>
-                                <constraint firstAttribute="trailing" secondItem="snK-Ff-LVR" secondAttribute="trailing" id="iYx-GP-5fq"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="feW-RX-iWD" secondAttribute="trailing" constant="3" id="Hz8-hM-WEF"/>
-                        <constraint firstItem="feW-RX-iWD" firstAttribute="leading" secondItem="VtU-JK-wAA" secondAttribute="leading" id="NMU-r0-ohw"/>
-                        <constraint firstItem="feW-RX-iWD" firstAttribute="top" secondItem="VtU-JK-wAA" secondAttribute="top" id="e0m-XE-e3v"/>
-                        <constraint firstAttribute="bottom" secondItem="feW-RX-iWD" secondAttribute="bottom" id="zX0-dA-a2Y"/>
-                    </constraints>
-                    <viewLayoutGuide key="contentLayoutGuide" id="032-AF-kyh"/>
-                    <viewLayoutGuide key="frameLayoutGuide" id="0df-nB-b1d"/>
-                </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <constraints>
-                <constraint firstItem="VtU-JK-wAA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7si-53-Uib"/>
-                <constraint firstItem="feW-RX-iWD" firstAttribute="height" secondItem="fnl-2z-Ty3" secondAttribute="height" priority="250" id="9Rd-uG-4pJ"/>
-                <constraint firstItem="VtU-JK-wAA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Mva-2C-Sn2"/>
-                <constraint firstItem="VtU-JK-wAA" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="TRF-SI-ipE"/>
-                <constraint firstItem="feW-RX-iWD" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" multiplier="0.992366" id="pre-gC-leB"/>
-                <constraint firstItem="VtU-JK-wAA" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="rGH-nz-NrM"/>
-            </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>
     </objects>

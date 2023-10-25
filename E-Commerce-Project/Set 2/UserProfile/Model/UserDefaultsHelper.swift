@@ -12,22 +12,24 @@ final class UserDefaultsHelper {
     static let shared = UserDefaultsHelper()
     private init() {}
     
-    func saveAPIToken(token: String) {
-        let userDefaults = UserDefaults.standard
-        userDefaults.setValue(token, forKey: "token")
-        //userDefaults.setValue(true, forKey: "isUserLoggedIn")
-        setUserLogin()
-        userDefaults.synchronize() // method is unnecessary and shouldn't be used.
-        // restar app after saved token, restartApp() function.
-    }
-    
-    func getAPIToken() -> String? {
-        guard let token = UserDefaults.standard.object(forKey: "token") as? String else {
-            return nil
+    func saveAPI(id: Int) {
+            let userDefaults = UserDefaults.standard
+            userDefaults.setValue(id, forKey: "id")
+            //userDefaults.setValue(true, forKey: "isUserLoggedIn")
+            setUserLogin()
+            userDefaults.synchronize() // method is unnecessary and shouldn't be used.
+            // restar app after saved token, restartApp() function.
         }
-        return token
-    }
+
+
+        func getAPIToken() -> String? {
+            guard let token = UserDefaults.standard.object(forKey: "id") as? String else {
+                return nil
+            }
+            return token
+        }
     
+  
     func isUserLoggedIn() -> Bool {
         return UserDefaults.standard.bool(forKey: "isUserLoggedIn")
     }
