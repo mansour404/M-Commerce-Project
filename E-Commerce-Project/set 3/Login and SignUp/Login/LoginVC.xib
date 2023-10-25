@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginVC" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
+                <outlet property="UserNameTextField" destination="NuY-Yq-93F" id="9Fa-fa-w3O"/>
+                <outlet property="UserPasswordTextField" destination="dER-y1-Q4W" id="KlL-YW-YZd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -58,6 +60,7 @@
                                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NuY-Yq-93F">
                                                             <rect key="frame" x="0.0" y="36" width="310" height="35"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="310" id="bhU-gA-04e"/>
                                                                 <constraint firstAttribute="height" constant="35" id="ble-HL-87t"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -98,6 +101,7 @@
                                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dER-y1-Q4W">
                                                             <rect key="frame" x="0.0" y="35" width="310" height="35"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="310" id="mbG-BM-oJK"/>
                                                                 <constraint firstAttribute="height" constant="35" id="sDC-UZ-dSi"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -135,11 +139,17 @@
                                     </constraints>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="filled" title="login" cornerStyle="capsule"/>
+                                    <connections>
+                                        <action selector="LoginButton:" destination="-1" eventType="touchUpInside" id="FyE-0R-vaG"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBn-tf-tAd">
-                                    <rect key="frame" x="25" y="534" width="335" height="34.333333333333371"/>
+                                    <rect key="frame" x="25" y="534" width="335" height="38.333333333333371"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="filled" title="Google" cornerStyle="capsule"/>
+                                    <connections>
+                                        <action selector="GoogleButton:" destination="-1" eventType="touchUpInside" id="ofo-UK-W92"/>
+                                    </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aMb-u6-icj">
                                     <rect key="frame" x="15" y="489" width="355" height="25"/>

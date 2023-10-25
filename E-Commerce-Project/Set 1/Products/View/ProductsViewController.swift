@@ -15,19 +15,30 @@ class ProductsViewController: UIViewController {
     @IBOutlet weak var rateFilterButtonOutlet: UIButton!
     @IBOutlet weak var priceFilterButtonOutlet: UIButton!
     @IBOutlet weak var charFilterButtonOutlet: UIButton!
-    
+    var productviewModel = ProductViewModel()
     var buttonHidden:Bool = true
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Products"
-        configureCollectionView()
+       
         rateFilterButtonOutlet.isHidden = true
         priceFilterButtonOutlet.isHidden = true
         charFilterButtonOutlet.isHidden = true
-
+        productviewModel.bindresultToProductsViewController = {
+            DispatchQueue.main.async {
+                self.productsCollectionView.reloadData()
+            }
+        }
+        self.configureLoadingDataFromApi()
+        configureCollectionView()
         
+    }
+    func configureLoadingDataFromApi(){
+
+        productviewModel.getDataFromApiForProduct()
+
     }
     // MARK: - Configure CollectionView
     private func configureCollectionView() {
@@ -64,12 +75,15 @@ class ProductsViewController: UIViewController {
     // MARK: - UICollectionView DataSource
     extension ProductsViewController:UICollectionViewDataSource {
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            10
+            return productviewModel.getNumberOfProduct() ?? 1
         }
 
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             
             let cell = productsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
+            cell.productNameLabel.text = productviewModel.getTitle(index: indexPath.row)
+            cell.imageView.downloadImageFrom(productviewModel.getid(index: indexPath.row))
+            
             return cell
             
         }

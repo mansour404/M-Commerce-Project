@@ -166,6 +166,7 @@ extension HomeViewController:UICollectionViewDataSource {
             self.present(alert, animated: true, completion: nil)
         } else {
                 let vc = ProductsViewController()
+            homeViewModel.setSelectedBrandID(Index: indexPath.row)
         //        navigationController?.pushViewController(vc, animated: true)
             vc.modalPresentationStyle = .automatic
                 self.present(vc, animated: true)

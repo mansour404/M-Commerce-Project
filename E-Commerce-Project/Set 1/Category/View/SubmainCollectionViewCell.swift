@@ -38,6 +38,7 @@ class SubmainCollectionViewCell: UICollectionViewCell {
         if let titleLabel = exchangeLabel {
             titleLabel.text = exchangeText
         }
+        
 //        if let ratingView = rating {
 //            ratingView = rating
 //        }
