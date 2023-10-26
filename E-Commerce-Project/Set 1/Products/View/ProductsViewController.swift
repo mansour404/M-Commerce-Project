@@ -17,12 +17,12 @@ class ProductsViewController: UIViewController {
     @IBOutlet weak var charFilterButtonOutlet: UIButton!
     var productviewModel = ProductViewModel()
     var buttonHidden:Bool = true
-    
+    var isSearchActive  = false
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Products"
-       
+        searchBar.delegate = self
         rateFilterButtonOutlet.isHidden = true
         priceFilterButtonOutlet.isHidden = true
         charFilterButtonOutlet.isHidden = true
@@ -36,9 +36,12 @@ class ProductsViewController: UIViewController {
         
     }
     func configureLoadingDataFromApi(){
-
-        productviewModel.getDataFromApiForProduct()
-
+        if(isSearchActive ){
+            productviewModel.getDataFromApiForProduct_WithFilter(SearchText: searchBar.text!)
+        }
+        else {
+            productviewModel.getDataFromApiForProduct()
+        }
     }
     // MARK: - Configure CollectionView
     private func configureCollectionView() {
@@ -101,11 +104,26 @@ class ProductsViewController: UIViewController {
     }
 // MARK: - UICollectionView Delegate
 
-extension ProductsViewController: UICollectionViewDelegate , UICollectionViewDelegateFlowLayout
+extension ProductsViewController: UICollectionViewDelegate , UICollectionViewDelegateFlowLayout , UISearchBarDelegate
 {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (productsCollectionView.frame.width / 2) - 10 , height: (productsCollectionView.frame.height) / 2.5 )
     }
+//    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        <#code#>
+//    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchText.isEmpty == true){
+            isSearchActive = false
+        }
+        else {
+            isSearchActive = true
+        }
+        configureLoadingDataFromApi()
+    
+    }
+   
 }
 
 

@@ -11,8 +11,11 @@ class CategoriesViewController: UIViewController {
     // MARK: - Variables
     @IBOutlet weak var subMainCollectionView: UICollectionView!
     
+   
+    @IBOutlet var secondOutletCollection: [UIButton]!
     let categoryViewModel = CategoryViewModel()
     
+    @IBOutlet var FirstOutletCollection: [UIButton]!
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,32 +94,19 @@ class CategoriesViewController: UIViewController {
         
     }
     // MARK: - ACTIONS
-    @IBAction func menBtnTapped(_ sender: Any) {
-//        categoryViewModel.filter(mainCategoryName: "men")
+    var filter_1 : String = "all"
+    var filter_2 : String = "ALL"
+    @IBAction func FirstRowButtons(_ sender: UIButton) {
         
-    }
-    @IBAction func womenBtnTapped(_ sender: Any) {
-        
-    }
-    @IBAction func kidsBtnTapped(_ sender: Any) {
-        
-    }
-    @IBAction func saleBtnTapped(_ sender: Any) {
-        
-    }
-    @IBAction func allBtnTapped(_ sender: Any) {
-        
-    }
-    @IBAction func shoesBtnTapped(_ sender: Any) {
-        
-    }
-    @IBAction func accessoriesBtnTapped(_ sender: Any) {
-        
-    }
-    @IBAction func tshirtsBtnTapped(_ sender: Any) {
-        
+        filter_1 = (sender.titleLabel!.text?.lowercased())!
+        categoryViewModel.getDataFromApiForHome(filter1: filter_1, filter2: filter_2)
     }
     
+    @IBAction func secondRowButtons(_ sender: UIButton) {
+       
+        filter_2 = (sender.titleLabel!.text?.uppercased())!
+        categoryViewModel.getDataFromApiForHome(filter1: filter_1, filter2: filter_2)
+    }
 }
 // MARK: - UICollectionView DataSource
 extension CategoriesViewController:UICollectionViewDataSource {
@@ -132,9 +122,15 @@ extension CategoriesViewController:UICollectionViewDataSource {
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = ProductsViewController()
-        navigationController?.pushViewController(vc, animated: true)
+     
         
+        let vc = ProductInfoViewController(nibName: "ProductInfoViewController", bundle: nil)
+       
+        var id = categoryViewModel.getProductID(index: indexPath.item)
+        print(id)
+        vc.setID(id: id)
+      
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

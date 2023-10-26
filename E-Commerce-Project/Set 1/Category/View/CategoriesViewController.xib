@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,14 @@
             <connections>
                 <outlet property="subMainCollectionView" destination="qlS-Kd-GWF" id="Kfw-Es-t9F"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="secondOutletCollection" destination="Ptt-uh-gzM" collectionClass="NSMutableArray" id="oRm-lW-JEY"/>
+                <outletCollection property="secondOutletCollection" destination="1bV-yI-ZVH" collectionClass="NSMutableArray" id="5rj-CC-sI2"/>
+                <outletCollection property="secondOutletCollection" destination="Eba-rA-9h6" collectionClass="NSMutableArray" id="Z2G-R5-1hC"/>
+                <outletCollection property="secondOutletCollection" destination="VTN-xp-NBw" collectionClass="NSMutableArray" id="bUv-3h-L6s"/>
+                <outletCollection property="FirstOutletCollection" destination="Ywr-pn-IKN" collectionClass="NSMutableArray" id="f7s-qK-ATV"/>
+                <outletCollection property="FirstOutletCollection" destination="sPL-Fj-xUv" collectionClass="NSMutableArray" id="UrK-t3-SPO"/>
+                <outletCollection property="FirstOutletCollection" destination="m8U-YR-S7C" collectionClass="NSMutableArray" id="RJj-Od-UAG"/>
+                <outletCollection property="FirstOutletCollection" destination="A2z-Gj-BdS" collectionClass="NSMutableArray" id="vsi-iK-W4j"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,7 +39,7 @@
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="menBtnTapped:" destination="-1" eventType="touchUpInside" id="AfF-Rm-3Jq"/>
+                        <action selector="FirstRowButtons:" destination="-1" eventType="touchUpInside" id="jtE-ML-bkT"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8U-YR-S7C">
@@ -45,7 +53,7 @@
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="womenBtnTapped:" destination="-1" eventType="touchUpInside" id="opN-60-6vR"/>
+                        <action selector="FirstRowButtons:" destination="-1" eventType="touchUpInside" id="KgC-rA-end"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPL-Fj-xUv">
@@ -53,13 +61,13 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="gray" title="Kids" subtitle="" cornerStyle="medium">
+                    <buttonConfiguration key="configuration" style="gray" title="Kid" subtitle="" cornerStyle="medium">
                         <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
                         <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="kidsBtnTapped:" destination="-1" eventType="touchUpInside" id="SQD-kU-SLd"/>
+                        <action selector="FirstRowButtons:" destination="-1" eventType="touchUpInside" id="bQC-II-xf4"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ywr-pn-IKN">
@@ -73,7 +81,7 @@
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="saleBtnTapped:" destination="-1" eventType="touchUpInside" id="Z32-An-vN6"/>
+                        <action selector="FirstRowButtons:" destination="-1" eventType="touchUpInside" id="rB5-Pd-hCw"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTN-xp-NBw">
@@ -87,7 +95,7 @@
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="allBtnTapped:" destination="-1" eventType="touchUpInside" id="dUf-Ma-MKI"/>
+                        <action selector="secondRowButtons:" destination="-1" eventType="touchUpInside" id="aDa-Tc-mak"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eba-rA-9h6">
@@ -101,7 +109,7 @@
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="shoesBtnTapped:" destination="-1" eventType="touchUpInside" id="mef-eM-LZR"/>
+                        <action selector="secondRowButtons:" destination="-1" eventType="touchUpInside" id="BZ7-zr-baR"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ptt-uh-gzM">
@@ -115,7 +123,7 @@
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="accessoriesBtnTapped:" destination="-1" eventType="touchUpInside" id="uzZ-Gq-yLZ"/>
+                        <action selector="secondRowButtons:" destination="-1" eventType="touchUpInside" id="6F8-6d-2s7"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bV-yI-ZVH">
@@ -129,7 +137,7 @@
                         <color key="baseBackgroundColor" systemColor="systemGray5Color"/>
                     </buttonConfiguration>
                     <connections>
-                        <action selector="tshirtsBtnTapped:" destination="-1" eventType="touchUpInside" id="1zD-WO-FVQ"/>
+                        <action selector="secondRowButtons:" destination="-1" eventType="touchUpInside" id="uZW-Vg-G6o"/>
                     </connections>
                 </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qlS-Kd-GWF">
@@ -154,7 +162,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -9,7 +9,7 @@
 import Foundation
 
 struct ProductsResponse: Codable {
-    let products: [Product]
+    var products: [Product]
 }
 
 struct Variant : Codable {

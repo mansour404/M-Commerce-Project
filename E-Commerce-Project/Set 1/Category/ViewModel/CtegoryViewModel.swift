@@ -44,6 +44,78 @@ class CategoryViewModel{
             }
         })
     }
+    func getDataFromApiForHome(filter1 : String , filter2 :String) {
+        if(filter2 != "ALL"){
+            services.getDataByProductType(Type: filter2, Handler: { (dataValue:ProductsResponse?, error: Error?) in
+                print("Success")
+                
+                if let mydata = dataValue {
+                    if(filter1 == "all") {
+                        self.getAllProducts = mydata
+                    }else{
+                        self.getAllProducts = mydata
+                        self.getAllProducts?.products = []
+                        for p in mydata.products {
+                            var allTags : [String] = p.tags?.components(separatedBy: ", ") ?? []
+                            var found = false
+                            for t in allTags {
+                                if (t == filter1){
+                                    found = true
+                                    break
+                                }
+                                
+                            }
+                            if (found){
+                                self.getAllProducts?.products.append(p)
+                            }
+                        }
+                    }
+                    
+                    self.bindresultToHomeViewController()
+                    
+                }else {
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            )
+        }
+        else {
+            services.getDataToCategory(Handler: { (dataValue:ProductsResponse?, error: Error?) in
+                print("Success")
+
+                if let mydata = dataValue {
+                    if(filter1 == "all") {
+                        self.getAllProducts = mydata
+                    }else{
+                        self.getAllProducts = mydata
+                        self.getAllProducts?.products = []
+                        for p in mydata.products {
+                            var allTags : [String] = p.tags?.components(separatedBy: ", ") ?? []
+                            var found = false
+                            for t in allTags {
+                                if (t == filter1){
+                                    found = true
+                                    break
+                                }
+                                
+                            }
+                            if (found){
+                                self.getAllProducts?.products.append(p)
+                            }
+                        }
+                    }
+                    self.bindresultToHomeViewController()
+
+                }else {
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }
+                }
+            })
+        }
+    }
     //MARK: -Getting Number of Brands
 func getNumberOfProducts() -> Int? {
 //    print(getAllProducts?.products.count)
@@ -61,16 +133,19 @@ func getNumberOfProducts() -> Int? {
      
         return getAllProducts?.products[index].variants?[0].price
     }
-    
-    func filter(mainCategoryName:String)->[Product]{
-        var arr : [Product] = []
-        for i in 0..<(getAllProducts?.products.count ?? 1){
-            if ((getAllProducts?.products[i].tags?.contains(mainCategoryName)) == true){
-                arr.append(getAllProducts!.products[i])
-            }
-        }
-        return arr
+    func getProductID(index : Int ) -> Int64{
+        return getAllProducts?.products[index].id ?? 7827742130326
     }
+    
+//    func filter(mainCategoryName:String)->[Product]{
+//        var arr : [Product] = []
+//        for i in 0..<(getAllProducts?.products.count ?? 1){
+//            if ((getAllProducts?.products[i].tags?.contains(mainCategoryName)) == true){
+//                arr.append(getAllProducts!.products[i])
+//            }
+//        }
+//        return arr
+//    }
 }
     
 

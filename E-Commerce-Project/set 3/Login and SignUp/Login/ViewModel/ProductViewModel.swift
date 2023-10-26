@@ -9,7 +9,7 @@ import Foundation
 class ProductViewModel {
     var handerDataOfHome: (() -> Void)?
     var  bindresultToProductsViewController: ( () -> () ) = {}
-  
+    
     var services = NetworkServices()
     
     var AllBrandProducts: ProductsResponse? {
@@ -36,11 +36,32 @@ class ProductViewModel {
             }
         })
     }
+    func getDataFromApiForProduct_WithFilter(SearchText : String) {
+        services.getAllProductsForBrandData(BrandId: HomeViewModel.selectedBrandID ?? 303787573398, Handler: { (dataValue:ProductsResponse?, error: Error?) in
+            print("Success")
+
+            if let mydata = dataValue {
+                self.AllBrandProducts = mydata
+                self.AllBrandProducts?.products = []
+                
+                for p in mydata.products {
+                    if (p.title?.contains(SearchText) == true){
+                        self.AllBrandProducts?.products.append(p)
+                    }
+                }
+                
+                self.bindresultToProductsViewController()
+
+            }else {
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+            }
+        })
+    }
     
     //MARK: -Getting Number of Brands
 func getNumberOfProduct() -> Int? {
-//    print(getAllBrands?.smart_collections.count)
-   
     return AllBrandProducts?.products.count
    }
     func getTitle(index: Int) -> String?{
