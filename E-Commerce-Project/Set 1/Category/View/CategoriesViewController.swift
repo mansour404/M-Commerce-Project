@@ -123,7 +123,7 @@ extension CategoriesViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         categoryViewModel.getNumberOfProducts() ?? 3
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = subMainCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
@@ -131,7 +131,11 @@ extension CategoriesViewController:UICollectionViewDataSource {
         return cell
         
     }
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ProductsViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
 }
 
 

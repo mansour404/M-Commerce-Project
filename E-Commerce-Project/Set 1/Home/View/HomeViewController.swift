@@ -11,8 +11,7 @@ class HomeViewController: UIViewController {
     // MARK: - Variables
     var timer : Timer?
     var currentCellIndex = 0
-    
-    var homeViewModel = HomeViewModel()
+        var homeViewModel = HomeViewModel()
 
 
     var brandData : Brands?
@@ -26,39 +25,23 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 //        navigationItem.title = "Home"
         self.configureLoadingDataFromApi()
-        self.navigationItem.setHidesBackButton(true, animated: true)
         homeViewModel.bindresultToHomeViewController = {
             DispatchQueue.main.async {
                 self.brandsCollectionView.reloadData()
             }
-            
         }
         configureCollectionView()
-//        pageConroller.numberOfPages = coupons.count
-//        startTimer()
-        
-       
+        pageConroller.numberOfPages = 4
+        startTimer()
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
         navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
     }
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.tabBarController?.navigationItem.hidesBackButton = true
+//    }
     //MARK: - Configure The Loading Data
     func configureLoadingDataFromApi(){
-
         homeViewModel.getDataFromApiForHome()
-        //        homeViewModel.getData(Handler: { (dataValue:Brands?, error: Error?) in
-        //            if let data = dataValue {
-        //                self.brandData = data
-        //                DispatchQueue.main.async {
-        //                    self.brandsCollectionView.reloadData()
-        //                }
-        //                //                        print(self.brandData!.smart_collections)
-        //            }else {
-        //                if let error = error{
-        //                    print(error.localizedDescription)
-        //                }
-        //            }
-        //        }
-        //        )}
     }
         
     // MARK: - Configure CollectionView
@@ -123,24 +106,24 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Go to next coupon
-//    func startTimer(){
-//        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
-//    }
+    func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
+    }
 
-//  @objc func moveToNextIndex(){
-//      if currentCellIndex < coupons.count - 1 {
-//          currentCellIndex += 1
-//      }else{
-//          currentCellIndex = 0
-//      }
-//      couponsCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
-//      pageConroller.currentPage = currentCellIndex
-//        }
+  @objc func moveToNextIndex(){
+      if currentCellIndex < 3 {
+          currentCellIndex += 1
+      }else{
+          currentCellIndex = 0
+      }
+      couponsCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+      pageConroller.currentPage = currentCellIndex
+        }
 }
     // MARK: - UICollectionView DataSource
 extension HomeViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return homeViewModel.getNumberOfBrands() ?? 1
+        return homeViewModel.getNumberOfBrands() ?? 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -168,9 +151,9 @@ extension HomeViewController:UICollectionViewDataSource {
         } else {
                 let vc = ProductsViewController()
             homeViewModel.setSelectedBrandID(Index: indexPath.row)
-        //        navigationController?.pushViewController(vc, animated: true)
-            vc.modalPresentationStyle = .automatic
-                self.present(vc, animated: true)
+                navigationController?.pushViewController(vc, animated: true)
+//            vc.modalPresentationStyle = .automatic
+//                self.present(vc, animated: true)
             }
         }
     }

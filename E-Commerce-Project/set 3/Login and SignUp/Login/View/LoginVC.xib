@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="UserNameTextField" destination="NuY-Yq-93F" id="9Fa-fa-w3O"/>
                 <outlet property="UserPasswordTextField" destination="dER-y1-Q4W" id="KlL-YW-YZd"/>
+                <outlet property="googleBtnOutlet" destination="XBn-tf-tAd" id="brx-jJ-XnN"/>
+                <outlet property="loginBtnOutlet" destination="Zus-dL-L1t" id="Sz0-Rc-se6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -133,46 +135,54 @@
                                     </subviews>
                                 </stackView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zus-dL-L1t">
-                                    <rect key="frame" x="25" y="434" width="335" height="40"/>
+                                    <rect key="frame" x="25" y="434" width="335" height="50"/>
+                                    <color key="backgroundColor" red="0.57254904510000004" green="0.46274507050000002" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="3EB-m8-qRC"/>
+                                        <constraint firstAttribute="height" constant="50" id="3EB-m8-qRC"/>
                                     </constraints>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="filled" title="login" cornerStyle="capsule"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Login"/>
                                     <connections>
                                         <action selector="LoginButton:" destination="-1" eventType="touchUpInside" id="FyE-0R-vaG"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBn-tf-tAd">
-                                    <rect key="frame" x="25" y="534" width="335" height="38.333333333333371"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="filled" title="Google" cornerStyle="capsule"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBn-tf-tAd">
+                                    <rect key="frame" x="25" y="540.66666666666663" width="335" height="50"/>
+                                    <color key="backgroundColor" red="0.84705877299999999" green="0.31764706970000001" blue="0.25098040700000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="rpI-wO-nIZ"/>
+                                    </constraints>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="google"/>
                                     <connections>
                                         <action selector="GoogleButton:" destination="-1" eventType="touchUpInside" id="ofo-UK-W92"/>
                                     </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aMb-u6-icj">
-                                    <rect key="frame" x="15" y="489" width="355" height="25"/>
+                                    <rect key="frame" x="15" y="499" width="355" height="21.666666666666629"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPj-sf-8Ib">
-                                            <rect key="frame" x="0.0" y="12" width="165" height="1"/>
+                                            <rect key="frame" x="0.0" y="10.333333333333371" width="165" height="1"/>
                                             <color key="backgroundColor" red="0.90588235859999999" green="0.90980386729999996" blue="0.91764706370000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="TWY-hn-uJT"/>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0d-u1-g6D">
-                                            <rect key="frame" x="165" y="0.0" width="25" height="25"/>
+                                            <rect key="frame" x="165" y="0.0" width="25" height="21.666666666666668"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="5sX-LY-0Ym"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="XYh-S5-GSi"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="5sX-LY-0Ym"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="XYh-S5-GSi"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjG-7L-sGX">
-                                            <rect key="frame" x="190" y="12" width="165" height="1"/>
+                                            <rect key="frame" x="190" y="10.333333333333371" width="165" height="1"/>
                                             <color key="backgroundColor" red="0.90588235859999999" green="0.90980386729999996" blue="0.91764706370000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="koC-G1-Wlb"/>
@@ -234,6 +244,7 @@
         </view>
     </objects>
     <resources>
+        <image name="google" width="84" height="22"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

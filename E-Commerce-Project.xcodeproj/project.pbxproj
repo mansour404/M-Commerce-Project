@@ -507,7 +507,6 @@
 			children = (
 				DC851A552AE9E1E9001BD944 /* ViewModel */,
 				DC851A592AE9E1E9001BD944 /* View */,
-				DC851A5B2AE9E1E9001BD944 /* LoginVC.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -525,6 +524,7 @@
 		DC851A592AE9E1E9001BD944 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DC851A5B2AE9E1E9001BD944 /* LoginVC.xib */,
 				DC851A5A2AE9E1E9001BD944 /* LoginVC.swift */,
 			);
 			path = View;
