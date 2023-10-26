@@ -9,20 +9,20 @@ import UIKit
 
 class UserOrderCustomTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var orderNumberLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var itemLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         selectionStyle = .none
+        separatorInset = UIEdgeInsets(top: 0, left: 500, bottom: 0, right: 0)
+        
+        cardView.clipsToBounds = true
+        cardView.layer.cornerRadius = 20
+        cardView.dropShadow()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,14 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewAddressView" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
-                <outlet property="GovernorateTextField" destination="Eaf-ZY-xt9" id="bgS-S9-d9s"/>
-                <outlet property="addressTextField" destination="Sun-bA-Uuf" id="Q8x-4e-DC5"/>
-                <outlet property="addtionalNoteTextField" destination="yUu-5L-2WH" id="exT-nA-fpB"/>
-                <outlet property="cityTextField" destination="P8O-o8-W9v" id="gd8-LL-g5q"/>
+                <outlet property="addressTextField" destination="P8O-o8-W9v" id="gd8-LL-g5q"/>
+                <outlet property="cityTextField" destination="Eaf-ZY-xt9" id="bgS-S9-d9s"/>
                 <outlet property="countryTextField" destination="bly-bg-xFn" id="HVS-lF-YGp"/>
-                <outlet property="isPrimeAddressSwitch" destination="Gi9-7C-3MD" id="wcC-hg-Wt4"/>
-                <outlet property="nameTextField" destination="AYD-of-vqd" id="AQE-pb-xh5"/>
-                <outlet property="phoneNumberTextField" destination="dCh-ku-kuG" id="KgV-NH-8bW"/>
+                <outlet property="firstNameTextField" destination="AYD-of-vqd" id="AQE-pb-xh5"/>
+                <outlet property="isDefaultAddressSwitch" destination="Gi9-7C-3MD" id="wcC-hg-Wt4"/>
+                <outlet property="lastNameTextField" destination="dCh-ku-kuG" id="KgV-NH-8bW"/>
+                <outlet property="phoneNumberTextField" destination="Sun-bA-Uuf" id="Q8x-4e-DC5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,16 +32,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2j-4I-utF">
                             <rect key="frame" x="16" y="8" width="361" height="80"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHf-Iz-vml">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHf-Iz-vml">
                                     <rect key="frame" x="4" y="4" width="353" height="22"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ali Ahmed" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AYD-of-vqd">
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ali" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AYD-of-vqd">
                                     <rect key="frame" x="4" y="30" width="353" height="42"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                                 </textField>
                             </subviews>
                             <constraints>
@@ -68,7 +67,7 @@
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Egypt" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bly-bg-xFn">
                                     <rect key="frame" x="4" y="28.333333333333311" width="161.66666666666666" height="43.666666666666657"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                                 </textField>
                             </subviews>
                             <constraints>
@@ -85,16 +84,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Wr-T7-ag8">
                             <rect key="frame" x="16" y="272" width="361" height="80"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMo-Rh-0sb">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMo-Rh-0sb">
                                     <rect key="frame" x="4" y="4" width="353" height="21"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nasr City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P8O-o8-W9v">
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Besides El Manhal private school" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P8O-o8-W9v">
                                     <rect key="frame" x="4" y="29" width="353" height="43"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                                 </textField>
                             </subviews>
                             <constraints>
@@ -110,16 +109,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOK-MA-NG2">
                             <rect key="frame" x="16" y="360" width="361" height="80"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2S3-fa-Hn8">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2S3-fa-Hn8">
                                     <rect key="frame" x="0.0" y="4" width="357" height="21"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Besides El Manhal private school" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sun-bA-Uuf">
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(+20) 1## - ### -####" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sun-bA-Uuf">
                                     <rect key="frame" x="4" y="29" width="353" height="43"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad" returnKeyType="go"/>
                                 </textField>
                             </subviews>
                             <constraints>
@@ -136,16 +135,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cha-jk-yRO">
                             <rect key="frame" x="207.33333333333337" y="184" width="169.66666666666663" height="80"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Governorate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkK-k6-aUd">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AkK-k6-aUd">
                                     <rect key="frame" x="4" y="4" width="161.66666666666666" height="21"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cairo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eaf-ZY-xt9">
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nasr City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eaf-ZY-xt9">
                                     <rect key="frame" x="4" y="29" width="161.66666666666666" height="43"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                                 </textField>
                             </subviews>
                             <constraints>
@@ -158,46 +157,19 @@
                                 <constraint firstItem="AkK-k6-aUd" firstAttribute="top" secondItem="Cha-jk-yRO" secondAttribute="top" constant="4" id="g9S-hV-VFz"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGM-cx-q16">
-                            <rect key="frame" x="16" y="448" width="361" height="80"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Addtional note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k74-kn-TS3">
-                                    <rect key="frame" x="4" y="4" width="353" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="prefer delivery after 7 pm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yUu-5L-2WH">
-                                    <rect key="frame" x="4" y="29" width="353" height="43"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                </textField>
-                            </subviews>
-                            <constraints>
-                                <constraint firstItem="yUu-5L-2WH" firstAttribute="top" secondItem="k74-kn-TS3" secondAttribute="bottom" constant="4" id="1Ff-Cy-fIQ"/>
-                                <constraint firstItem="k74-kn-TS3" firstAttribute="leading" secondItem="iGM-cx-q16" secondAttribute="leading" constant="4" id="Aoz-t2-Cpg"/>
-                                <constraint firstItem="yUu-5L-2WH" firstAttribute="leading" secondItem="iGM-cx-q16" secondAttribute="leading" constant="4" id="Dew-6k-gKd"/>
-                                <constraint firstItem="yUu-5L-2WH" firstAttribute="top" secondItem="k74-kn-TS3" secondAttribute="bottom" constant="4" id="G9H-q3-P3T"/>
-                                <constraint firstItem="k74-kn-TS3" firstAttribute="top" secondItem="iGM-cx-q16" secondAttribute="top" constant="4" id="TrI-BU-zI6"/>
-                                <constraint firstAttribute="trailing" secondItem="yUu-5L-2WH" secondAttribute="trailing" constant="4" id="fJe-w7-nJc"/>
-                                <constraint firstItem="yUu-5L-2WH" firstAttribute="top" secondItem="k74-kn-TS3" secondAttribute="bottom" constant="4" id="itD-nm-q08"/>
-                                <constraint firstAttribute="bottom" secondItem="yUu-5L-2WH" secondAttribute="bottom" constant="8" id="xhR-4O-RnW"/>
-                                <constraint firstAttribute="trailing" secondItem="k74-kn-TS3" secondAttribute="trailing" constant="4" id="yRP-kh-c90"/>
-                            </constraints>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjX-7m-T53">
                             <rect key="frame" x="16" y="96" width="361" height="80"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFy-qQ-uqQ">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFy-qQ-uqQ">
                                     <rect key="frame" x="4" y="4" width="353" height="21"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="(+20) 1## - ### -####" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dCh-ku-kuG">
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mahmoud" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dCh-ku-kuG">
                                     <rect key="frame" x="4" y="29" width="353" height="43"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                                 </textField>
                             </subviews>
                             <constraints>
@@ -214,7 +186,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D17-SX-PZw">
-                            <rect key="frame" x="16" y="536" width="361" height="47"/>
+                            <rect key="frame" x="16" y="448" width="361" height="47"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Save as primary address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vb5-Ok-e7B">
                                     <rect key="frame" x="4" y="13" width="284" height="21"/>
@@ -222,7 +194,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gi9-7C-3MD">
+                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Gi9-7C-3MD">
                                     <rect key="frame" x="304" y="8" width="51" height="31"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="31" id="Gr5-BH-Pks"/>
@@ -264,7 +236,6 @@
                         <constraint firstItem="sOK-MA-NG2" firstAttribute="leading" secondItem="G2j-4I-utF" secondAttribute="leading" id="93l-cs-vgL"/>
                         <constraint firstItem="2Wr-T7-ag8" firstAttribute="height" secondItem="G2j-4I-utF" secondAttribute="height" multiplier="1:1" id="F2n-Wk-eSV"/>
                         <constraint firstItem="zO6-Di-QEf" firstAttribute="centerX" secondItem="cVm-US-bKR" secondAttribute="centerX" id="MwI-h4-LBh"/>
-                        <constraint firstItem="D17-SX-PZw" firstAttribute="top" secondItem="iGM-cx-q16" secondAttribute="bottom" constant="8" id="N6r-7F-9wp"/>
                         <constraint firstItem="G2j-4I-utF" firstAttribute="top" secondItem="cVm-US-bKR" secondAttribute="top" constant="8" id="Tfr-Yw-C3y"/>
                         <constraint firstItem="D17-SX-PZw" firstAttribute="trailing" secondItem="G2j-4I-utF" secondAttribute="trailing" id="U6v-IF-tdM"/>
                         <constraint firstItem="2Wr-T7-ag8" firstAttribute="trailing" secondItem="G2j-4I-utF" secondAttribute="trailing" id="V4E-Yb-2Rv"/>
@@ -274,11 +245,9 @@
                         <constraint firstItem="2Wr-T7-ag8" firstAttribute="leading" secondItem="G2j-4I-utF" secondAttribute="leading" id="Xe8-85-zbh"/>
                         <constraint firstItem="XNE-sj-Chi" firstAttribute="top" secondItem="SjX-7m-T53" secondAttribute="bottom" constant="8" id="Zrb-cO-uib"/>
                         <constraint firstItem="Cha-jk-yRO" firstAttribute="width" secondItem="XNE-sj-Chi" secondAttribute="width" id="ftW-Xg-QeP"/>
+                        <constraint firstItem="D17-SX-PZw" firstAttribute="top" secondItem="sOK-MA-NG2" secondAttribute="bottom" constant="8" id="g6u-xk-drk"/>
                         <constraint firstItem="G2j-4I-utF" firstAttribute="leading" secondItem="cVm-US-bKR" secondAttribute="leading" constant="16" id="gXi-PV-WNz"/>
-                        <constraint firstItem="iGM-cx-q16" firstAttribute="height" secondItem="G2j-4I-utF" secondAttribute="height" id="gmh-ue-26w"/>
                         <constraint firstItem="Cha-jk-yRO" firstAttribute="height" secondItem="XNE-sj-Chi" secondAttribute="height" multiplier="1:1" id="hPf-Jb-31A"/>
-                        <constraint firstItem="iGM-cx-q16" firstAttribute="leading" secondItem="G2j-4I-utF" secondAttribute="leading" id="hxi-Mf-jvU"/>
-                        <constraint firstItem="iGM-cx-q16" firstAttribute="trailing" secondItem="G2j-4I-utF" secondAttribute="trailing" id="kxj-Ct-X7m"/>
                         <constraint firstItem="XNE-sj-Chi" firstAttribute="width" secondItem="G2j-4I-utF" secondAttribute="width" multiplier="0.47" id="mYq-xc-qVb"/>
                         <constraint firstItem="sOK-MA-NG2" firstAttribute="height" secondItem="G2j-4I-utF" secondAttribute="height" id="oGR-nL-ar5"/>
                         <constraint firstItem="SjX-7m-T53" firstAttribute="top" secondItem="G2j-4I-utF" secondAttribute="bottom" constant="8" id="pA4-dT-B2d"/>
@@ -287,7 +256,6 @@
                         <constraint firstItem="SjX-7m-T53" firstAttribute="height" secondItem="G2j-4I-utF" secondAttribute="height" id="v9z-2r-r4L"/>
                         <constraint firstAttribute="bottom" secondItem="zO6-Di-QEf" secondAttribute="bottom" constant="24" id="x4b-34-7Yb"/>
                         <constraint firstItem="2Wr-T7-ag8" firstAttribute="top" secondItem="XNE-sj-Chi" secondAttribute="bottom" constant="8" id="yZQ-cT-sZE"/>
-                        <constraint firstItem="iGM-cx-q16" firstAttribute="top" secondItem="sOK-MA-NG2" secondAttribute="bottom" constant="8" id="z8t-cm-AJZ"/>
                     </constraints>
                 </view>
             </subviews>

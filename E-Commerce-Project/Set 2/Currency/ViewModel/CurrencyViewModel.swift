@@ -18,7 +18,7 @@ class CurrencyViewModel {
     var selectedCell: String?
     var isAllowSegue: Bool = false
     
-    // MARK: - Proberties
+    // MARK: - Properties
     var currencyCodes: [String] = []
     var currencyValues: [Double] = []
     var currencies: [[String: Double]] = [["USD":1.0, "EGP": 1.0, "SAR":1.0, "AED":1.0, "KWD": 1.0, "QAR":1.0]]

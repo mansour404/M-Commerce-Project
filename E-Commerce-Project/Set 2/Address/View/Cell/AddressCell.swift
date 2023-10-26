@@ -34,4 +34,12 @@ class AddressCell: UITableViewCell {
     @IBAction func removeAddressButtonPressed(_ sender: Any) {
         
     }
+    
+    var addressCellViewModel: AddressCellViewModel? {
+        didSet {
+            nameLabel.text = addressCellViewModel?.name
+            cityLabel.text = addressCellViewModel?.city
+            addresslabel.text = addressCellViewModel?.address
+        }
+    }
 }
