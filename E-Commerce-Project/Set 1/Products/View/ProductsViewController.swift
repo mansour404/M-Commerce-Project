@@ -15,19 +15,33 @@ class ProductsViewController: UIViewController {
     @IBOutlet weak var rateFilterButtonOutlet: UIButton!
     @IBOutlet weak var priceFilterButtonOutlet: UIButton!
     @IBOutlet weak var charFilterButtonOutlet: UIButton!
-    
+    var productviewModel = ProductViewModel()
     var buttonHidden:Bool = true
-    
+    var isSearchActive  = false
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Products"
-        configureCollectionView()
+        searchBar.delegate = self
         rateFilterButtonOutlet.isHidden = true
         priceFilterButtonOutlet.isHidden = true
         charFilterButtonOutlet.isHidden = true
-
+        productviewModel.bindresultToProductsViewController = {
+            DispatchQueue.main.async {
+                self.productsCollectionView.reloadData()
+            }
+        }
+        self.configureLoadingDataFromApi()
+        configureCollectionView()
         
+    }
+    func configureLoadingDataFromApi(){
+        if(isSearchActive ){
+            productviewModel.getDataFromApiForProduct_WithFilter(SearchText: searchBar.text!)
+        }
+        else {
+            productviewModel.getDataFromApiForProduct()
+        }
     }
     // MARK: - Configure CollectionView
     private func configureCollectionView() {
@@ -64,29 +78,52 @@ class ProductsViewController: UIViewController {
     // MARK: - UICollectionView DataSource
     extension ProductsViewController:UICollectionViewDataSource {
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            10
+            return productviewModel.getNumberOfProduct() ?? 1
         }
 
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             
             let cell = productsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
+            cell.productNameLabel.text = productviewModel.getTitle(index: indexPath.row)
+            cell.imageView.downloadImageFrom(productviewModel.getid(index: indexPath.row))
+            
             return cell
             
         }
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             let vc = ProductInfoViewController(nibName: "ProductInfoViewController", bundle: nil)
+            print("after calling")
             vc.modalPresentationStyle = .automatic
+            var id = productviewModel.getProductID(index: indexPath.item)
+            print(id)
+            vc.setID(id: id)
+            print("id is set")
             self.present(vc, animated: true)
         }
     }
 // MARK: - UICollectionView Delegate
 
-extension ProductsViewController: UICollectionViewDelegate , UICollectionViewDelegateFlowLayout
+extension ProductsViewController: UICollectionViewDelegate , UICollectionViewDelegateFlowLayout , UISearchBarDelegate
 {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (productsCollectionView.frame.width / 2) - 10 , height: (productsCollectionView.frame.height) / 2.5 )
     }
+//    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        <#code#>
+//    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchText.isEmpty == true){
+            isSearchActive = false
+        }
+        else {
+            isSearchActive = true
+        }
+        configureLoadingDataFromApi()
+    
+    }
+   
 }
 
 

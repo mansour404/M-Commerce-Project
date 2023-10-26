@@ -29,6 +29,10 @@ extension UIImageView {
         }
     }
     
+    func getImageInsideView () -> UIImage{
+        return self.image ?? UIImage()
+    }
+    
     // MARK: - Make imageView rounded
     func rounded() {
        clipsToBounds = true

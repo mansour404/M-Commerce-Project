@@ -13,6 +13,7 @@ struct Brands : Codable{
 
 struct SmartCollectionModel: Codable {
     let title: String
+    let id : Int
     let image: Image
 }
 

@@ -11,14 +11,26 @@ class CategoriesViewController: UIViewController {
     // MARK: - Variables
     @IBOutlet weak var subMainCollectionView: UICollectionView!
     
+   
+    @IBOutlet var secondOutletCollection: [UIButton]!
+    let categoryViewModel = CategoryViewModel()
+    
+    @IBOutlet var FirstOutletCollection: [UIButton]!
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationItem.title = "Categories"
         configureCollectionView()
+        categoryViewModel.bindresultToHomeViewController = {
+            DispatchQueue.main.async {
+                self.subMainCollectionView.reloadData()
+            }
+        }
 
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
         navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
+        configureLoadingDataFromApi()
+        
     }
     // MARK: - Configure CollectionView
     private func configureCollectionView() {
@@ -27,9 +39,16 @@ class CategoriesViewController: UIViewController {
         //Registers
         subMainCollectionView.register(UINib(nibName: CellIdentifier.submainCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.submainCollectionViewCell)
     }
+    //MARK: - Configure The Loading Data
+    func configureLoadingDataFromApi(){
+
+        categoryViewModel.getDataFromApiForHome()
+
+    }
+        
     private func addFavouriteButton() -> UIBarButtonItem {
         let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
 
@@ -39,7 +58,7 @@ class CategoriesViewController: UIViewController {
     
     private func addShoppingCartButton() -> UIBarButtonItem {
         let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(named: "shipped"), for: .normal)
+        heartButton.setImage(UIImage(systemName: "cart"), for: .normal)
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(navigateToShoppingCart), for: .touchUpInside)
 
@@ -74,23 +93,45 @@ class CategoriesViewController: UIViewController {
 //        self.present(vc, animated: true)
         
     }
+    // MARK: - ACTIONS
+    var filter_1 : String = "all"
+    var filter_2 : String = "ALL"
+    @IBAction func FirstRowButtons(_ sender: UIButton) {
+        
+        filter_1 = (sender.titleLabel!.text?.lowercased())!
+        categoryViewModel.getDataFromApiForHome(filter1: filter_1, filter2: filter_2)
+    }
+    
+    @IBAction func secondRowButtons(_ sender: UIButton) {
+       
+        filter_2 = (sender.titleLabel!.text?.uppercased())!
+        categoryViewModel.getDataFromApiForHome(filter1: filter_1, filter2: filter_2)
+    }
 }
-
-
-
 // MARK: - UICollectionView DataSource
 extension CategoriesViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        categoryViewModel.getNumberOfProducts() ?? 3
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = subMainCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
+        cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: categoryViewModel.getPrice(index: indexPath.row) ?? "10" , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A")
         return cell
         
     }
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+     
+        
+        let vc = ProductInfoViewController(nibName: "ProductInfoViewController", bundle: nil)
+       
+        var id = categoryViewModel.getProductID(index: indexPath.item)
+        print(id)
+        vc.setID(id: id)
+      
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 

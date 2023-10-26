@@ -12,7 +12,7 @@ class HomeViewModel{
     var  bindresultToHomeViewController: ( () -> () ) = {}
 
 //    var data : Brands?
-   
+ static  var selectedBrandID : Int?
     var handerDataOfHome: (() -> Void)?
     var services = NetworkServices()
     
@@ -30,7 +30,8 @@ class HomeViewModel{
     func getBrand() -> Brands? {
         return getAllBrands
     }
-    
+
+  
     
     //MARK: -CAll Request of Api
     func getDataFromApiForHome() {
@@ -49,11 +50,16 @@ class HomeViewModel{
         })
     }
     //MARK: -Getting Number of Brands
-func getNumberOfBrands() -> Int? {
-//    print(getAllBrands?.smart_collections.count)
+    func getNumberOfBrands() -> Int? {
+
     return getAllBrands?.smart_collections.count
    }
+    func setSelectedBrandID (Index :Int){
+        
+        HomeViewModel.selectedBrandID = getAllBrands?.smart_collections[Index].id
+    }
     func getTitle(index: Int) -> String?{
+        
         return getAllBrands?.smart_collections[index].title ?? "NO"
 
     }

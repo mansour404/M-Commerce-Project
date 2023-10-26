@@ -98,13 +98,13 @@ extension UserProfileView {
 // MARK: - Actions
 extension UserProfileView {
     @IBAction func signInButtonPressed(_ sender: Any) {
-        let vc = LoginVC(nibName: "LoginVC", bundle: nil)
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = LoginVC(nibName: "LoginVC", bundle: nil)
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
-        let vc = SignUpVC(nibName: "SignUpVC", bundle: nil)
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = SignUpVC(nibName: "SignUpVC", bundle: nil)
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func seeAllOrdersButtonPressed(_ sender: Any) {

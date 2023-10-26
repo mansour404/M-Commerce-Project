@@ -12,11 +12,20 @@ class OptionCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var button_container: UIView!
     
+    @IBOutlet weak var optionValue: UILabel!
     
-    @IBOutlet weak var optionButton: UIButton!
     
     func setOptionValue (value : String) {
-        optionButton.setTitle(value, for: .normal)
+        //optionButton.setTitle(value, for: .normal)
+        optionValue.text = value
+    }
+    
+    func select () {
+        button_container.backgroundColor = .darkGray
+    }
+    
+    func unselect () {
+        button_container.backgroundColor = .white
     }
     
     override func awakeFromNib() {

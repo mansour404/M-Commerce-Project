@@ -9,6 +9,191 @@ import UIKit
 
 class ProductInfoViewController: UIViewController {
     
+    // cart code------------------------------------------------------------------------------
+    @IBOutlet weak var variant_price: UILabel!
+    
+    @IBOutlet weak var variant_availability: UILabel!
+    
+    
+    var variant_available_elements : Int = 0
+    
+    var variant_index : Int = 0
+    var variant_Unique_ID : Int = 0
+    
+    func get_variant_data () {
+        
+        print ("get_variant_data")
+        print(view_model.product)
+        var all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
+        
+        var found : VariantCompleteModel = VariantCompleteModel()
+        for v in all_variants {
+            //numOptions
+            
+            print(v)
+            
+            var equal : Bool = true
+            
+            if numOptions >= 1 {
+                equal = equal && (v.option1 == view_model.product?.options?[0].values?[selectedOption[0]])
+            }
+            if numOptions >= 2 {
+                equal = equal && (v.option2 == view_model.product?.options?[1].values?[selectedOption[1]])
+            }
+            if numOptions >= 3 {
+                equal = equal && (v.option3 == view_model.product?.options?[2].values?[selectedOption[2]])
+            }
+            
+            if (equal) {
+                print("variant is found")
+                found = v;
+                break
+            }
+            else {
+                print("variant is NOT found")
+            }
+        }
+        
+        variant_price.text = found.price ?? "not found"
+        variant_availability.text = found.inventory_quantity != nil ? String(found.inventory_quantity!) : "not found"
+        variant_available_elements = found.inventory_quantity ?? 0
+    }
+    
+    var numberOfCartItems : Int = 0
+    
+    func updateNumberLabel () {
+        number_of_cart_items_label.text = String(numberOfCartItems)
+    }
+    func reset_cart () {
+        numberOfCartItems = 0
+        updateNumberLabel()
+    }
+    
+    @IBAction func plus_button_tapped(_ sender: Any) {
+        
+        if (numberOfCartItems < variant_available_elements) {
+            numberOfCartItems += 1;
+        }
+        
+        updateNumberLabel()
+        
+        print("plus")
+    }
+    
+    @IBAction func minus_button_tapped(_ sender: Any) {
+        if (numberOfCartItems > 0) {
+            numberOfCartItems -= 1;
+        }
+        updateNumberLabel()
+        print("minus")
+    }
+    
+    @IBOutlet weak var number_of_cart_items_label: UILabel!
+    
+    @IBAction func add_to_cart_tapped(_ sender: Any) {
+        // mansour starts here
+        
+        print("add to cart")
+        
+        var Mansour_itemID = product_id
+        var Mansour_selectedOptionValues : [Int] = selectedOption //
+    }
+    //------------------------------------------------------------------------------
+    
+    // options code------------------------------------------------------------------------------
+    
+    var selectedOption : [Int] = []
+    var selectedOptionsCount = 0
+    var numOptions = 0
+    
+    func get_number_of_options () -> Int{
+        return numOptions
+    }
+    
+    func reset_options () {
+        selectedOptionsCount = 0
+        numOptions = view_model.numberOfOptions()
+        selectedOption = Array(repeating: -1, count: view_model.numberOfOptions())
+    }
+    
+    func isOptionSelected (row : Int) -> Bool {
+        return selectedOption[row] != -1
+    }
+    
+    func setOption (row : Int, value : Int) {
+        //selectedOptionsCount += (selectedOption[row] == -1) ? 1 : 0
+        selectedOption[row] = value
+    }
+    
+    func unsetOption (row : Int) {
+        //selectedOptionsCount -= (selectedOption[row] != -1) ? 1 : 0
+        selectedOption[row] = -1
+    }
+    
+    func toggleOption (row : Int, value : Int) {
+        
+        var cell = optionsCollectionView.cellForItem(at: IndexPath(item: value, section: row)) as! OptionCollectionViewCell
+        
+        var old_cell : OptionCollectionViewCell? = isOptionSelected(row: row) ?
+        optionsCollectionView.cellForItem(at: IndexPath(item: selectedOption[row], section: row)) as! OptionCollectionViewCell : nil
+        
+        
+        if isOptionSelected(row: row) {
+            
+            if selectedOption[row] == value {
+                unsetOption(row: row)
+                selectedOptionsCount -= 1
+                
+                cell.unselect()
+            }
+            else {
+                setOption(row: row, value: value)
+                
+                cell.select()
+            }
+            
+            
+        }
+        else {
+            selectedOptionsCount += 1
+            setOption(row: row, value: value)
+            
+            cell.select()
+            
+        }
+        
+        if old_cell != nil {
+            old_cell!.unselect()
+        }
+    }
+    
+    //------------------------------------------------------------------------------
+    
+    
+    func viewReload () {
+        optionsCollectionView.reloadData()
+        productName.text = view_model.product?.title
+        productTags.text = view_model.product?.tags
+        productDescription.text = view_model.product?.body_html
+        
+        productImagesCollectionView.reloadData()
+        
+        reset_options()
+        reset_cart()
+    }
+    
+    // view_mode
+    var view_model = ProductInfoViewModel()
+    var product_id : Int64 = 7827742130326
+    
+    func setID (id: Int64) {
+        print("inside set id : \(id)")
+        self.product_id = id;
+    }
+    
+    
+    
+    // heart
     let heartButton = UIButton(type: .custom) // treat it as an outlet
     var heartIsFilled : Bool = true;
     
@@ -21,6 +206,8 @@ class ProductInfoViewController: UIViewController {
         }
         heartIsFilled = !heartIsFilled
     }
+    
+    // outlets
     
     @IBOutlet weak var addToCartView: UIView!
     @IBOutlet weak var scroll_and_add_to_cart_vertical_spacing: NSLayoutConstraint!
@@ -36,6 +223,12 @@ class ProductInfoViewController: UIViewController {
     
     
     @IBOutlet weak var optionsHeight: NSLayoutConstraint!
+    
+    
+    
+    @IBOutlet weak var productName: UILabel!
+    @IBOutlet weak var productTags: UILabel!
+    @IBOutlet weak var productDescription: UILabel!
     
     func setproductImagesCollectionView () -> Void {
         productImagesCollectionView.delegate = self;
@@ -149,6 +342,20 @@ class ProductInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //here
+//        var view_model = ProductInfoViewModel()
+//        view_model.id = 7827742130326
+//        view_model.myView = self
+//        view_model.initializeProduct()
+        
+        print("view did load")
+        
+        view_model.id = product_id
+        view_model.myView = self
+        view_model.initializeProduct()
+        
+        //print(view_model.product)
+        
         setOptionsView ()
         setproductImagesCollectionView()
         setReviewsView()
@@ -156,6 +363,8 @@ class ProductInfoViewController: UIViewController {
         hideAddToCart()
         
         navigationItem.setRightBarButtonItems([addFavouriteButton()], animated: true)
+        
+        
         
     }
     
@@ -211,7 +420,7 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         if (collectionView == optionsCollectionView) {
-            return 3
+            return view_model.numberOfOptions()
         }
         else if (collectionView == productImagesCollectionView) {
             return 1
@@ -225,13 +434,13 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (collectionView == optionsCollectionView) {
-            return 10
+            return view_model.product?.options?[section].values?.count ?? 6
         }
         else if (collectionView == productImagesCollectionView) {
-            return 5
+            return view_model.product?.images.count ?? 0
         }
         else if (collectionView == reviewsCollectionView) {
-            return 4
+            return 3
         }
         return 10
     }
@@ -240,7 +449,8 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
         if (collectionView == optionsCollectionView) {
             let cell = optionsCollectionView.dequeueReusableCell(withReuseIdentifier: "OptionCollectionViewCell", for: indexPath) as! OptionCollectionViewCell
         
-            cell.setOptionValue(value: "White")
+            //cell.setOptionValue(value: "White")
+            cell.setOptionValue(value: view_model.product?.options?[indexPath.section].values?[indexPath.item] ?? "default")
             
             return cell;
         }
@@ -248,6 +458,15 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             let cell = productImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "CopounCollectionViewCell", for: indexPath) as! CopounCollectionViewCell
             
             cell.configure(with: "coupon")
+            
+            var img = UIImageView()
+            img.downloadImageFrom(view_model.product?.images[indexPath.item].src)
+            img.frame.size.height = img.superview?.frame.size.height ?? img.frame.size.height
+            img.frame.size.width = img.superview?.frame.size.width ?? img.frame.size.height
+            
+            cell.couponImageView.image = img.getImageInsideView()
+
+            
             cell.layer.cornerRadius = 30
             
             return cell;
@@ -267,16 +486,8 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
     }
     
     func getOptionsCollectionViewHeaderName (indexPath: IndexPath) -> String{
-        if indexPath.section == 0 {
-            return "First header"
-        }
-        else if indexPath.section == 1 {
-            return "Second header"
-        }
-        else if indexPath.section == 2 {
-            return "third header"
-        }
-        return "Default"
+
+        return view_model.product?.options?[indexPath.section].name ?? "Nil"
     }
     
 //    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -321,16 +532,35 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
         return CGSize (width: 100, height: 100)
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if (addToCartView.isHidden == true) {
-            showAddToCart()
-        }
-        else {
-            hideAddToCart()
+        
+        if collectionView == optionsCollectionView {
+            
+            var row = indexPath.section
+            var value = indexPath.item
+            
+            
+            
+            toggleOption(row: row, value: value)
+            
+            if selectedOptionsCount == get_number_of_options() {
+                get_variant_data()
+                showAddToCart()
+            }
+            else {
+                hideAddToCart()
+            }
+            
+            print("toggle add to cart")
+            
+            print(selectedOptionsCount)
+            
+            reset_cart()
+            
+            
         }
         
-        print("toggle add to cart")
-        print("an item is pressed")
     }
     
     

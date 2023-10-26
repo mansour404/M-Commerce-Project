@@ -11,12 +11,18 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductInfoViewController" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
                 <outlet property="addToCartView" destination="q3b-gI-vJm" id="Xxc-DZ-pxF"/>
+                <outlet property="number_of_cart_items_label" destination="QI7-v2-SHP" id="bZ1-ML-A0h"/>
                 <outlet property="optionsCollectionView" destination="i9M-8e-mEj" id="Y7S-jf-yDl"/>
                 <outlet property="optionsHeight" destination="m6B-4U-mls" id="AUX-Cb-D8x"/>
+                <outlet property="productDescription" destination="YOn-8m-fgI" id="w18-ad-3hW"/>
                 <outlet property="productImagesCollectionView" destination="pUR-Te-URW" id="c4W-B3-Wn1"/>
+                <outlet property="productName" destination="8De-VL-Hf2" id="Ozr-Tj-zA0"/>
+                <outlet property="productTags" destination="O29-dj-l1t" id="0WJ-hW-og9"/>
                 <outlet property="reviewsCollectionView" destination="zek-UK-BxI" id="UQt-Ds-gHN"/>
                 <outlet property="reviewsHeight" destination="p30-tJ-5Cc" id="yIm-Le-YBu"/>
                 <outlet property="scroll_and_add_to_cart_vertical_spacing" destination="e4M-55-wTs" id="Ql6-GK-Ivl"/>
+                <outlet property="variant_availability" destination="nvX-SY-Kyg" id="9rb-J9-uq7"/>
+                <outlet property="variant_price" destination="fV9-CG-Y8d" id="ZeA-6G-TfY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -88,7 +94,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ydw-r4-CBX">
                                             <rect key="frame" x="0.0" y="280" width="393" height="30"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADIDAS, SHOES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O29-dj-l1t">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADIDAS, SHOES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O29-dj-l1t">
                                                     <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -254,26 +260,28 @@ any time of year.</string>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXV-fW-F5C">
                             <rect key="frame" x="0.0" y="8" width="393" height="46"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="plus.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="oV5-aR-e46">
-                                    <rect key="frame" x="0.0" y="1.6666666666666643" width="46.666666666666664" height="43"/>
-                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" button="YES" image="YES"/>
-                                    </accessibility>
-                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ut-co-eHw">
+                                    <rect key="frame" x="0.0" y="0.0" width="46.666666666666664" height="46"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="+"/>
+                                    <connections>
+                                        <action selector="plus_button_tapped:" destination="-1" eventType="touchUpInside" id="uyk-ZG-yG0"/>
+                                    </connections>
+                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="305" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QI7-v2-SHP">
                                     <rect key="frame" x="46.666666666666657" y="0.0" width="300" height="46"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="minus.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8Kv-tt-8C7">
-                                    <rect key="frame" x="346.66666666666669" y="1.6666666666666643" width="46.333333333333314" height="43"/>
-                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <accessibility key="accessibilityConfiguration">
-                                        <accessibilityTraits key="traits" button="YES" image="YES"/>
-                                    </accessibility>
-                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTQ-tK-yZR">
+                                    <rect key="frame" x="346.66666666666669" y="0.0" width="46.333333333333314" height="46"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="-"/>
+                                    <connections>
+                                        <action selector="minus_button_tapped:" destination="-1" eventType="touchUpInside" id="Grc-8x-iac"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="QI7-v2-SHP" firstAttribute="centerX" secondItem="QXV-fW-F5C" secondAttribute="centerX" id="kkq-eo-OfZ"/>
@@ -289,6 +297,9 @@ any time of year.</string>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="Add to cart" image="arrowshape.turn.up.right.fill" catalog="system"/>
+                            <connections>
+                                <action selector="add_to_cart_tapped:" destination="-1" eventType="touchUpInside" id="anH-mO-wtV"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.59215686270000001" green="0.45882352939999999" blue="0.98039215690000003" alpha="0.39510037250000002" colorSpace="custom" customColorSpace="sRGB"/>
@@ -323,8 +334,6 @@ any time of year.</string>
     </objects>
     <resources>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="104"/>
-        <image name="minus.square.fill" catalog="system" width="128" height="114"/>
-        <image name="plus.square.fill" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

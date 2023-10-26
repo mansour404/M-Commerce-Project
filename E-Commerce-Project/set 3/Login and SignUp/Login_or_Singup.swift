@@ -16,6 +16,21 @@ class Login_or_Singup: UIViewController {
     }
 
 
+    @IBAction func SignUpButton(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func LoginButton(_ sender: UIButton) {
+        let vc = LoginVC()
+//    vc.modalPresentationStyle = .automatic
+//        ().present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func SkipButtons(_ sender: UIButton) {
+        let vc = TabController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     /*
     // MARK: - Navigation
 
