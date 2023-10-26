@@ -51,10 +51,9 @@ func getNumberOfProduct() -> Int? {
         return  AllBrandProducts?.products[index].images[0].src ?? "none"
  
     }
-    
     func getProductID (index : Int) -> Int64{
-        return AllBrandProducts?.products[index].id ?? 0
-    }
+            return AllBrandProducts?.products[index].id ?? 0
+        }
    
 //    func getImage(index: Int) -> String?{
 //        return getAllBrands?.smart_collections[index].image.src

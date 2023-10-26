@@ -26,9 +26,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 //        navigationItem.title = "Home"
         self.configureLoadingDataFromApi()
-      
-           
-           
+        self.navigationItem.setHidesBackButton(true, animated: true)
         homeViewModel.bindresultToHomeViewController = {
             DispatchQueue.main.async {
                 self.brandsCollectionView.reloadData()
