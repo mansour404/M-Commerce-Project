@@ -76,7 +76,7 @@ class NetworkServices   {
   }
     func getCustomerWishList<T :Codable>(CustomerId : Int? ,Handler: @escaping (T?,Error?) -> Void){
       
-        let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-01/customers/6866434621590/metafields.json?namespace=wishlisthttps://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-01/customers/6866434621590/metafields.json?namespace=wishlist"
+        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/6866434621590/metafields.json?namespace=wishlist"
        
         Alamofire.AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
             if let validData = data.data {
@@ -86,17 +86,17 @@ class NetworkServices   {
                 Handler(dataRetivied, nil)
                 
                 }catch let error{
-                  print (error)
+                  print ("this is an error :\(error)")
                     Handler(nil, error)
                 }
             }
-            else{print("There is error in casting data")}
+            else{}
         }
     }
 
-    func getProductById<T :Codable>(ProductId : Int ,Handler: @escaping (T?,Error?) -> Void){
+    func getProductById<T :Codable>(ProductId : String ,Handler: @escaping (T?,Error?) -> Void){
 
-        let urlFile = "//https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/products/7827742130326.json"
+        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/products/\(ProductId).json"
        
         Alamofire.AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
             if let validData = data.data {

@@ -28,3 +28,6 @@ struct Product : Codable {
     var tags : String?
 }
 
+struct MyProductcontainer : Codable{
+    var product : Product
+}

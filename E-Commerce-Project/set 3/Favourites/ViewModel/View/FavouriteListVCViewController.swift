@@ -20,10 +20,10 @@ class FavouriteListVCViewController: UIViewController {
         favouriteViewModel.bindresultToProductsViewController = {
             self.FavouriteCollectionView.reloadData()
         }
-        DispatchQueue.main.async {
+      
             self.favouriteViewModel.getDataFromApiForProduct()
-        }
-        favouriteViewModel.getproducts()
+        
+              //  favouriteViewModel.getproducts()
         
         // Do any additional setup after loading the view.
     }
@@ -73,7 +73,7 @@ class FavouriteListVCViewController: UIViewController {
 }
 extension FavouriteListVCViewController :UICollectionViewDelegate,UICollectionViewDataSource{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return  1
+        return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return favouriteViewModel.getNumberOfProduct() ?? 1

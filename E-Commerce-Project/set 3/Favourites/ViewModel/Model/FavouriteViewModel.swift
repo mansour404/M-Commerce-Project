@@ -28,6 +28,12 @@ class FavouriteViewModel {
                 print("Success")
                 if let mydata = dataValue {
                     self.AllUserWishList = mydata
+                    print(mydata.metafields.count)
+                    for p in mydata.metafields {
+                        print(p.key)
+                    }
+                    
+                    self.getproducts()
                 }else {
                     if let error = error{
                         print(error.localizedDescription)
@@ -46,14 +52,15 @@ class FavouriteViewModel {
             return  productArray[index].title
         }
     func getproducts(){
+        productArray = []
         for i in 0..<(AllUserWishList?.metafields.count)! {
-            services.getProductById(ProductId: AllUserWishList!.metafields[i].Key! , Handler: { (dataValue:ProductsResponse?, error: Error?) in
+        
+            services.getProductById(ProductId: AllUserWishList!.metafields[i].key! , Handler: { (dataValue:MyProductcontainer?, error: Error?) in
                 print("Success")
                 
                 if let mydata = dataValue {
-                    self.productArray = mydata.products
+                    self.productArray.append( mydata.product)
                     self.bindresultToProductsViewController()
-                    
                 }else {
                     if let error = error{
                         print(error.localizedDescription)
@@ -62,7 +69,8 @@ class FavouriteViewModel {
             })
             
         }
-    
+      
+        
     }
        
     
