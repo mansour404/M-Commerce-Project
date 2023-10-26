@@ -10,43 +10,57 @@ import Foundation
 final class UserDefaultsHelper {
     
     static let shared = UserDefaultsHelper()
+    private let userDefaults = UserDefaults.standard
     private init() {}
     
     func saveAPI(id: Int) {
-            let userDefaults = UserDefaults.standard
-            userDefaults.setValue(id, forKey: "id")
-            //userDefaults.setValue(true, forKey: "isUserLoggedIn")
-            setUserLogin()
-            userDefaults.synchronize() // method is unnecessary and shouldn't be used.
-            // restar app after saved token, restartApp() function.
-        }
-
-
-        func getAPIToken() -> String? {
-            guard let token = UserDefaults.standard.object(forKey: "id") as? String else {
-                return nil
-            }
-            return token
-        }
+        userDefaults.setValue(id, forKey: "id")
+        //userDefaults.setValue(true, forKey: "isUserLoggedIn")
+        setCustomerLogin()
+        userDefaults.synchronize() // method is unnecessary and shouldn't be used.
+        // restar app after saved token, restartApp() function.
+    }
     
+    
+    func getAPIToken() -> String? {
+        guard let token = userDefaults.object(forKey: "id") as? String else {
+            return nil
+        }
+        return token
+    }
     
     func isUserLoggedIn() -> Bool {
-        return UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+        return userDefaults.bool(forKey: "isCustomerLoggedIn")
     }
     
-    func setUserLogin() {
-        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+    func setCustomerLogin() {
+        userDefaults.set(true, forKey: "isCustomerLoggedIn")
     }
     
-    func setUserLogout() {
-        UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+    func setCustomerLogout() {
+        userDefaults.set(false, forKey: "isCustomerLoggedIn")
     }
     
-    func checkIsUserLoggedIn(completion: @escaping (_ isLoggedIn: Bool) -> Void){
+    func checkIsCustomerLoggedIn(completion: @escaping (_ isLoggedIn: Bool) -> Void){
         if isUserLoggedIn() {
             completion(true)
         }else{
             completion(false)
         }
+    }
+    
+    func getCustomerId() -> Int {
+        return userDefaults.integer(forKey: "customerId")
+        //return 6866630049942
+    }
+    
+    // set static userId
+    func setCustomerId() {
+        userDefaults.set(6866630049942, forKey: "customerId")
+        setCustomerLogin()
+    }
+    
+    func deleteCustomerId() {
+        userDefaults.set(-1, forKey: "customerId")
     }
 }

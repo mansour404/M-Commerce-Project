@@ -63,6 +63,14 @@
 		DCE147122AE6CED300B37C03 /* sectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1470B2AE6CED300B37C03 /* sectionHeader.swift */; };
 		DCE1EB2B2AE8C1920038AA1E /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1EB2A2AE8C1920038AA1E /* ProductViewModel.swift */; };
 		DCE1EB2F2AE946460038AA1E /* AppNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE1EB2E2AE946460038AA1E /* AppNetworkManager.swift */; };
+		E50F48082AE974CC009360CC /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50F48072AE974CC009360CC /* AddressViewModel.swift */; };
+		E50F48102AE97661009360CC /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50F480E2AE97660009360CC /* Address.swift */; };
+		E50F48112AE97661009360CC /* CustomerAddresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50F480F2AE97661009360CC /* CustomerAddresses.swift */; };
+		E50F48132AE97B35009360CC /* AddressNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50F48122AE97B35009360CC /* AddressNetworking.swift */; };
+		E50F48152AE97C40009360CC /* AddressAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50F48142AE97C40009360CC /* AddressAPI.swift */; };
+		E50F48172AE9CB5E009360CC /* AddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50F48162AE9CB5E009360CC /* AddressService.swift */; };
+		E50F48192AE9D2D1009360CC /* AddressServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50F48182AE9D2D1009360CC /* AddressServiceProtocol.swift */; };
+		E50F481B2AE9D5BC009360CC /* AddressCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50F481A2AE9D5BC009360CC /* AddressCellViewModel.swift */; };
 		E53E899B2AE73F730039B3D0 /* UserProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E53E899A2AE73F730039B3D0 /* UserProfileView.xib */; };
 		E53E899E2AE7483E0039B3D0 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53E899D2AE7483E0039B3D0 /* UserDefaultsHelper.swift */; };
 		E53E89A12AE751410039B3D0 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53E89A02AE751410039B3D0 /* OrderViewModel.swift */; };
@@ -205,6 +213,14 @@
 		DCE1470B2AE6CED300B37C03 /* sectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sectionHeader.swift; sourceTree = "<group>"; };
 		DCE1EB2A2AE8C1920038AA1E /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductViewModel.swift; path = "E-Commerce-Project/set 3/Login and SignUp/Login/ViewModel/ProductViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		DCE1EB2E2AE946460038AA1E /* AppNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNetworkManager.swift; sourceTree = "<group>"; };
+		E50F48072AE974CC009360CC /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
+		E50F480E2AE97660009360CC /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		E50F480F2AE97661009360CC /* CustomerAddresses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerAddresses.swift; sourceTree = "<group>"; };
+		E50F48122AE97B35009360CC /* AddressNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressNetworking.swift; sourceTree = "<group>"; };
+		E50F48142AE97C40009360CC /* AddressAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAPI.swift; sourceTree = "<group>"; };
+		E50F48162AE9CB5E009360CC /* AddressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressService.swift; sourceTree = "<group>"; };
+		E50F48182AE9D2D1009360CC /* AddressServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressServiceProtocol.swift; sourceTree = "<group>"; };
+		E50F481A2AE9D5BC009360CC /* AddressCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellViewModel.swift; sourceTree = "<group>"; };
 		E53E899A2AE73F730039B3D0 /* UserProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileView.xib; sourceTree = "<group>"; };
 		E53E899D2AE7483E0039B3D0 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		E53E89A02AE751410039B3D0 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
@@ -640,6 +656,44 @@
 			path = "set 3";
 			sourceTree = "<group>";
 		};
+		E50F48092AE974DA009360CC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E50F48072AE974CC009360CC /* AddressViewModel.swift */,
+				E50F481A2AE9D5BC009360CC /* AddressCellViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E50F480A2AE9758D009360CC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E50F481C2AE9EB26009360CC /* NotUsed */,
+				E50F480B2AE975A2009360CC /* Networking */,
+				E50F480E2AE97660009360CC /* Address.swift */,
+				E50F480F2AE97661009360CC /* CustomerAddresses.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E50F480B2AE975A2009360CC /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E50F48162AE9CB5E009360CC /* AddressService.swift */,
+				E50F48182AE9D2D1009360CC /* AddressServiceProtocol.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		E50F481C2AE9EB26009360CC /* NotUsed */ = {
+			isa = PBXGroup;
+			children = (
+				E50F48122AE97B35009360CC /* AddressNetworking.swift */,
+				E50F48142AE97C40009360CC /* AddressAPI.swift */,
+			);
+			path = NotUsed;
+			sourceTree = "<group>";
+		};
 		E53E899C2AE748240039B3D0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -778,7 +832,9 @@
 		E5D2278F2AE3214300A56A9A /* Address */ = {
 			isa = PBXGroup;
 			children = (
+				E50F48092AE974DA009360CC /* ViewModel */,
 				E5D227912AE3215A00A56A9A /* View */,
+				E50F480A2AE9758D009360CC /* Model */,
 			);
 			path = Address;
 			sourceTree = "<group>";
@@ -1214,6 +1270,9 @@
 				DC851A6F2AE9E1E9001BD944 /* LoginViewModel.swift in Sources */,
 				E5D227AE2AE3273400A56A9A /* SettingModel.swift in Sources */,
 				B2DD78122AE683540082CADE /* ProductsViewController.swift in Sources */,
+				DCE146D02AE64EB000B37C03 /* FavouriteListVCViewController.swift in Sources */,
+				E50F48082AE974CC009360CC /* AddressViewModel.swift in Sources */,
+				DCE146D42AE64EB000B37C03 /* GoogleLoginVC.swift in Sources */,
 				E5D227DD2AE3E3F600A56A9A /* CurrencyViewModel.swift in Sources */,
 				E5D227D42AE3799900A56A9A /* Rates.swift in Sources */,
 				B2DD77F42AE6831A0082CADE /* CopounCollectionViewCell.swift in Sources */,
@@ -1230,7 +1289,10 @@
 				DC851A2E2AE9D69A001BD944 /* ProductModel.swift in Sources */,
 				DCE146E02AE6879A00B37C03 /* UserProfileView.swift in Sources */,
 				E59AAEE22ADE91F400683168 /* AppDelegate.swift in Sources */,
+				E50F48172AE9CB5E009360CC /* AddressService.swift in Sources */,
+				E50F48102AE97661009360CC /* Address.swift in Sources */,
 				E5E793022AE5D93500311077 /* ReachabilityManager.swift in Sources */,
+				E50F48132AE97B35009360CC /* AddressNetworking.swift in Sources */,
 				E5D227C92AE3707F00A56A9A /* CurrencyView.swift in Sources */,
 				E5D227A42AE3235A00A56A9A /* SettingsView.swift in Sources */,
 				E59AAEE42ADE91F400683168 /* SceneDelegate.swift in Sources */,
@@ -1239,6 +1301,8 @@
 				DCE1470D2AE6CED300B37C03 /* OptionCollectionViewCell.swift in Sources */,
 				E5FF2BA32AE4C4EE001D12A2 /* State.swift in Sources */,
 				E5E793082AE5D9D500311077 /* BaseView.swift in Sources */,
+				E50F48112AE97661009360CC /* CustomerAddresses.swift in Sources */,
+				E50F48192AE9D2D1009360CC /* AddressServiceProtocol.swift in Sources */,
 				B2DD780A2AE6834B0082CADE /* UserOrderDetailsViewController.swift in Sources */,
 				B2DD780B2AE6834B0082CADE /* UserOrderCell.swift in Sources */,
 				E53E899E2AE7483E0039B3D0 /* UserDefaultsHelper.swift in Sources */,
@@ -1267,6 +1331,7 @@
 				E5D227C02AE3598900A56A9A /* ContactUsView.swift in Sources */,
 				E5814B242AE0D30F00D4D60F /* ProductItemCell.swift in Sources */,
 				E5D227BC2AE3571C00A56A9A /* AboutAppView.swift in Sources */,
+				E50F481B2AE9D5BC009360CC /* AddressCellViewModel.swift in Sources */,
 				E5D227DF2AE3E41C00A56A9A /* CurrencyCellViewModel.swift in Sources */,
 				E5814B202AE0C0E500D4D60F /* OrderViewController.swift in Sources */,
 				DCE1470C2AE6CED300B37C03 /* ReviewCollectionViewCell.swift in Sources */,
@@ -1275,6 +1340,7 @@
 				B2DD77F02AE6831A0082CADE /* TabController.swift in Sources */,
 				E5814B182AE0B6AD00D4D60F /* UIButton + Extensions.swift in Sources */,
 				DC851A2F2AE9D69A001BD944 /* SubmainCollectionViewCell.swift in Sources */,
+				E50F48152AE97C40009360CC /* AddressAPI.swift in Sources */,
 				B26D4EBE2AE87614008F1D2B /* HomeViewModel.swift in Sources */,
 				E5D227D72AE37A9B00A56A9A /* ExchnageRateService.swift in Sources */,
 				DCE1470F2AE6CED300B37C03 /* ProductInfoViewController.swift in Sources */,

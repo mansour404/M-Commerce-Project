@@ -17,7 +17,7 @@ class BaseAPI<T:TargetType> {
         let method = Alamofire.HTTPMethod(rawValue: target.method.rawValue)
         let headers = HTTPHeaders(target.headers ?? [:])
         let params = buildParameters(task: target.task)
-        AF.request(url, method: method, parameters: params.0, encoding: params.1, headers: headers).responseJSON { response in
+        AF.request(url, method: method, parameters: params.0, encoding: params.1, headers: headers).response { response in
             guard let statusCode = response.response?.statusCode else {
                 // ADD Custom Error
                 let error = NSError(domain: target.baseURL, code: 0, userInfo: [NSLocalizedDescriptionKey: ErrorMessage.genericError])

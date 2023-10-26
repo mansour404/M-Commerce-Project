@@ -26,8 +26,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPS-o5-2Pa">
                     <rect key="frame" x="0.0" y="59" width="393" height="80"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R9G-yb-2N6">
-                            <rect key="frame" x="16" y="0.0" width="80" height="80"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="R9G-yb-2N6">
+                            <rect key="frame" x="16" y="1.6666666666666643" width="80" height="77.333333333333343"/>
+                            <color key="tintColor" red="0.59215686270000001" green="0.45882352939999999" blue="0.98039215690000003" alpha="0.875" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="R9G-yb-2N6" secondAttribute="height" id="CV2-FT-ZoT"/>
                             </constraints>
@@ -38,8 +39,9 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NA7-sL-tal">
-                            <rect key="frame" x="327" y="15" width="50" height="50"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NA7-sL-tal">
+                            <rect key="frame" x="327" y="16" width="50" height="48.666666666666671"/>
+                            <color key="tintColor" red="0.59215686270000001" green="0.45882352939999999" blue="0.98039215690000003" alpha="0.875" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="Z7n-Ej-MXu"/>
                                 <constraint firstAttribute="width" secondItem="NA7-sL-tal" secondAttribute="height" id="mit-0c-T1M"/>
@@ -96,7 +98,9 @@
         </view>
     </objects>
     <resources>
+        <image name="heart.circle.fill" catalog="system" width="128" height="123"/>
         <image name="iphone.and.arrow.forward" catalog="system" width="112" height="128"/>
+        <image name="person" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

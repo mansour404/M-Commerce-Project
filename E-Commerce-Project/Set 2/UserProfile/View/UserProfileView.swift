@@ -46,7 +46,7 @@ class UserProfileView: UIViewController {
 // MARK: - Guest VS User
 extension UserProfileView {
     func isUserLoggedIn() {
-        UserDefaultsHelper.shared.checkIsUserLoggedIn { [weak self] isLoggedIn in
+        UserDefaultsHelper.shared.checkIsCustomerLoggedIn { [weak self] isLoggedIn in
             guard let self = self else { return }
             if isLoggedIn {
                 self.userUIView.isHidden = false
@@ -119,23 +119,20 @@ extension UserProfileView {
     
     @objc func navigateToSettings(sender: UIButton) {
         let vc = SettingsView(nibName: "SettingsView", bundle: nil)
-        // passing data before navigation
         //navigationController?.pushViewController(vc, animated: true)
         vc.modalPresentationStyle = .automatic
         self.present(vc, animated: true)
-        
     }
     
     @objc func navigateToShoppingCart(sender: UIButton) {
         let vc = ShoppingCartView(nibName: "ShoppingCartView", bundle: nil)
-        // passing data before navigation
         //navigationController?.pushViewController(vc, animated: true)
         vc.modalPresentationStyle = .automatic
         self.present(vc, animated: true)
     }
 }
 
-// MARK: - Table view data source
+// MARK: - Data source
 extension UserProfileView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ordersTableView {
@@ -158,10 +155,10 @@ extension UserProfileView: UITableViewDataSource {
     }
 }
 
-// MARK: - Table view delegate
+// MARK: - Delegate
 extension UserProfileView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView == ordersTableView ? 120 : 105
+        return tableView == ordersTableView ? 120 : 115
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
