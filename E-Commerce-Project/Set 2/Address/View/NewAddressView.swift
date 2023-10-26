@@ -37,11 +37,11 @@ class NewAddressView: UIViewController {
 
     // MARK: - Actions
     @IBAction func saveAddressButtonPressed(_ sender: Any) {
-//        view.endEditing(true)
-//        creatNewAddress()
-//        delegate?.backValue(address: newAddress)  // protocol call
-//        self.dismiss(animated: true)
-        saveChanges()
+        view.endEditing(true)
+        creatNewAddress()
+        delegate?.backValue(address: newAddress)  // protocol call
+        self.dismiss(animated: true)
+//        saveChanges()
     }
     
     private func configureTextFieldDelegate() {
@@ -70,10 +70,10 @@ extension NewAddressView: UITextFieldDelegate {
         } else if textField == addressTextField {
             phoneNumberTextField.becomeFirstResponder()
         } else if textField == phoneNumberTextField {
-//            creatNewAddress()
-//            delegate?.backValue(address: newAddress)
-//            view.endEditing(true)
-            saveChanges()
+            creatNewAddress()
+            delegate?.backValue(address: newAddress)
+            view.endEditing(true)
+           // saveChanges()
         }
         return true
     }

@@ -41,6 +41,11 @@ extension UserOrderViewController:UICollectionViewDataSource {
         return cell
         
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = UserOrderDetailsViewController(nibName: "UserOrderDetailsViewController", bundle: nil)
+        // passing data before navigation
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 // MARK: - UICollectionView Delegate
 
