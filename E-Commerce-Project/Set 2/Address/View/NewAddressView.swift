@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DelegateProtocol { // protocol declaration
-    func backValue(address: Address)
+    func backValue(address: Address?)
 }
 
 class NewAddressView: UIViewController {

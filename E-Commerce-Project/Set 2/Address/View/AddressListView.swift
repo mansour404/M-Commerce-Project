@@ -137,7 +137,8 @@ extension AddressListView {
 
 // MARK: - Delegate Protocol
 extension AddressListView: DelegateProtocol { // confirm protocol
-    func backValue(address: Address) {
+    func backValue(address: Address?) {
+        guard let address = address else { return }
         viewModel.creatNewAddress(address: address)
         initVM()
     }
