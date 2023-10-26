@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,50 +21,50 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aw1-5a-t8X" userLabel="ContentView">
                         <rect key="frame" x="0.0" y="0.0" width="415" height="117"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="producr_Bag" translatesAutoresizingMaskIntoConstraints="NO" id="i4I-aW-bgL">
-                                <rect key="frame" x="20" y="10" width="103" height="92"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="92" id="IYG-4Q-pR7"/>
-                                    <constraint firstAttribute="width" constant="103" id="TXt-WP-ubR"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ClASSIC SUPER NO SHOW SOCKS 3 PASCK WHITE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2SP-J9-pfr">
-                                <rect key="frame" x="133" y="10" width="250" height="33.666666666666664"/>
-                                <color key="backgroundColor" red="1" green="0.94863427690000002" blue="0.58521654190000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD 50.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTa-vF-eN0">
+                                <rect key="frame" x="144" y="87" width="70" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD 50.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTa-vF-eN0">
-                                <rect key="frame" x="133" y="73.666666666666671" width="84" height="19.333333333333329"/>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adidasBag" translatesAutoresizingMaskIntoConstraints="NO" id="i4I-aW-bgL">
+                                <rect key="frame" x="17" y="10" width="108" height="97"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="108" id="NAX-3M-eKZ"/>
+                                    <constraint firstAttribute="height" constant="97" id="dEM-CF-pMj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" text="ClASSIC SUPER NO SHOW SOCKS 3 PASCK WHITE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2SP-J9-pfr">
+                                <rect key="frame" x="144" y="10" width="222" height="45"/>
+                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ZTa-vF-eN0" secondAttribute="trailing" constant="198" id="GzM-3d-KGP"/>
-                            <constraint firstItem="i4I-aW-bgL" firstAttribute="top" secondItem="Aw1-5a-t8X" secondAttribute="top" constant="10" id="YvK-Yh-Oxh"/>
-                            <constraint firstItem="i4I-aW-bgL" firstAttribute="leading" secondItem="Aw1-5a-t8X" secondAttribute="leading" constant="20" id="ZmU-K4-NY2"/>
-                            <constraint firstAttribute="bottom" secondItem="ZTa-vF-eN0" secondAttribute="bottom" constant="24" id="btg-Iu-39d"/>
-                            <constraint firstItem="ZTa-vF-eN0" firstAttribute="leading" secondItem="i4I-aW-bgL" secondAttribute="trailing" constant="10" id="eHS-xv-paJ"/>
-                            <constraint firstAttribute="bottom" secondItem="i4I-aW-bgL" secondAttribute="bottom" constant="10" id="ewX-Jj-ewe"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2SP-J9-pfr" secondAttribute="trailing" constant="10" id="ivN-xU-MPt"/>
-                            <constraint firstItem="2SP-J9-pfr" firstAttribute="leading" secondItem="i4I-aW-bgL" secondAttribute="trailing" constant="10" id="rre-Dm-7lz"/>
-                            <constraint firstItem="2SP-J9-pfr" firstAttribute="top" secondItem="Aw1-5a-t8X" secondAttribute="top" constant="10" id="sWV-Lj-chn"/>
-                            <constraint firstItem="ZTa-vF-eN0" firstAttribute="top" secondItem="2SP-J9-pfr" secondAttribute="bottom" constant="30" id="yfM-u6-DIr"/>
+                            <constraint firstAttribute="trailing" secondItem="ZTa-vF-eN0" secondAttribute="trailing" constant="201" id="BI4-lB-QgK"/>
+                            <constraint firstAttribute="bottom" secondItem="ZTa-vF-eN0" secondAttribute="bottom" constant="10" id="DmP-3O-rd1"/>
+                            <constraint firstItem="2SP-J9-pfr" firstAttribute="leading" secondItem="i4I-aW-bgL" secondAttribute="trailing" constant="19" id="Iub-2o-Da2"/>
+                            <constraint firstItem="i4I-aW-bgL" firstAttribute="leading" secondItem="Aw1-5a-t8X" secondAttribute="leading" constant="17" id="Jq3-am-KX4"/>
+                            <constraint firstItem="ZTa-vF-eN0" firstAttribute="leading" secondItem="i4I-aW-bgL" secondAttribute="trailing" constant="19" id="MXR-Dx-4ZC"/>
+                            <constraint firstAttribute="trailing" secondItem="2SP-J9-pfr" secondAttribute="trailing" constant="49" id="R45-Hc-Ntw"/>
+                            <constraint firstAttribute="bottom" secondItem="i4I-aW-bgL" secondAttribute="bottom" constant="10" id="d8M-1D-3q2"/>
+                            <constraint firstItem="2SP-J9-pfr" firstAttribute="top" secondItem="Aw1-5a-t8X" secondAttribute="top" constant="10" id="fig-WL-DHc"/>
+                            <constraint firstItem="i4I-aW-bgL" firstAttribute="top" secondItem="Aw1-5a-t8X" secondAttribute="top" constant="10" id="hQI-Y0-OJc"/>
+                            <constraint firstItem="ZTa-vF-eN0" firstAttribute="top" secondItem="2SP-J9-pfr" secondAttribute="bottom" constant="32" id="tOU-As-j9M"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="Aw1-5a-t8X" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JfS-2z-31g"/>
-                <constraint firstItem="Aw1-5a-t8X" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TzN-5j-GTx"/>
-                <constraint firstAttribute="bottom" secondItem="Aw1-5a-t8X" secondAttribute="bottom" id="bVr-iK-f8X"/>
-                <constraint firstAttribute="trailing" secondItem="Aw1-5a-t8X" secondAttribute="trailing" id="hYO-Kz-a4z"/>
+                <constraint firstAttribute="trailing" secondItem="Aw1-5a-t8X" secondAttribute="trailing" id="FgK-Ra-elB"/>
+                <constraint firstAttribute="bottom" secondItem="Aw1-5a-t8X" secondAttribute="bottom" id="kMX-JR-awT"/>
+                <constraint firstItem="Aw1-5a-t8X" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rgo-FL-K8F"/>
+                <constraint firstItem="Aw1-5a-t8X" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zsa-a5-clV"/>
             </constraints>
             <size key="customSize" width="415" height="117"/>
             <connections>
@@ -71,10 +72,13 @@
                 <outlet property="FavouriteProductName" destination="2SP-J9-pfr" id="6J4-ZB-Ona"/>
                 <outlet property="FavouriteProductPrice" destination="ZTa-vF-eN0" id="Gdb-K5-Mni"/>
             </connections>
-            <point key="canvasLocation" x="402.29007633587787" y="-34.859154929577464"/>
+            <point key="canvasLocation" x="414.50381679389312" y="-33.450704225352112"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="producr_Bag" width="635" height="560"/>
+        <image name="adidasBag" width="840" height="840"/>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
