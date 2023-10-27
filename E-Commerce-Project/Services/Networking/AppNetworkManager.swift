@@ -191,9 +191,9 @@ class NetworkServices   {
     //MARK: - Fetching Data From Api to create customer
     func CreateCustomer<T:Codable> (userData : [String],Handler: @escaping (T?,Error?) -> Void){
         let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json"
-        // a6cdf13b3aee85b07964a84ccc1bd762:@
-//        {"customer":{"first_name":"Yousof","last_name":"Khaled","email":"Yousof","phone":"15142546011","verified_email":true}}
-                
+//        
+//    {"customer":{"first_name":"Yousof","last_name":"Khaled","email":"Yousof","phone":"15142546011","verified_email":true}}
+//                
                 let body: [String: Any] = [
                     "customer": [
                         "first_name": "WishList",
