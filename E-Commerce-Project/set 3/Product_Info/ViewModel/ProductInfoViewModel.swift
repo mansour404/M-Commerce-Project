@@ -11,10 +11,17 @@ class ProductInfoViewModel {
     
     var id : Int64?
     var product : ProductCompleteModel?
-    
+   
     var manager = AbstractNetworkService()
-    
+    var networkManager = NetworkServices()
     var myView : ProductInfoViewController?
+    
+    
+    var isInFavourites : Bool = false
+    var  bindresultToProductsViewController: ( (_ colored : Bool) -> () ) = {colored in}
+    
+   
+    
     func reload_my_view () {
         myView?.viewReload()
     }
@@ -49,4 +56,45 @@ class ProductInfoViewModel {
             }
         })
     }
+    
+    
+    func deleteProductFromFavourites(){
+        networkManager.removefavouriteItem(userID: 6866434621590, wishId: FavouriteViewModel().sendWishId(userID: 6866434621590, productId:  Int(id!)), Handler: {
+            self.bindresultToProductsViewController(false)
+        })
+        
+    }
+    func createFavourite(){
+        networkManager.addFavouriteItem(userID: 6866434621590, productId: Int(id!), productName: (product?.title)!, Handler:{
+            self.bindresultToProductsViewController(true)
+        })
+    }
+    
+    func  setControllerFavourite(){
+        networkManager.getfavouriteItem(userID: 6866434621590 , productId: Int(id!), Handler: { (dataValue:WhishList?, error: Error?) in
+            print("Success")
+            if let mydata = dataValue {
+                print(mydata.metafields)
+                print(mydata.metafields.isEmpty)
+                
+                if(mydata.metafields.isEmpty == true ){
+                    self.bindresultToProductsViewController(false)
+                    
+                }
+                else  {
+                    self.bindresultToProductsViewController(true)
+                  
+                }
+                print("yousof is right")
+            }else {
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+            }
+        })
+       print("ziyad is wrong")
+        
+    }
+    //MARK: - Fetching Data From Api to chech if in favourite
+    
 }

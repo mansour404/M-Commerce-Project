@@ -24,7 +24,7 @@ class ProductInfoViewController: UIViewController {
         
         print ("get_variant_data")
         print(view_model.product)
-        let all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
+        var all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
         
         var found : VariantCompleteModel = VariantCompleteModel()
         for v in all_variants {
@@ -95,8 +95,8 @@ class ProductInfoViewController: UIViewController {
         
         print("add to cart")
         
-        let Mansour_itemID = product_id
-        let _ : [Int] = selectedOption //
+        var Mansour_itemID = product_id
+        var Mansour_selectedOptionValues : [Int] = selectedOption //
     }
     //------------------------------------------------------------------------------
     
@@ -132,10 +132,10 @@ class ProductInfoViewController: UIViewController {
     
     func toggleOption (row : Int, value : Int) {
         
-        let cell = optionsCollectionView.cellForItem(at: IndexPath(item: value, section: row)) as! OptionCollectionViewCell
+        var cell = optionsCollectionView.cellForItem(at: IndexPath(item: value, section: row)) as! OptionCollectionViewCell
         
-        let old_cell : OptionCollectionViewCell? = isOptionSelected(row: row) ?
-        optionsCollectionView.cellForItem(at: IndexPath(item: selectedOption[row], section: row)) as? OptionCollectionViewCell : nil
+        var old_cell : OptionCollectionViewCell? = isOptionSelected(row: row) ?
+        optionsCollectionView.cellForItem(at: IndexPath(item: selectedOption[row], section: row)) as! OptionCollectionViewCell : nil
         
         
         if isOptionSelected(row: row) {
@@ -193,20 +193,7 @@ class ProductInfoViewController: UIViewController {
     
     
     
-    // heart
-    let heartButton = UIButton(type: .custom) // treat it as an outlet
-    var heartIsFilled : Bool = true;
-    
-    func toggleHeart () {
-        if heartIsFilled {
-            heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
-        else {
-            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        }
-        heartIsFilled = !heartIsFilled
-    }
-    
+  
     // outlets
     
     @IBOutlet weak var addToCartView: UIView!
@@ -319,39 +306,53 @@ class ProductInfoViewController: UIViewController {
     
     private func addFavouriteButton() -> UIBarButtonItem {
         
-        heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        heartIsFilled = false
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(heartButtonPressed), for: .touchUpInside)
 
         let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
         return heartBarButtonItem
     }
+    // heart
+    let heartButton = UIButton(type: .custom) // treat it as an outlet
+    var heartIsFilled : Bool = true;
     
+    func setHeartButton(){
+        view_model.setControllerFavourite()
+    }
     @objc func heartButtonPressed(sender: UIButton) {
-//        let vc = FavouriteListVCViewController(nibName: "FavouriteListVCViewController", bundle: nil)
-//        // passing data before navigation
-//        //navigationController?.pushViewController(vc, animated: true)
-//        vc.modalPresentationStyle = .automatic
-//        self.present(vc, animated: true)
-        print("heart button is pressed")
-        
-        toggleHeart()
-        
+        print(heartIsFilled)
+        if heartIsFilled {
+            view_model.deleteProductFromFavourites()
+        }
+        else {
+            view_model.createFavourite()
+        }
+
+    }
+    func colorheart(colored : Bool){
+        if colored {
+            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            heartIsFilled = true
+        }
+        else {
+            heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //here
-//        var view_model = ProductInfoViewModel()
-//        view_model.id = 7827742130326
-//        view_model.myView = self
-//        view_model.initializeProduct()
         
         print("view did load")
         
         view_model.id = product_id
         view_model.myView = self
+        view_model.bindresultToProductsViewController = {(check : Bool ) -> Void in
+            self.colorheart(colored: check)
+        }
         view_model.initializeProduct()
         
         //print(view_model.product)
@@ -364,6 +365,7 @@ class ProductInfoViewController: UIViewController {
         
         navigationItem.setRightBarButtonItems([addFavouriteButton()], animated: true)
         
+       setHeartButton()
         
         
     }
@@ -384,8 +386,6 @@ class ProductInfoViewController: UIViewController {
         }
     }
     
-    
-    
     override func viewDidAppear(_ animated: Bool) {
         
         optionsCollectionView.reloadData()
@@ -402,16 +402,6 @@ class ProductInfoViewController: UIViewController {
         
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -459,7 +449,7 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             
             cell.configure(with: "coupon")
             
-            let img = UIImageView()
+            var img = UIImageView()
             img.downloadImageFrom(view_model.product?.images[indexPath.item].src)
             img.frame.size.height = img.superview?.frame.size.height ?? img.frame.size.height
             img.frame.size.width = img.superview?.frame.size.width ?? img.frame.size.height
@@ -490,14 +480,6 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
         return view_model.product?.options?[indexPath.section].name ?? "Nil"
     }
     
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeader.identifier, for: indexPath) as! sectionHeader
-//
-//        header.setHeaderValue(value: getHeaderName(indexPath: indexPath))
-//
-//        return header
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
             if kind == UICollectionView.elementKindSectionHeader{
                 let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeader.identifier, for: indexPath) as! sectionHeader
@@ -514,7 +496,6 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             }
             return UICollectionViewCell()
         }
-    
     
 }
 
@@ -537,8 +518,8 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
         
         if collectionView == optionsCollectionView {
             
-            let row = indexPath.section
-            let value = indexPath.item
+            var row = indexPath.section
+            var value = indexPath.item
             
             
             
