@@ -41,7 +41,7 @@ class LoginViewModel {
     func checkCustomerInfo(userName : String , userPassword : String) -> Bool {
             var flag = false
         for i in 0..<(AllCustomers?.customers.count)! {
-            var FullName : String = (AllCustomers?.customers[i].first_name)! + " " + (AllCustomers?.customers[i].last_name)!
+            let FullName : String = (AllCustomers?.customers[i].first_name)! + " " + (AllCustomers?.customers[i].last_name)!
             if (FullName == userName){
                 if(AllCustomers?.customers[i].tags == userPassword){
                     flag = true

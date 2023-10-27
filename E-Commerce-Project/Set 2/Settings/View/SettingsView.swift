@@ -33,9 +33,10 @@ class SettingsView: UIViewController {
 
     // MARK: - Actions
     @IBAction func logoutButtonPressed(_ sender: Any) {
-        
+        let vc = Login_or_Singup()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
-    
 }
 
 

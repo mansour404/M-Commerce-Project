@@ -126,7 +126,7 @@ extension CategoriesViewController:UICollectionViewDataSource {
         
         let vc = ProductInfoViewController(nibName: "ProductInfoViewController", bundle: nil)
        
-        var id = categoryViewModel.getProductID(index: indexPath.item)
+        let id = categoryViewModel.getProductID(index: indexPath.item)
         print(id)
         vc.setID(id: id)
       

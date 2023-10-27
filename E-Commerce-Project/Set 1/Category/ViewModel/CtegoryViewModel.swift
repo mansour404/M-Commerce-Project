@@ -56,7 +56,7 @@ class CategoryViewModel{
                         self.getAllProducts = mydata
                         self.getAllProducts?.products = []
                         for p in mydata.products {
-                            var allTags : [String] = p.tags?.components(separatedBy: ", ") ?? []
+                            let allTags : [String] = p.tags?.components(separatedBy: ", ") ?? []
                             var found = false
                             for t in allTags {
                                 if (t == filter1){
@@ -92,7 +92,7 @@ class CategoryViewModel{
                         self.getAllProducts = mydata
                         self.getAllProducts?.products = []
                         for p in mydata.products {
-                            var allTags : [String] = p.tags?.components(separatedBy: ", ") ?? []
+                            let allTags : [String] = p.tags?.components(separatedBy: ", ") ?? []
                             var found = false
                             for t in allTags {
                                 if (t == filter1){

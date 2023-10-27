@@ -95,7 +95,7 @@ class ProductsViewController: UIViewController {
             let vc = ProductInfoViewController(nibName: "ProductInfoViewController", bundle: nil)
             print("after calling")
             vc.modalPresentationStyle = .automatic
-            var id = productviewModel.getProductID(index: indexPath.item)
+            let id = productviewModel.getProductID(index: indexPath.item)
             print(id)
             vc.setID(id: id)
             print("id is set")

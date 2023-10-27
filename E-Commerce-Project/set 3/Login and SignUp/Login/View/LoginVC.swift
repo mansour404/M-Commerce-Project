@@ -47,5 +47,8 @@ class LoginVC: UIViewController {
     }
     
    
-
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
 }
