@@ -55,7 +55,7 @@ final class UserDefaultsHelper {
     }
     
     // set static userId
-    func setCustomerId(Id : Int?) {
+    func setCustomerId() {
         userDefaults.set( 6866630049942, forKey: "customerId")
         setCustomerLogin()
     }

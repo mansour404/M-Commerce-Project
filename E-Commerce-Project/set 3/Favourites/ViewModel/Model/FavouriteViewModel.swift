@@ -76,10 +76,18 @@ class FavouriteViewModel {
         services.getfavouriteItem(userID: 6866434621590 , productId: productId, Handler: { (dataValue:WhishList?, error: Error?) in
             print("Success")
             if let mydata = dataValue {
-                if(mydata.metafields.isEmpty == false ){
+                print(mydata.metafields)
+                print(mydata.metafields.isEmpty)
+               
+                if(mydata.metafields.isEmpty == true ){
                     check = false
                 }
-                else if (mydata.metafields[0].key == String(productId) && mydata.metafields[0].owner_id == userID ) {
+                else  {
+                    print(mydata.metafields[0].key )
+                    print(productId)
+                    if(mydata.metafields[0].key == String(productId) && mydata.metafields[0].owner_id == userID ){
+                       
+                    }
                     check = true
                 }
             }else {

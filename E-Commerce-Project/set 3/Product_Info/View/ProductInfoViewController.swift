@@ -210,10 +210,14 @@ class ProductInfoViewController: UIViewController {
     func setHeartButton(){
         if view_model.isInFavourite() {
             heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            heartIsFilled  = true
         }
         else {
             heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            heartIsFilled  = false
+            
         }
+        toggleHeart()
     }
     // outlets
     
@@ -343,8 +347,8 @@ class ProductInfoViewController: UIViewController {
 //        self.present(vc, animated: true)
         print("heart button is pressed")
         
-        toggleHeart()
-        
+       // toggleHeart()
+        setHeartButton()
     }
     
     override func viewDidLoad() {
@@ -372,7 +376,7 @@ class ProductInfoViewController: UIViewController {
         
         navigationItem.setRightBarButtonItems([addFavouriteButton()], animated: true)
         
-        setHeartButton()
+       setHeartButton()
         
         
     }
