@@ -11,7 +11,7 @@ class FavouriteViewModel {
      private var productArray : [Product] = []
         var handerDataOfHome: (() -> Void)?
         var  bindresultToProductsViewController: ( () -> () ) = {}
-      
+    var compiltionHandler: ((_ id : Int) -> ()) = {id in }
         var services = NetworkServices()
         
         var AllUserWishList: WhishList? {
@@ -78,10 +78,10 @@ class FavouriteViewModel {
             if let mydata = dataValue {
                 if(mydata.metafields.isEmpty == false ){
                     wishId = mydata.metafields[0].id!
-                
+                    self.compiltionHandler(wishId)
                 }
                 else if (mydata.metafields[0].key == String(productId) && mydata.metafields[0].owner_id == userID ) {
-                    
+                    self.compiltionHandler(-1)
                 }
             }else {
                 if let error = error{

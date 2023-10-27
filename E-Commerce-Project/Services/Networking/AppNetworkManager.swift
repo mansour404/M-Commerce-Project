@@ -42,10 +42,7 @@ class NetworkServices   {
                let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
                print("Success22")
                Handler(dataRetivied, nil)
-               let ggg = dataRetivied as! ProductsResponse
-//               print("===================================")
-//               print(ggg.products[1].id )
-//               print("===================================")
+           
            }catch let error{
              print (error)
                Handler(nil, error)
@@ -116,7 +113,7 @@ class NetworkServices   {
     }
     //MARK: - Fetching Data From Api to  remove product from favourites
     func removefavouriteItem (userID : Int, wishId: Int ,Handler: @escaping () -> Void){
-        let URL = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(userID)/metafields/\(wishId).json"
+        let URL = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/metafields/\(wishId).json?"
         Alamofire.AF.request(URL,method: Alamofire.HTTPMethod.delete,headers: ["X-Shopify-Access-Token":"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"]).response { response in
             switch response.result {
             case .success(_):

@@ -324,8 +324,7 @@ class ProductInfoViewController: UIViewController {
     @objc func heartButtonPressed(sender: UIButton) {
         print(heartIsFilled)
         if heartIsFilled {
-            view_model.deleteProductFromFavourites()
-        }
+            view_model.StageDelete()        }
         else {
             view_model.createFavourite()
         }

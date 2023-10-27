@@ -16,6 +16,7 @@ class ProductInfoViewModel {
     var networkManager = NetworkServices()
     var myView : ProductInfoViewController?
     
+    var obj = FavouriteViewModel()
     
     var isInFavourites : Bool = false
     var  bindresultToProductsViewController: ( (_ colored : Bool) -> () ) = {colored in}
@@ -57,9 +58,20 @@ class ProductInfoViewModel {
         })
     }
     
+    func StageDelete(){
+     
+        obj.compiltionHandler = { id in
+            if id != -1 {
+                self.deleteProductFromFavourites(wishId: id)
+            }
+            
+        }
+        let nothing = self.obj.sendWishId(userID: 6866434621590, productId:  Int(id!))
+          
+    }
     
-    func deleteProductFromFavourites(){
-        networkManager.removefavouriteItem(userID: 6866434621590, wishId: FavouriteViewModel().sendWishId(userID: 6866434621590, productId:  Int(id!)), Handler: {
+        func deleteProductFromFavourites(wishId : Int){
+            networkManager.removefavouriteItem(userID: 6866434621590, wishId: wishId ,Handler: {
             self.bindresultToProductsViewController(false)
         })
         
