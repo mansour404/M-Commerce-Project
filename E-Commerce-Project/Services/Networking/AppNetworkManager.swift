@@ -41,7 +41,7 @@ class NetworkServices   {
                let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
                print("Success22")
                Handler(dataRetivied, nil)
-               let ggg = dataRetivied as! ProductsResponse
+               _ = dataRetivied as! ProductsResponse
 //               print("===================================")
 //               print(ggg.products[1].id )
 //               print("===================================")
@@ -62,7 +62,7 @@ class NetworkServices   {
                let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
                print("Success22")
                Handler(dataRetivied, nil)
-               let ggg = dataRetivied as! ProductsResponse
+               _ = dataRetivied as! ProductsResponse
 //               print("===================================")
 //               print(ggg.products[1].id )
 //               print("===================================")

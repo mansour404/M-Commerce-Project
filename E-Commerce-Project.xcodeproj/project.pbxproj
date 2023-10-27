@@ -335,7 +335,6 @@
 			children = (
 				E59AAEF22ADE91F500683168 /* Info.plist */,
 				E59AAEED2ADE91F500683168 /* Assets.xcassets */,
-				E59AAEEF2ADE91F500683168 /* LaunchScreen.storyboard */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -399,6 +398,14 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B29301452AEBED0D000A6997 /* Splach */ = {
+			isa = PBXGroup;
+			children = (
+				E59AAEEF2ADE91F500683168 /* LaunchScreen.storyboard */,
+			);
+			path = Splach;
 			sourceTree = "<group>";
 		};
 		B2DD77E62AE6831A0082CADE /* Home */ = {
@@ -507,12 +514,12 @@
 		DC851A4D2AE9E1E9001BD944 /* Login and SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				DC851A4E2AE9E1E9001BD944 /* GoogleLoginVC.swift */,
 				DC851A4F2AE9E1E9001BD944 /* Login_or_Singup.xib */,
-				DC851A502AE9E1E9001BD944 /* GoogleLoginVC.xib */,
-				DC851A512AE9E1E9001BD944 /* SignUpVC.xib */,
 				DC851A522AE9E1E9001BD944 /* Login_or_Singup.swift */,
+				DC851A512AE9E1E9001BD944 /* SignUpVC.xib */,
 				DC851A532AE9E1E9001BD944 /* SignUpVC.swift */,
+				DC851A502AE9E1E9001BD944 /* GoogleLoginVC.xib */,
+				DC851A4E2AE9E1E9001BD944 /* GoogleLoginVC.swift */,
 				DC851A542AE9E1E9001BD944 /* Login */,
 			);
 			path = "Login and SignUp";
@@ -624,6 +631,7 @@
 		DCE147142AE6D41800B37C03 /* Set 1 */ = {
 			isa = PBXGroup;
 			children = (
+				B29301452AEBED0D000A6997 /* Splach */,
 				DC851A232AE9D69A001BD944 /* Category */,
 				B2DD78002AE6834B0082CADE /* userOrders */,
 				B2DD780E2AE683540082CADE /* Products */,
@@ -1270,9 +1278,7 @@
 				DC851A6F2AE9E1E9001BD944 /* LoginViewModel.swift in Sources */,
 				E5D227AE2AE3273400A56A9A /* SettingModel.swift in Sources */,
 				B2DD78122AE683540082CADE /* ProductsViewController.swift in Sources */,
-				DCE146D02AE64EB000B37C03 /* FavouriteListVCViewController.swift in Sources */,
 				E50F48082AE974CC009360CC /* AddressViewModel.swift in Sources */,
-				DCE146D42AE64EB000B37C03 /* GoogleLoginVC.swift in Sources */,
 				E5D227DD2AE3E3F600A56A9A /* CurrencyViewModel.swift in Sources */,
 				E5D227D42AE3799900A56A9A /* Rates.swift in Sources */,
 				B2DD77F42AE6831A0082CADE /* CopounCollectionViewCell.swift in Sources */,

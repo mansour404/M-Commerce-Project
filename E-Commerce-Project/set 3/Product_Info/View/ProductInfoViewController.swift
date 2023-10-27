@@ -24,7 +24,7 @@ class ProductInfoViewController: UIViewController {
         
         print ("get_variant_data")
         print(view_model.product)
-        var all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
+        let all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
         
         var found : VariantCompleteModel = VariantCompleteModel()
         for v in all_variants {
@@ -95,8 +95,8 @@ class ProductInfoViewController: UIViewController {
         
         print("add to cart")
         
-        var Mansour_itemID = product_id
-        var Mansour_selectedOptionValues : [Int] = selectedOption //
+        let Mansour_itemID = product_id
+        let _ : [Int] = selectedOption //
     }
     //------------------------------------------------------------------------------
     
@@ -132,10 +132,10 @@ class ProductInfoViewController: UIViewController {
     
     func toggleOption (row : Int, value : Int) {
         
-        var cell = optionsCollectionView.cellForItem(at: IndexPath(item: value, section: row)) as! OptionCollectionViewCell
+        let cell = optionsCollectionView.cellForItem(at: IndexPath(item: value, section: row)) as! OptionCollectionViewCell
         
-        var old_cell : OptionCollectionViewCell? = isOptionSelected(row: row) ?
-        optionsCollectionView.cellForItem(at: IndexPath(item: selectedOption[row], section: row)) as! OptionCollectionViewCell : nil
+        let old_cell : OptionCollectionViewCell? = isOptionSelected(row: row) ?
+        optionsCollectionView.cellForItem(at: IndexPath(item: selectedOption[row], section: row)) as? OptionCollectionViewCell : nil
         
         
         if isOptionSelected(row: row) {
@@ -459,7 +459,7 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             
             cell.configure(with: "coupon")
             
-            var img = UIImageView()
+            let img = UIImageView()
             img.downloadImageFrom(view_model.product?.images[indexPath.item].src)
             img.frame.size.height = img.superview?.frame.size.height ?? img.frame.size.height
             img.frame.size.width = img.superview?.frame.size.width ?? img.frame.size.height
@@ -537,8 +537,8 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
         
         if collectionView == optionsCollectionView {
             
-            var row = indexPath.section
-            var value = indexPath.item
+            let row = indexPath.section
+            let value = indexPath.item
             
             
             

@@ -197,6 +197,20 @@
                                         <constraint firstItem="UPj-sf-8Ib" firstAttribute="leading" secondItem="aMb-u6-icj" secondAttribute="leading" id="nox-hV-jCB"/>
                                     </constraints>
                                 </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qkt-SU-O6a">
+                                    <rect key="frame" x="10" y="10" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="h4a-ba-3tG"/>
+                                        <constraint firstAttribute="width" constant="35" id="pwX-SW-c5Z"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" image="arrow.backward" catalog="system" cornerStyle="capsule">
+                                        <color key="baseBackgroundColor" red="0.57254904510000004" green="0.46274507050000002" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </buttonConfiguration>
+                                    <connections>
+                                        <action selector="backBtnTapped:" destination="-1" eventType="touchUpInside" id="2rC-M9-mEL"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -212,6 +226,8 @@
                                 <constraint firstAttribute="trailing" secondItem="aMb-u6-icj" secondAttribute="trailing" constant="15" id="Y7M-1W-GQZ"/>
                                 <constraint firstAttribute="trailing" secondItem="XBn-tf-tAd" secondAttribute="trailing" constant="25" id="YsP-IL-N6v"/>
                                 <constraint firstItem="Ows-f2-2Bd" firstAttribute="top" secondItem="tLG-CS-dJS" secondAttribute="bottom" constant="150" id="ejf-au-ZVU"/>
+                                <constraint firstItem="qkt-SU-O6a" firstAttribute="leading" secondItem="UIp-0P-eE9" secondAttribute="leading" constant="10" id="fQV-oy-mt5"/>
+                                <constraint firstItem="qkt-SU-O6a" firstAttribute="top" secondItem="UIp-0P-eE9" secondAttribute="top" constant="10" id="fxS-TU-ln1"/>
                                 <constraint firstItem="tLG-CS-dJS" firstAttribute="top" secondItem="iJw-eG-BFN" secondAttribute="bottom" id="gLK-RT-lUU"/>
                                 <constraint firstItem="Zus-dL-L1t" firstAttribute="leading" secondItem="UIp-0P-eE9" secondAttribute="leading" constant="25" id="kNW-SX-JTT"/>
                                 <constraint firstItem="XBn-tf-tAd" firstAttribute="leading" secondItem="UIp-0P-eE9" secondAttribute="leading" constant="25" id="lRB-Zn-aBm"/>
@@ -244,6 +260,7 @@
         </view>
     </objects>
     <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="google" width="84" height="22"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

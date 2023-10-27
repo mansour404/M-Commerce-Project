@@ -9,36 +9,34 @@ import UIKit
 
 class Login_or_Singup: UIViewController {
 
+    @IBOutlet weak var myView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        myView.layer.cornerRadius = 15
     }
 
 
     @IBAction func SignUpButton(_ sender: UIButton) {
-        
+        let vc = SignUpVC()
+         vc.modalPresentationStyle = .fullScreen
+         present(vc, animated: true)
     }
     
     @IBAction func LoginButton(_ sender: UIButton) {
         let vc = LoginVC()
-//    vc.modalPresentationStyle = .automatic
-//        ().present(vc, animated: true)
-        navigationController?.pushViewController(vc, animated: true)
+         vc.modalPresentationStyle = .fullScreen
+         present(vc, animated: true)
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func SkipButtons(_ sender: UIButton) {
+    @IBAction func skipBtnTapped(_ sender: UIButton) {
         let vc = TabController()
-        navigationController?.pushViewController(vc, animated: true)
+//        self.navigationController?.pushViewController(vc, animated: true)
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
