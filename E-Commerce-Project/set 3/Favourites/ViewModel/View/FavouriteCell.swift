@@ -9,12 +9,20 @@ import UIKit
 
 class FavouriteCell: UICollectionViewCell {
 
-    @IBOutlet weak var FavouriteProductPrice: UILabel!
+
+    @IBOutlet weak var CellView: UIView!
     @IBOutlet weak var FavouriteProductName: UILabel!
+    @IBOutlet weak var FavouriteProductPrice: UILabel!
     @IBOutlet weak var FavouriteProductImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        FavouriteProductImage.rounded()
+        FavouriteProductImage.addBorder()
+        
+        CellView.clipsToBounds = true
+        CellView.layer.cornerRadius = 20
+        CellView.dropShadow()
     }
     func configureCell (imageURL : String , productname : String ){
         

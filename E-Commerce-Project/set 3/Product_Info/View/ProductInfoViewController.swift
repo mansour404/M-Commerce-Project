@@ -207,6 +207,14 @@ class ProductInfoViewController: UIViewController {
         heartIsFilled = !heartIsFilled
     }
     
+    func setHeartButton(){
+        if view_model.isInFavourite() {
+            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        else {
+            heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
     // outlets
     
     @IBOutlet weak var addToCartView: UIView!
@@ -364,6 +372,7 @@ class ProductInfoViewController: UIViewController {
         
         navigationItem.setRightBarButtonItems([addFavouriteButton()], animated: true)
         
+        setHeartButton()
         
         
     }
@@ -384,8 +393,6 @@ class ProductInfoViewController: UIViewController {
         }
     }
     
-    
-    
     override func viewDidAppear(_ animated: Bool) {
         
         optionsCollectionView.reloadData()
@@ -402,16 +409,6 @@ class ProductInfoViewController: UIViewController {
         
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -490,14 +487,6 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
         return view_model.product?.options?[indexPath.section].name ?? "Nil"
     }
     
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeader.identifier, for: indexPath) as! sectionHeader
-//
-//        header.setHeaderValue(value: getHeaderName(indexPath: indexPath))
-//
-//        return header
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
             if kind == UICollectionView.elementKindSectionHeader{
                 let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeader.identifier, for: indexPath) as! sectionHeader
@@ -514,7 +503,6 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             }
             return UICollectionViewCell()
         }
-    
     
 }
 

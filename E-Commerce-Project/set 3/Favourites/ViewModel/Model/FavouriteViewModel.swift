@@ -29,9 +29,6 @@ class FavouriteViewModel {
                 if let mydata = dataValue {
                     self.AllUserWishList = mydata
                     print(mydata.metafields.count)
-                    for p in mydata.metafields {
-                        print(p.key)
-                    }
                     
                     self.getproducts()
                 }else {
@@ -74,8 +71,47 @@ class FavouriteViewModel {
     }
        
     
-        
-
+    func isFavourite (userID : Int64 ,productId : Int ) ->Bool {
+        var check = false
+        services.getfavouriteItem(userID: 6866434621590 , productId: productId, Handler: { (dataValue:WhishList?, error: Error?) in
+            print("Success")
+            if let mydata = dataValue {
+                if(mydata.metafields.isEmpty == false ){
+                    check = false
+                }
+                else if (mydata.metafields[0].key == String(productId) && mydata.metafields[0].owner_id == userID ) {
+                    check = true
+                }
+            }else {
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        return check
+    }
+    
+    func sendWishId(userID : Int64 ,productId : Int) ->Int{
+        var wishId = 0
+        services.getfavouriteItem(userID: 6866434621590 , productId: productId, Handler: { (dataValue:WhishList?, error: Error?) in
+            print("Success")
+            if let mydata = dataValue {
+                if(mydata.metafields.isEmpty == false ){
+                    wishId = mydata.metafields[0].id!
+                
+                }
+                else if (mydata.metafields[0].key == String(productId) && mydata.metafields[0].owner_id == userID ) {
+                    
+                }
+            }else {
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        return wishId
+    }
+    
 
 
 }

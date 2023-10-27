@@ -10,7 +10,7 @@ struct WhishList : Codable {
     var metafields : [FavouriteProduct]
 }
 struct FavouriteProduct : Codable{
-    var id : Int64?
+    var id : Int?
     var key : String?          // product Id
     var value : String?     // product Name
     var owner_id : Int64?     // customer Id

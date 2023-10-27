@@ -13,7 +13,7 @@ class ProductInfoViewModel {
     var product : ProductCompleteModel?
     
     var manager = AbstractNetworkService()
-    
+    var networkManager = NetworkServices()
     var myView : ProductInfoViewController?
     func reload_my_view () {
         myView?.viewReload()
@@ -49,4 +49,12 @@ class ProductInfoViewModel {
             }
         })
     }
+    
+    func isInFavourite() -> Bool{
+        return FavouriteViewModel().isFavourite(userID: 6866434621590, productId: Int(id!))
+    }
+    func deleteProductFromFavourites(){
+        networkManager.removefavouriteItem(userID: 6866434621590, wishId: FavouriteViewModel().sendWishId(userID: 6866434621590, productId:  Int(id!)))
+    }
+    
 }

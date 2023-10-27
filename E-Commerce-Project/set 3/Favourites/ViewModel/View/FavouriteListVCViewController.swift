@@ -81,7 +81,7 @@ extension FavouriteListVCViewController :UICollectionViewDelegate,UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = FavouriteCollectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCell", for: indexPath) as! FavouriteCell
-        cell.FavouriteProductImage.image = UIImage(named: "bag")
+        cell.FavouriteProductImage.image = UIImage(named: "adidasBag")
         cell.FavouriteProductName.text = favouriteViewModel.getTitle(index: indexPath.row)
         cell.FavouriteProductPrice.text = pricearray[indexPath.row]
     
