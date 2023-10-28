@@ -22,9 +22,8 @@ class ProductInfoViewController: UIViewController {
     
     func get_variant_data () {
         
-        print ("get_variant_data")
-        print(view_model.product)
-        var all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
+    
+        let all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
         
         var found : VariantCompleteModel = VariantCompleteModel()
         for v in all_variants {
@@ -132,9 +131,9 @@ class ProductInfoViewController: UIViewController {
     
     func toggleOption (row : Int, value : Int) {
         
-        var cell = optionsCollectionView.cellForItem(at: IndexPath(item: value, section: row)) as! OptionCollectionViewCell
+        let cell = optionsCollectionView.cellForItem(at: IndexPath(item: value, section: row)) as! OptionCollectionViewCell
         
-        var old_cell : OptionCollectionViewCell? = isOptionSelected(row: row) ?
+        let old_cell : OptionCollectionViewCell? = isOptionSelected(row: row) ?
         optionsCollectionView.cellForItem(at: IndexPath(item: selectedOption[row], section: row)) as! OptionCollectionViewCell : nil
         
         
@@ -448,7 +447,7 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             
             cell.configure(with: "coupon")
             
-            var img = UIImageView()
+            let img = UIImageView()
             img.downloadImageFrom(view_model.product?.images[indexPath.item].src)
             img.frame.size.height = img.superview?.frame.size.height ?? img.frame.size.height
             img.frame.size.width = img.superview?.frame.size.width ?? img.frame.size.height
@@ -517,8 +516,8 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
         
         if collectionView == optionsCollectionView {
             
-            var row = indexPath.section
-            var value = indexPath.item
+            let row = indexPath.section
+            let value = indexPath.item
             
             
             

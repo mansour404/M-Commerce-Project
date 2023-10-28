@@ -61,10 +61,7 @@ class NetworkServices   {
                let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
                print("Success22")
                Handler(dataRetivied, nil)
-               let ggg = dataRetivied as! ProductsResponse
-//               print("===================================")
-//               print(ggg.products[1].id )
-//               print("===================================")
+         
            }catch let error{
              print (error)
                Handler(nil, error)
@@ -213,37 +210,36 @@ class NetworkServices   {
         }
     }
     //MARK: - Fetching Data From Api to create customer
-    func CreateCustomer<T:Codable> (userData : [String],Handler: @escaping (T?,Error?) -> Void){
+    func CreateCustomer (userFirstName : String , userLastName : String , userPassword : String , userEmail : String , userPhoneNumber : String   ,Handler: @escaping () -> Void){
         let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json"
-//
-//    {"customer":{"first_name":"Yousof","last_name":"Khaled","email":"Yousof","phone":"15142546011","verified_email":true}}
-//
-                let body: [String: Any] = [
-                    "customer": [
-                        "first_name": "WishList",
-                        "last_name": "productID", // Product ID
-                        "email": "Product", // Product Name
-                        "phone": "customerID", // Customer ID
-                        "verified_email": "single_line_text_field"
-                    ]
-                ]
-        AF.request(urlFile ,method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response{ response in
-            switch response.result {
-            case .success(let data):
-                guard let data = data else { return }
-//                print(String(data: data, encoding: .utf8) ?? "Nil")
-                do {
-                    let decodedData = try JSONDecoder().decode(Customer.self, from: data)
-                    print(decodedData)
+        let body: [String: Any] =
+        ["customer":[
+            "first_name": userFirstName,
+            "last_name" : userLastName,
+                "tags":  userPassword,
+                    "phone": userPhoneNumber,
+                    "email": userEmail,
+                    "country": "CA"
+          
+         ]]
+            print(body)
+        AF.request(urlFile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response { response in
+                        switch response.result {
+                        case .success(let data):
+                            guard let data = data else { return }
+            //                print(String(data: data, encoding: .utf8) ?? "Nil")
+                            do {
+                                
 
-                } catch {
-                    print(error)
+                            } catch {
+                                print(error)
+                            }
+                            
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
                 }
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
     
                 
@@ -264,7 +260,7 @@ class NetworkServices   {
 //                        print(error)
 //                    }
 //                }
-            }
+            
             
      
 //            AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in

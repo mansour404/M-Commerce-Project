@@ -28,7 +28,7 @@ class LoginViewModel {
             if let mydata = dataValue {
                 self.AllCustomers = mydata
 //                self.bindresultToProductsViewController()
-                self.printName()
+                
             }else {
                 if let error = error{
                     print(error.localizedDescription)
@@ -52,12 +52,6 @@ class LoginViewModel {
         }
         return flag
     }
-    func printName () {
-        for i in 0..<(AllCustomers?.customers.count)! {
-            print("======================")
-            print( (AllCustomers?.customers[i].first_name)! + " " + (AllCustomers?.customers[i].last_name)!)
-            print("======================")
-
-        }}
+    
 }
 
