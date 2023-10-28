@@ -480,6 +480,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DC5664652AED5D44003297FE /* SignUP */ = {
+			isa = PBXGroup;
+			children = (
+				DC851A512AE9E1E9001BD944 /* SignUpVC.xib */,
+				DC851A532AE9E1E9001BD944 /* SignUpVC.swift */,
+			);
+			path = SignUP;
+			sourceTree = "<group>";
+		};
+		DC5664662AED5D86003297FE /* Loginin_Or_Signup */ = {
+			isa = PBXGroup;
+			children = (
+				DC851A4F2AE9E1E9001BD944 /* Login_or_Singup.xib */,
+				DC851A522AE9E1E9001BD944 /* Login_or_Singup.swift */,
+			);
+			path = Loginin_Or_Signup;
+			sourceTree = "<group>";
+		};
 		DC851A232AE9D69A001BD944 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,12 +538,8 @@
 		DC851A4D2AE9E1E9001BD944 /* Login and SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				DC851A4F2AE9E1E9001BD944 /* Login_or_Singup.xib */,
-				DC851A522AE9E1E9001BD944 /* Login_or_Singup.swift */,
-				DC851A512AE9E1E9001BD944 /* SignUpVC.xib */,
-				DC851A532AE9E1E9001BD944 /* SignUpVC.swift */,
-				DC851A502AE9E1E9001BD944 /* GoogleLoginVC.xib */,
-				DC851A4E2AE9E1E9001BD944 /* GoogleLoginVC.swift */,
+				DC5664662AED5D86003297FE /* Loginin_Or_Signup */,
+				DC5664652AED5D44003297FE /* SignUP */,
 				DC851A542AE9E1E9001BD944 /* Login */,
 			);
 			path = "Login and SignUp";
@@ -534,6 +548,8 @@
 		DC851A542AE9E1E9001BD944 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				DC851A502AE9E1E9001BD944 /* GoogleLoginVC.xib */,
+				DC851A4E2AE9E1E9001BD944 /* GoogleLoginVC.swift */,
 				DC851A552AE9E1E9001BD944 /* ViewModel */,
 				DC851A592AE9E1E9001BD944 /* View */,
 			);
