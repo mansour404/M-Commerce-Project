@@ -61,10 +61,7 @@ class NetworkServices   {
                let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
                print("Success22")
                Handler(dataRetivied, nil)
-               let ggg = dataRetivied as! ProductsResponse
-//               print("===================================")
-//               print(ggg.products[1].id )
-//               print("===================================")
+         
            }catch let error{
              print (error)
                Handler(nil, error)
