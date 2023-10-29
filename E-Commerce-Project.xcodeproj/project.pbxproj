@@ -31,7 +31,6 @@
 		DC56645F2AED5390003297FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC56645E2AED5390003297FE /* GoogleService-Info.plist */; };
 		DC5664622AED53EA003297FE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC5664612AED53EA003297FE /* FirebaseAnalytics */; };
 		DC5664642AED53EA003297FE /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DC5664632AED53EA003297FE /* FirebaseAnalyticsSwift */; };
-		DC5664692AED5EDD003297FE /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5664682AED5EDD003297FE /* Authenticator.swift */; };
 		DC851A2D2AE9D69A001BD944 /* CtegoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC851A252AE9D69A001BD944 /* CtegoryViewModel.swift */; };
 		DC851A2E2AE9D69A001BD944 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC851A272AE9D69A001BD944 /* ProductModel.swift */; };
 		DC851A2F2AE9D69A001BD944 /* SubmainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC851A292AE9D69A001BD944 /* SubmainCollectionViewCell.swift */; };
@@ -159,6 +158,18 @@
 			remoteInfo = "E-Commerce-Project";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B204A94E2AEDDC770034F3D6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		842CF15C2AE9567C006F4925 /* ProductInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoViewModel.swift; sourceTree = "<group>"; };
@@ -1133,6 +1144,7 @@
 				E59AAEDA2ADE91F400683168 /* Sources */,
 				E59AAEDB2ADE91F400683168 /* Frameworks */,
 				E59AAEDC2ADE91F400683168 /* Resources */,
+				B204A94E2AEDDC770034F3D6 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1332,7 +1344,6 @@
 				E5D227B72AE3302400A56A9A /* SettingCellViewModel.swift in Sources */,
 				DC851A2E2AE9D69A001BD944 /* ProductModel.swift in Sources */,
 				DCE146E02AE6879A00B37C03 /* UserProfileView.swift in Sources */,
-				DC5664692AED5EDD003297FE /* Authenticator.swift in Sources */,
 				E59AAEE22ADE91F400683168 /* AppDelegate.swift in Sources */,
 				E50F48172AE9CB5E009360CC /* AddressService.swift in Sources */,
 				E50F48102AE97661009360CC /* Address.swift in Sources */,

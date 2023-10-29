@@ -12,7 +12,7 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var userPasswordfield: UITextField!
     @IBOutlet weak var userEmailAdressfield: UITextField!
     @IBOutlet weak var userPhoneNumberfield: UITextField!
-    let signUpViewModel = SignUpViewModel()
+//    let signUpViewModel = SignUpViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,30 +20,30 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func SignUpPressed(_ sender: UIButton) {
-        if(textFieldisEmpty()){
-            if( signUpViewModel.isDataValid(phoneNumber: userPhoneNumberfield.text!, emailAdress: userEmailAdressfield.text!, userPassword: userPasswordfield.text!)){
-                let arr  : [String] = sperateUserName(userName: userNamefield.text!)
-                signUpViewModel.bindresultToProductsViewController = {
-                    self.showAlert(message: "User Created Successfully", actionType: .default)
-                }
-                //create user in api
-                signUpViewModel.CreateUser(userFirstName: arr[0], userLastName: arr[1], userPassword: userPasswordfield.text!, userEmail: userEmailAdressfield.text!, userPhoneNumber: userPhoneNumberfield.text!)
-                signUpViewModel.bindresultToProductsViewController = {
-                    self.showAlert(message: self.signUpViewModel.errorDescription, actionType: .default)
-                }
-                
-                // create user in fireBase
-                
-                
-                signUpViewModel.createUserInFirebase(email:  userEmailAdressfield.text!, password: userPasswordfield.text!)
-            }
-                else {
-                    showAlert(message: "Data is not Vaild", actionType: .cancel)
-           }
-        }
-        else {
-            showAlert(message: "There is a one or more empty Field", actionType: .cancel)
-        }
+//        if(textFieldisEmpty()){
+//            if( signUpViewModel.isDataValid(phoneNumber: userPhoneNumberfield.text!, emailAdress: userEmailAdressfield.text!, userPassword: userPasswordfield.text!)){
+//                let arr  : [String] = sperateUserName(userName: userNamefield.text!)
+//                signUpViewModel.bindresultToProductsViewController = {
+//                    self.showAlert(message: "User Created Successfully", actionType: .default)
+//                }
+//                //create user in api
+//                signUpViewModel.CreateUser(userFirstName: arr[0], userLastName: arr[1], userPassword: userPasswordfield.text!, userEmail: userEmailAdressfield.text!, userPhoneNumber: userPhoneNumberfield.text!)
+//                signUpViewModel.bindresultToProductsViewController = {
+//                    self.showAlert(message: self.signUpViewModel.errorDescription, actionType: .default)
+//                }
+//
+//                // create user in fireBase
+//
+//
+//                signUpViewModel.createUserInFirebase(email:  userEmailAdressfield.text!, password: userPasswordfield.text!)
+//            }
+//                else {
+//                    showAlert(message: "Data is not Vaild", actionType: .cancel)
+//           }
+//        }
+//        else {
+//            showAlert(message: "There is a one or more empty Field", actionType: .cancel)
+//        }
         
         
     }
