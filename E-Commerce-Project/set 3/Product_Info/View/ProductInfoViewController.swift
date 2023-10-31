@@ -10,27 +10,26 @@ import UIKit
 class ProductInfoViewController: UIViewController {
     
     // cart code------------------------------------------------------------------------------
-    @IBOutlet weak var variant_price: UILabel!
+    //MARK: - Variables
     
+    var timer : Timer?
+    var currentCellIndex = 0
+    
+    @IBOutlet weak var pageController: UIPageControl!
+    @IBOutlet weak var variant_price: UILabel!
     @IBOutlet weak var variant_availability: UILabel!
     
-    
     var variant_available_elements : Int = 0
-    
     var variant_index : Int = 0
     var variant_Unique_ID : Int = 0
     
     func get_variant_data () {
         
-    
         let all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
-        
         var found : VariantCompleteModel = VariantCompleteModel()
         for v in all_variants {
             //numOptions
-            
             print(v)
-            
             var equal : Bool = true
             
             if numOptions >= 1 {
@@ -88,7 +87,6 @@ class ProductInfoViewController: UIViewController {
     }
     
     @IBOutlet weak var number_of_cart_items_label: UILabel!
-    
     @IBAction func add_to_cart_tapped(_ sender: Any) {
         // mansour starts here
         
@@ -150,25 +148,18 @@ class ProductInfoViewController: UIViewController {
                 
                 cell.select()
             }
-            
-            
         }
         else {
             selectedOptionsCount += 1
             setOption(row: row, value: value)
             
             cell.select()
-            
         }
-        
         if old_cell != nil {
             old_cell!.unselect()
         }
     }
-    
     //------------------------------------------------------------------------------
-    
-    
     func viewReload () {
         optionsCollectionView.reloadData()
         productName.text = view_model.product?.title
@@ -190,28 +181,14 @@ class ProductInfoViewController: UIViewController {
         self.product_id = id;
     }
     
-    
-    
-  
     // outlets
-    
     @IBOutlet weak var addToCartView: UIView!
     @IBOutlet weak var scroll_and_add_to_cart_vertical_spacing: NSLayoutConstraint!
-    
     @IBOutlet weak var reviewsHeight: NSLayoutConstraint!
     @IBOutlet weak var reviewsCollectionView: UICollectionView!
-    
     @IBOutlet weak var productImagesCollectionView: UICollectionView!
-    
-    
     @IBOutlet weak var optionsCollectionView: UICollectionView!
-    
-    
-    
     @IBOutlet weak var optionsHeight: NSLayoutConstraint!
-    
-    
-    
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productTags: UILabel!
     @IBOutlet weak var productDescription: UILabel!
@@ -228,7 +205,7 @@ class ProductInfoViewController: UIViewController {
         reviewsCollectionView.dataSource = self;
         
         let layout_ = UICollectionViewCompositionalLayout { index, env in
-
+            
             let itemSize = NSCollectionLayoutSize (widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             
             let item = NSCollectionLayoutItem (layoutSize: itemSize)
@@ -244,14 +221,12 @@ class ProductInfoViewController: UIViewController {
             
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = NSDirectionalEdgeInsets (top: 0, leading: 0, bottom: 0, trailing: 0)
-            
-            
             section.boundarySupplementaryItems = [header]
             
             //section.orthogonalScrollingBehavior = .continuous
             
             return section
-
+            
         }
         
         reviewsCollectionView.setCollectionViewLayout(layout_, animated: true)
@@ -266,7 +241,7 @@ class ProductInfoViewController: UIViewController {
         optionsCollectionView.dataSource = self;
         
         let layout_ = UICollectionViewCompositionalLayout { index, env in
-
+            
             let itemSize = NSCollectionLayoutSize (widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
             
             let item = NSCollectionLayoutItem (layoutSize: itemSize)
@@ -289,7 +264,7 @@ class ProductInfoViewController: UIViewController {
             section.orthogonalScrollingBehavior = .continuous
             
             return section
-
+            
         }
         
         optionsCollectionView.setCollectionViewLayout(layout_, animated: true)
@@ -309,7 +284,7 @@ class ProductInfoViewController: UIViewController {
         heartIsFilled = false
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(heartButtonPressed), for: .touchUpInside)
-
+        
         let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
         return heartBarButtonItem
     }
@@ -327,7 +302,7 @@ class ProductInfoViewController: UIViewController {
         else {
             view_model.createFavourite()
         }
-
+        
     }
     func colorheart(colored : Bool){
         if colored {
@@ -339,34 +314,52 @@ class ProductInfoViewController: UIViewController {
             
         }
     }
-    
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         print("view did load")
-        
         view_model.id = product_id
         view_model.myView = self
         view_model.bindresultToProductsViewController = {(check : Bool ) -> Void in
             self.colorheart(colored: check)
         }
         view_model.initializeProduct()
-        
         //print(view_model.product)
-        
         setOptionsView ()
         setproductImagesCollectionView()
         setReviewsView()
-        
         hideAddToCart()
-        
         navigationItem.setRightBarButtonItems([addFavouriteButton()], animated: true)
-        
-       setHeartButton()
-        
-        
+        setHeartButton()
+        pageController.numberOfPages = 3
+        startTimer()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        optionsCollectionView.reloadData()
+        var height = optionsCollectionView.collectionViewLayout.collectionViewContentSize.height
+        optionsHeight.constant = height
+        height = reviewsCollectionView.collectionViewLayout.collectionViewContentSize.height
+        reviewsHeight.constant = height
+        view.layoutIfNeeded()
+    }
+    
+    
+    // MARK: - Go to next Pic
+    func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
+    }
+    
+    @objc func moveToNextIndex(){
+        if currentCellIndex < 2 {
+            currentCellIndex += 1
+        }else{
+            currentCellIndex = 0
+        }
+        productImagesCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+        pageController.currentPage = currentCellIndex
+    }
+    
+    
     
     func showAddToCart () {
         if (addToCartView.isHidden) {
@@ -383,24 +376,6 @@ class ProductInfoViewController: UIViewController {
             view.layoutIfNeeded()
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        optionsCollectionView.reloadData()
-        
-        var height = optionsCollectionView.collectionViewLayout.collectionViewContentSize.height
-        optionsHeight.constant = height
-        
-        height = reviewsCollectionView.collectionViewLayout.collectionViewContentSize.height
-        reviewsHeight.constant = height
-        
-        
-        
-        view.layoutIfNeeded()
-        
-    }
-
-
 }
 
 extension ProductInfoViewController : UICollectionViewDataSource, UICollectionViewDelegate{
@@ -497,7 +472,6 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
     
 }
 
-
 extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -511,18 +485,14 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
         return CGSize (width: 100, height: 100)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == optionsCollectionView {
             
             let row = indexPath.section
             let value = indexPath.item
-            
-            
-            
+        
             toggleOption(row: row, value: value)
-            
             if selectedOptionsCount == get_number_of_options() {
                 get_variant_data()
                 showAddToCart()
@@ -530,17 +500,9 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
             else {
                 hideAddToCart()
             }
-            
             print("toggle add to cart")
-            
             print(selectedOptionsCount)
-            
             reset_cart()
-            
-            
         }
-        
     }
-    
-    
 }

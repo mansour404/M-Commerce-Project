@@ -13,7 +13,6 @@ class HomeViewController: UIViewController {
     var currentCellIndex = 0
         var homeViewModel = HomeViewModel()
 
-
     var brandData : Brands?
     @IBOutlet weak var couponsCollectionView: UICollectionView!
     @IBOutlet weak var pageConroller: UIPageControl!

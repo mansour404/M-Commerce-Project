@@ -87,6 +87,11 @@ class ProductsViewController: UIViewController {
             cell.productNameLabel.text = productviewModel.getTitle(index: indexPath.row)
             cell.imageView.downloadImageFrom(productviewModel.getid(index: indexPath.row))
             
+            cell.layer.cornerRadius = 20
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor.lightGray.cgColor
+            
+            
             return cell
             
         }
@@ -107,7 +112,7 @@ class ProductsViewController: UIViewController {
 extension ProductsViewController: UICollectionViewDelegate , UICollectionViewDelegateFlowLayout , UISearchBarDelegate
 {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (productsCollectionView.frame.width / 2) - 10 , height: (productsCollectionView.frame.height) / 2.5 )
+        return CGSize(width: (productsCollectionView.frame.width / 2) - 10 , height: (productsCollectionView.frame.height) / 3 )
     }
 //    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 //        <#code#>

@@ -24,8 +24,6 @@ class HomeViewModel{
         }
     }
 
-   
-    
     //MARK: -Get All Model Return From Api
     func getBrand() -> Brands? {
         return getAllBrands
@@ -51,18 +49,17 @@ class HomeViewModel{
     }
     //MARK: -Getting Number of Brands
     func getNumberOfBrands() -> Int? {
-
     return getAllBrands?.smart_collections.count
    }
+    
     func setSelectedBrandID (Index :Int){
-        
         HomeViewModel.selectedBrandID = getAllBrands?.smart_collections[Index].id
     }
+    
     func getTitle(index: Int) -> String?{
-        
         return getAllBrands?.smart_collections[index].title ?? "NO"
-
     }
+    
     func getImage(index: Int) -> String?{
         return getAllBrands?.smart_collections[index].image.src
 

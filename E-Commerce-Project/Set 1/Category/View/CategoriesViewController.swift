@@ -10,9 +10,8 @@ import UIKit
 class CategoriesViewController: UIViewController {
     // MARK: - Variables
     @IBOutlet weak var subMainCollectionView: UICollectionView!
-    
-   
     @IBOutlet var secondOutletCollection: [UIButton]!
+    
     let categoryViewModel = CategoryViewModel()
     
     @IBOutlet var FirstOutletCollection: [UIButton]!
@@ -41,9 +40,7 @@ class CategoriesViewController: UIViewController {
     }
     //MARK: - Configure The Loading Data
     func configureLoadingDataFromApi(){
-
         categoryViewModel.getDataFromApiForHome()
-
     }
         
     private func addFavouriteButton() -> UIBarButtonItem {
@@ -118,6 +115,9 @@ extension CategoriesViewController:UICollectionViewDataSource {
         
         let cell = subMainCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
         cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: categoryViewModel.getPrice(index: indexPath.row) ?? "10" , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A")
+        cell.layer.cornerRadius = 15
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.lightGray.cgColor
         return cell
         
     }

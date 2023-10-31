@@ -14,6 +14,7 @@ class CopounCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        couponImageView.layer.cornerRadius = 20
     }
     
     // MARK: - configure Nib

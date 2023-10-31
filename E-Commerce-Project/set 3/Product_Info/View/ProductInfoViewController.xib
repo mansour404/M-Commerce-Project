@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,6 +15,7 @@
                 <outlet property="number_of_cart_items_label" destination="QI7-v2-SHP" id="bZ1-ML-A0h"/>
                 <outlet property="optionsCollectionView" destination="i9M-8e-mEj" id="Y7S-jf-yDl"/>
                 <outlet property="optionsHeight" destination="m6B-4U-mls" id="AUX-Cb-D8x"/>
+                <outlet property="pageController" destination="qTF-m3-hsf" id="GsM-pD-L4W"/>
                 <outlet property="productDescription" destination="YOn-8m-fgI" id="w18-ad-3hW"/>
                 <outlet property="productImagesCollectionView" destination="pUR-Te-URW" id="c4W-B3-Wn1"/>
                 <outlet property="productName" destination="8De-VL-Hf2" id="Ozr-Tj-zA0"/>
@@ -67,10 +69,12 @@
                                                 </view>
                                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="qTF-m3-hsf">
                                                     <rect key="frame" x="0.0" y="224" width="393" height="26"/>
-                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="Env-hr-TM6"/>
                                                     </constraints>
+                                                    <color key="pageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="currentPageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </pageControl>
                                             </subviews>
                                             <constraints>
@@ -233,6 +237,10 @@ any time of year.</string>
                                             </constraints>
                                         </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="JP3-n2-yTp" firstAttribute="leading" secondItem="zJP-vn-U3O" secondAttribute="leading" constant="10" id="SHj-YT-oSB"/>
+                                        <constraint firstAttribute="trailing" secondItem="JP3-n2-yTp" secondAttribute="trailing" constant="10" id="bjf-6D-i41"/>
+                                    </constraints>
                                 </stackView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
