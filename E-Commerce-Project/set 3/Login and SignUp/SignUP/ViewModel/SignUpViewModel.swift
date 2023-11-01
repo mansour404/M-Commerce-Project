@@ -12,6 +12,7 @@ class SignUpViewModel {
     let manager  = NetworkServices()
     var errorDescription : String = ""
     var bindresultToProductsViewController : (() -> ()) = {}
+    
     private let format = "SELF MATCHES %@"
     //MARK: - Validate user Info
     func isDataValid(phoneNumber : String , emailAdress : String , userPassword : String) -> Bool {
@@ -33,8 +34,27 @@ class SignUpViewModel {
         manager.CreateCustomer(userFirstName: userFirstName, userLastName: userLastName, userPassword: userPassword, userEmail: userEmail, userPhoneNumber: userPhoneNumber,  Handler:{
             print("Done")
             self.bindresultToProductsViewController()
+            self.createUserInFirebase(email: userEmail, password: userPassword)
+         
+        
         })
     }
+    func sendEmailToUser(email : String){
+        Auth.auth().currentUser?.sendEmailVerification { error in
+          // ...
+            if error != nil {
+                print("===============================")
+                print("error from sending email \(error?.localizedDescription)")
+                print("===============================")
+            }
+            else {
+                print("===============================")
+                print("email sent successfully please go check your emails")
+                print("===============================")
+            }
+        }
+    }
+    
     func createUserInFirebase(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let e = error {
@@ -46,6 +66,25 @@ class SignUpViewModel {
             }
         }
         }
+    //MARK: - adding user information to user defaults
+    func  setCustomerId(customerEmail : String) {
+        manager.getCustomerByEmail(userEmail: customerEmail, Handler: { (dataValue:CustomerList?, error: Error?) in
+            if let mydata = dataValue {
+                
+                UserDefaultsHelper.shared.saveAPI(id: mydata.customers[0].id ?? 0)
+                
+             
+            }else {
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+            }
+        })
+        
+    }
+    func  setCustomerName(CustomerName : String) {
+        UserDefaultsHelper.shared.saveCustomerEmail(customerName: CustomerName)
+    }
     //MARK: - Authoentication
 
     func isValidEmail(email: String) -> Bool {

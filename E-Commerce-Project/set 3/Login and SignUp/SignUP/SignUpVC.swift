@@ -12,7 +12,7 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var userPasswordfield: UITextField!
     @IBOutlet weak var userEmailAdressfield: UITextField!
     @IBOutlet weak var userPhoneNumberfield: UITextField!
-//    let signUpViewModel = SignUpViewModel()
+   let signUpViewModel = SignUpViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +20,7 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func SignUpPressed(_ sender: UIButton) {
-//        if(textFieldisEmpty()){
+//        if(textFieldIsNotEmpty()){
 //            if( signUpViewModel.isDataValid(phoneNumber: userPhoneNumberfield.text!, emailAdress: userEmailAdressfield.text!, userPassword: userPasswordfield.text!)){
 //                let arr  : [String] = sperateUserName(userName: userNamefield.text!)
 //                signUpViewModel.bindresultToProductsViewController = {
@@ -32,7 +32,7 @@ class SignUpVC: UIViewController {
 //                    self.showAlert(message: self.signUpViewModel.errorDescription, actionType: .default)
 //                }
 //
-//                // create user in fireBase
+//                //create user in fireBase
 //
 //
 //                signUpViewModel.createUserInFirebase(email:  userEmailAdressfield.text!, password: userPasswordfield.text!)
@@ -44,13 +44,14 @@ class SignUpVC: UIViewController {
 //        else {
 //            showAlert(message: "There is a one or more empty Field", actionType: .cancel)
 //        }
-        
+        print(userEmailAdressfield.text!)
+        signUpViewModel.sendEmailToUser(email: userEmailAdressfield.text!)
         
     }
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    func textFieldisEmpty () ->Bool {
+    func textFieldIsNotEmpty () ->Bool {
         let arr : [String?] = [userNamefield.text,userPasswordfield.text,userEmailAdressfield.text ,userPhoneNumberfield.text]
         var check = true
         for s in arr {
