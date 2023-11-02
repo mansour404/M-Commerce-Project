@@ -18,13 +18,12 @@ class ProductInfoViewController: UIViewController {
     var variant_available_elements : Int = 0
     
     var variant_index : Int = 0
-    var variant_Unique_ID : Int = 0
+    var Variant_Unique_ID : Int = 0
     
     func get_variant_data () {
         
-        print ("get_variant_data")
-        print(view_model.product)
-        var all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
+    
+        let all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
         
         var found : VariantCompleteModel = VariantCompleteModel()
         for v in all_variants {
@@ -89,15 +88,52 @@ class ProductInfoViewController: UIViewController {
     }
     
     @IBOutlet weak var number_of_cart_items_label: UILabel!
-    
+  
     @IBAction func add_to_cart_tapped(_ sender: Any) {
-        // mansour starts here
-        
-        print("add to cart")
-        
-        var Mansour_itemID = product_id
-        var Mansour_selectedOptionValues : [Int] = selectedOption //
-    }
+          // mansour starts here
+          
+          print("add to cart")
+          
+          var Mansour_selectedOptionValues : [Int] = selectedOption //
+          
+          guard let product = view_model.product else { return }
+          
+          
+          let elements_to_be_added_to_cart : Int = numberOfCartItems;
+          let quantity = elements_to_be_added_to_cart // same variable with different name.
+          
+          let productTitle = view_model.product?.title ?? "title Does not exist"
+          let productId : Int = view_model.product?.id ?? 0 // use it in case data in variants is insufficient
+          let imageString : String = view_model.product?.images.first?.src ?? "Beware :O .. Image Src is Empty"
+          let price = Double(view_model.product?.variants?.first?.price ?? "1.0")
+          let variantId = variant_Unique_ID
+          let inventory_item_id = self.inventory_item_id
+          let availableElements = variant_available_elements
+          
+          let cartModel = ShoppingCartModel(title: productTitle, quantity: quantity, price: price, image: imageString, draftOrderId: productId, variantId: variantId, availableElements: availableElements, inventory_item_id: inventory_item_id)
+          
+          addToCart(cart: cartModel)
+      }
+
+      func addToCart(cart: ShoppingCartModel) {
+          let customerId = UserDefaultsHelper.shared.getCustomerId()
+          
+          shoppingCartService.addProductToCartShopping(customerId: customerId, variantId: cart.variantId ?? 0, cart: cart) { error in
+              if error != nil {
+                  print(error)
+                  print("Error cann't added to shopping cart")
+              } else {
+                  print("succed added to shopping cart")
+              }
+          }
+      }
+      
+      // Vars
+      let shoppingCartService = ShoppingCartService()
+      let shoppingCartViewModel = ShoppingCartViewModel()
+      var variant_Unique_ID : Int = 0 // found variant - mansour - send as a paramter for addToCart
+      var inventory_item_id: Int = 0
+    
     //------------------------------------------------------------------------------
     
     // options code------------------------------------------------------------------------------
@@ -132,9 +168,9 @@ class ProductInfoViewController: UIViewController {
     
     func toggleOption (row : Int, value : Int) {
         
-        var cell = optionsCollectionView.cellForItem(at: IndexPath(item: value, section: row)) as! OptionCollectionViewCell
+        let cell = optionsCollectionView.cellForItem(at: IndexPath(item: value, section: row)) as! OptionCollectionViewCell
         
-        var old_cell : OptionCollectionViewCell? = isOptionSelected(row: row) ?
+        let old_cell : OptionCollectionViewCell? = isOptionSelected(row: row) ?
         optionsCollectionView.cellForItem(at: IndexPath(item: selectedOption[row], section: row)) as! OptionCollectionViewCell : nil
         
         
@@ -193,20 +229,7 @@ class ProductInfoViewController: UIViewController {
     
     
     
-    // heart
-    let heartButton = UIButton(type: .custom) // treat it as an outlet
-    var heartIsFilled : Bool = true;
-    
-    func toggleHeart () {
-        if heartIsFilled {
-            heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
-        else {
-            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        }
-        heartIsFilled = !heartIsFilled
-    }
-    
+  
     // outlets
     
     @IBOutlet weak var addToCartView: UIView!
@@ -319,39 +342,52 @@ class ProductInfoViewController: UIViewController {
     
     private func addFavouriteButton() -> UIBarButtonItem {
         
-        heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        heartIsFilled = false
         heartButton.tintColor = UIColor.systemPurple
         heartButton.addTarget(self, action: #selector(heartButtonPressed), for: .touchUpInside)
 
         let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
         return heartBarButtonItem
     }
+    // heart
+    let heartButton = UIButton(type: .custom) // treat it as an outlet
+    var heartIsFilled : Bool = true;
     
+    func setHeartButton(){
+        view_model.setControllerFavourite()
+    }
     @objc func heartButtonPressed(sender: UIButton) {
-//        let vc = FavouriteListVCViewController(nibName: "FavouriteListVCViewController", bundle: nil)
-//        // passing data before navigation
-//        //navigationController?.pushViewController(vc, animated: true)
-//        vc.modalPresentationStyle = .automatic
-//        self.present(vc, animated: true)
-        print("heart button is pressed")
-        
-        toggleHeart()
-        
+        print(heartIsFilled)
+        if heartIsFilled {
+            view_model.StageDelete()        }
+        else {
+            view_model.createFavourite()
+        }
+
+    }
+    func colorheart(colored : Bool){
+        if colored {
+            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            heartIsFilled = true
+        }
+        else {
+            heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //here
-//        var view_model = ProductInfoViewModel()
-//        view_model.id = 7827742130326
-//        view_model.myView = self
-//        view_model.initializeProduct()
         
         print("view did load")
         
         view_model.id = product_id
         view_model.myView = self
+        view_model.bindresultToProductsViewController = {(check : Bool ) -> Void in
+            self.colorheart(colored: check)
+        }
         view_model.initializeProduct()
         
         //print(view_model.product)
@@ -364,6 +400,7 @@ class ProductInfoViewController: UIViewController {
         
         navigationItem.setRightBarButtonItems([addFavouriteButton()], animated: true)
         
+       setHeartButton()
         
         
     }
@@ -384,8 +421,6 @@ class ProductInfoViewController: UIViewController {
         }
     }
     
-    
-    
     override func viewDidAppear(_ animated: Bool) {
         
         optionsCollectionView.reloadData()
@@ -402,16 +437,6 @@ class ProductInfoViewController: UIViewController {
         
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -459,7 +484,7 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             
             cell.configure(with: "coupon")
             
-            var img = UIImageView()
+            let img = UIImageView()
             img.downloadImageFrom(view_model.product?.images[indexPath.item].src)
             img.frame.size.height = img.superview?.frame.size.height ?? img.frame.size.height
             img.frame.size.width = img.superview?.frame.size.width ?? img.frame.size.height
@@ -490,14 +515,6 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
         return view_model.product?.options?[indexPath.section].name ?? "Nil"
     }
     
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeader.identifier, for: indexPath) as! sectionHeader
-//
-//        header.setHeaderValue(value: getHeaderName(indexPath: indexPath))
-//
-//        return header
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
             if kind == UICollectionView.elementKindSectionHeader{
                 let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeader.identifier, for: indexPath) as! sectionHeader
@@ -514,7 +531,6 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             }
             return UICollectionViewCell()
         }
-    
     
 }
 
@@ -537,8 +553,8 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
         
         if collectionView == optionsCollectionView {
             
-            var row = indexPath.section
-            var value = indexPath.item
+            let row = indexPath.section
+            let value = indexPath.item
             
             
             

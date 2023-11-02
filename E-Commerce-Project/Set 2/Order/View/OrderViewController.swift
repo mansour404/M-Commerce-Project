@@ -10,7 +10,7 @@ import UIKit
 class OrderViewController: UIViewController {
     
     // MARK: - Vars
-    
+    private let viewModel: ShoppingCartViewModel = ShoppingCartViewModel()
 
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -26,23 +26,25 @@ class OrderViewController: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         configureButtonsUI()
+        
+        bindViewModel()
+        viewModel.fetchCartProducts()
     }
 
     // MARK: - Actions
     @IBAction func applyCouponButtonPressed(_ sender: Any) {
+        
     }
     
     @IBAction func checkoutButtonPressed(_ sender: Any) {
         // PaymentView
         let vc = PaymentView(nibName: "PaymentView", bundle: nil)
         // passing data before navigation
-        //navigationController?.pushViewController(vc, animated: true)
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - Function
-    func configureCollectionView() {
+    private func configureCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         // Register cell
@@ -50,37 +52,51 @@ class OrderViewController: UIViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: "ProductItemCell")
     }
     
-    func configureButtonsUI() {
+    private func configureButtonsUI() {
         applyCouponButton.addCornerRadius()
         checkoutButton.addCornerRadius()
+    }
+    
+    private func bindViewModel() {
+        viewModel.reloadTableViewClosure = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+        
+        viewModel.updateTotalPriceClosure = { [weak self] totalPriceText in
+            self?.subtotalMoneyLabel.text = totalPriceText
+            self?.totalMoneyLabel.text = totalPriceText
+        }
     }
 }
 
 // MARK: - Data source
 extension OrderViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return viewModel.cartProductsCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductItemCell", for: indexPath) as? ProductItemCell else { return UICollectionViewCell() }
+        viewModel.configureCollectionViewCell(cell, at: indexPath.item)
         return cell
     }
 }
 
 // MARK: - Delegate
 extension OrderViewController: UICollectionViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 196
+    }
 }
 
 // MARK: - Delegate flow layout
 extension OrderViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return 24
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        return UIEdgeInsets(top: 24, left: 0, bottom: 24, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

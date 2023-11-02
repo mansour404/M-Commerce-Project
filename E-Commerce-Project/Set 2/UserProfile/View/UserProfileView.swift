@@ -119,16 +119,16 @@ extension UserProfileView {
     
     @objc func navigateToSettings(sender: UIButton) {
         let vc = SettingsView(nibName: "SettingsView", bundle: nil)
-        //navigationController?.pushViewController(vc, animated: true)
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+//        vc.modalPresentationStyle = .automatic
+//        self.present(vc, animated: true)
     }
     
     @objc func navigateToShoppingCart(sender: UIButton) {
         let vc = ShoppingCartView(nibName: "ShoppingCartView", bundle: nil)
-        //navigationController?.pushViewController(vc, animated: true)
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+//        vc.modalPresentationStyle = .automatic
+//        self.present(vc, animated: true)
     }
 }
 

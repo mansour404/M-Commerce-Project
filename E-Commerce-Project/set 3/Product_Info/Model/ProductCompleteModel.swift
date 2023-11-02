@@ -9,12 +9,17 @@ import Foundation
 
 
 struct VariantCompleteModel : Codable {
-    var  price : String?
+    var title: String?
+    var  price : String? // used to change currency for all application.
     var option1 : String?
     var option2 : String?
     var option3 : String?
     var inventory_quantity : Int?
+    var id: Int?
+    var inventory_item_id: Int?
+    var product_id: Int?
 }
+
 struct OptionCompleteModel : Codable {
     var name : String?
     var position : Int?

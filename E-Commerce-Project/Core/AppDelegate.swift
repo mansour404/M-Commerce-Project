@@ -17,7 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        UserDefaultsHelper.shared.setCustomerId()
+//        if UserDefaultsHelper.shared.getCustomerId() {
+//            UserDefaultsHelper.shared.setCustomerId(<#T##customerID: Int##Int#>)
+//        }
+//        //UserDefaultsHelper.shared.setCustomerId()
         
         IQKeyboardManager.shared.enable = true // enable IQKeyboardManager
         

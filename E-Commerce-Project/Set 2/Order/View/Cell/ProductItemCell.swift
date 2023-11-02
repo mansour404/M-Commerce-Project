@@ -24,4 +24,9 @@ class ProductItemCell: UICollectionViewCell {
         containerView.dropShadow()
     }
 
+    func configureCell(_ product: ShoppingCartModel, index: Int) {
+        productImageView.downloadImageFrom(product.image, placeHolder: "lazaApp")
+        productTitleLabel.text = product.title
+        productCountLabel.text = "\(product.quantity ?? 1)"
+    }
 }

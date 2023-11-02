@@ -25,16 +25,23 @@ class SubmainCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - configure Nib
-    func configure( imageName: String , priceText: String , productNameText: String ) {
+    func configure( imageName: String , priceText: String , productNameText: String, currncySymbol: String ) {
         
         imageView.downloadImageFrom(imageName)
 
         if let titleLabel = productNameLabel {
             titleLabel.text = productNameText
         }
+        
         if let titleLabel = priceLabel {
             titleLabel.text = priceText
         }
+        
+        if let titleLabel = exchangeLabel {
+            titleLabel.text = currncySymbol
+        }
+        
+        
 //        if let titleLabel = exchangeLabel {
 //            titleLabel.text = exchangeText
 //        }

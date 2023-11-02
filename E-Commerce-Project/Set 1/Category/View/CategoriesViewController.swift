@@ -117,7 +117,13 @@ extension CategoriesViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = subMainCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
-        cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: categoryViewModel.getPrice(index: indexPath.row) ?? "10" , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A")
+        let exchangeRate = UserDefaultsHelper.shared.getCurrencyRate()
+        let price = Double(categoryViewModel.getPrice(index: indexPath.row) ?? "10")
+        let newPrice = exchangeRate * price!
+//        let _ = Double(String(format:"%.2f", price)) ?? 1.00
+        let roundedCost = String(format:"%.2f", newPrice)
+        let newSym = UserDefaultsHelper.shared.getCurrencySymbol()
+        cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: roundedCost , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A", currncySymbol: newSym)
         return cell
         
     }

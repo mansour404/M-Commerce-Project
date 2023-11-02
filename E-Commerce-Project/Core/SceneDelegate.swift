@@ -16,7 +16,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
    
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let rootViewController = LoginVC()
+        let rootViewController: UIViewController!
+        let customerID = UserDefaultsHelper.shared.getCustomerId()
+        if customerID != 0 {
+            print("customerID => \(customerID)")
+            rootViewController = TabController()
+        } else {
+            rootViewController = LoginVC()
+        }
+        
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
     }

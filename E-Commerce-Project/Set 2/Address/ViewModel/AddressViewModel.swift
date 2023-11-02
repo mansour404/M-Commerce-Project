@@ -17,6 +17,7 @@ class AddressViewModel {
     var addressService: AddressServiceProtocol!
     var items: [Address] = []
     var newAddress: [Address] = []
+    var shippingAddress: Address?
     let customerId: Int = UserDefaultsHelper.shared.getCustomerId()
     
     // MARK: - Init
@@ -47,10 +48,10 @@ class AddressViewModel {
         return cellViewModels[indexPath.row]
     }
     
-    func createCellViewModel(name: String, city: String, address: String) -> AddressCellViewModel{
+    func createCellViewModel(name: String, city: String, address: String, isDefault: Bool) -> AddressCellViewModel{
         
         // Mainpulate data before return it do what I wish before return.
-        return AddressCellViewModel(name: name, city: city, address: address)
+        return AddressCellViewModel(name: name, city: city, address: address, isDefault: isDefault)
     }
     
     private func processFetcheditems(_ items: [Address]) {
@@ -58,11 +59,13 @@ class AddressViewModel {
         var vms = [AddressCellViewModel]()  // vms enhance performance, reload tableView only once when vms filled
         for i in 0..<items.count {
             let address = items[i]
-            vms.append(createCellViewModel(name: address.name!, city: address.city!, address: address.address1!)) // return cellVM with same count of displayed cell, will save them temporally in vms to enhance performance, prevent reload table view for each cell.
+            vms.append(createCellViewModel(name: address.name!, city: address.city!, address: address.address1!, isDefault: address.isDefault!)) // return cellVM with same count of displayed cell, will save them temporally in vms to enhance performance, prevent reload table view for each cell.
         }
         cellViewModels = vms // cellViewModels has been changed, automatically table view will be reloaded.
         // cellViewModels will call the closure (reloadTableViewClosure?()), which implemented by viewController in initVM() function.
     }
+    
+    
     
     // MARK: - API functions
     func creatNewAddress(address: Address){
@@ -108,20 +111,22 @@ class AddressViewModel {
             }
         }
     }
+    
+    
+    func selectAddressForShipping(indexPath: IndexPath) {
+        guard let address_id = items[indexPath.row].id else { return }
+        addressService.getSingleAddress(customerId: customerId, address_id: address_id) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let address):
+                print("success")
+                self.shippingAddress = address
+                //completion(.success(success))
+            case .failure(let error):
+                print(error)
+                //completion(.failure(error))
+            }
+        }
+    }
   
 }
-
-
-/*
- {
- //        addressService.creatNewAddress(customerId: customerId, address: address) { result in
- //            switch result {
- //            case .success(let value):
- //                guard let address = value else { return }
- //                self.items.append(address)
- //            case .failure(let error):
- //                print(error)
- //            }
- //        }
- //    }
- */

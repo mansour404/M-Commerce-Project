@@ -74,7 +74,6 @@ extension SettingsView: UITableViewDelegate {
 
 // MARK: - Configure View
 extension SettingsView {
-    
     private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -103,16 +102,17 @@ extension SettingsView {
                 self?.tableView.reloadData()
             }
         }
-        
         viewModel.initFetch()
     }
 }
 
+// MARK: - Navigation
 extension SettingsView {
-
+    
     func navigateToNextScreen() {
         guard let vc = viewModel.selectedItem?.vc else { return }
-        vc.modalPresentationStyle = .automatic
-        present(vc, animated: true)
+//        vc.modalPresentationStyle = .automatic
+//        present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
