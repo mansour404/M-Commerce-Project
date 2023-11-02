@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
         pageConroller.numberOfPages = 4
         startTimer()
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
-        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
+//        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
     }
 //    override func viewWillAppear(_ animated: Bool) {
 //        self.tabBarController?.navigationItem.hidesBackButton = true
