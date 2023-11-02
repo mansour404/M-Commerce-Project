@@ -251,7 +251,47 @@ class NetworkServices   {
             else{print("There is error in casting data")}
         }
     }
-}
+    //MARK: - Fetching Data From Api to show Coupon Data
+    func getDiscountCodes <T:Codable> (priceRuleId: Int,Handler : @escaping (T?,Error?) -> Void){
+            let URL = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/price_rules/\(priceRuleId)/discount_codes.json"
+            Alamofire.AF.request(URL,method: Alamofire.HTTPMethod.get).response { data in
+                if let validData = data.data {
+                    do{
+                        let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
+                        print("Success")
+                    Handler(dataRetivied, nil)
+                    
+                    }catch let error{
+                      print ("this is an error :\(error)")
+                        Handler(nil, error)
+                    }
+                }
+                else{print("There is error in casting data")}
+            }
+        }
+    func getPriceRule <T:Codable> (Handler : @escaping (T?,Error?) -> Void){
+            let URL = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/price_rules.json"
+            AF.request(URL,method: .get).response { data in
+                if let validData = data.data {
+                    do{
+                        let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
+                        print("Success from get price rule network manager ")
+                        Handler(dataRetivied, nil)
+                    
+                    }catch let error{
+                      print ("this is an error to fetch priceRules :\(error)")
+                        Handler(nil, error)
+                    }
+                }
+                else{print("There is error in casting data")}
+            }
+        }
+    
+    
+    
+    }
+    
+
 
 protocol end_point_generator {
     var base_URL : String {get}

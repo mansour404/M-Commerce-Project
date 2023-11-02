@@ -24,6 +24,22 @@ class HomeViewModel{
         }
     }
 
+    var getAllPriceRules: AllPriceRules? {
+        didSet{
+            if let validHander =  handerDataOfHome {
+                validHander()
+            }
+        }
+    }
+    
+    var getDiscountCodes: AllDiscounts? {
+        didSet{
+            if let validHander =  handerDataOfHome {
+                validHander()
+            }
+        }
+    }
+    
    
     
     //MARK: -Get All Model Return From Api
@@ -49,23 +65,65 @@ class HomeViewModel{
             }
         })
     }
-    //MARK: -Getting Number of Brands
-    func getNumberOfBrands() -> Int? {
+    
+    func fetchPriceRules(){
+        services.getPriceRule(Handler: {(dataValue:AllPriceRules? , error: Error?) in
+            print("Success to fetch price rules")
+            
+            if let mydata = dataValue {
+                self.getAllPriceRules = mydata
+//                self.bindresultToHomeViewController()
 
+            }else {
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+            }
+        })
+    }
+    
+//    func fetchDiscountCodes(){
+//        for rule in getAllPriceRules!.price_rules {
+//            services.getDiscountCodes(priceRuleId: rule.id, Handler: <#T##((Decodable & Encodable)?, Error?) -> Void#>)
+//        }
+//
+//    }
+    
+    //MARK: - Brands
+    func getNumberOfBrands() -> Int? {
     return getAllBrands?.smart_collections.count
    }
+    
     func setSelectedBrandID (Index :Int){
-        
         HomeViewModel.selectedBrandID = getAllBrands?.smart_collections[Index].id
     }
+    
     func getTitle(index: Int) -> String?{
-        
         return getAllBrands?.smart_collections[index].title ?? "NO"
-
     }
+    
     func getImage(index: Int) -> String?{
         return getAllBrands?.smart_collections[index].image.src
-
     }
+    
+    //MARK: - All Price Rules
+    func getNumberOfPriceRules() -> Int? {
+        print("///\(getAllPriceRules?.price_rules.count)" )
+        return getAllPriceRules?.price_rules.count
+   }
+    
+    func getId(index: Int) -> Int?{
+        return getAllPriceRules?.price_rules[index].id  ?? 200
+    }
+    
+    func getPriceRulesTitle(index: Int) -> String?{
+        return getAllPriceRules?.price_rules[index].title ?? "NO Price Rule title"
+    }
+    
+    //MARK: - All Discount Codes
+
+
+    
 }
     
+

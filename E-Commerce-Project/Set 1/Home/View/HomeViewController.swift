@@ -28,11 +28,13 @@ class HomeViewController: UIViewController {
         homeViewModel.bindresultToHomeViewController = {
             DispatchQueue.main.async {
                 self.brandsCollectionView.reloadData()
+                self.couponsCollectionView.reloadData()
             }
         }
         configureCollectionView()
-        pageConroller.numberOfPages = 4
-        startTimer()
+        pageConroller.numberOfPages = homeViewModel.getNumberOfPriceRules() ?? 11
+        
+//        startTimer()
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
         navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
     }
@@ -42,6 +44,7 @@ class HomeViewController: UIViewController {
     //MARK: - Configure The Loading Data
     func configureLoadingDataFromApi(){
         homeViewModel.getDataFromApiForHome()
+        homeViewModel.fetchPriceRules()
     }
         
     // MARK: - Configure CollectionView
@@ -52,7 +55,7 @@ class HomeViewController: UIViewController {
         brandsCollectionView.delegate = self
         
         //Registers
-        couponsCollectionView.register(UINib(nibName: CellIdentifier.copounCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.copounCollectionViewCell)
+        couponsCollectionView.register(UINib(nibName: CellIdentifier.coupounCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.coupounCell)
         
         brandsCollectionView.register(UINib(nibName: CellIdentifier.brandsCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.brandsCollectionViewCell)
     }
@@ -111,7 +114,7 @@ class HomeViewController: UIViewController {
     }
 
   @objc func moveToNextIndex(){
-      if currentCellIndex < 3 {
+      if currentCellIndex < homeViewModel.getNumberOfPriceRules() ?? 11 {
           currentCellIndex += 1
       }else{
           currentCellIndex = 0
@@ -123,13 +126,20 @@ class HomeViewController: UIViewController {
     // MARK: - UICollectionView DataSource
 extension HomeViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return homeViewModel.getNumberOfBrands() ?? 4
+        if collectionView == couponsCollectionView {
+            return homeViewModel.getNumberOfPriceRules() ?? 2
+        }else{
+            return homeViewModel.getNumberOfBrands() ?? 3
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == couponsCollectionView {
-            let cell = couponsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.copounCollectionViewCell, for: indexPath) as! CopounCollectionViewCell
+            let cell = couponsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.coupounCell, for: indexPath) as! CoupounCell
+            cell.priceRoleLabel.text = homeViewModel.getPriceRulesTitle(index: indexPath.row) ?? "A"
             cell.layer.cornerRadius = 20
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor.lightGray.cgColor
             return cell
         } else {
             let cell = brandsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.brandsCollectionViewCell, for: indexPath)as! BrandsCollectionViewCell
@@ -172,4 +182,5 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDelegat
         }
     }
 }
+
 

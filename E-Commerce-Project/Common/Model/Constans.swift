@@ -10,10 +10,11 @@ import Foundation
 struct CellIdentifier {
     static let copounCollectionViewCell = "CopounCollectionViewCell"
     static let brandsCollectionViewCell = "BrandsCollectionViewCell"
-    
     static let submainCollectionViewCell = "SubmainCollectionViewCell"
     static let UserOrderCell = "UserOrderCell"
-}
+    static let coupounCell = "CoupounCell"
+    
+    }
 
 struct ErrorMessage {
     static let genericError = "Some Thing going wrong, Please try again later."
@@ -27,3 +28,4 @@ struct ConnectivityMessage {
     static let wifiConnect = "Connected by wifi"
     static let cellularConnect = "Connected by cellular"
 }
+
