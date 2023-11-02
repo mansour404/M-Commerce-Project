@@ -20,3 +20,32 @@ struct SmartCollectionModel: Codable {
 struct Image: Codable {
     let src: String
 }
+
+               /*------------------------------------------*/
+
+struct AllPriceRules : Codable {
+    let price_rules : [PriceRules]
+}
+
+struct PriceRules : Codable {
+    let id : Int
+    let title : String
+}
+
+struct AllDiscounts : Codable {
+    let discount_codes : [DiscountCodes]
+}
+
+struct DiscountCodes : Codable {
+    
+    let id : Int
+    let price_rule_id : Int
+    let code : String
+    let usage_count : Int
+    let created_at : String
+    let updated_at : String
+
+}
+
+
+
