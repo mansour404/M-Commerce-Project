@@ -66,7 +66,7 @@ class ProductInfoViewModel {
             }
             
         }
-        let nothing = self.obj.sendWishId(userID: 6866434621590, productId:  Int(id!))
+        
           
     }
     

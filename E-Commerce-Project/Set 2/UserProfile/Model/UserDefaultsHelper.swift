@@ -19,7 +19,15 @@ final class UserDefaultsHelper {
         setCustomerLogin()
         userDefaults.synchronize() // method is unnecessary and shouldn't be used.
         // restar app after saved token, restartApp() function.
+    }  
+    func saveCustomerEmail(customerName: String) {
+        userDefaults.setValue(customerName, forKey: "customerEmail")
+        //userDefaults.setValue(true, forKey: "isUserLoggedIn")
+        setCustomerLogin()
+        userDefaults.synchronize() // method is unnecessary and shouldn't be used.
+        // restar app after saved token, restartApp() function.
     }
+  
     
     
     func getAPIToken() -> String? {
