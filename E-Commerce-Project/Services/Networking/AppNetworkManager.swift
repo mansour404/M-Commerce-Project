@@ -210,7 +210,7 @@ class NetworkServices   {
         }
     }
     //MARK: - Fetching Data From Api to create customer
-    func CreateCustomer (userFirstName : String , userLastName : String , userPassword : String , userEmail : String , userPhoneNumber : String   ,Handler: @escaping () -> Void){
+    func CreateCustomer (userFirstName : String , userLastName : String , userPassword : String , userEmail : String , userPhoneNumber : String){
         let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json"
         let body: [String: Any] =
         ["customer":[

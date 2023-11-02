@@ -43,26 +43,25 @@ class SignUpViewModel {
     //MARK: - create customer in api and FireBase
     func CreateUser (userFirstName : String ,userLastName : String ,userPassword : String , userEmail : String , userPhoneNumber : String ) {
         
-        manager.CreateCustomer(userFirstName: userFirstName, userLastName: userLastName, userPassword: userPassword, userEmail: userEmail, userPhoneNumber: userPhoneNumber,  Handler:{
-            print("Done")
-            self.bindresultToProductsViewController()
-        
-            
-        })
+        manager.CreateCustomer(userFirstName: userFirstName, userLastName: userLastName, userPassword: userPassword, userEmail: userEmail, userPhoneNumber: userPhoneNumber)
     }
     func sendEmailToUser(email : String){
         Auth.auth().currentUser?.sendEmailVerification { [self] error in
             // ...
             if error != nil {
+                
                 print("===============================")
                 print("error from sending email \(error?.localizedDescription)")
                 self.messageText = error!.localizedDescription
+                self.bindresultToProductsViewController
                 print("===============================")
             }
             else {
+                
                 print("===============================")
                 print("Email sent successfully please go check your emails")
                 self.messageText = "Email sent successfully please go check your emails"
+                self.bindresultToProductsViewController
                 print("===============================")
                 print(self.data)
                 self.CreateUser(userFirstName: self.data!.userFirstName, userLastName:self.data!.userLastName, userPassword: self.data!.userPassword, userEmail: self.data!.userEmail, userPhoneNumber: self.data!.userPhoneNumber)
@@ -73,6 +72,7 @@ class SignUpViewModel {
     
     func createUserInFirebase(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+         
             if let e = error {
                 self.messageText =  e.localizedDescription
                 self.bindresultToProductsViewController()
