@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import GoogleSignIn
+import FirebaseCore
+import FirebaseAuth
 
 class SignUpVC: UIViewController {
+    @IBOutlet weak var signInButton: GIDSignInButton!
     @IBOutlet weak var userNamefield: UITextField!
     @IBOutlet weak var userPasswordfield: UITextField!
     @IBOutlet weak var userEmailAdressfield: UITextField!
@@ -15,10 +19,53 @@ class SignUpVC: UIViewController {
     let signUpViewModel = SignUpViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        signInButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(googleSigninTapped)))
         
     }
+    @objc func googleSigninTapped(){
+        print("=================================================")
+        print("google sign in pressed")
+        print("=================================================")
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) {  result, error in
+          guard error == nil else {
+            // ...
+              return
+          }
+
+          guard let user = result?.user,
+            let idToken = user.idToken?.tokenString
+          else {
+              return
+            // ...
+          }
+
+          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                         accessToken: user.accessToken.tokenString)
+            
+            
+            print("=================================================")
+            print(result?.user.profile?.email)
+            print("=================================================")
+            print(result?.user.profile?.familyName)
+            print("=================================================")
+            print(result?.user.profile?.name)
+            print("=================================================")
+            Auth.auth().signIn(with: credential) { result, error in
+
+              // At this point, our user is signed in
+            }
+
+          // ...
+        }
     
+    }
     @IBAction func SignUpPressed(_ sender: UIButton) {
         if(textFieldIsNotEmpty()){
             if( signUpViewModel.isDataValid(phoneNumber: userPhoneNumberfield.text!, emailAdress: userEmailAdressfield.text!, userPassword: userPasswordfield.text!)){
@@ -42,6 +89,9 @@ class SignUpVC: UIViewController {
         //        signUpViewModel.sendEmailToUser(email: userEmailAdressfield.text!)
         
     }
+    
+  
+    
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }
@@ -60,12 +110,7 @@ class SignUpVC: UIViewController {
     func sperateUserName(userName : String) ->[String]{
         let components = userName.components(separatedBy: " ")
         
-        if components.count >= 2 {
-            let firstString = components[0].trimmingCharacters(in: .whitespaces)
-            
-            let secondString = components[1].trimmingCharacters(in: .whitespaces)
-            
-        }
+        
         return components
         
     }

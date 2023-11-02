@@ -51,9 +51,9 @@ class SignUpViewModel {
             if error != nil {
                 
                 print("===============================")
-                print("error from sending email \(error?.localizedDescription)")
+                print("error from sending email \(String(describing: error?.localizedDescription))")
                 self.messageText = error!.localizedDescription
-                self.bindresultToProductsViewController
+                self.bindresultToProductsViewController()
                 print("===============================")
             }
             else {
@@ -61,9 +61,9 @@ class SignUpViewModel {
                 print("===============================")
                 print("Email sent successfully please go check your emails")
                 self.messageText = "Email sent successfully please go check your emails"
-                self.bindresultToProductsViewController
+                self.bindresultToProductsViewController()
                 print("===============================")
-                print(self.data)
+               
                 self.CreateUser(userFirstName: self.data!.userFirstName, userLastName:self.data!.userLastName, userPassword: self.data!.userPassword, userEmail: self.data!.userEmail, userPhoneNumber: self.data!.userPhoneNumber)
                 
             }

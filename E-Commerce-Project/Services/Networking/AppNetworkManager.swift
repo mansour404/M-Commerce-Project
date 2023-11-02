@@ -225,16 +225,8 @@ class NetworkServices   {
         print(body)
         AF.request(urlFile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response { response in
             switch response.result {
-            case .success(let data):
-                guard let data = data else { return }
-                //                print(String(data: data, encoding: .utf8) ?? "Nil")
-                do {
-                    
-                    
-                } catch {
-                    print(error)
-                }
-                
+            case .success:
+                break
             case .failure(let error):
                 print(error)
             }
