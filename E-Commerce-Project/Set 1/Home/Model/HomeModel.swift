@@ -30,6 +30,8 @@ struct AllPriceRules : Codable {
 struct PriceRules : Codable {
     let id : Int
     let title : String
+    let value_type  : String
+    let value : String
 }
 
 struct AllDiscounts : Codable {
@@ -37,14 +39,13 @@ struct AllDiscounts : Codable {
 }
 
 struct DiscountCodes : Codable {
-    
+
     let id : Int
     let price_rule_id : Int
     let code : String
     let usage_count : Int
     let created_at : String
     let updated_at : String
-
 }
 
 

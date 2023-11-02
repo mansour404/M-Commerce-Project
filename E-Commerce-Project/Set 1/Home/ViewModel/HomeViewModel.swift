@@ -6,13 +6,21 @@
 //
 
 import Foundation
+import Alamofire
 //All Leagues
 
 class HomeViewModel{
     var  bindresultToHomeViewController: ( () -> () ) = {}
+    let downloadGroup = DispatchGroup()
+    var priceRuleTitle : [Int : String] = [:]
+    var productDiscountCode : [Int : String] = [:]
+    var cellTitle : [String] = []
+    var cellDiscountCode : [String] = []
 
-//    var data : Brands?
- static  var selectedBrandID : Int?
+    
+    
+    //    var data : Brands?
+    static  var selectedBrandID : Int?
     var handerDataOfHome: (() -> Void)?
     var services = NetworkServices()
     
@@ -23,7 +31,7 @@ class HomeViewModel{
             }
         }
     }
-
+    
     var getAllPriceRules: AllPriceRules? {
         didSet{
             if let validHander =  handerDataOfHome {
@@ -40,24 +48,24 @@ class HomeViewModel{
         }
     }
     
-   
+    
     
     //MARK: -Get All Model Return From Api
     func getBrand() -> Brands? {
         return getAllBrands
     }
-
-  
+    
+    
     
     //MARK: -CAll Request of Api
     func getDataFromApiForHome() {
         services.getData(Handler: { (dataValue:Brands?, error: Error?) in
             print("Success")
-
+            
             if let mydata = dataValue {
                 self.getAllBrands = mydata
                 self.bindresultToHomeViewController()
-
+                
             }else {
                 if let error = error{
                     print(error.localizedDescription)
@@ -72,9 +80,11 @@ class HomeViewModel{
             
             if let mydata = dataValue {
                 self.getAllPriceRules = mydata
-//                self.bindresultToHomeViewController()
-
-            }else {
+                for p in self.getAllPriceRules?.price_rules ?? []{
+                    self.priceRuleTitle[p.id] = p.title
+                }
+                //self.bindresultToHomeViewController()
+                self.fetchDiscountCodes()            }else {
                 if let error = error{
                     print(error.localizedDescription)
                 }
@@ -82,17 +92,75 @@ class HomeViewModel{
         })
     }
     
-//    func fetchDiscountCodes(){
-//        for rule in getAllPriceRules!.price_rules {
-//            services.getDiscountCodes(priceRuleId: rule.id, Handler: <#T##((Decodable & Encodable)?, Error?) -> Void#>)
-//        }
-//
-//    }
+    
+    
+    func getSingleDiscountCode <T:Codable> (priceRuleId: Int,Handler : @escaping (T?,Error?) -> Void){
+            let URL = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/price_rules/\(priceRuleId)/discount_codes.json"
+            Alamofire.AF.request(URL,method: Alamofire.HTTPMethod.get).response { data in
+                if let validData = data.data {
+                    do{
+                        let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
+                        print("Success")
+                    Handler(dataRetivied, nil)
+                    
+                    }catch let error{
+                      print ("this is an error :\(error)")
+                        Handler(nil, error)
+                    }
+                }
+                else{print("There is error in casting data")}
+            }
+        }
+    //     func test_dispatch_group () {
+    //            let downloadGroup = DispatchGroup()
+    //
+    //            for i in 1 ... 10 {
+    //                downloadGroup.enter()
+    //                // asynch func { handler {downloadGroup.leave()} }
+    //            }
+    //
+    //            downloadGroup.notify(queue: DispatchQueue.main) {
+    //              // handler {view_model.bindresults()}
+    //            }
+    //        }
+    
+    
+    func fetchDiscountCodes(){
+        for p in getAllPriceRules?.price_rules ?? [] {
+            downloadGroup.enter()
+            getSingleDiscountCode(priceRuleId: p.id, Handler: { (dataValue:AllDiscounts?, error: Error?) in
+                print("Success")
+                if let mydata = dataValue {
+                    self.getDiscountCodes = mydata
+                    // self.bindresultToHomeViewController()
+                    if !mydata.discount_codes.isEmpty {
+                        self.productDiscountCode[p.id] = mydata.discount_codes[0].code
+                    }
+                    
+                }else {
+                    if let error = error{
+                        print(error.localizedDescription)
+                    }
+                }
+                self.downloadGroup.leave()
+            })
+        }
+        downloadGroup.notify(queue: DispatchQueue.main) {
+            for dicElement in self.productDiscountCode {
+                let title = self.priceRuleTitle[dicElement.key] ?? "nil"
+                let code = dicElement.value
+                self.cellTitle.append(title)
+                self.cellDiscountCode.append(code)
+            }
+            self.bindresultToHomeViewController()
+            
+        }
+    }
     
     //MARK: - Brands
     func getNumberOfBrands() -> Int? {
-    return getAllBrands?.smart_collections.count
-   }
+        return getAllBrands?.smart_collections.count
+    }
     
     func setSelectedBrandID (Index :Int){
         HomeViewModel.selectedBrandID = getAllBrands?.smart_collections[Index].id
@@ -108,22 +176,27 @@ class HomeViewModel{
     
     //MARK: - All Price Rules
     func getNumberOfPriceRules() -> Int? {
-        print("///\(getAllPriceRules?.price_rules.count)" )
-        return getAllPriceRules?.price_rules.count
-   }
-    
-    func getId(index: Int) -> Int?{
-        return getAllPriceRules?.price_rules[index].id  ?? 200
+//        print("\(getAllPriceRules?.price_rules.count)" )
+        return cellTitle.count
     }
+    
+//    func getId(index: Int) -> Int?{
+//        return getAllPriceRules?.price_rules[index].id  ?? 200
+//    }
     
     func getPriceRulesTitle(index: Int) -> String?{
-        return getAllPriceRules?.price_rules[index].title ?? "NO Price Rule title"
+        return cellTitle[index]
     }
     
+    func getPriceRuleDiscountCode(index: Int)->String{
+        return cellDiscountCode[index]
+    }
+    
+    
     //MARK: - All Discount Codes
-
-
+  
+    
     
 }
-    
+
 

@@ -24,13 +24,15 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationItem.title = "Home"
-        self.configureLoadingDataFromApi()
+       
         homeViewModel.bindresultToHomeViewController = {
             DispatchQueue.main.async {
                 self.brandsCollectionView.reloadData()
                 self.couponsCollectionView.reloadData()
             }
+            
         }
+        self.configureLoadingDataFromApi()
         configureCollectionView()
         pageConroller.numberOfPages = homeViewModel.getNumberOfPriceRules() ?? 11
         
@@ -137,6 +139,7 @@ extension HomeViewController:UICollectionViewDataSource {
         if collectionView == couponsCollectionView {
             let cell = couponsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.coupounCell, for: indexPath) as! CoupounCell
             cell.priceRoleLabel.text = homeViewModel.getPriceRulesTitle(index: indexPath.row) ?? "A"
+            cell.discountTitle.text = homeViewModel.getPriceRuleDiscountCode(index: indexPath.row) 
             cell.layer.cornerRadius = 20
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.lightGray.cgColor
