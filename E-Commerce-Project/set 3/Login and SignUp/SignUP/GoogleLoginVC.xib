@@ -20,16 +20,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="CgI-tG-twe">
-                    <rect key="frame" x="15" y="265.33333333333331" width="363" height="217.66666666666669"/>
+                    <rect key="frame" x="15" y="265.33333333333331" width="363" height="235"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P62-i9-Xys">
-                            <rect key="frame" x="0.0" y="0.0" width="140.66666666666666" height="26.333333333333332"/>
+                            <rect key="frame" x="0.0" y="0.0" width="140.66666666666666" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="AhQ-0S-o6E"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sW5-Nl-gyq">
-                            <rect key="frame" x="0.0" y="51.333333333333371" width="363" height="45"/>
+                            <rect key="frame" x="0.0" y="60" width="363" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="Y0H-0x-Elq"/>
                             </constraints>
@@ -37,13 +40,16 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm New password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZZ-ru-wO7">
-                            <rect key="frame" x="0.0" y="121.33333333333336" width="222" height="26.333333333333329"/>
+                            <rect key="frame" x="0.0" y="130" width="222" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="Qh7-nE-ZOn"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LBj-AI-abb">
-                            <rect key="frame" x="0.0" y="172.66666666666669" width="363" height="45"/>
+                            <rect key="frame" x="0.0" y="190" width="363" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="hQh-8N-yA2"/>
                             </constraints>
@@ -69,7 +75,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiC-aq-iY8">
-                    <rect key="frame" x="95.666666666666686" y="627" width="202" height="60"/>
+                    <rect key="frame" x="95.666666666666686" y="644.33333333333337" width="202" height="60"/>
                     <color key="backgroundColor" red="0.5176470876" green="0.41568624970000001" blue="0.85490196939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="202" id="HUU-n7-e6J"/>

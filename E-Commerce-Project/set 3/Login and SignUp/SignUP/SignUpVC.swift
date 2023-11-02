@@ -33,9 +33,11 @@ class SignUpVC: UIViewController {
         GIDSignIn.sharedInstance.configuration = config
 
         // Start the sign in flow!
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) {  result, error in
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { result, error in
           guard error == nil else {
             // ...
+             
+              self.showAlert(message: "\( error?.localizedDescription)", actionType: .default)
               return
           }
 
@@ -58,8 +60,14 @@ class SignUpVC: UIViewController {
             print(result?.user.profile?.name)
             print("=================================================")
             Auth.auth().signIn(with: credential) { result, error in
-
-              // At this point, our user is signed in
+                if error != nil {
+                    
+                }
+                else{
+//                    let arr = self.sperateUserName(userName: result?.user.profile?.name)
+//                    self.signUpViewModel.CreateUser(userFirstName: arr[0], userLastName: arr[1], userPassword: "placeHolder", userEmail: result?.user.profile?.email, userPhoneNumber: "01010101010")
+                }
+             
             }
 
           // ...
