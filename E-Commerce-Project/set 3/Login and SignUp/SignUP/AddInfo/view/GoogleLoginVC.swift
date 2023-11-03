@@ -9,6 +9,7 @@ import UIKit
 
 class GoogleLoginVC: UIViewController {
 
+    @IBOutlet weak var userEmaillabel: UILabel!
     @IBOutlet weak var PhoneNumberField: UITextField!
     @IBOutlet weak var ConfirmPasswordField: UILabel!
     @IBOutlet weak var NewPasswordFiell: UITextField!
@@ -16,7 +17,7 @@ class GoogleLoginVC: UIViewController {
     private let addUserDetailsModel  = AddInfoViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        userEmaillabel.text = userEmail
         // Do any additional setup after loading the view.
     }
 

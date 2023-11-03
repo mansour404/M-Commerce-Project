@@ -24,7 +24,7 @@ class FavouriteViewModel {
         
         //MARK: -CAll Request of Api
         func getDataFromApiForProduct() {
-            services.getCustomerWishList(CustomerId: 6866434621590, Handler: { (dataValue:WhishList?, error: Error?) in
+            services.getCustomerWishList(CustomerId: UserDefaultsHelper.shared.getCustomerId(), Handler: { (dataValue:WhishList?, error: Error?) in
                 print("Success")
                 if let mydata = dataValue {
                     self.AllUserWishList = mydata
@@ -48,6 +48,12 @@ class FavouriteViewModel {
         func getTitle(index: Int) -> String?{
             return  productArray[index].title
         }
+    func getprice(index : Int) ->String? {
+        return  productArray[index].variants?[0].price
+    }
+    func getImageUrl(index : Int)->String? {
+        return productArray[index].images[0].src
+    }
     func getproducts(){
         productArray = []
         for i in 0..<(AllUserWishList?.metafields.count)! {

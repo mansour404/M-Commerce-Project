@@ -73,7 +73,7 @@ class NetworkServices   {
     //MARK: - Fetching Data From Api to favourites
     func getCustomerWishList<T :Codable>(CustomerId : Int? ,Handler: @escaping (T?,Error?) -> Void){
         
-        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/6866434621590/metafields.json?namespace=wishlist"
+        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(CustomerId)/metafields.json?namespace=wishlist"
         
         Alamofire.AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
             if let validData = data.data {
@@ -259,8 +259,7 @@ class NetworkServices   {
     func editCustomerData(CustomerId : Int , customerPassword: String , customerPhoneNumber : String , Handler : @escaping (Error?)-> Void){
         let Url = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(CustomerId).json"
         let body: [String: Any] = ["customer":[
-            "id" :CustomerId
-            ,"tags" : customerPassword
+            "tags" : customerPassword
             ,"phone" : customerPhoneNumber
         ]]
         AF.request(Url ,method: .put, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response{ response in

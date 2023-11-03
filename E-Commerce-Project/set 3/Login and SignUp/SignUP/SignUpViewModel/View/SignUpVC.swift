@@ -16,10 +16,14 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var userPasswordfield: UITextField!
     @IBOutlet weak var userEmailAdressfield: UITextField!
     @IBOutlet weak var userPhoneNumberfield: UITextField!
+    
+    var userData  : SignUpData?
+    var signInSuccessfully : Bool = false
     let signUpViewModel = SignUpViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         signInButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(googleSigninTapped)))
+        userData = SignUpData(userFirstName: "", userLastName: "", userPassword: "", userEmail: "", userPhoneNumber: "")
         
     }
     @objc func googleSigninTapped(){
@@ -31,13 +35,10 @@ class SignUpVC: UIViewController {
 
         // Start the sign in flow!
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { result, error in
-          guard error == nil else {
-            // ...
-             
-              self.showAlert(message: "\( error?.localizedDescription)", actionType: .default)
+            guard error == nil else {
+              self.showAlert(message: "\( String(describing: error?.localizedDescription))", actionType: .default)
               return
           }
-            
 
           guard let user = result?.user,
             let idToken = user.idToken?.tokenString
@@ -50,33 +51,58 @@ class SignUpVC: UIViewController {
                                                          accessToken: user.accessToken.tokenString)
             
             
-            print("=================================================")
-            print(result?.user.profile?.email)
-            print("=================================================")
-            print(result?.user.profile?.familyName)
-            print("=================================================")
-            print(result?.user.profile?.name)
-            print("=================================================")
+            self.userData?.userEmail = (result?.user.profile!.email)!
+            print("=====================================")
+            print("\(result?.user.profile!.email)")
+            print("=====================================")
+            print("=====================================")
+            print("\(result?.user.profile!.name)")
+            print("=====================================")
+            let arr = self.sperateUserName(userName: (result?.user.profile!.name)!)
+            self.userData?.userFirstName = arr[0]
+            self.userData?.userLastName = arr[1]
+            print("=====================================")
+            print("this is coming from auth . auth . sign up in google action in signup viewcontroller")
+            print("=====================================")
             Auth.auth().signIn(with: credential) { result, error in
                 if error != nil {
-                    
+                    self.showAlert(message: "\( String(describing: error?.localizedDescription))", actionType: .default)
                 }
                 else{
-                    self.performLogic(username: result?.user.profile?.name, userEmail: result?.user.profile?.email)
+                    print("=====================================")
+                    print("this is coming from auth . auth . sign up in google action in signup viewcontroller")
+                    print("=====================================")
+                    
+                    
+                    self.signInSuccessfully = true
+                    print("=====================================")
+                    print("\(self.signInSuccessfully)")
+                    print("=====================================")
+                    self.performLogic(UserData: self.userData!)
                 }
              
             }
 
           // ...
         }
+//        if(signInSuccessfully){
+//            
+//            performLogic(UserData: userData!)
+//        }
     
     }
-    func performLogic ( username : String ,userEmail : String  ){
-        let arr = self.sperateUserName(userName: username)
-        self.signUpViewModel.CreateUser(userFirstName: arr[0], userLastName: arr[1], userPassword: "placeHolder", userEmail: userEmail, userPhoneNumber: "01010101010")
+    func performLogic (UserData : SignUpData){
+        print("=====================================")
+        print("\(userData!.userFirstName)")
+        print("=====================================")
+        self.signUpViewModel.CreateUser(userFirstName: userData!.userFirstName, userLastName: UserData.userLastName, userPassword: "placeHolder", userEmail: UserData.userEmail, userPhoneNumber: "01010101010")
         let vc = GoogleLoginVC()
-        vc.userEmail = userEmail
-        self.navigationController?.pushViewController(vc, animated: true)
+      
+        vc.userEmail =  UserData.userEmail
+        vc.modalPresentationStyle = .fullScreen
+    
+        present(vc, animated: true)
+        //self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func SignUpPressed(_ sender: UIButton) {
         if(textFieldIsNotEmpty()){

@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseCore
+import GoogleSignIn
+import FirebaseAuth
 
 class LoginVC: UIViewController {
 
@@ -36,7 +39,40 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func GoogleButton(_ sender: UIButton) {
-    }
+//        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+//
+//        // Create Google Sign In configuration object.
+//        let config = GIDConfiguration(clientID: clientID)
+//        GIDSignIn.sharedInstance.configuration = config
+//
+//        // Start the sign in flow!
+//        GIDSignIn.sharedInstance.signIn(withPresenting: self) { result, error in
+//            guard error == nil else {
+//              self.showAlert(message: "\( String(describing: error?.localizedDescription))", actionType: .default)
+//              return
+//          }
+//
+//          guard let user = result?.user,
+//            let idToken = user.idToken?.tokenString
+//          else {
+//              return
+//            // ...
+//          }
+//
+//          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+//                                                         accessToken: user.accessToken.tokenString)
+//            
+//            }
+//       
+//    
+   }
+//    func performLogic (UserName : String){
+//       
+//        loginModel.checkCustomerInfo(userName: UserName, userPassword: String)
+//        let vc = TabController()
+//       // vc.userEmail =  UserData.userEmail
+//        self.navigationController?.pushViewController(vc, animated: true)
+//    }
     func getUserData() -> Bool {
         if UserPasswordTextField.text?.isEmpty == false {
             if UserNameTextField.text?.isEmpty == false {

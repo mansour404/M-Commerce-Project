@@ -220,7 +220,7 @@ class ProductInfoViewController: UIViewController {
         productImagesCollectionView.delegate = self;
         productImagesCollectionView.dataSource = self;
         
-        productImagesCollectionView.register(UINib(nibName: "CopounCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CopounCollectionViewCell")
+        productImagesCollectionView.register(UINib(nibName: "ProductImageCell", bundle: nil), forCellWithReuseIdentifier: "ProductImageCell")
     }
     
     func setReviewsView () -> Void {
@@ -443,17 +443,17 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             return cell;
         }
         else if (collectionView == productImagesCollectionView) {
-            let cell = productImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "CopounCollectionViewCell", for: indexPath) as! CopounCollectionViewCell
+            let cell = productImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCell
             
             cell.configure(with: "coupon")
             
-            let img = UIImageView()
-            img.downloadImageFrom(view_model.product?.images[indexPath.item].src)
-            img.frame.size.height = img.superview?.frame.size.height ?? img.frame.size.height
-            img.frame.size.width = img.superview?.frame.size.width ?? img.frame.size.height
-            
-            cell.couponImageView.image = img.getImageInsideView()
-
+//            let img = UIImageView()
+//            img.downloadImageFrom(view_model.product?.images[indexPath.item].src)
+//            img.frame.size.height = img.superview?.frame.size.height ?? img.frame.size.height
+//            img.frame.size.width = img.superview?.frame.size.width ?? img.frame.size.height
+//            
+//            cell.couponImageView.image = img.getImageInsideView()
+            cell.couponImageView.downloadImageFrom(view_model.product?.images[indexPath.item].src)
             
             cell.layer.cornerRadius = 30
             

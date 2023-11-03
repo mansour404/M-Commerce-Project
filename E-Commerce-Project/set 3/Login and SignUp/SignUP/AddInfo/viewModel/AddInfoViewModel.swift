@@ -61,9 +61,9 @@ class AddInfoViewModel {
             return false
         }
       
-        guard isValidPassword(password: userPassword) else {
-                        return false
-                    }
+//        guard isValidPassword(password: userPassword) else {
+//                        return false
+//                    }
         return true
     }
     private let format = "SELF MATCHES %@"
