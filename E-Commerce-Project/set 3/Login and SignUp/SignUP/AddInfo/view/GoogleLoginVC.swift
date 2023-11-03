@@ -9,6 +9,9 @@ import UIKit
 
 class GoogleLoginVC: UIViewController {
 
+    @IBOutlet weak var PhoneNumberField: UITextField!
+    @IBOutlet weak var ConfirmPasswordField: UILabel!
+    @IBOutlet weak var NewPasswordFiell: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 

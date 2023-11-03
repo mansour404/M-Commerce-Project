@@ -23,9 +23,6 @@ class SignUpVC: UIViewController {
         
     }
     @objc func googleSigninTapped(){
-        print("=================================================")
-        print("google sign in pressed")
-        print("=================================================")
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
 
         // Create Google Sign In configuration object.
