@@ -38,11 +38,9 @@ class HomeViewController: UIViewController {
         
 //        startTimer()
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
-        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
+//        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.tabBarController?.navigationItem.hidesBackButton = true
-//    }
+
     //MARK: - Configure The Loading Data
     func configureLoadingDataFromApi(){
         homeViewModel.getDataFromApiForHome()
@@ -82,15 +80,15 @@ class HomeViewController: UIViewController {
         return shoppingCartBarButtonItem
     }
     
-    private func addFSearchButton() -> UIBarButtonItem {
-        let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        heartButton.tintColor = UIColor.systemPurple
-//        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
-
-        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
-        return heartBarButtonItem
-    }
+//    private func addFSearchButton() -> UIBarButtonItem {
+//        let heartButton = UIButton(type: .custom)
+//        heartButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+//        heartButton.tintColor = UIColor.systemPurple
+////        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
+//
+//        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
+//        return heartBarButtonItem
+//    }
     
     @objc func navigateToFavourites(sender: UIButton) {
         let vc = FavouriteListVCViewController(nibName: "FavouriteListVCViewController", bundle: nil)
@@ -139,10 +137,10 @@ extension HomeViewController:UICollectionViewDataSource {
         if collectionView == couponsCollectionView {
             let cell = couponsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.coupounCell, for: indexPath) as! CoupounCell
             cell.priceRoleLabel.text = homeViewModel.getPriceRulesTitle(index: indexPath.row) ?? "A"
-            cell.discountTitle.text = homeViewModel.getPriceRuleDiscountCode(index: indexPath.row) 
-            cell.layer.cornerRadius = 20
-            cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor.lightGray.cgColor
+            cell.discountTitle.text = homeViewModel.getPriceRuleDiscountCode(index: indexPath.row)
+            cell.layer.cornerRadius = 15
+//            cell.layer.borderWidth = 1
+//            cell.layer.borderColor = UIColor.lightGray.cgColor
             return cell
         } else {
             let cell = brandsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.brandsCollectionViewCell, for: indexPath)as! BrandsCollectionViewCell
@@ -180,7 +178,7 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDelegat
         if collectionView == couponsCollectionView {
             return CGSize(width: couponsCollectionView.frame.width , height: couponsCollectionView.frame.height)
         }else{
-            return CGSize(width: (brandsCollectionView.frame.width - 20)/2  , height: brandsCollectionView.frame.height/2)
+            return CGSize(width: (brandsCollectionView.frame.width - 20)/2  , height: brandsCollectionView.frame.height/2.2)
             
         }
     }

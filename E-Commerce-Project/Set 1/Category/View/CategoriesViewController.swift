@@ -28,8 +28,8 @@ class CategoriesViewController: UIViewController {
         }
 
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
-        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
-        configureLoadingDataFromApi()
+//        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
+//        configureLoadingDataFromApi()
         
     }
     // MARK: - Configure CollectionView
@@ -66,15 +66,15 @@ class CategoriesViewController: UIViewController {
         return shoppingCartBarButtonItem
     }
     
-    private func addFSearchButton() -> UIBarButtonItem {
-        let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        heartButton.tintColor = UIColor.systemPurple
-//        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
-
-        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
-        return heartBarButtonItem
-    }
+//    private func addFSearchButton() -> UIBarButtonItem {
+//        let heartButton = UIButton(type: .custom)
+//        heartButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+//        heartButton.tintColor = UIColor.systemPurple
+////        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
+//
+//        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
+//        return heartBarButtonItem
+//    }
     
     @objc func navigateToFavourites(sender: UIButton) {
         let vc = FavouriteListVCViewController(nibName: "FavouriteListVCViewController", bundle: nil)
@@ -118,6 +118,9 @@ extension CategoriesViewController:UICollectionViewDataSource {
         
         let cell = subMainCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
         cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: categoryViewModel.getPrice(index: indexPath.row) ?? "10" , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A")
+        cell.layer.cornerRadius = 20
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.lightGray.cgColor
         return cell
         
     }
