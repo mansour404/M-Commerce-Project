@@ -107,17 +107,21 @@
                     <state key="normal" title="Add Password">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="addPasswordtapped:" destination="-1" eventType="touchUpInside" id="usC-Un-Vsm"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="PiC-aq-iY8" firstAttribute="top" secondItem="CgI-tG-twe" secondAttribute="bottom" constant="144.00000000000006" id="5im-ho-tIf"/>
+                <constraint firstItem="PiC-aq-iY8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CgI-tG-twe" secondAttribute="bottom" constant="144.00000000000006" id="5im-ho-tIf"/>
                 <constraint firstItem="CgI-tG-twe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="BGa-Jy-Dbv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CgI-tG-twe" secondAttribute="trailing" constant="15" id="ULg-Oc-rzb"/>
                 <constraint firstItem="PiC-aq-iY8" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="VZt-m5-w1H"/>
                 <constraint firstItem="M2Z-uN-3QA" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="cdj-83-9bS"/>
                 <constraint firstItem="M2Z-uN-3QA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="75" id="eJy-iv-SEn"/>
+                <constraint firstAttribute="bottom" secondItem="PiC-aq-iY8" secondAttribute="bottom" constant="26.329999999999998" id="hgM-4G-L35"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="PiC-aq-iY8" secondAttribute="bottom" constant="150" id="mxe-57-cM2"/>
                 <constraint firstItem="CgI-tG-twe" firstAttribute="top" secondItem="M2Z-uN-3QA" secondAttribute="bottom" constant="100" id="zva-3n-rqh"/>
             </constraints>

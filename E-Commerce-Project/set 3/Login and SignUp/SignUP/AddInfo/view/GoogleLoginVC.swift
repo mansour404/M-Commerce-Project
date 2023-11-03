@@ -12,13 +12,58 @@ class GoogleLoginVC: UIViewController {
     @IBOutlet weak var PhoneNumberField: UITextField!
     @IBOutlet weak var ConfirmPasswordField: UILabel!
     @IBOutlet weak var NewPasswordFiell: UITextField!
+    var userEmail : String = ""
+    private let addUserDetailsModel  = AddInfoViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
+    func textFieldIsNotEmpty () ->Bool {
+        let arr : [String?] = [NewPasswordFiell.text,ConfirmPasswordField.text,PhoneNumberField.text]
+        var check = true
+        for s in arr {
+            if (s?.isEmpty == true){
+                check = false
+                break
+            }
+            
+        }
+        return check
+    }
+    @IBAction func addPasswordtapped(_ sender: UIButton) {
+        if textFieldIsNotEmpty(){              // check if text fields is not empty
+            if(addUserDetailsModel.isDataValid(phoneNumber: PhoneNumberField.text!, userPassword: NewPasswordFiell.text!)){
+                if(NewPasswordFiell.text == ConfirmPasswordField.text ){ // check if user put the same input in confirm and password
+                    addUserDetailsModel.showAlert = {
+                        self.showAlert(message: self.addUserDetailsModel.messageText)
+                    }
+                    addUserDetailsModel.bindresultToProductsViewController = { // set alert message
+                        let vc = TabController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    // add perform the logic as in getting the user date
+                    addUserDetailsModel.getUserData(UserEmail: userEmail, customerPassword: ConfirmPasswordField.text!, customerPhoneNumber: PhoneNumberField.text!)
+                    
+                    
+                }
+                
+            }
+            else{
+                
+            }
+            
+        }
+    }
+    func showAlert(message:String ){
+        let alert = UIAlertController(title: message, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "okay", style: .default))
+        
+        self.present(alert, animated: true)
+    }
 
+        
     /*
     // MARK: - Navigation
 

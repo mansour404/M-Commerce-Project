@@ -37,6 +37,7 @@ class SignUpVC: UIViewController {
               self.showAlert(message: "\( error?.localizedDescription)", actionType: .default)
               return
           }
+            
 
           guard let user = result?.user,
             let idToken = user.idToken?.tokenString
@@ -61,8 +62,7 @@ class SignUpVC: UIViewController {
                     
                 }
                 else{
-//                    let arr = self.sperateUserName(userName: result?.user.profile?.name)
-//                    self.signUpViewModel.CreateUser(userFirstName: arr[0], userLastName: arr[1], userPassword: "placeHolder", userEmail: result?.user.profile?.email, userPhoneNumber: "01010101010")
+                    self.performLogic(username: result?.user.profile?.name, userEmail: result?.user.profile?.email)
                 }
              
             }
@@ -70,6 +70,13 @@ class SignUpVC: UIViewController {
           // ...
         }
     
+    }
+    func performLogic ( username : String ,userEmail : String  ){
+        let arr = self.sperateUserName(userName: username)
+        self.signUpViewModel.CreateUser(userFirstName: arr[0], userLastName: arr[1], userPassword: "placeHolder", userEmail: userEmail, userPhoneNumber: "01010101010")
+        let vc = GoogleLoginVC()
+        vc.userEmail = userEmail
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func SignUpPressed(_ sender: UIButton) {
         if(textFieldIsNotEmpty()){
@@ -79,8 +86,13 @@ class SignUpVC: UIViewController {
                     self.showAlert(message: self.signUpViewModel.messageText, actionType: .default)
                 }
                 signUpViewModel.data = SignUpData(userFirstName: arr[0], userLastName: arr[1], userPassword: self.userPasswordfield.text! , userEmail: self.userEmailAdressfield.text!, userPhoneNumber: self.userPhoneNumberfield.text!)
-                
+                signUpViewModel.pushToHome = {
+                    let vc = TabController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
                 signUpViewModel.createUserInFirebase(email: userEmailAdressfield.text!, password: userPasswordfield.text!)
+                
+            
                 
             }
             else {
@@ -90,8 +102,7 @@ class SignUpVC: UIViewController {
         else {
             showAlert(message: "There is a one or more empty Field", actionType: .cancel)
         }
-        //        print(userEmailAdressfield.text!)
-        //        signUpViewModel.sendEmailToUser(email: userEmailAdressfield.text!)
+      
         
     }
     
