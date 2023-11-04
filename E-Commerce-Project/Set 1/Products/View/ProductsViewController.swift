@@ -87,6 +87,10 @@ class ProductsViewController: UIViewController {
             cell.productNameLabel.text = productviewModel.getTitle(index: indexPath.row)
             cell.imageView.downloadImageFrom(productviewModel.getid(index: indexPath.row))
             
+            cell.product_title = productviewModel.getTitle(index: indexPath.item)
+            cell.product_id = Int(productviewModel.getProductID(index: indexPath.item))
+
+            
             return cell
             
         }

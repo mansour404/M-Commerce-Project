@@ -125,6 +125,12 @@ func getNumberOfProducts() -> Int? {
         return getAllProducts?.products[index].title ?? "NO"
     }
     
+    func getID(index: Int) -> Int?{
+        return Int(getAllProducts?.products[index].id ?? -1)
+    }
+    
+    
+    
     func getImage(index: Int) -> String?{
         if (getAllProducts?.products[index].images == nil || getAllProducts?.products[index].images.count == 0) {
             return "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
