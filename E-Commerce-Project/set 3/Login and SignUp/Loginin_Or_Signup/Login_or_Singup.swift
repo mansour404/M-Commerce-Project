@@ -34,7 +34,7 @@ class Login_or_Singup: UIViewController {
     @IBAction func skipBtnTapped(_ sender: UIButton) {
         let vc = TabController()
         
-        UserDefaultsHelper.shared.setCustomerId(customerId: -1)
+        UserDefaultsHelper.shared.setCustomerId(customerId: 0)
    //     self.navigationController?.pushViewController(vc, animated: true)
             vc.modalPresentationStyle = .fullScreen
         
