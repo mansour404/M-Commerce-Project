@@ -71,15 +71,15 @@ class NetworkServices   {
         }
     }
     //MARK: - Fetching Data From Api to favourites
-    func getCustomerWishList<T :Codable>(CustomerId : Int? ,Handler: @escaping (T?,Error?) -> Void){
+    func getCustomerWishList<T :Codable>(CustomerId : Int ,Handler: @escaping (T?,Error?) -> Void){
         
-        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(CustomerId)/metafields.json?namespace=wishlist"
+        let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-01/customers/\(CustomerId)/metafields.json?namespace=wishlist"
         
-        Alamofire.AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
+        Alamofire.AF.request(urlFile,method: Alamofire.HTTPMethod.get,headers: ["X-Shopify-Access-Token": "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"]).response { data in
             if let validData = data.data {
                 do{
                     let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
-                    print("Success")
+                    print("Success from network manager")
                     Handler(dataRetivied, nil)
                     
                 }catch let error{

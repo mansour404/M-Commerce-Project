@@ -24,8 +24,11 @@ class FavouriteViewModel {
         
         //MARK: -CAll Request of Api
         func getDataFromApiForProduct() {
+            print("======================")
+            print("============\(UserDefaultsHelper.shared.getCustomerId())")
+            print("======================")
             services.getCustomerWishList(CustomerId: UserDefaultsHelper.shared.getCustomerId(), Handler: { (dataValue:WhishList?, error: Error?) in
-                print("Success")
+                
                 if let mydata = dataValue {
                     self.AllUserWishList = mydata
                     print(mydata.metafields.count)
@@ -79,14 +82,14 @@ class FavouriteViewModel {
     
     func sendWishId(userID : Int64 ,productId : Int) ->Int{
         var wishId = 0
-        services.getfavouriteItem(userID: 6866434621590 , productId: productId, Handler: { (dataValue:WhishList?, error: Error?) in
+        services.getfavouriteItem(userID: UserDefaultsHelper.shared.getCustomerId() , productId: productId, Handler: { (dataValue:WhishList?, error: Error?) in
             print("Success")
             if let mydata = dataValue {
                 if(mydata.metafields.isEmpty == false ){
                     wishId = mydata.metafields[0].id!
                     self.compiltionHandler(wishId)
                 }
-                else if (mydata.metafields[0].key == String(productId) && mydata.metafields[0].owner_id == userID ) {
+                else if (mydata.metafields[0].key == String(productId) && mydata.metafields[0].owner_id! == userID ) {
                     self.compiltionHandler(-1)
                 }
             }else {

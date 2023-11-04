@@ -7,11 +7,17 @@
 
 import Foundation
 struct WhishList : Codable {
-    var metafields : [FavouriteProduct]
+    let metafields : [FavouriteProduct]
 }
 struct FavouriteProduct : Codable{
     var id : Int?
     var key : String?          // product Id
     var value : String?     // product Name
-    var owner_id : Int64?     // customer Id
+    var owner_id : Int?     // customer Id
+    var namespace : String?
+    var description : String?
+    var created_at : String?
+    var updated_at : String?
+    var owner_resource : String?
+    var type : String?
 }
