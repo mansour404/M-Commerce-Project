@@ -51,6 +51,21 @@ class LoginViewModel {
             }
         }
         return flag
+    } 
+    func checkCustomerInfoIngoogleSignIn(userName : String ,userEmail : String ) -> Bool {
+            var flag = false
+        for i in 0..<(AllCustomers?.customers.count)! {
+            let FullName : String = (AllCustomers?.customers[i].first_name)! + " " + (AllCustomers?.customers[i].last_name)!
+            if (FullName == userName){
+                if (userEmail == AllCustomers?.customers[i].email ){
+                    flag = true
+                    self.bindresultToProductsViewController()
+                    UserDefaultsHelper.shared.setCustomerId(customerId: (AllCustomers?.customers[i].id)!)
+                    break
+                }
+            }
+        }
+        return flag
     }
     
 }
