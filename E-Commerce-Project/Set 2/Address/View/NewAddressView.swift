@@ -40,8 +40,7 @@ class NewAddressView: UIViewController {
         view.endEditing(true)
         creatNewAddress()
         delegate?.backValue(address: newAddress)  // protocol call
-        self.dismiss(animated: true)
-//        saveChanges()
+        saveChanges()
     }
     
     private func configureTextFieldDelegate() {
@@ -73,7 +72,7 @@ extension NewAddressView: UITextFieldDelegate {
             creatNewAddress()
             delegate?.backValue(address: newAddress)
             view.endEditing(true)
-           // saveChanges()
+            saveChanges()
         }
         return true
     }

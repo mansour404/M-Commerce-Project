@@ -12,10 +12,11 @@ import Alamofire
 class AddressService: AddressServiceProtocol {
     
 //    private let stringUrl2 = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-01/customers/\(UserDefaultsHelper.shared.getCustomerId())/addresses.json"
-//    let headers2: HTTPHeaders = [
-//        "X-Shopify-Access-Token": "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",
-//        "Content-Type": "application/json"
-//    ]
+    
+    private let headers: HTTPHeaders = [
+        "X-Shopify-Access-Token": "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",
+        "Content-Type": "application/json"
+    ]
 
     // MARK: - Creat new address
     func creatNewAddress(customerId: Int, address: Address, completion: @escaping (Result<[Address]?, Error>) -> Void) {
@@ -26,15 +27,12 @@ class AddressService: AddressServiceProtocol {
         let city = address.city
         let country = address.country
         let phone = address.phone
-        let address = address.address1
+        let addressOne = address.address1
+        let isDefault = address.isDefault
         
         let params: [String: Any] = ["customer_address":
-                                        ["address1" : address, "name": name, "country": country, "city": city, "phone": phone, "first_name": firstName, "last_name": lastName, "country_name": country]
+                                        ["address1" : addressOne, "name": name, "country": country, "city": city, "phone": phone, "first_name": firstName, "last_name": lastName, "country_name": country, "default": isDefault]
                                      
-        ]
-        let headers: HTTPHeaders = [
-            "X-Shopify-Access-Token": "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",
-            "Content-Type": "application/json"
         ]
         
         AF.request(stringUrl, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: CustomerAddresses.self) { response in
@@ -61,11 +59,7 @@ class AddressService: AddressServiceProtocol {
     
     // MARK: - Get all addresses
     func getAllAddresses(customerId: Int, completion: @escaping (Result<[Address]?, Error>) -> Void) {
-        let stringUrl = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-01/customers/\(customerId)/addresses.json"
-        let headers: HTTPHeaders = [
-            "X-Shopify-Access-Token": "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",
-            "Content-Type": "application/json"
-        ]
+        let stringUrl = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(customerId)/addresses.json"
         
         AF.request(stringUrl, method: .get, encoding: URLEncoding.default, headers: headers).responseDecodable(of: CustomerAddresses.self) { response in
             switch response.result {
@@ -82,12 +76,7 @@ class AddressService: AddressServiceProtocol {
     func removeAddress(customerId: Int, address_id: Int, completion: @escaping (Result<Bool?, NSError>) -> Void) {
         let stringUrl = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(customerId)/addresses/\(address_id).json"
 
-        let head: HTTPHeaders = [
-            "X-Shopify-Access-Token": "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",
-            "Content-Type": "application/json"
-        ]
-        
-        AF.request(stringUrl, method: .delete, headers: head).response { response in
+        AF.request(stringUrl, method: .delete, headers: headers).response { response in
             if response.response?.statusCode == 200 {
                 print("true")
                 completion(.success(true))
@@ -99,52 +88,43 @@ class AddressService: AddressServiceProtocol {
         }
     }
     
-    //    func getWishlist(forCustom customerID: Int, completion: @escaping (Result<[Product], Error>) -> Void) {
-        //        fetchAllMetafields(forCustom: customerID) { result in
-        //            switch result {
-        //            case .success(let wishListMetafield):
-        //                guard !wishListMetafield.isEmpty else {
-        //                    completion(.success([]))
-        //                    return
-        //                }
-        //                let stringIDs = wishListMetafield.compactMap( { String($0.key) }).joined(separator: ",")
-        //                let url = self.baseURLString + "/products.json?ids=(stringIDs)"
-        //                AF.request(url, method: .get, headers: self.header).responseDecodable(of: Products.self) { response in
-        //                    switch response.result {
-        //                    case .success(let data):
-        //                        completion(.success(data.products))
-        //                    case .failure(let error):
-        //                        completion(.failure(error))
-        //                    }
-        //                }
-        //            case .failure(let error):
-        //                completion(.failure(error))
-        //            }
-        //        }
-        //    }
+    // MARK: - get single customer address
+    func getSingleAddress(customerId: Int, address_id: Int, completion: @escaping (Result<Address?, Error>) -> Void) {
+        let stringUrl = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(customerId)/addresses/\(address_id).json"
+        AF.request(stringUrl, method: .get, headers: headers).responseDecodable(of: Address.self) { response in
+            switch response.result {
+            case .success(let address):
+                print("@@@@@@@@@@@@@@@@")
+                print(address)
+                completion(.success(address))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
 
-/*
- /*
-  "addresses": [
-      {
-        "id": 207119551,
-        "customer_id": 6940095564,
-        "first_name": "Bob",
-        "last_name": "Norman",
-        "company": null,
-        "address1": "Chestnut Street 92",
-        "address2": "Apartment 2",
-        "city": "Louisville",
-        "province": "Kentucky",
-        "country": "United States",
-        "zip": "40202",
-        "phone": "555-625-1199",
-        "province_code": "KY",
-        "country_code": "US",
-        "country_name": "United States",
-        "default": true
-      }
-  */
 
+
+
+/*
+ "addresses": [
+     {
+       "id": 207119551,
+       "customer_id": 6940095564,
+       "first_name": "Bob",
+       "last_name": "Norman",
+       "company": null,
+       "address1": "Chestnut Street 92",
+       "address2": "Apartment 2",
+       "city": "Louisville",
+       "province": "Kentucky",
+       "country": "United States",
+       "zip": "40202",
+       "phone": "555-625-1199",
+       "province_code": "KY",
+       "country_code": "US",
+       "country_name": "United States",
+       "default": true
+     }
  */

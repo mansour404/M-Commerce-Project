@@ -29,7 +29,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dU-8r-l33">
-                                <rect key="frame" x="144" y="23.999999999999996" width="220" height="33.666666666666657"/>
+                                <rect key="frame" x="144" y="23.999999999999996" width="263" height="33.666666666666657"/>
                                 <string key="text">ADIDAS | CLASSIC
 BACKPACK | LEGEND INK</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -42,19 +42,6 @@ BACKPACK | LEGEND INK</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pvv-tD-iQ8">
-                                <rect key="frame" x="380" y="16" width="35" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="I5c-9h-Fzw"/>
-                                    <constraint firstAttribute="width" constant="35" id="iLb-hk-xF5"/>
-                                </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="trash.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="removeItemButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mpo-nI-1ut"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Vu-mG-YIj">
                                 <rect key="frame" x="380" y="85" width="35" height="35"/>
                                 <constraints>
@@ -90,16 +77,14 @@ BACKPACK | LEGEND INK</string>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="pvv-tD-iQ8" firstAttribute="top" secondItem="GWp-HP-sJn" secondAttribute="top" constant="16" id="4MQ-cH-YQw"/>
                             <constraint firstItem="0CD-4M-dvR" firstAttribute="leading" secondItem="Cmh-8U-ZBT" secondAttribute="trailing" constant="16" id="6Hb-XV-b42"/>
                             <constraint firstItem="Cmh-8U-ZBT" firstAttribute="leading" secondItem="GWp-HP-sJn" secondAttribute="leading" constant="8" id="8OO-yJ-hEa"/>
                             <constraint firstItem="0aP-06-Ad3" firstAttribute="leading" secondItem="0CD-4M-dvR" secondAttribute="trailing" constant="8" id="9ve-CT-rUk"/>
                             <constraint firstItem="Ol6-2P-fiM" firstAttribute="leading" secondItem="0aP-06-Ad3" secondAttribute="trailing" constant="8" symbolic="YES" id="EJG-hL-fIb"/>
-                            <constraint firstAttribute="trailing" secondItem="pvv-tD-iQ8" secondAttribute="trailing" constant="8" id="HPt-Wn-tBF"/>
-                            <constraint firstItem="pvv-tD-iQ8" firstAttribute="leading" secondItem="7dU-8r-l33" secondAttribute="trailing" constant="16" id="KeA-w7-Hs2"/>
                             <constraint firstItem="Ol6-2P-fiM" firstAttribute="centerY" secondItem="9Vu-mG-YIj" secondAttribute="centerY" id="L5d-f8-tNG"/>
                             <constraint firstItem="Cmh-8U-ZBT" firstAttribute="top" secondItem="GWp-HP-sJn" secondAttribute="top" constant="8" id="OIb-Pc-gkZ"/>
                             <constraint firstAttribute="bottom" secondItem="9Vu-mG-YIj" secondAttribute="bottom" constant="16" id="Os2-D9-UOD"/>
+                            <constraint firstAttribute="trailing" secondItem="7dU-8r-l33" secondAttribute="trailing" constant="16" id="R8i-WV-Hz5"/>
                             <constraint firstAttribute="bottom" secondItem="0aP-06-Ad3" secondAttribute="bottom" constant="16" id="Ygj-lg-zmz"/>
                             <constraint firstItem="9Vu-mG-YIj" firstAttribute="leading" secondItem="Ol6-2P-fiM" secondAttribute="trailing" constant="8" symbolic="YES" id="frV-Xp-h1f"/>
                             <constraint firstAttribute="bottom" secondItem="Cmh-8U-ZBT" secondAttribute="bottom" constant="8" id="iR0-QE-e2C"/>
@@ -133,7 +118,6 @@ BACKPACK | LEGEND INK</string>
         <image name="adidasBag" width="840" height="840"/>
         <image name="minus.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="trash.fill" catalog="system" width="119" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

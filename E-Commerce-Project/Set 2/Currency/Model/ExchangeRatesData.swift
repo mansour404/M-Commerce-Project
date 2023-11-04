@@ -19,11 +19,10 @@ struct ExchangeRatesData : Decodable {
 	let time_next_update_utc : String?
 	let time_eol_unix : Int?
 	let base_code : String?
-//    let rates: Rates?
-    let rates : [String: Double]?
+    let rates: Rates?
+//    let rates : [String: Double]?
 
 	enum CodingKeys: String, CodingKey {
-
 		case result = "result"
 		case provider = "provider"
 		case documentation = "documentation"
@@ -37,3 +36,38 @@ struct ExchangeRatesData : Decodable {
 		case rates = "rates"
 	}
 }
+
+struct Rates : Codable {
+    let USD : Double?
+    let EGP : Double?
+    let SAR : Double?
+    let AED : Double?
+    let KWD : Double?
+    let QAR : Double?
+    
+    enum CodingKeys: String, CodingKey {
+        case USD = "USD"
+        case EGP = "EGP"
+        case SAR = "SAR"
+        case AED = "AED"
+        case KWD = "KWD"
+        case QAR = "QAR"
+    }
+}
+
+struct AppSupportedCurrency {
+    let title: String
+    let valueToDollar: Double?
+}
+
+//struct Currency: Codable {
+//    let currency: String?
+//    let rateUpdatedAt: String?
+//    let enabled: Bool?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case currency = "currency"
+//        case rateUpdatedAt = "rate_updated_at"
+//        case enabled = "enabled"
+//    }
+//}

@@ -89,7 +89,8 @@ class SignUpViewModel {
             if let mydata = dataValue {
                 
                 UserDefaultsHelper.shared.saveAPI(id: mydata.customers[0].id ?? 0)
-                
+                let customerId = mydata.customers[0].id ?? 0
+                UserDefaultsHelper.shared.setCustomerId(customerId)
                 
             }else {
                 if let error = error{

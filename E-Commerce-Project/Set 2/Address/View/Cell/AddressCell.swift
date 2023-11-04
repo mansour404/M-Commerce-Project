@@ -15,12 +15,13 @@ class AddressCell: UITableViewCell {
     
     @IBOutlet weak var locationImageView: UIImageView!
     @IBOutlet weak var cartView: UIView!
+    @IBOutlet weak var defaultAddressImageView: UIImageView!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        selectionStyle = .none
+//        selectionStyle = .none
         locationImageView.rounded()
         locationImageView.addBorder()
         // remove seprator
@@ -30,16 +31,15 @@ class AddressCell: UITableViewCell {
         cartView.dropShadow()
         
     }
-
-    @IBAction func removeAddressButtonPressed(_ sender: Any) {
-        
-    }
     
     var addressCellViewModel: AddressCellViewModel? {
         didSet {
             nameLabel.text = addressCellViewModel?.name
             cityLabel.text = addressCellViewModel?.city
             addresslabel.text = addressCellViewModel?.address
+            let image: UIImage? = (addressCellViewModel?.isDefault == true) ? UIImage(systemName: "heart.fill")?.withTintColor(.systemPurple, renderingMode: .alwaysOriginal) : UIImage(named: "")
+            defaultAddressImageView.image = image
+            
         }
     }
 }
