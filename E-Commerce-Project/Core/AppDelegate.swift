@@ -13,12 +13,31 @@ import GoogleSignIn
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static func getWindow() -> UIWindow? {
+        return UIApplication.shared.keyWindow
+    }
 
+    static func resetViewController() {
+        CartList.carts = []
+        UserDefaultsHelper.shared.setCustomerId(0)
+        UserDefaultsHelper.shared.saveAPI(id: 0)
+        
+//        print("++++++++++++++++++")
+//        print(UserDefaultsHelper.shared.getCustomerId())
+//        print(UserDefaultsHelper.shared.getAPIToken())
+//        print(CartList.carts)
+//        print("++++++++++++++++++")
+//        
+        let window = getWindow()
+        let controller = UINavigationController(rootViewController: Login_or_Singup())
+        window?.rootViewController = controller
+        window?.makeKeyAndVisible()
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        UserDefaultsHelper.shared.setCustomerId()
+        //UserDefaultsHelper.shared.setCustomerId()
         
         IQKeyboardManager.shared.enable = true // enable IQKeyboardManager
         

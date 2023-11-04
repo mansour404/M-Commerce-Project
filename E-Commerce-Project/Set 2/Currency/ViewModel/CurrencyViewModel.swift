@@ -11,17 +11,16 @@ protocol CurrencyViewModelProtocol {
     
 }
 
+
 class CurrencyViewModel {
     
     // MARK: - Variables
     let exchnageRateService: ExchnageRateServiceProtocol
     var selectedCell: String?
-    var isAllowSegue: Bool = false
+    var chosenIndex: Int?
     
     // MARK: - Properties
-    var currencyCodes: [String] = []
-    var currencyValues: [Double] = []
-    var currencies: [[String: Double]] = [["USD":1.0, "EGP": 1.0, "SAR":1.0, "AED":1.0, "KWD": 1.0, "QAR":1.0]]
+    var currencies = [AppSupportedCurrency]()
 
     // MARK: - Init
     init(exchnageRateService: ExchnageRateServiceProtocol = ExchnageRateService()) {
@@ -59,9 +58,10 @@ class CurrencyViewModel {
     var updateLoadingStatus: (() -> ())?
 
     
-    func getCellViewModel( at indexPath: IndexPath ) -> CurrencyCellViewModel {
+    func getCellViewModel(at indexPath: IndexPath) -> CurrencyCellViewModel {
         return cellViewModels[indexPath.row]
     }
+    
     
     // MARK: - Init fetch
     func initFetch() {
@@ -71,12 +71,18 @@ class CurrencyViewModel {
             switch result {
             case .success(let success):
                 guard let rates = success?.rates else { return }
-                var codes: [String] = []
-                var values: [Double] = []
-                codes.append(contentsOf: rates.keys)
-                values.append(contentsOf: rates.values)
+
+                let myStrings = [ "USD", "EGP", "SAR",  "AED", "KWD", "QAR"]
+                let objectOne = AppSupportedCurrency(title: myStrings[0], valueToDollar: rates.USD)
+                let objectTwo = AppSupportedCurrency(title: myStrings[1], valueToDollar: rates.EGP)
+                let objectThree = AppSupportedCurrency(title: myStrings[2], valueToDollar: rates.SAR)
+                let objectFour = AppSupportedCurrency(title: myStrings[3], valueToDollar: rates.AED)
+                let objectFive = AppSupportedCurrency(title: myStrings[4], valueToDollar: rates.KWD)
+                let objectSix = AppSupportedCurrency(title: myStrings[5], valueToDollar: rates.QAR)
+                let arr = [objectOne, objectTwo, objectThree, objectFour, objectFive, objectSix]
                 
-                self.processFetcheditems(codes, values)
+                //self.currencies = arr // set the value inside processFetcheditems() function
+                self.processFetcheditems(arr)
                 self.state = .populated
             case .failure(let error):
                 self.state = .error
@@ -85,35 +91,46 @@ class CurrencyViewModel {
         }
     }
     
-    func createCellViewModel(_ code: String, _ value: Double) -> CurrencyCellViewModel{
-        
+    private func createCellViewModel(_ currency: AppSupportedCurrency) -> CurrencyCellViewModel{
         // Mainpulate data before return it do what I wish before return.
-        return CurrencyCellViewModel(currencyCode: code, currencyValue: value)
+        return CurrencyCellViewModel(currencyCode: currency.title, currencyValue: currency.valueToDollar)
     }
     
-    private func processFetcheditems(_ currencyCodes: [String], _ currencyValues: [Double]) {
-        self.currencyCodes  = currencyCodes
-        self.currencyValues = currencyValues
+    private func processFetcheditems(_ currencies: [AppSupportedCurrency]) {
+        self.currencies = currencies
         var vms = [CurrencyCellViewModel]()  // vms enhance performance, reload tableView only once when vms filled
-        for i in 0..<currencyCodes.count {
-            vms.append(createCellViewModel(currencyCodes[i], currencyValues[i])) // return cellVM with same count of displayed cell, will save them temporally in vms to enhance performance, prevent reload table view for each cell.
+        
+        for currency in currencies {
+            vms.append(createCellViewModel(currency)) // return cellVM with same count of displayed cell, will save them temporally in vms to enhance performance, prevent reload table view for each cell.
         }
         cellViewModels = vms // cellViewModels has been changed, automatically table view will be reloaded.
         // cellViewModels will call the closure (reloadTableViewClosure?()), which implemented by viewController in initVM() function.
     }
     
+    
 }
 
 
 extension CurrencyViewModel {
+    
     func userPressed( at indexPath: IndexPath ){
-        let item = currencyCodes[indexPath.row]
-        if item == "AED" {
-            selectedCell = item
-            alertMessage = "NOOOOOOOOOOOOOOOOOOOOOPE" // This line will make alert Appear, as long as value is changes
-        } else {
-            selectedCell = item
-            alertMessage = "YEEEEEEEEEEEEEEEEEEEEEES" // This line will make alert showing
-        }
+        let item = currencies[indexPath.row]
+        alertMessage = "would you like to confirm the app currency change to \"" + item.title + "\" ?"
+        chosenIndex = indexPath.row
     }
+    
+    func changeAppCurrency() {
+        guard let chosenIndex = chosenIndex else { return }
+        let symbol = currencies[chosenIndex].title
+        let rate = currencies[chosenIndex].valueToDollar ?? 1.0
+        
+        UserDefaultsHelper.shared.setCurrencySymbol(symbol)
+        UserDefaultsHelper.shared.setCurrencyRate(rate)
+        
+        print("++++++++++++++++++++++++++")
+        print(UserDefaultsHelper.shared.getCurrencyRate())
+        print(UserDefaultsHelper.shared.getCurrencySymbol())
+        print("++++++++++++++++++++++++++")
+    }
+ 
 }

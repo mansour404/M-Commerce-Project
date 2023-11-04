@@ -94,12 +94,14 @@ class ProductsViewController: UIViewController {
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             let vc = ProductInfoViewController(nibName: "ProductInfoViewController", bundle: nil)
             print("after calling")
-            vc.modalPresentationStyle = .automatic
+            //vc.modalPresentationStyle = .automatic
             let id = productviewModel.getProductID(index: indexPath.item)
             print(id)
             vc.setID(id: id)
             print("id is set")
-            self.present(vc, animated: true)
+            //self.present(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
+
         }
     }
 // MARK: - UICollectionView Delegate

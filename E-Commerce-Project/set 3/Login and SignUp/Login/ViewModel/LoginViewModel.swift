@@ -46,6 +46,8 @@ class LoginViewModel {
                 if(AllCustomers?.customers[i].tags == userPassword){
                     flag = true
                     UserDefaultsHelper.shared.saveAPI(id: (AllCustomers?.customers[i].id)!)
+                    guard let customerId = AllCustomers?.customers[i].id else { break }
+                    UserDefaultsHelper.shared.setCustomerId(customerId)
                     break
                 }
             }

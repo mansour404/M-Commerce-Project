@@ -34,26 +34,30 @@ class AddressListView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configureCheckoutButton()
         initVM()
+        print("1")
     }
 
     // MARK: - Actions
     @IBAction func continueButtonPressed(_ sender: Any) {
-        let vc = OrderViewController(nibName: "OrderViewController", bundle: nil)
+        // TODO: - Change App Flow, make shoping list view controllers before payment directly.
+        //let vc = OrderViewController(nibName: "OrderViewController", bundle: nil)
+        let vc = PaymentView(nibName: "PaymentView", bundle: nil)
         // passing data before navigation
-        //navigationController?.pushViewController(vc, animated: true)
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
+        //        pay.order = order
+        //        pay.orderTotalPrice = Double(order?.totalPrice ?? "") ?? 0
+        vc.address = viewModel.shippingAddress
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func addNewAddressButtonPressed(_ sender: Any) {
         let vc = NewAddressView(nibName: "NewAddressView", bundle: nil)
-        // passing data before navigation
-        //navigationController?.pushViewController(vc, animated: true)
-        
         vc.delegate = self // set delegate/(reference) = self
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
+        // passing data before navigation
+        navigationController?.pushViewController(vc, animated: true)
+//        vc.modalPresentationStyle = .automatic
+//        self.present(vc, animated: true)
     }
     
     // MARK: - Functions
@@ -67,6 +71,7 @@ class AddressListView: UIViewController {
     func configureCheckoutButton() {
         continueButton.addCornerRadius()
         addNewAddressButton.addCornerRadius()
+        continueButton.isEnabled = false
     }
 }
 
@@ -84,6 +89,8 @@ extension AddressListView: UITableViewDataSource {
     }
 }
 
+
+
 // MARK: - Table view delegate
 extension AddressListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -92,20 +99,41 @@ extension AddressListView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let alertController = UIAlertController(title: "Warning", message: "Are you sure u want to delete address from list?", preferredStyle: .actionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            let confirmAction = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] action in
-                guard let self = self else { return }
-                //viewModel.removeLeagueFromCoreData(at: indexPath.row)
-                //viewModel.updateTableView(at: indexPath)
-                viewModel.removeAddress(indexPath: indexPath)
-                initVM()
+            if viewModel.getCellViewModel(at: indexPath).isDefault == false {
+                let alertController = UIAlertController(title: "Warning", message: "Are you sure u want to delete address from list?", preferredStyle: .actionSheet)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let confirmAction = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] action in
+                    guard let self = self else { return }
+                    
+                    viewModel.removeAddress(indexPath: indexPath)
+                    initVM()
+                }
+                alertController.addAction(cancelAction)
+                alertController.addAction(confirmAction)
+                present(alertController, animated: true)
+            } else {
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                Alert.showAlert(target: self, title: "Rejected", message: "Can't remove default address", actions: [cancelAction])
             }
-            alertController.addAction(cancelAction)
-            alertController.addAction(confirmAction)
-            present(alertController, animated: true)
+            
+        }
+        
+        // TODO: - add edit option for editingStyle == .insert
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: - Did select row at index path
+        
+        if viewModel.continueToPayment == true {
+            continueButton.isEnabled = true
+            viewModel.selectAddressForShipping(index: indexPath.row)
+        } else {
+            let alert = Alert.showAlertWithMessage(title: "Sorry", message: "No order created yet!", buttonTitle: "Cancel")
+            //Alert.showAlert(target: self, title: "Sorry", message: "No order created yet!")
+            self.present(alert, animated: true)
         }
     }
+    
 }
 
 

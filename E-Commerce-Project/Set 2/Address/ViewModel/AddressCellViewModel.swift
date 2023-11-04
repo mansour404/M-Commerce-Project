@@ -14,4 +14,6 @@ struct AddressCellViewModel {
     var name: String?
     var city: String?
     var address: String?
+    var isDefault: Bool?
+    
 }

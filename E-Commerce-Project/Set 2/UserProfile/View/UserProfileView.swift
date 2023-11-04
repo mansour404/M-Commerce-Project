@@ -2,7 +2,7 @@
 //  UserProfileView.swift
 //  E-Commerce-Project
 //
-//  Created by Ziyad Qassem on 23/10/2023.
+//  Created by Mohammed Adel on 21/10/2023.
 //
 
 import UIKit
@@ -21,6 +21,7 @@ class UserProfileView: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        userProfileIsEmpty()
         // Setup bar button items
         navigationItem.setRightBarButtonItems([addSettingsButton(), addShoppingCartButton()], animated: true)
         registerNibs()
@@ -40,6 +41,25 @@ class UserProfileView: UIViewController {
         ordersTableView.delegate = self
         favouritesTableView.dataSource = self
         favouritesTableView.delegate = self
+    }
+    
+    private func userProfileIsEmpty() {
+        let customerID = UserDefaultsHelper.shared.getCustomerId()
+        
+        if customerID != 0 {
+            userUIView.isHidden = false
+            favouritesTableView.isHidden = false
+            ordersTableView.isHidden = false
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            noUserUIView.isHidden = true
+            
+        } else {
+            userUIView.isHidden = true
+            favouritesTableView.isHidden = true
+            ordersTableView.isHidden = true
+            navigationController?.setNavigationBarHidden(true, animated: true)
+            noUserUIView.isHidden = false
+        }
     }
 }
 
@@ -97,14 +117,15 @@ extension UserProfileView {
 
 // MARK: - Actions
 extension UserProfileView {
-    @IBAction func signInButtonPressed(_ sender: Any) {
-//        let vc = LoginVC(nibName: "LoginVC", bundle: nil)
-//        navigationController?.pushViewController(vc, animated: true)
-    }
     
-    @IBAction func signUpButtonPressed(_ sender: Any) {
+    @IBAction func joinUSButtonPressed(_ sender: Any) {
 //        let vc = SignUpVC(nibName: "SignUpVC", bundle: nil)
 //        navigationController?.pushViewController(vc, animated: true)
+        //let rootViewController = UINavigationController(rootViewController: Login_or_Singup())
+        CartList.carts = []
+        UserDefaultsHelper.shared.setCustomerId(0)
+        UserDefaultsHelper.shared.saveAPI(id: 0)
+        AppDelegate.resetViewController()
     }
     
     @IBAction func seeAllOrdersButtonPressed(_ sender: Any) {
@@ -119,16 +140,16 @@ extension UserProfileView {
     
     @objc func navigateToSettings(sender: UIButton) {
         let vc = SettingsView(nibName: "SettingsView", bundle: nil)
-        //navigationController?.pushViewController(vc, animated: true)
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+//        vc.modalPresentationStyle = .automatic
+//        self.present(vc, animated: true)
     }
     
     @objc func navigateToShoppingCart(sender: UIButton) {
         let vc = ShoppingCartView(nibName: "ShoppingCartView", bundle: nil)
-        //navigationController?.pushViewController(vc, animated: true)
-        vc.modalPresentationStyle = .automatic
-        self.present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+//        vc.modalPresentationStyle = .automatic
+//        self.present(vc, animated: true)
     }
 }
 

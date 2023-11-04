@@ -126,7 +126,7 @@ func getNumberOfProducts() -> Int? {
     }
     
     func getImage(index: Int) -> String?{
-        return getAllProducts?.products[index].images[0].src
+        return getAllProducts?.products[index].images[0].src ?? "LazaApp"
     }
     
     func getPrice(index: Int) -> String?{

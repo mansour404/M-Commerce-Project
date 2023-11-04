@@ -14,7 +14,6 @@ class CurrencyView: UIViewController {
         return CurrencyViewModel() // initialized the default parameters
     }()
     
-    var rates: [String: Double]? = [:]
     
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -36,7 +35,6 @@ class CurrencyView: UIViewController {
 // MARK: - Data source
 extension CurrencyView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(viewModel.numberOfCells)
         return viewModel.numberOfCells
     }
     
@@ -54,18 +52,14 @@ extension CurrencyView: UITableViewDelegate {
         return 58
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //showCurrencyAlert()
-        //viewModel.userPressed(at: indexPath)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        showCurrencyAlert()
+//        viewModel.userPressed(at: indexPath)
+//    }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         viewModel.userPressed(at: indexPath)
-        if viewModel.isAllowSegue {
-            return indexPath
-        }else {
-            return nil
-        }
+        return indexPath
     }
 }
 
@@ -85,18 +79,15 @@ extension CurrencyView {
     }
     
     func showAlert(_ message: String) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        //let alert = UIAlertController(title: "Currency Change", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let confirmAction = UIAlertAction(title: "Ok", style: .destructive) { _ in
+            self.viewModel.changeAppCurrency()
+        }
+        Alert.showAlert(target: self, title: "Change app currency", message: message, actions: [cancelAction, confirmAction])
     }
     
-//    private func showCurrencyAlert(_ msg: String = "you are going to change payment currency") {
-//        let alert = showAlert(title: "Change currency", msg: msg) { action in
-//            print("SIIIIIIIIII")
-//            self.dismiss(animated: true)
-//        }
-//        self.present(alert, animated: true)
-//    }
+    
 }
 
 // MARK: - Binding
@@ -149,13 +140,4 @@ extension CurrencyView {
         viewModel.initFetch()
     }
     
-//    func alertClosure() {
-//        viewModel.showAlertClosure = { [weak self] in
-//            DispatchQueue.main.async {
-//                if let message = self?.viewModel.alertMessage {
-//                    self?.showCurrencyAlert(message)
-//                }
-//            }
-//        }
-//    }
 }
