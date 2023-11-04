@@ -128,7 +128,12 @@ extension ProductsViewController: UICollectionViewDelegate , UICollectionViewDel
         configureLoadingDataFromApi()
     
     }
-   
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+       //(collectionView, willDisplay: cell, forItemAt: indexPath)
+        let cell = cell as! SubmainCollectionViewCell
+        cell.setControllerFavourite()
+            // Your code here
+       }
 }
 
 

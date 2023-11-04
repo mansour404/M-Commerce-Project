@@ -61,7 +61,10 @@ class SubmainCollectionViewCell: UICollectionViewCell {
         heart_button_outlet.setImage(UIImage(systemName: "heart"), for: .normal)
         
         bindresultToProductsViewController = {(check : Bool ) -> Void in
-            self.colorheart(colored: check)
+            
+                self.colorheart(colored: check)
+            
+           
         }
         
             
@@ -95,13 +98,20 @@ class SubmainCollectionViewCell: UICollectionViewCell {
     
         func deleteProductFromFavourites(wishId : Int){
             networkManager.removefavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), wishId: wishId ,Handler: {
-            self.bindresultToProductsViewController(false)
+                DispatchQueue.main.async {
+                    
+                    self.bindresultToProductsViewController(false)
+                }
         })
         
     }
     func createFavourite(){
         networkManager.addFavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), productId: Int(product_id!), productName: (product_title)!, Handler:{
-            self.bindresultToProductsViewController(true)
+            DispatchQueue.main.async {
+                
+                
+                self.bindresultToProductsViewController(true)
+            }
         })
     }
     
@@ -111,14 +121,17 @@ class SubmainCollectionViewCell: UICollectionViewCell {
             if let mydata = dataValue {
                 print(mydata.metafields)
                 print(mydata.metafields.isEmpty)
-                
-                if(mydata.metafields.isEmpty == true ){
-                    self.bindresultToProductsViewController(false)
+                DispatchQueue.main.async {
                     
-                }
-                else  {
-                    self.bindresultToProductsViewController(true)
-                  
+                    if(mydata.metafields.isEmpty == true ){
+                        
+                        self.bindresultToProductsViewController(false)
+                        
+                    }
+                    else  {
+                        self.bindresultToProductsViewController(true)
+                        
+                    }
                 }
                 print("yousof is right")
             }else {

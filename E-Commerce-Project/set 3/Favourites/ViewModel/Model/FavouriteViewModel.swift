@@ -57,16 +57,19 @@ class FavouriteViewModel {
     func getImageUrl(index : Int)->String? {
         return productArray[index].images[0].src
     }
+    let dispatchGroup = DispatchGroup()
     func getproducts(){
         productArray = []
-        for i in 0..<(AllUserWishList?.metafields.count)! {
         
+        for i in 0..<(AllUserWishList?.metafields.count)! {
+            dispatchGroup.enter()
             services.getProductById(ProductId: AllUserWishList!.metafields[i].key! , Handler: { (dataValue:MyProductcontainer?, error: Error?) in
                 print("Success")
                 
                 if let mydata = dataValue {
                     self.productArray.append( mydata.product)
-                    self.bindresultToProductsViewController()
+                //    self.bindresultToProductsViewController()
+                    self.dispatchGroup.leave()
                 }else {
                     if let error = error{
                         print(error.localizedDescription)
@@ -75,7 +78,12 @@ class FavouriteViewModel {
             })
             
         }
-      
+        dispatchGroup.notify(queue: DispatchQueue.main){
+            DispatchQueue.main.async {
+                self.bindresultToProductsViewController()
+            }
+            
+        }
         
     }
        
