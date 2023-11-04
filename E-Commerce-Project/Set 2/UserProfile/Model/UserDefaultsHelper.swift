@@ -109,4 +109,12 @@ final class UserDefaultsHelper {
         userDefaults.set(value, forKey: "currencyRate")
     }
     
+    func setContinueToPayment(_ value: Bool) {
+        userDefaults.set(value, forKey: "continueToPatment")
+    }
+    
+    func getContinueToPayment() -> Bool? {
+        userDefaults.bool(forKey: "continueToPatment")
+    }
+    
 }

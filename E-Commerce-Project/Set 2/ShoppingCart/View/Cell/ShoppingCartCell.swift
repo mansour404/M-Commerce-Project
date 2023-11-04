@@ -6,15 +6,15 @@
 //
 
 import UIKit
+import Alamofire
 
 class ShoppingCartCell: UITableViewCell {
     
     // MARK: - Vars
     weak var delegate: ShoppingCartCellDelegate?
-    private var index: Int?
-    private var count: Int = 1
-    var numberOfCartItems: Int = 0
-    var availableElements: Int = 0
+    private var cellIndex: Int?
+    private var productCount: Int = 0
+    var availableElements: Int = 0 // availableElements always return nil.
     
     // MARK: - Outlets
     @IBOutlet weak var cartView: UIView!
@@ -44,34 +44,36 @@ class ShoppingCartCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func plusItemButtonPressed(_ sender: Any) {
-        if (numberOfCartItems < availableElements) {
-            count += 1;
-        }
-        updateNumberLabel()
-        print("plus")
+//        if productCount < availableElements  {
+//            guard let button = minusButton else { return }
+//            button.isEnabled = true
+//
+//        } else {
+//            print("nothing")
+//            guard let button = minusButton else { return }
+//            button.isEnabled = false
+//        }
         
-        count += 1
-        if let cellID = index {
-            delegate?.updateProductCount(index: cellID, count: count)
-            //delegate
+        productCount += 1
+        if let index = cellIndex {
+            delegate?.updateProductCount(index: index, count: productCount)
+            updateProductCountLabel()
         }
+        //test_put_draft_order ()
     }
     
     @IBAction func minusItemButtonPressed(_ sender: Any) {
-        count -= 1
-        if let cellID = index {
-            delegate?.updateProductCount(index: cellID, count: count)
+        productCount -= 1
+        if let index = cellIndex {
+            delegate?.updateProductCount(index: index, count: productCount)
+            updateProductCountLabel()
         }
-    }
-   
-    @IBAction func deleteButtonPressed(_ sender: UIButton) {
-        if let cellID = index {
-            delegate?.deleteProduct(index: cellID)
-        }
+        //test_put_draft_order ()
     }
     
-    func updateNumberLabel () {
-        productPriceLabel.text = String(numberOfCartItems)
+    func updateProductCountLabel () {
+        //productPriceLabel.text = String(numberOfCartItems)
+        productCountLabel.text = String(productCount)
     }
     
 }
@@ -83,22 +85,46 @@ extension ShoppingCartCell: ShoppingCartCellProtocol {
         productTitleLabel.text = product.title
         productPriceLabel.text = "\(product.price ?? 100)  EGP"
         productCountLabel.text = "\(product.quantity ?? 1)"
-        count = product.quantity ?? 1
+        
+        // set product count & available count for the product.
+        productCount = product.quantity ?? 1
         availableElements = product.availableElements ?? 1
-        self.index = index
+        
+        print(productCount, availableElements)  // availableElements always return nil.
+        self.cellIndex = index
     }
     
-    func hideButtons() {
-        plusButton.isHidden = true
-        minusButton.isHidden = true
-    }
     
-    func hideQuantity() {
-        minusButton.superview?.isHidden = true
-    }
     
-    func setCell(id: Int) {
-        index = id
-    }
+    //    func test_put_draft_order () {
+    //        let url = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders/1031372177558.json"
+    //        let params = ["draft_order":["id":1031372177558,"line_items":[["variant_id":42798192099478,"quantity":8888, "sku" : "new sku",
+    //                                                                       "properties": [["name":"value", "value" : "value2"]]], ["variant_id":42798187446422,"quantity":33, "sku" : "new sku2"]]]]
+    //
+    //        let header : HTTPHeaders = ["X-Shopify-Access-Token": "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"]
+    //
+    //        Alamofire.AF.request(url, method: .put, parameters: params, headers: header).response { data in
+    //
+    //            print("I am done")
+    //        }
+    //    }
     
+    //        productCount += 1
+    //        if let index = cellIndex {
+    //            delegate?.updateProductCount(index: index, count: productCount)
+    //            updateProductCountLabel()
+    //        }
+    
+    //        if productCount > 1  {
+    //            productCount -= 1
+    //            if let index = cellIndex {
+    //                delegate?.updateProductCount(index: index, count: productCount)
+    //                updateProductCountLabel()
+    //            }
+    //        } else {
+    //            guard let button = minusButton else { return }
+    //            button.isEnabled = false
+    //        }
 }
+
+

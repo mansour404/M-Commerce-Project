@@ -55,6 +55,11 @@ struct Rates : Codable {
     }
 }
 
+struct AppSupportedCurrency {
+    let title: String
+    let valueToDollar: Double?
+}
+
 //struct Currency: Codable {
 //    let currency: String?
 //    let rateUpdatedAt: String?
@@ -66,9 +71,3 @@ struct Rates : Codable {
 //        case enabled = "enabled"
 //    }
 //}
-
-struct AppSupportedCurrency {
-    let title: String
-    let valueToDollar: Double?
-}
-

@@ -31,7 +31,7 @@ class PaymentViewModel {
     
     func postOrder() {
         let customerId = UserDefaultsHelper.shared.getCustomerId()
-        // let shipingAddress = get Address by id from api.
+        // TODO: - let shipingAddress = get Address by id from api.
         let items = CartList.carts
         print(items)
         var line_items: [Line_items] = []
@@ -39,8 +39,18 @@ class PaymentViewModel {
             let newItem = Line_items(price: String(item.price ?? 1.00), quantity: item.quantity, title: item.title, variant_id: nil, vendor: nil, sku: nil, properties: nil)
             line_items.append(newItem)
         }
+        
         // TODO: - Don't forget to set shipping address.
-        let order = OrderNewModel(total_tax: "0", currency: "EGP", phone: "+201099999999", total_discounts: "0", user_id: String(customerId), line_items: line_items)
+        // TODO: - Don't forget total_discounts
+        let currency = UserDefaultsHelper.shared.getCurrencySymbol()
+        let phone = "+2" + (shippingAddress?.phone ?? "0109999999")
+        let order = OrderNewModel(total_tax: "0", currency: currency, phone: phone, total_discounts: "0", user_id: String(customerId), line_items: line_items, shipping_address: shippingAddress)
+        
+        print("*************")
+        print(order)
+        print("*************")
+
+        // Helper methods to creat paramters depend on lineItems count.
         let orderResult = OrdersResultNewModel(order: order)
         let parameters = JsonEncoderHelper.convertObjectToJson(object: orderResult) ?? [:]
         

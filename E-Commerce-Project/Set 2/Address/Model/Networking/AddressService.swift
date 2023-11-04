@@ -90,10 +90,12 @@ class AddressService: AddressServiceProtocol {
     
     // MARK: - get single customer address
     func getSingleAddress(customerId: Int, address_id: Int, completion: @escaping (Result<Address?, Error>) -> Void) {
-        let stringUrl = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(customerId))/addresses/\(address_id).json"
+        let stringUrl = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(customerId)/addresses/\(address_id).json"
         AF.request(stringUrl, method: .get, headers: headers).responseDecodable(of: Address.self) { response in
             switch response.result {
             case .success(let address):
+                print("@@@@@@@@@@@@@@@@")
+                print(address)
                 completion(.success(address))
             case .failure(let error):
                 completion(.failure(error))
@@ -104,51 +106,25 @@ class AddressService: AddressServiceProtocol {
 
 
 
+
 /*
- /*
-  "addresses": [
-      {
-        "id": 207119551,
-        "customer_id": 6940095564,
-        "first_name": "Bob",
-        "last_name": "Norman",
-        "company": null,
-        "address1": "Chestnut Street 92",
-        "address2": "Apartment 2",
-        "city": "Louisville",
-        "province": "Kentucky",
-        "country": "United States",
-        "zip": "40202",
-        "phone": "555-625-1199",
-        "province_code": "KY",
-        "country_code": "US",
-        "country_name": "United States",
-        "default": true
-      }
-  */
- 
- //    func getWishlist(forCustom customerID: Int, completion: @escaping (Result<[Product], Error>) -> Void) {
- //        fetchAllMetafields(forCustom: customerID) { result in
- //            switch result {
- //            case .success(let wishListMetafield):
- //                guard !wishListMetafield.isEmpty else {
- //                    completion(.success([]))
- //                    return
- //                }
- //                let stringIDs = wishListMetafield.compactMap( { String($0.key) }).joined(separator: ",")
- //                let url = self.baseURLString + "/products.json?ids=(stringIDs)"
- //                AF.request(url, method: .get, headers: self.header).responseDecodable(of: Products.self) { response in
- //                    switch response.result {
- //                    case .success(let data):
- //                        completion(.success(data.products))
- //                    case .failure(let error):
- //                        completion(.failure(error))
- //                    }
- //                }
- //            case .failure(let error):
- //                completion(.failure(error))
- //            }
- //        }
- //    }
- 
+ "addresses": [
+     {
+       "id": 207119551,
+       "customer_id": 6940095564,
+       "first_name": "Bob",
+       "last_name": "Norman",
+       "company": null,
+       "address1": "Chestnut Street 92",
+       "address2": "Apartment 2",
+       "city": "Louisville",
+       "province": "Kentucky",
+       "country": "United States",
+       "zip": "40202",
+       "phone": "555-625-1199",
+       "province_code": "KY",
+       "country_code": "US",
+       "country_name": "United States",
+       "default": true
+     }
  */

@@ -16,8 +16,7 @@ struct SettingModel {
         let settings = [
             SettingModel(id: 0, title: "Address", vc: AddressListView(nibName: "AddressListView", bundle: nil)),
             SettingModel(id: 1, title: "Cuncerrency", vc: CurrencyView(nibName: "CurrencyView", bundle: nil)),
-            SettingModel(id: 2, title: "Contact Us", vc: ContactUsView(nibName: "ContactUsView", bundle: nil)),
-            SettingModel(id: 3, title: "About App", vc: AboutAppView(nibName: "AboutAppView", bundle: nil))
+            SettingModel(id: 2, title: "About App", vc: AboutAppView(nibName: "AboutAppView", bundle: nil))
         ]
         return settings
     }
@@ -26,6 +25,5 @@ struct SettingModel {
 enum SettingType {
     case address
     case cuncerrency
-    case contactUs
     case aboutApp
 }

@@ -10,8 +10,11 @@ import UIKit
 class OrderViewController: UIViewController {
     
     // MARK: - Vars
-    private let viewModel: ShoppingCartViewModel = ShoppingCartViewModel()
-
+    private let shoppinViewModel: ShoppingCartViewModel = ShoppingCartViewModel()
+    private let orderViewModel: OrderViewModel = OrderViewModel()
+    var totalPrice: Double = 1.0
+    var currencySymbol: String = ""
+    
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var couponTextField: UITextField!
@@ -28,20 +31,68 @@ class OrderViewController: UIViewController {
         configureButtonsUI()
         
         bindViewModel()
-        viewModel.fetchCartProducts()
+        shoppinViewModel.fetchCartProducts()
+        
+        couponTextField?.delegate = self
+        applyCouponButton?.isUserInteractionEnabled = false
+        applyCouponButton?.alpha = 0.5
     }
 
     // MARK: - Actions
     @IBAction func applyCouponButtonPressed(_ sender: Any) {
+        // binding
+        orderViewModel.bindToOrderVC = { [weak self] in
+            guard let self = self else { return }
+            // 3 things,
+            // update discountMoneyLabel
+            // totalMoneyLabel: UILabel!
+            //
+
+            //discountMoneyLabel.text =
+            print("inside bind")
+            guard let couponText = self.couponTextField.text else { return }
+            let type = self.orderViewModel.get_discount_type(code: couponText)
+            let amount = self.orderViewModel.get_discount_amount(code: couponText)
+            
+            if (type != nil && amount != nil) {
+                // Print
+                print("+++++++++++++")
+                print(type!, amount!)
+                print("+++++++++++++")
+                
+                if type == "percentage" {
+                    // summer discount, code
+                    //  dream1, code
+                    let positiveAmount = -1 * amount!
+                    let precentageValueInDouble = self.totalPrice / positiveAmount // positive value
+                    let priceAfterDiscount = self.totalPrice - precentageValueInDouble
+                    // Update Labels
+                    self.discountMoneyLabel.text = "\(precentageValueInDouble)" + "  " + currencySymbol
+                    self.totalMoneyLabel.text = "\(priceAfterDiscount)"  + "  " + currencySymbol
+                    // Update final cost
+                    UserDefaultsHelper.shared.setFinalTotalCost(priceAfterDiscount)
+                } else /* "fixed_amount"*/ {
+                    let priceAfterDiscount = totalPrice + amount!
+                    self.discountMoneyLabel.text = "\(amount!)" + "  " + currencySymbol
+                    // Update Labels
+                    self.totalMoneyLabel.text = String(priceAfterDiscount) + "  " + currencySymbol
+                    // Update final cost
+                    UserDefaultsHelper.shared.setFinalTotalCost(priceAfterDiscount)
+                }
+            }
+        }
         
+        orderViewModel.fetchPriceRules()
     }
     
     @IBAction func checkoutButtonPressed(_ sender: Any) {
         // PaymentView
-        let vc = PaymentView(nibName: "PaymentView", bundle: nil)
+        //let vc = PaymentView(nibName: "PaymentView", bundle: nil)
+        let vc = AddressListView(nibName: "AddressListView", bundle: nil)
         // passing data before navigation
         navigationController?.pushViewController(vc, animated: true)
     }
+    
     
     // MARK: - Function
     private func configureCollectionView() {
@@ -58,13 +109,18 @@ class OrderViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.reloadTableViewClosure = { [weak self] in
+        shoppinViewModel.reloadTableViewClosure = { [weak self] in
             self?.collectionView.reloadData()
         }
         
-        viewModel.updateTotalPriceClosure = { [weak self] totalPriceText in
-            self?.subtotalMoneyLabel.text = totalPriceText
-            self?.totalMoneyLabel.text = totalPriceText
+        shoppinViewModel.updateTotalPriceClosure = { [weak self] (totalPrice , symbol) in
+            self?.subtotalMoneyLabel.text = String(totalPrice) + "  " + symbol
+            self?.totalMoneyLabel.text = String(totalPrice) + "  " + symbol
+            self?.discountMoneyLabel.text = "0.00" + "  " + symbol
+//            var validPrice = totalPrice
+//            validPrice.removeLast(5)
+            self?.totalPrice = totalPrice
+            self?.currencySymbol = symbol
         }
     }
 }
@@ -72,12 +128,12 @@ class OrderViewController: UIViewController {
 // MARK: - Data source
 extension OrderViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.cartProductsCount
+        return shoppinViewModel.cartProductsCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductItemCell", for: indexPath) as? ProductItemCell else { return UICollectionViewCell() }
-        viewModel.configureCollectionViewCell(cell, at: indexPath.item)
+        shoppinViewModel.configureCollectionViewCell(cell, at: indexPath.item)
         return cell
     }
 }
@@ -104,5 +160,23 @@ extension OrderViewController: UICollectionViewDelegateFlowLayout {
         let height = collectionView.frame.height * 0.9
         let size = CGSize(width: width, height: height)
         return size
+    }
+}
+
+// MARK: - TextField Delegate
+extension OrderViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+
+        if !text.isEmpty{
+            applyCouponButton?.isUserInteractionEnabled = true
+            applyCouponButton?.alpha = 1.0
+        } else {
+            applyCouponButton?.isUserInteractionEnabled = false
+            applyCouponButton?.alpha = 0.5
+        }
+        return true
     }
 }

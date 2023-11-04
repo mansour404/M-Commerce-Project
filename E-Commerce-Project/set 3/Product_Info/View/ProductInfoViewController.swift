@@ -9,6 +9,10 @@ import UIKit
 
 class ProductInfoViewController: UIViewController {
     
+    // Vars
+    let shoppingCartService = ShoppingCartService()
+    let shoppingCartViewModel = ShoppingCartViewModel()
+    
     // cart code------------------------------------------------------------------------------
     @IBOutlet weak var variant_price: UILabel!
     
@@ -18,11 +22,14 @@ class ProductInfoViewController: UIViewController {
     var variant_available_elements : Int = 0
     
     var variant_index : Int = 0
-    var Variant_Unique_ID : Int = 0
+    var variant_Unique_ID : Int = 0 // found variant - mansour - send as a paramter for addToCart
+    var inventory_item_id: Int = 0
+    
     
     func get_variant_data () {
         
-    
+        print ("get_variant_data")
+        print(view_model.product)
         let all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
         
         var found : VariantCompleteModel = VariantCompleteModel()
@@ -56,6 +63,8 @@ class ProductInfoViewController: UIViewController {
         variant_price.text = found.price ?? "not found"
         variant_availability.text = found.inventory_quantity != nil ? String(found.inventory_quantity!) : "not found"
         variant_available_elements = found.inventory_quantity ?? 0
+        variant_Unique_ID  = found.id ?? 0
+        inventory_item_id = found.inventory_item_id ?? 0
     }
     
     var numberOfCartItems : Int = 0
@@ -109,6 +118,9 @@ class ProductInfoViewController: UIViewController {
           let variantId = variant_Unique_ID
           let inventory_item_id = self.inventory_item_id
           let availableElements = variant_available_elements
+        print(availableElements)
+        
+        print(variantId)
           
           let cartModel = ShoppingCartModel(title: productTitle, quantity: quantity, price: price, image: imageString, draftOrderId: productId, variantId: variantId, availableElements: availableElements, inventory_item_id: inventory_item_id)
           
@@ -127,12 +139,7 @@ class ProductInfoViewController: UIViewController {
               }
           }
       }
-      
-      // Vars
-      let shoppingCartService = ShoppingCartService()
-      let shoppingCartViewModel = ShoppingCartViewModel()
-      var variant_Unique_ID : Int = 0 // found variant - mansour - send as a paramter for addToCart
-      var inventory_item_id: Int = 0
+    //++++++++++++++++++++++++++++++++++++++++++++++ // mansour end here
     
     //------------------------------------------------------------------------------
     
@@ -229,8 +236,21 @@ class ProductInfoViewController: UIViewController {
     
     
     
-  
-    // outlets
+//    // heart
+//    let heartButton = UIButton(type: .custom) // treat it as an outlet
+//    var heartIsFilled : Bool = true;
+    
+//    func toggleHeart () {
+//        if heartIsFilled {
+//            heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+//        }
+//        else {
+//            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//        }
+//        heartIsFilled = !heartIsFilled
+//    }
+    
+  // outlets
     
     @IBOutlet weak var addToCartView: UIView!
     @IBOutlet weak var scroll_and_add_to_cart_vertical_spacing: NSLayoutConstraint!

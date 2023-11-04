@@ -19,11 +19,12 @@ class PaymentView: UIViewController {
     
     // MARK: - Vars
     var viewModel: PaymentViewModel!
-    var address: Address?
+    var address: Shipping_address?
     var isHiddenFlag: Bool = true
     var cashState: PaymentState = .notSelected
     var creditState: PaymentState = .notSelected
     var finalTotalCost: Double = 0.0
+    var currencySymbol: String = ""
     
     private var paymentRequest: PKPaymentRequest {
         let request = PKPaymentRequest()
@@ -36,10 +37,12 @@ class PaymentView: UIViewController {
         request.currencyCode = "EGP"
         
         finalTotalCost = UserDefaultsHelper.shared.getFinalTotalCost()
+        currencySymbol = UserDefaultsHelper.shared.getCurrencySymbol()
+        
         let roundedCost = Double(String(format:"%.2f", finalTotalCost)) ?? 1.00
         let _ = (finalTotalCost * 100).rounded() / 100
         let amount = NSDecimalNumber(value: roundedCost)
-        request.paymentSummaryItems = [PKPaymentSummaryItem(label: "Order Cost", amount: amount)]
+        request.paymentSummaryItems = [PKPaymentSummaryItem(label: "Order total caost", amount: amount)]
         
         return request
     }
@@ -65,7 +68,11 @@ class PaymentView: UIViewController {
         finalTotalCost = UserDefaultsHelper.shared.getFinalTotalCost()
         configureUI()
         setupGestureRecognizer()
-        viewModel = PaymentViewModel()
+        viewModel = PaymentViewModel(shippingAddress: address)
+        print("++++++++++++")
+        print(address)
+        print("++++++++++++")
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,8 +84,8 @@ class PaymentView: UIViewController {
     @IBAction func checkoutButtonPressed(_ sender: Any) {
         
         //viewModel.postOrder(order: order)
-        finalTotalCost = 0.0
-        UserDefaultsHelper.shared.setFinalTotalCost(finalTotalCost)
+        //finalTotalCost = 0.0
+        //UserDefaultsHelper.shared.setFinalTotalCost(finalTotalCost)
         //viewModel.updateVar()
         
         if creditState == .selected {
@@ -86,7 +93,8 @@ class PaymentView: UIViewController {
             presentPaymentController()
         }else{
             // only play animaton for cash on delivery
-            playAnimation()
+            //playAnimation()
+            resetOrderSetup()
         }
         
         // TODO: - Reset coupon.
@@ -105,7 +113,7 @@ class PaymentView: UIViewController {
         orderInfoView.clipsToBounds = true
         orderInfoView.dropShadow()
         
-        totalLabel.text = String(finalTotalCost)
+        totalLabel.text = String(finalTotalCost) + "  " + currencySymbol
     }
     
     private func configureCardView(_ view: UIView) {
@@ -136,6 +144,16 @@ class PaymentView: UIViewController {
                 self.view.layoutIfNeeded()
             }
         }
+    }
+    
+    private func resetOrderSetup() {
+        self.finalTotalCost = 0.0
+        UserDefaultsHelper.shared.setFinalTotalCost(finalTotalCost)
+        UserDefaultsHelper.shared.setContinueToPayment(false)
+        // TODO: - Get currency Symbol and add it after final cost on label
+        self.totalLabel.text = "\(finalTotalCost) EGP"
+        self.viewModel.postOrder()
+        self.playAnimation()
     }
     
     // MARK: - Setup gesture recognizer
@@ -190,12 +208,15 @@ extension PaymentView: PKPaymentAuthorizationViewControllerDelegate {
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         controller.dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
-            self.finalTotalCost = 0.0
-            // TODO: - Get currency Symbol and add it after final cost on label
-            self.totalLabel.text = "\(0.0) EGP"
-            //viewModel.decreaseVariantCountByOrderAmount()
-            self.viewModel.postOrder()
-            self.playAnimation()
+//            self.finalTotalCost = 0.0
+//            UserDefaultsHelper.shared.setFinalTotalCost(finalTotalCost)
+//            UserDefaultsHelper.shared.setContinueToPayment(false)
+//            // TODO: - Get currency Symbol and add it after final cost on label
+//            self.totalLabel.text = "\(finalTotalCost) EGP"
+//            //viewModel.decreaseVariantCountByOrderAmount()
+//            self.viewModel.postOrder()
+//            self.playAnimation()
+            self.resetOrderSetup()
         }
     }
     
@@ -224,8 +245,8 @@ extension PaymentView {
     
     func navigateToRootVC(){
         let alert = Alert.showAlertWithMessage(title: "Congratulations", message: "Successful payment done", buttonTitle: "Ok") { action in
-            //self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-            self.navigationController?.popToRootViewController(animated: true) // doesn't work
+            self.navigationController?.popToRootViewController(animated: true)
+            //self.view.window?.rootViewController?.dismiss(animated: true, completion: nil) // doesn't work
             //self.dismissViewControllers() // doesn't work
         }
         self.present(alert, animated: true)

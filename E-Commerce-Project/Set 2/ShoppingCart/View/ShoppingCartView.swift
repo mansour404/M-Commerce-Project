@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Alamofire
 
 class ShoppingCartView: UIViewController {
     // MARK: - Vars
     // ProductInfoViewController
     private let viewModel: ShoppingCartViewModel = ShoppingCartViewModel()
     var totalPrice: Double = 0.0
+    var currencySymbol: String = ""
     
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -45,7 +47,9 @@ extension ShoppingCartView {
     @IBAction func checkoutButtonPressed(_ sender: UIButton) {
 //        totalPrice = Double(totalPriceLabel.text ?? "0.0")!
         UserDefaultsHelper.shared.setFinalTotalCost(totalPrice)
-        let vc = AddressListView(nibName: "AddressListView", bundle: nil)
+        UserDefaultsHelper.shared.setContinueToPayment(true)
+        //let vc = AddressListView(nibName: "AddressListView", bundle: nil)
+        let vc = OrderViewController(nibName: "OrderViewController", bundle: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -72,11 +76,18 @@ extension ShoppingCartView {
             self?.shoppingCartIsEmpty()
         }
         
-        viewModel.updateTotalPriceClosure = { [weak self] totalPriceText in
-            self?.totalPriceLabel.text = totalPriceText
-            var validPrice = totalPriceText
-            validPrice.removeLast(5)
-            self?.totalPrice = Double(validPrice) ?? 0.0
+//        viewModel.updateTotalPriceClosure = { [weak self] totalPriceText in
+//            self?.totalPriceLabel.text = totalPriceText
+//            var validPrice = totalPriceText
+//            validPrice.removeLast(5)
+//            self?.totalPrice = Double(validPrice) ?? 0.0
+//        }
+        viewModel.updateTotalPriceClosure = { [weak self] (totalPrice , symbol) in
+            self?.totalPriceLabel.text = String(totalPrice) + "  " + symbol
+//            var validPrice = totalPrice
+//            validPrice.removeLast(5)
+            self?.totalPrice = totalPrice
+            self?.currencySymbol = symbol
         }
     }
     
@@ -123,7 +134,7 @@ extension ShoppingCartView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingCartCell", for: indexPath) as? ShoppingCartCell else { return UITableViewCell()}
         viewModel.configCell(cell, at: indexPath.row)
-        cell.delegate = self
+        cell.delegate = self // set cell delegate equal self.
         return cell
     }
     
@@ -137,38 +148,45 @@ extension ShoppingCartView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-        viewModel.deleteProductFromShoppingCart(at: indexPath.row)
+        viewModel.deleteProductFromShoppingCart(index: indexPath.row)
+        //deleteProduct(index: indexPath.row)
     }
 }
 
 
 extension ShoppingCartView: ShoppingCartCellDelegate {
-    func deleteProduct(index: Int) {
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            self.tableView.reloadData()
-        }
-        
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-            self?.viewModel.deleteProductFromShoppingCart(forCellID: index)
-        }
-        
-        Alert.showAlert(target: self, title: "Be Careful", message: "You are going to remove product from cart!", actions: [cancelAction, deleteAction])
-    }
+
     
     func updateProductCount(index: Int, count: Int) {
         if count <= 0 {
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            let cancelAction = UIAlertAction(title: "Close", style: .cancel) { _ in
                 self.tableView.reloadData()
             }
-            
+
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-                self?.viewModel.deleteProductFromShoppingCart(forCellID: index)
+                self?.viewModel.deleteProductFromShoppingCart(index: index)
             }
-            
-            Alert.showAlert(target: self, title: "Be Careful", message: "You are going to remove product from cart!", actions: [cancelAction, deleteAction])
+
+            Alert.showAlert(target: self, title: "Be Careful", message: "You are going to update product from cart!", actions: [cancelAction, deleteAction])
         } else {
-            viewModel.updateProductCount(index: index, count: count)
+            //viewModel.updateProductCount(index: index, count: count)
+            viewModel.updateProductCountInShoppingCart(index: index, count: count)
+            //test_put_draft_order ()
         }
+        
     }
+
+//    func test_put_draft_order () {
+//        let url = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders/1031372177558.json"
+//        let params = ["draft_order":["id":1031372177558,"line_items":[["variant_id":42798192099478,"quantity":0, "sku" : "new sku",
+//                                                                       "properties": [["name":"value", "value" : "value2"]]], ["variant_id":42798187446422,"quantity":33, "sku" : "new sku2"]]]]
+//
+//        let header : HTTPHeaders = ["X-Shopify-Access-Token": "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"]
+//
+//        Alamofire.AF.request(url, method: .put, parameters: params, headers: header).response { data in
+//
+//            print("I am done")
+//        }
+//    }
 }
 

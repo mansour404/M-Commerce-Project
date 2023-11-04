@@ -38,20 +38,27 @@ class ShoppingCartViewModel {
     
     // MARK: - Closures
     var reloadTableViewClosure: (() -> ())?
-    var updateTotalPriceClosure: ((String) -> ())?
+    var updateTotalPriceClosure: ((Double,String) -> ())?
     
     
     // MARK: - Functions
     func configCell(_ cell: ShoppingCartCell, at index: Int) {
         let product = cartProducts[index]
+//        print("+++++++++++++++++++++++")
+//        print(product)
+//        print("+++++++++++++++++++++++")
+//        print(cartProducts)
+//        print("+++++++++++++++++++++++")
         cell.configureCell(product, index: index)
     }
     
+    // MARK: -  Configure cell for order view, the next view.
     func configureCollectionViewCell(_ cell: ProductItemCell, at index: Int) {
         let product = cartProducts[index]
         cell.configureCell(product, index: index)
     }
     
+    // MARK: - Mainpulate shopping cart
     func fetchCartProducts() {
         shoppingCartService.getShoppingCartProducts(customerId: customerId) { [weak self] result in
             guard let self = self else { return }
@@ -59,9 +66,10 @@ class ShoppingCartViewModel {
             case .success(let cartProducts):
                 self.cartProducts = cartProducts
                 let totalPrice = cartProducts.map { ($0.price ?? 0) * Double($0.quantity ?? 0) }.reduce(0, +)
-                let priceString = String(format: "%.2f", totalPrice) + "  EGP"
+                //let priceString = String(format: "%.2f", totalPrice) + "  EGP"
+                let symbol = UserDefaultsHelper.shared.getCurrencySymbol()
                 DispatchQueue.main.async {
-                    self.updateTotalPriceClosure?(priceString)
+                    self.updateTotalPriceClosure?(totalPrice, symbol)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -69,26 +77,26 @@ class ShoppingCartViewModel {
         }
     }
     
-    func updateProductCount(index: Int, count: Int){
-        let variantId = index
-        if let cartProduct = cartProducts.first(where: { $0.variantId == variantId }) {
-            print("\(count)")
-            shoppingCartService.updateProductQuantity(cartProduct: cartProduct, quantity: count, customerId: customerId) { [weak self] error in
-                guard let self = self else { return }
-                self.fetchCartProducts()
-            }
+    func updateProductCountInShoppingCart(index: Int?, count: Int?){
+        if let index = index, let count = count {
+            print("at")
+            print("++++++++++")
+            print("count", count)
+            print("index", index)
+            print("++++++++++")
+            let cartProduct = cartProducts[index]
+            updateCartProduct(cartProduct, quantity: count, customerId: customerId)
         }
+        //shoppingCartService.test_put_draft_order()
     }
     
-    func deleteProductFromShoppingCart(forCellID id: Int? = nil, at index: Int? = nil) {
-        if let id = id {
-            let variantId = id
-            if let cartProduct = cartProducts.first(where: { $0.variantId == variantId }) {
-                deleteCartProduct(cartProduct)
-            }
-        } else if let index = index {
+    func deleteProductFromShoppingCart(index: Int? = nil) {
+        print("8888888888888")
+        if let index = index {
+            print("at")
             deleteCartProduct(cartProducts[index])
         }
+        print("7777777777777")
     }
     
     // MARK: - Private Function
@@ -103,5 +111,14 @@ class ShoppingCartViewModel {
         }
     }
     
-    
+    private func updateCartProduct(_ cartProduct: ShoppingCartModel, quantity: Int, customerId: Int) {
+        shoppingCartService.updateProductQuantity(cart: cartProduct, quantity: quantity, customerId: customerId) { [weak self] error in
+            guard let self = self else { return }
+            if let error = error {
+                print(error)
+                return
+            }
+            self.fetchCartProducts()
+        }
+    }
 }

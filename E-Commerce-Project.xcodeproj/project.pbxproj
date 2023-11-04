@@ -102,6 +102,7 @@
 		E5B3E8E22AEDA93000BD8E93 /* ShoppingCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3E8E12AEDA93000BD8E93 /* ShoppingCartViewModel.swift */; };
 		E5B3E8E42AEDAB4D00BD8E93 /* ShoppingCartCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3E8E32AEDAB4D00BD8E93 /* ShoppingCartCellViewModel.swift */; };
 		E5B3E8E82AEDD18200BD8E93 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B3E8E72AEDD18200BD8E93 /* Alert.swift */; };
+		E5C7F1C52AF5487100F154F5 /* OrderNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7F1C42AF5487100F154F5 /* OrderNetworkingService.swift */; };
 		E5D2279B2AE321E900A56A9A /* NewAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227992AE321E900A56A9A /* NewAddressView.swift */; };
 		E5D2279C2AE321E900A56A9A /* NewAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5D2279A2AE321E900A56A9A /* NewAddressView.xib */; };
 		E5D2279F2AE3220A00A56A9A /* AddressListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D2279D2AE3220A00A56A9A /* AddressListView.swift */; };
@@ -115,8 +116,6 @@
 		E5D227B72AE3302400A56A9A /* SettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227B62AE3302400A56A9A /* SettingCellViewModel.swift */; };
 		E5D227BC2AE3571C00A56A9A /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227BA2AE3571C00A56A9A /* AboutAppView.swift */; };
 		E5D227BD2AE3571C00A56A9A /* AboutAppView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5D227BB2AE3571C00A56A9A /* AboutAppView.xib */; };
-		E5D227C02AE3598900A56A9A /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227BE2AE3598900A56A9A /* ContactUsView.swift */; };
-		E5D227C12AE3598900A56A9A /* ContactUsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5D227BF2AE3598900A56A9A /* ContactUsView.xib */; };
 		E5D227C92AE3707F00A56A9A /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227C72AE3707F00A56A9A /* CurrencyView.swift */; };
 		E5D227CA2AE3707F00A56A9A /* CurrencyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5D227C82AE3707F00A56A9A /* CurrencyView.xib */; };
 		E5D227CE2AE370C300A56A9A /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D227CC2AE370C300A56A9A /* CurrencyCell.swift */; };
@@ -257,6 +256,7 @@
 		E5B3E8E12AEDA93000BD8E93 /* ShoppingCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewModel.swift; sourceTree = "<group>"; };
 		E5B3E8E32AEDAB4D00BD8E93 /* ShoppingCartCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartCellViewModel.swift; sourceTree = "<group>"; };
 		E5B3E8E72AEDD18200BD8E93 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		E5C7F1C42AF5487100F154F5 /* OrderNetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNetworkingService.swift; sourceTree = "<group>"; };
 		E5D227992AE321E900A56A9A /* NewAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddressView.swift; sourceTree = "<group>"; };
 		E5D2279A2AE321E900A56A9A /* NewAddressView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewAddressView.xib; sourceTree = "<group>"; };
 		E5D2279D2AE3220A00A56A9A /* AddressListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListView.swift; sourceTree = "<group>"; };
@@ -270,8 +270,6 @@
 		E5D227B62AE3302400A56A9A /* SettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellViewModel.swift; sourceTree = "<group>"; };
 		E5D227BA2AE3571C00A56A9A /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		E5D227BB2AE3571C00A56A9A /* AboutAppView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutAppView.xib; sourceTree = "<group>"; };
-		E5D227BE2AE3598900A56A9A /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
-		E5D227BF2AE3598900A56A9A /* ContactUsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactUsView.xib; sourceTree = "<group>"; };
 		E5D227C72AE3707F00A56A9A /* CurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyView.swift; sourceTree = "<group>"; };
 		E5D227C82AE3707F00A56A9A /* CurrencyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyView.xib; sourceTree = "<group>"; };
 		E5D227CC2AE370C300A56A9A /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
@@ -758,6 +756,7 @@
 			children = (
 				E53E899F2AE751170039B3D0 /* ViewModel */,
 				E5814B1B2AE0C06D00D4D60F /* View */,
+				E5C7F1C32AF5484000F154F5 /* Model */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -870,6 +869,14 @@
 			path = DraftOrderModel;
 			sourceTree = "<group>";
 		};
+		E5C7F1C32AF5484000F154F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E5C7F1C42AF5487100F154F5 /* OrderNetworkingService.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E5D2278F2AE3214300A56A9A /* Address */ = {
 			isa = PBXGroup;
 			children = (
@@ -906,7 +913,6 @@
 			isa = PBXGroup;
 			children = (
 				E5D227B92AE356D100A56A9A /* AboutApp */,
-				E5D227B82AE3562400A56A9A /* ContactUs */,
 				E5D227A72AE3258700A56A9A /* Cell */,
 				E5D227A22AE3235A00A56A9A /* SettingsView.swift */,
 				E5D227A32AE3235A00A56A9A /* SettingsView.xib */,
@@ -938,15 +944,6 @@
 				E5D227B62AE3302400A56A9A /* SettingCellViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		E5D227B82AE3562400A56A9A /* ContactUs */ = {
-			isa = PBXGroup;
-			children = (
-				E5D227BE2AE3598900A56A9A /* ContactUsView.swift */,
-				E5D227BF2AE3598900A56A9A /* ContactUsView.xib */,
-			);
-			path = ContactUs;
 			sourceTree = "<group>";
 		};
 		E5D227B92AE356D100A56A9A /* AboutApp */ = {
@@ -1295,7 +1292,6 @@
 				E5D227BD2AE3571C00A56A9A /* AboutAppView.xib in Resources */,
 				DC851A6A2AE9E1E9001BD944 /* Login_or_Singup.xib in Resources */,
 				E59AAEF12ADE91F500683168 /* LaunchScreen.storyboard in Resources */,
-				E5D227C12AE3598900A56A9A /* ContactUsView.xib in Resources */,
 				DC851A302AE9D69A001BD944 /* CategoriesViewController.xib in Resources */,
 				B2DD780C2AE6834B0082CADE /* UserOrderDetailsViewController.xib in Resources */,
 				E59AAEEE2ADE91F500683168 /* Assets.xcassets in Resources */,
@@ -1377,6 +1373,7 @@
 				DC851A712AE9E1E9001BD944 /* ProductViewModel.swift in Sources */,
 				E5D2279F2AE3220A00A56A9A /* AddressListView.swift in Sources */,
 				DC851A742AE9E1E9001BD944 /* FavouriteViewModel.swift in Sources */,
+				E5C7F1C52AF5487100F154F5 /* OrderNetworkingService.swift in Sources */,
 				DCE147122AE6CED300B37C03 /* sectionHeader.swift in Sources */,
 				DC851A312AE9D69A001BD944 /* CategoriesViewController.swift in Sources */,
 				E5B3E8E22AEDA93000BD8E93 /* ShoppingCartViewModel.swift in Sources */,
@@ -1395,7 +1392,6 @@
 				E5D227D52AE3799900A56A9A /* ExchangeRatesData.swift in Sources */,
 				E5B3E8E42AEDAB4D00BD8E93 /* ShoppingCartCellViewModel.swift in Sources */,
 				DCE1EB2B2AE8C1920038AA1E /* ProductViewModel.swift in Sources */,
-				E5D227C02AE3598900A56A9A /* ContactUsView.swift in Sources */,
 				E5814B242AE0D30F00D4D60F /* ProductItemCell.swift in Sources */,
 				E5B3E8E82AEDD18200BD8E93 /* Alert.swift in Sources */,
 				E5D227BC2AE3571C00A56A9A /* AboutAppView.swift in Sources */,

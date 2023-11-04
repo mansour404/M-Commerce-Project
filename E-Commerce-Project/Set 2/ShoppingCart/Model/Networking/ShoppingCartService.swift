@@ -37,6 +37,7 @@ class ShoppingCartService {
                     let quantity = draftOrder.line_items?.first?.quantity
                     let availableElements = Int(draftOrder.line_items?.first?.sku ?? "1")
                     //let inventory_item_id = draftOrder.line_items?.first?.variant_id.
+                    
                     let cartProduct = ShoppingCartModel(title: title, quantity: quantity, price: price, image: image, draftOrderId: orderId, variantId: variant_id, availableElements: availableElements, inventory_item_id: 99)
                     items.append(cartProduct)
                 }
@@ -57,33 +58,34 @@ class ShoppingCartService {
         let image = cart.image ?? "Picture"
         let sku = String(cart.availableElements ?? 0)
         let inventoryItemId = cart.inventory_item_id
+        
         print("++++++++++++++++++")
         print(inventoryItemId)
         print("++++++++++++++++++")
 
         let parameters: [String: Any] = [
-           "draft_order": [
-              "line_items":[
-                 [
-                    "id": variantId,
-                    "variant_id": variantId, //Optional("{\"errors\":{\"line_items[0].variant_id\":[\"not found\"]}}")
-                    "title":title,
-                    "price":price,
-                    "quantity":quantity,
-                    "sku": sku,
-                    "fulfillment_service": image,
-                    "properties": [
-                          [
-                            "name": "imageSrc",
-                            "value": image
-                          ]
-                    ]
-                 ] as [String : Any]
-              ],
-              "customer": [
-                 "id":customerId
-              ]
-           ] as [String : Any]
+            "draft_order": [
+                "line_items":[
+                    [
+                        "id": variantId,
+                        "variant_id": variantId, //Optional("{\"errors\":{\"line_items[0].variant_id\":[\"not found\"]}}")
+                        "title":title,
+                        "price":price,
+                        "quantity":quantity,
+                        "sku": sku,
+                        //"fulfillment_service": image,
+                        "properties": [
+                            [
+                                "name": "imageSrc",
+                                "value": image
+                            ]
+                        ]
+                    ] as [String : Any]
+                ],
+                "customer": [
+                    "id":customerId
+                ]
+            ] as [String : Any]
         ]
         
         
@@ -99,50 +101,79 @@ class ShoppingCartService {
     }
     
     // MARK: - Update
-    func updateProductQuantity(cartProduct: ShoppingCartModel, quantity: Int, customerId: Int, completion:  @escaping (Result<[DraftOrdersResult], Error>) -> Void) {
-        guard let draftOrderId = cartProduct.draftOrderId else { return }
-        guard let variantId = cartProduct.variantId else { return }
-        let stringUrl = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders" + "/\(draftOrderId).json"
+    
+    func updateProductQuantity(cart: ShoppingCartModel, quantity: Int, customerId: Int, completion: @escaping (Error?) -> Void) {
+        guard let draftOrderId = cart.draftOrderId else { return }
+        guard let variantId = cart.variantId else { return }
+        let stringUrl = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders/" + "\(draftOrderId).json"
+        print(draftOrderId, variantId)
         
-        let parameters: [String: Any] = [
-            "draft_order": [ "line_items": [
-                [ "variant_id": variantId, "quantity": quantity, "properties": [
-                    ["name": "imageSrc", "value": cartProduct.image]
-                ] ] as [String : Any] ]
-                           ]
+        let price = cart.price ?? 0.0
+        //let quantity = cart.quantity ?? 1
+        let title = cart.title ?? "Title"
+        let image = cart.image ?? "Picture"
+        let sku = String(cart.availableElements ?? 0)
+        
+        print(variantId)
+        
+        let parameters = [
+            "draft_order": [
+                "id":draftOrderId,
+                "line_items": [
+                    [
+                        "variant_id":variantId,
+                        "quantity":quantity,
+                        "sku": "new sku",
+                        "properties": [
+                            [
+                                "name": "imageSrc",
+                                "value": image
+                            ]
+                        ]
+                    ] as [String : Any]
+                ]
+            ] as [String : Any]
         ]
         
-        // Note: Pass new array of line items not the last line item.
-        //let parameters: [String: Any] = Hopa()
+        //        let parameters: [String: Any] = [
+        //            "draft_order": [
+        //                "id": draftOrderId,
+        //                "line_items":[
+        //                    [
+        //                        //"id": draftOrderId,
+        //                        "variant_id": variantId,
+        //                        "title":title,
+        //                        "price":price,
+        //                        "quantity":quantity, // USE the new quantity passed from minus or plus button.
+        //                        "sku": sku,
+        //                        "properties": [
+        //                            [
+        //                                "name": "imageSrc",
+        //                                "value": image
+        //                            ]
+        //                        ]
+        //                    ] as [String : Any]
+        //                ],
+        //                "customer": [
+        //                    "id":customerId
+        //                ]
+        //            ] as [String : Any]
+        //        ]
+        
+        // Note: if i want to has only one draft order, Pass new array of line items not the last line item.
         AF.request(stringUrl, method: .put, parameters: parameters, headers: headers).response { response in
             switch response.result {
             case .success(let data):
-                print(data)
-                //completion(nil)
-//                do {
-//                    let result = try JSONDecoder().decode(DraftOrdersResult.self, from: data)
-//                    completion(.success(<#T##[DraftOrdersResult]#>))
-//                } catch {
-//                    print("Error: Trying to convert JSON data to string")
-//                    return
-//                }
+                print("UPPPPPPPPPPPPPPPPPPP")
+                print(String(data: data!, encoding: .utf8))
+                completion(nil)
             case .failure(let error):
-                completion(.failure(error))
+                print("NIIIIIIIIIIIIIIIIIIIII")
+                completion(error)
             }
         }
     }
     
-//    private func Hopa() -> [String: Any] {
-//        var arr = ShoppingCartList.items
-//        if arr.isEmpty {
-//            let lineItem = Line_items(price: "88.9", quantity: 22, title: "Dummy", variant_id: nil, vendor: nil, sku: "")
-//            arr.append(lineItem)
-//        }
-//        let draftOrder = Draft_orders(id: nil, note: nil, line_items: arr, customer: nil)
-//        let resoponse = DraftOrdersResult(draft_orders: [draftOrder])
-//        let params = JsonEncoderHelper.convertObjectToJson(object: resoponse)!
-//        return params
-//    }
     
     // MARK: - Remove
     func removeProductFromCart(cartProduct: ShoppingCartModel, customerId: Int, completion: @escaping (Error?) -> Void) {
@@ -160,3 +191,24 @@ class ShoppingCartService {
     }
     
 }
+
+/*
+ //    func test_put_draft_order () {
+ //            let url = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders/1031372177558.json"
+ ////            let params = ["draft_order":["id":1031372177558,"line_items":[["variant_id":42798192099478,"quantity":7777, "sku" : "new sku",
+ ////                "properties": [["name":"value", "value" : "value2"]]], ["variant_id":42798187446422,"quantity":33, "sku" : "new sku2"]]]]
+ //
+ //        let params = ["draft_order":["id":1031372177558,"line_items":[["variant_id":42798192099478,"quantity":0, "sku" : "new sku",
+ //                                                                       "properties": [["name":"value", "value" : "value2"]]], ["variant_id":42798187446422,"quantity":33, "sku" : "new sku2"]]]]
+ //
+ //            let header : HTTPHeaders = ["X-Shopify-Access-Token": "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"]
+ //
+ //            Alamofire.AF.request(url, method: .put, parameters: params, headers: header).response { data in
+ //
+ //                print("I am done")
+ //            }
+ //        }
+ 
+ //        let parameters = ["draft_order":["id":draftOrderId,"line_items":[["variant_id":variantId,"quantity":quantity, "sku" : "new sku",
+ //            "properties": [["name":"value", "value" : "value2"]]] ]]]
+ */

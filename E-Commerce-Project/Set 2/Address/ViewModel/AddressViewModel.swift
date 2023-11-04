@@ -16,9 +16,11 @@ class AddressViewModel {
     // MARK: - Variables
     var addressService: AddressServiceProtocol!
     var items: [Address] = []
+    var defaultAddress: Address?
     var newAddress: [Address] = []
-    var shippingAddress: Address?
+    var shippingAddress: Shipping_address?
     let customerId: Int = UserDefaultsHelper.shared.getCustomerId()
+    let continueToPayment = UserDefaultsHelper.shared.getContinueToPayment()
     
     // MARK: - Init
     init(addressService: AddressServiceProtocol = AddressService()) {
@@ -90,6 +92,11 @@ class AddressViewModel {
             case .success(let data):
                 guard let addresses = data else { return }
                 self.items = addresses // Cashing
+                for address in addresses {
+                    if address.isDefault != nil {
+                        self.defaultAddress = address
+                    }
+                }
                 self.processFetcheditems(items)
             case .failure(let error):
                 print(error.localizedDescription)
@@ -113,20 +120,39 @@ class AddressViewModel {
     }
     
     
-    func selectAddressForShipping(indexPath: IndexPath) {
-        guard let address_id = items[indexPath.row].id else { return }
-        addressService.getSingleAddress(customerId: customerId, address_id: address_id) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let address):
-                print("success")
-                self.shippingAddress = address
-                //completion(.success(success))
-            case .failure(let error):
-                print(error)
-                //completion(.failure(error))
-            }
-        }
+    func selectAddressForShipping(index: Int) {
+//        guard let index = index else {
+//            let shippingAddress = Shipping_address(first_name: defaultAddress?.firstName, address1: defaultAddress?.address1, phone: defaultAddress?.phone, city: defaultAddress?.city, country: defaultAddress?.country, last_name: defaultAddress?.lastName, address2: defaultAddress?.address2, company: nil, name: defaultAddress?.name)
+//            self.shippingAddress = shippingAddress
+//            return
+//        }
+        guard let address_id = items[index].id else { return }
+        print(address_id, customerId)
+        
+        let address = items[index]
+        let shippingAddress = Shipping_address(first_name: address.firstName, address1: address.address1, phone: address.phone, city: address.city, country: address.country, last_name: address.lastName, address2: address.address2, company: nil, name: address.name)
+        self.shippingAddress = shippingAddress
+        
+        //                self.shippingAddress = shippingAddress
+//        addressService.getSingleAddress(customerId: customerId, address_id: address_id) { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let address):
+//                print("success")
+//                print(address)
+//                let shippingAddress = Shipping_address(first_name: address?.firstName, address1: address?.address1, phone: address?.phone, city: address?.city, country: address?.country, last_name: address?.lastName, address2: address?.address2, company: nil, name: address?.name)
+//                self.shippingAddress = shippingAddress
+//                print("Succeed fetch address and creaat shipping address.")
+//                print(shippingAddress)
+//            case .failure(let error):
+//                print(error)
+//            }
+//
+//            print("Complete")
+//        }
+        
     }
+    
+    
   
 }
