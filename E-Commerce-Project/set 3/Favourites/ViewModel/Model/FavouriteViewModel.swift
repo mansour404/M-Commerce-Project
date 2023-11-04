@@ -80,7 +80,7 @@ class FavouriteViewModel {
     }
        
     
-    func sendWishId(userID : Int64 ,productId : Int) ->Int{
+    func sendWishId(userID : Int64 ,productId : Int) {
         var wishId = 0
         services.getfavouriteItem(userID: UserDefaultsHelper.shared.getCustomerId() , productId: productId, Handler: { (dataValue:WhishList?, error: Error?) in
             print("Success")
@@ -98,7 +98,7 @@ class FavouriteViewModel {
                 }
             }
         })
-        return wishId
+        //return wishId
     }
     
 

@@ -323,7 +323,9 @@ class ProductInfoViewController: UIViewController {
     @objc func heartButtonPressed(sender: UIButton) {
         print(heartIsFilled)
         if heartIsFilled {
-            view_model.StageDelete()        }
+            view_model.StageDelete(product_id: view_model.product!.id!)
+            
+        }
         else {
             view_model.createFavourite()
         }
@@ -336,7 +338,7 @@ class ProductInfoViewController: UIViewController {
         }
         else {
             heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            
+            heartIsFilled = false
         }
     }
     

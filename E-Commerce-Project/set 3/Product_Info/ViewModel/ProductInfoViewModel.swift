@@ -58,32 +58,34 @@ class ProductInfoViewModel {
         })
     }
     
-    func StageDelete(){
+    func StageDelete(product_id : Int){
      
         obj.compiltionHandler = { id in
             if id != -1 {
+                print(id)
                 self.deleteProductFromFavourites(wishId: id)
             }
             
         }
+        obj.sendWishId(userID: Int64(UserDefaultsHelper.shared.getCustomerId()), productId: product_id)
         
           
     }
     
         func deleteProductFromFavourites(wishId : Int){
-            networkManager.removefavouriteItem(userID: 6866434621590, wishId: wishId ,Handler: {
+            networkManager.removefavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), wishId: wishId ,Handler: {
             self.bindresultToProductsViewController(false)
         })
         
     }
     func createFavourite(){
-        networkManager.addFavouriteItem(userID: 6866434621590, productId: Int(id!), productName: (product?.title)!, Handler:{
+        networkManager.addFavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), productId: Int(id!), productName: (product?.title)!, Handler:{
             self.bindresultToProductsViewController(true)
         })
     }
     
     func  setControllerFavourite(){
-        networkManager.getfavouriteItem(userID: 6866434621590 , productId: Int(id!), Handler: { (dataValue:WhishList?, error: Error?) in
+        networkManager.getfavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()) , productId: Int(id!), Handler: { (dataValue:WhishList?, error: Error?) in
             print("Success")
             if let mydata = dataValue {
                 print(mydata.metafields)

@@ -69,6 +69,9 @@ func getNumberOfProduct() -> Int? {
  
     } 
     func getid(index: Int) -> String{
+        if (AllBrandProducts?.products[index].images.count == 0) {
+            return "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
+        }
         return  AllBrandProducts?.products[index].images[0].src ?? "none"
  
     }
