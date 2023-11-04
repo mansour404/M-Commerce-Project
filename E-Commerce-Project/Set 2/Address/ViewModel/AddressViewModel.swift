@@ -87,7 +87,7 @@ class AddressViewModel {
             case .success(let data):
                 guard let addresses = data else { return }
                 self.items = addresses // Cashing
-                self.processFetcheditems(items)
+                self.processFetcheditems(self.items)
             case .failure(let error):
                 print(error.localizedDescription)
             }

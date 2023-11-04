@@ -98,8 +98,8 @@ extension AddressListView: UITableViewDelegate {
                 guard let self = self else { return }
                 //viewModel.removeLeagueFromCoreData(at: indexPath.row)
                 //viewModel.updateTableView(at: indexPath)
-                viewModel.removeAddress(indexPath: indexPath)
-                initVM()
+                self.viewModel.removeAddress(indexPath: indexPath)
+                self.initVM()
             }
             alertController.addAction(cancelAction)
             alertController.addAction(confirmAction)
@@ -128,9 +128,9 @@ extension AddressListView {
     func updateTableView(at indexPath: IndexPath) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.endUpdates()
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.endUpdates()
         }
     }
 }
