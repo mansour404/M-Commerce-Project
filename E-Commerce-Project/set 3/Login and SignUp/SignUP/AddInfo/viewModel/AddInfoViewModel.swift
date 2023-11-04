@@ -8,22 +8,34 @@
 import Foundation
 class AddInfoViewModel {
     private let manager = NetworkServices()
-    private var customerData : Customer?
+   
     var messageText : String = ""
     var bindresultToProductsViewController : (() -> ()) = {}
     var showAlert : (() -> ()) = {}
+    var isItokay: Bool? {
+        didSet{
+            bindresultToProductsViewController()
+        }
+    }
     //MARK: - get data from api
     func getUserData(UserEmail : String,customerPassword : String ,customerPhoneNumber : String){
         manager.getCustomerByEmail(userEmail: UserEmail, Handler:  {(dataValue:CustomerList?, error: Error?) in
     
 
             if let mydata = dataValue {
-                self.customerData = mydata.customers[0]
-                self.editCustomerData(CustomerId: (self.customerData?.id!)!, customerPassword: customerPassword, customerPhoneNumber: customerPhoneNumber)
+              
+                print("==================================================")
+                print("success from get user by email ---- \( mydata.customers[0])")
+                print("==================================================")
+                self.editCustomerData(CustomerId: mydata.customers[0].id!, customerPassword: customerPassword, customerPhoneNumber: customerPhoneNumber)
             }else {
                 if let error = error{
+                    print("==================================================")
+                    print("error from get user by email")
+                    print("==================================================")
                     self.messageText = "\(error.localizedDescription)"
                     self.showAlert()
+                   
                 }
             }
         })
@@ -35,18 +47,19 @@ class AddInfoViewModel {
     func editCustomerData (CustomerId :  Int,customerPassword : String ,customerPhoneNumber : String ) {
         manager.editCustomerData(CustomerId: CustomerId, customerPassword: customerPassword, customerPhoneNumber: customerPhoneNumber, Handler: {error in
             if error != nil {
-                self.messageText = "\(error?.localizedDescription)"
+                self.messageText = "\(String(describing: error?.localizedDescription))"
                 self.showAlert()
+                self.isItokay = false
                 
             }
             else{
-                self.messageText = "Your Data has been added Successfully,Thank you! "
-                self.showAlert()
+             
+//                self.showAlert()
                 self.setCustomerId(customerId: CustomerId)
-                self.bindresultToProductsViewController()
-            }
-            
-        })
+             
+                self.isItokay = true
+            }})
+        
     }
     //MARK: - add cutomer  to user default
     

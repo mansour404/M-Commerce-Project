@@ -11,13 +11,20 @@ class GoogleLoginVC: UIViewController {
 
     @IBOutlet weak var userEmaillabel: UILabel!
     @IBOutlet weak var PhoneNumberField: UITextField!
-    @IBOutlet weak var ConfirmPasswordField: UILabel!
+  
+    @IBOutlet weak var ConfirmPasswordField: UITextField!
     @IBOutlet weak var NewPasswordFiell: UITextField!
     var userEmail : String = ""
     private let addUserDetailsModel  = AddInfoViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         userEmaillabel.text = userEmail
+        addUserDetailsModel.bindresultToProductsViewController = { // set alert message
+            let vc = TabController()
+            vc.modalPresentationStyle = .fullScreen
+        
+            self.present(vc, animated: true)
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -35,27 +42,28 @@ class GoogleLoginVC: UIViewController {
     }
     @IBAction func addPasswordtapped(_ sender: UIButton) {
         if textFieldIsNotEmpty(){              // check if text fields is not empty
-            if(addUserDetailsModel.isDataValid(phoneNumber: PhoneNumberField.text!, userPassword: NewPasswordFiell.text!)){
-                if(NewPasswordFiell.text == ConfirmPasswordField.text ){ // check if user put the same input in confirm and password
-                    addUserDetailsModel.showAlert = {
-                        self.showAlert(message: self.addUserDetailsModel.messageText)
-                    }
+            print("inside first if")
+//            if(addUserDetailsModel.isDataValid(phoneNumber: PhoneNumberField.text!, userPassword: NewPasswordFiell.text!)){
+                // check if user put the same input in confirm and password
+                    print("inside  second if")
+//                    addUserDetailsModel.showAlert = {
+//                        self.showAlert(message: self.addUserDetailsModel.messageText)
+//                    }
                     addUserDetailsModel.bindresultToProductsViewController = { // set alert message
                         let vc = TabController()
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        vc.modalPresentationStyle = .fullScreen
+                    
+                        self.present(vc, animated: true)
                     }
                     // add perform the logic as in getting the user date
                     addUserDetailsModel.getUserData(UserEmail: userEmail, customerPassword: ConfirmPasswordField.text!, customerPhoneNumber: PhoneNumberField.text!)
                     
-                    
+        
                 }
-                
-            }
             else{
-                
+                showAlert(message: "Data is not vaild please enter your data or you have empty field")
             }
-            
-        }
+        
     }
     func showAlert(message:String ){
         let alert = UIAlertController(title: message, message: message, preferredStyle: .alert)

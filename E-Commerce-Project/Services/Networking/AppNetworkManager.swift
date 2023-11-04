@@ -262,10 +262,10 @@ class NetworkServices   {
             "tags" : customerPassword
             ,"phone" : customerPhoneNumber
         ]]
-        AF.request(Url ,method: .put, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response{ response in
+        AF.request(Url ,method: .put, parameters: body, headers: ["X-Shopify-Access-Token": "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"]).response{ response in
             switch response.result {
             case .success(_):
-                print("success from add favourites")
+                print("success from editCustomerData")
                 Handler(nil)
                 break
             case .failure(let error):

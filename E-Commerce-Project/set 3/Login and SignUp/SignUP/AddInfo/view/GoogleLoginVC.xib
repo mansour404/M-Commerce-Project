@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoogleLoginVC" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
-                <outlet property="ConfirmPasswordField" destination="PZZ-ru-wO7" id="qhr-ki-h0D"/>
+                <outlet property="ConfirmPasswordField" destination="LBj-AI-abb" id="sgj-M2-XqX"/>
                 <outlet property="NewPasswordFiell" destination="sW5-Nl-gyq" id="nYH-SB-Jvx"/>
                 <outlet property="PhoneNumberField" destination="qoU-hh-gPj" id="yTw-cg-0Yt"/>
                 <outlet property="userEmaillabel" destination="f0u-RO-7WJ" id="Hkd-BO-jNK"/>
@@ -99,15 +99,18 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiC-aq-iY8">
                     <rect key="frame" x="95.666666666666686" y="721.66666666666663" width="202" height="60"/>
-                    <color key="backgroundColor" red="0.5176470876" green="0.41568624970000001" blue="0.85490196939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="202" id="HUU-n7-e6J"/>
                         <constraint firstAttribute="height" constant="60" id="gkZ-e4-0n0"/>
                     </constraints>
+                    <color key="tintColor" red="0.5176470876" green="0.41568624970000001" blue="0.85490196939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="Add Password">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <buttonConfiguration key="configuration" style="filled" title="Add Password" cornerStyle="capsule">
+                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="addPasswordtapped:" destination="-1" eventType="touchUpInside" id="usC-Un-Vsm"/>
                     </connections>
