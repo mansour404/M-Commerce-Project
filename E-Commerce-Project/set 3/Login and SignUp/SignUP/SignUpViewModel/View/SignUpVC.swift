@@ -53,10 +53,10 @@ class SignUpVC: UIViewController {
             
             self.userData?.userEmail = (result?.user.profile!.email)!
             print("=====================================")
-            print("\(result?.user.profile!.email)")
+            print("\(String(describing: result?.user.profile!.email))")
             print("=====================================")
             print("=====================================")
-            print("\(result?.user.profile!.name)")
+            print("\(String(describing: result?.user.profile!.name))")
             print("=====================================")
             let arr = self.sperateUserName(userName: (result?.user.profile!.name)!)
             self.userData?.userFirstName = arr[0]
@@ -107,14 +107,19 @@ class SignUpVC: UIViewController {
     @IBAction func SignUpPressed(_ sender: UIButton) {
         if(textFieldIsNotEmpty()){
             if( signUpViewModel.isDataValid(phoneNumber: userPhoneNumberfield.text!, emailAdress: userEmailAdressfield.text!, userPassword: userPasswordfield.text!)){
+                showAlert(message: "An Verification  link will be  sent to your email please go check it ", actionType: .default)
                 let arr  : [String] = sperateUserName(userName: userNamefield.text!)
                 signUpViewModel.bindresultToProductsViewController = {
                     self.showAlert(message: self.signUpViewModel.messageText, actionType: .default)
                 }
                 signUpViewModel.data = SignUpData(userFirstName: arr[0], userLastName: arr[1], userPassword: self.userPasswordfield.text! , userEmail: self.userEmailAdressfield.text!, userPhoneNumber: self.userPhoneNumberfield.text!)
+                print("===============================")
+                print(signUpViewModel.data)
+                print("===============================")
                 signUpViewModel.pushToHome = {
-                    let vc = TabController()
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    let vc = LoginVC()
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true)
                 }
                 signUpViewModel.createUserInFirebase(email: userEmailAdressfield.text!, password: userPasswordfield.text!)
                 

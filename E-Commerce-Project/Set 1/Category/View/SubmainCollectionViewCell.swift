@@ -24,7 +24,6 @@ class SubmainCollectionViewCell: UICollectionViewCell {
     // important
     var product_id : Int? = 0
     var product_title : String? = ""
-    
     var heartIsFilled : Bool = false;
     
     @IBAction func heart_button_pressed(_ sender: UIButton) {
@@ -45,10 +44,12 @@ class SubmainCollectionViewCell: UICollectionViewCell {
     func colorheart(colored : Bool){
         if colored {
             heart_button_outlet.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//            heart_button_outlet.tintColor = UIColor.systemPurple
             heartIsFilled = true
         }
         else {
             heart_button_outlet.setImage(UIImage(systemName: "heart"), for: .normal)
+//            heart_button_outlet.backgroundColor = UIColor.systemPurple
             heartIsFilled = false
         }
     }

@@ -275,7 +275,7 @@ class NetworkServices   {
         }
     }
         //MARK: - Fetching Data From Api  to get customer by email
-        func getCustomerByEmail<T : Codable>(userEmail : String,Handler : @escaping (T?,Error?) -> Void){
+        func getCustomerByEmail<T : Codable>(userEmail : String ,Handler : @escaping (T?,Error?) -> Void){
             let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json?email=\(userEmail)"
             
             AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in

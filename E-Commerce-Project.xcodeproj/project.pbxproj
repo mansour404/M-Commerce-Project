@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B204A9562AF40F1C0034F3D6 /* CoupounCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B204A9552AF40F1B0034F3D6 /* CoupounCell.swift */; };
-		B204A9582AF40F240034F3D6 /* CoupounCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B204A9572AF40F230034F3D6 /* CoupounCell.xib */; };
+		B2463AC22AF7E614004B30B9 /* CoupounCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2463AC12AF7E614004B30B9 /* CoupounCell.xib */; };
 		B26D4EBB2AE87535008F1D2B /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26D4EBA2AE87535008F1D2B /* HomeModel.swift */; };
 		B26D4EBE2AE87614008F1D2B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26D4EBD2AE87613008F1D2B /* HomeViewModel.swift */; };
 		B2DD77EF2AE6831A0082CADE /* CopounCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2DD77E82AE6831A0082CADE /* CopounCollectionViewCell.xib */; };
@@ -190,7 +190,7 @@
 
 /* Begin PBXFileReference section */
 		B204A9552AF40F1B0034F3D6 /* CoupounCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoupounCell.swift; sourceTree = "<group>"; };
-		B204A9572AF40F230034F3D6 /* CoupounCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoupounCell.xib; sourceTree = "<group>"; };
+		B2463AC12AF7E614004B30B9 /* CoupounCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoupounCell.xib; sourceTree = "<group>"; };
 		B26D4EBA2AE87535008F1D2B /* HomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		B26D4EBD2AE87613008F1D2B /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B2DD77E82AE6831A0082CADE /* CopounCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CopounCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -443,7 +443,7 @@
 				B2DD77ED2AE6831A0082CADE /* CopounCollectionViewCell.swift */,
 				B2DD77E82AE6831A0082CADE /* CopounCollectionViewCell.xib */,
 				B204A9552AF40F1B0034F3D6 /* CoupounCell.swift */,
-				B204A9572AF40F230034F3D6 /* CoupounCell.xib */,
+				B2463AC12AF7E614004B30B9 /* CoupounCell.xib */,
 				B2DD77E92AE6831A0082CADE /* TabController.swift */,
 			);
 			path = View;
@@ -1427,7 +1427,6 @@
 				E5C7F2462AF6571600F154F5 /* AddressListView.xib in Resources */,
 				E5C7F2532AF6571600F154F5 /* UserProfileView.xib in Resources */,
 				DCFA44812AF706F400CCF30C /* OptionCollectionViewCell.xib in Resources */,
-				B204A9582AF40F240034F3D6 /* CoupounCell.xib in Resources */,
 				E5C7F25A2AF6571600F154F5 /* exchangeData.json in Resources */,
 				B2DD77EF2AE6831A0082CADE /* CopounCollectionViewCell.xib in Resources */,
 				DCFA44672AF706F300CCF30C /* SignUpVC.xib in Resources */,
@@ -1436,6 +1435,7 @@
 				E59AAEF12ADE91F500683168 /* LaunchScreen.storyboard in Resources */,
 				DCFA44A52AF7823600CCF30C /* UserOrderCustomTableViewCell.xib in Resources */,
 				DC9EED262AF3D99100E94248 /* GoogleService-Info.plist in Resources */,
+				B2463AC22AF7E614004B30B9 /* CoupounCell.xib in Resources */,
 				DCFA44722AF706F300CCF30C /* FavouriteCell.xib in Resources */,
 				E5C7F2332AF6571600F154F5 /* SettingCell.xib in Resources */,
 				DCFA447E2AF706F400CCF30C /* ProductImageCell.xib in Resources */,
