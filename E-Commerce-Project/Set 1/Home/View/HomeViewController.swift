@@ -137,6 +137,7 @@ extension HomeViewController:UICollectionViewDataSource {
         if collectionView == couponsCollectionView {
             let cell = couponsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.coupounCell, for: indexPath) as! CoupounCell
             cell.priceRoleLabel.text = homeViewModel.getPriceRulesTitle(index: indexPath.row) ?? "A"
+            cell.discountTitle.text = homeViewModel.getPriceRuleDiscountCode(index: indexPath.row)
             cell.layer.cornerRadius = 20
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.lightGray.cgColor
