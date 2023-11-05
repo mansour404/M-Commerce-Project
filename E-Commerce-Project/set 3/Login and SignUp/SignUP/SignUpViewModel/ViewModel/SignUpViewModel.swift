@@ -89,11 +89,13 @@ class SignUpViewModel {
             }
             else {
                 print("===============================")
-                print("insdie create user")
+                print("Email sent successfully please go check your emails")
+                self.messageText = "Email sent successfully please go check your emails"
+                self.bindresultToProductsViewController()
                 print("===============================")
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) { // Change `2.0` to the desired number of seconds.   // Code you want to be delayed}
-//                    self.setCustomerId(customerEmail: userEmail)
-//                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) { // Change `2.0` to the desired number of seconds.   // Code you want to be delayed}
+                    self.setCustomerId(customerEmail: userEmail)
+                }
                self.pushToHome()
             }
             
@@ -106,16 +108,10 @@ class SignUpViewModel {
     //create in firebase -> sendemail -> create customer -> setid
     //MARK: - adding user information to user defaults
     func  setCustomerId(customerEmail : String) {
-        print("===============================")
-        print(customerEmail)
-        print("inside set customer id ")
-        print("===============================")
+        
         manager.getCustomerByEmail(userEmail: customerEmail, Handler: { (dataValue:CustomerList?, error: Error?) in
             if let mydata = dataValue {
-                print("===============================")
-                print(mydata.customers.count)
-                print("inside set customer id ")
-                print("===============================")
+               
                 UserDefaultsHelper.shared.saveAPI(id: mydata.customers[0].id ?? 0)
               
                 let customerId =  mydata.customers[0].id ?? 0
