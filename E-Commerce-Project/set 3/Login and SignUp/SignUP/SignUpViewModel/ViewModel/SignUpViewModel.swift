@@ -15,7 +15,9 @@ struct SignUpData {
     var userEmail : String
     var userPhoneNumber : String
 }
-
+struct CreatedCustomer : Codable {
+    var customer : Customer
+}
 
 class SignUpViewModel {
     let manager  = NetworkServices()
@@ -41,7 +43,7 @@ class SignUpViewModel {
         return true
     }
     //MARK: - create customer in api and FireBase
-    let dispatchGroup = DispatchGroup()
+    
     func createUserInFirebase(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
          
@@ -72,7 +74,7 @@ class SignUpViewModel {
                 print("===============================")
             }
             else {
-                
+                    
                self.CreateUser(userFirstName: self.data!.userFirstName, userLastName:self.data!.userLastName, userPassword: self.data!.userPassword, userEmail: self.data!.userEmail, userPhoneNumber: self.data!.userPhoneNumber)
                
                 
@@ -81,51 +83,54 @@ class SignUpViewModel {
     }
     func CreateUser (userFirstName : String ,userLastName : String ,userPassword : String , userEmail : String , userPhoneNumber : String ) {
         
-        manager.CreateCustomer(userFirstName: userFirstName, userLastName: userLastName, userPassword: userPassword, userEmail: userEmail, userPhoneNumber: userPhoneNumber,Handler: { error in
-            if error != nil {
-                
-                self.messageText = "\(String(describing: error?.localizedDescription))"
-                self.bindresultToProductsViewController()
-            }
-            else {
-                print("===============================")
-                print("Email sent successfully please go check your emails")
-                self.messageText = "Email sent successfully please go check your emails"
-                self.bindresultToProductsViewController()
-                print("===============================")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) { // Change `2.0` to the desired number of seconds.   // Code you want to be delayed}
-                    self.setCustomerId(customerEmail: userEmail)
-                }
-               self.pushToHome()
-            }
+        manager.CreateCustomer(userFirstName: userFirstName, userLastName: userLastName, userPassword: userPassword, userEmail: userEmail, userPhoneNumber: userPhoneNumber,Handler: { (dataValue:CreatedCustomer?, error: Error?) in
+                        if let mydata = dataValue {
             
+                            UserDefaultsHelper.shared.saveAPI(id:  mydata.customer.id ?? 0)
             
-        } )
+                            let customerId =  mydata.customer.id ?? 0
+                            UserDefaultsHelper.shared.setCustomerId(customerId)
+                            print("===========================================")
+                            print("================= from create customer ")
+                            print(UserDefaultsHelper.shared.getCustomerId())
+                            print("=======================================")
+                            self.pushToHome()
+            
+                        }else {
+                            if let error = error{
+                                print(error.localizedDescription)
+                            }
+                        }
+                    })
     }
    
-    
+//    print("===============================")
+//    print("Email sent successfully please go check your emails")
+//    self.messageText = "Email sent successfully please go check your emails"
+//    self.bindresultToProductsViewController()
+//    print("===============================")
  
     //create in firebase -> sendemail -> create customer -> setid
     //MARK: - adding user information to user defaults
-    func  setCustomerId(customerEmail : String) {
-        
-        manager.getCustomerByEmail(userEmail: customerEmail, Handler: { (dataValue:CustomerList?, error: Error?) in
-            if let mydata = dataValue {
-               
-                UserDefaultsHelper.shared.saveAPI(id: mydata.customers[0].id ?? 0)
-              
-                let customerId =  mydata.customers[0].id ?? 0
-                UserDefaultsHelper.shared.setCustomerId(customerId)
-                self.pushToHome()
-                
-            }else {
-                if let error = error{
-                    print(error.localizedDescription)
-                }
-            }
-        })
-        
-    }
+//    func  setCustomerId(customerEmail : String) {
+//        
+//        manager.getCustomerByEmail(userEmail: customerEmail, Handler: { (dataValue:CustomerList?, error: Error?) in
+//            if let mydata = dataValue {
+//               
+//                UserDefaultsHelper.shared.saveAPI(id: mydata.customers[0].id ?? 0)
+//              
+//                let customerId =  mydata.customers[0].id ?? 0
+//                UserDefaultsHelper.shared.setCustomerId(customerId)
+//                self.pushToHome()
+//                
+//            }else {
+//                if let error = error{
+//                    print(error.localizedDescription)
+//                }
+//            }
+//        })
+//        
+//    }
     func  iName(CustomerName : String) {
         UserDefaultsHelper.shared.saveCustomerEmail(customerName: CustomerName)
     }

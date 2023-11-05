@@ -248,7 +248,7 @@ class NetworkServices   {
             }
         }
     
-    func CreateCustomer (userFirstName : String , userLastName : String , userPassword : String , userEmail : String , userPhoneNumber : String,Handler : @escaping (Error?) -> Void){
+    func CreateCustomer<T:Codable> (userFirstName : String , userLastName : String , userPassword : String , userEmail : String , userPhoneNumber : String,Handler : @escaping (T?,Error?) -> Void){
         let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json"
         let body: [String: Any] =
         ["customer":[
@@ -261,19 +261,24 @@ class NetworkServices   {
             
         ]]
         print(body)
-        AF.request(urlFile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response { response in
-            switch response.result {
-            case .success:
-                Handler(nil)
-                break
-            case .failure(let error):
-                Handler(error)
-                break
+        AF.request(urlFile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response {data in
+            if let validData = data.data {
+                do{
+                    let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
                 
-                
+                    
+                    Handler(dataRetivied, nil)
+                    
+                }catch let error{
+                 
+                    Handler(nil, error)
+                }
             }
+            else{print("There is error in casting data")}
         }
-    }
+            }
+        
+
         //MARK: - Fetching Data From Api  to get customer by email
         func getCustomerByEmail<T : Codable>(userEmail : String ,Handler : @escaping (T?,Error?) -> Void){
             let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json?email=\(userEmail)"
@@ -312,6 +317,7 @@ class NetworkServices   {
             }
             
         }
+
     //MARK: - Fetching Data From Api to show User Orders
     func getUserOrders <T:Codable> (Handler : @escaping (T?,Error?) -> Void){
         let URL = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/orders.json?status=any"
@@ -331,9 +337,9 @@ class NetworkServices   {
             else{print("There is error in casting data")}
         }
     }
-        }
+        
     
-   
+}
     
 
 
