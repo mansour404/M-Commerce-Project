@@ -113,9 +113,7 @@ class SignUpVC: UIViewController {
                     self.showAlert(message: self.signUpViewModel.messageText, actionType: .default)
                 }
                 signUpViewModel.data = SignUpData(userFirstName: arr[0], userLastName: arr[1], userPassword: self.userPasswordfield.text! , userEmail: self.userEmailAdressfield.text!, userPhoneNumber: self.userPhoneNumberfield.text!)
-                print("===============================")
-                print(signUpViewModel.data)
-                print("===============================")
+              
                 signUpViewModel.pushToHome = {
                     let vc = LoginVC()
                     vc.modalPresentationStyle = .fullScreen

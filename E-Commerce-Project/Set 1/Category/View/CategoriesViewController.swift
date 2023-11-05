@@ -29,7 +29,7 @@ class CategoriesViewController: UIViewController {
 
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
 //        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
-//        configureLoadingDataFromApi()
+       configureLoadingDataFromApi()
         
     }
     override func viewWillAppear(_ animated: Bool) {
