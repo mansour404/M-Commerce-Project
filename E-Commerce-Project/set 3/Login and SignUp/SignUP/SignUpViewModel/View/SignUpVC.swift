@@ -118,7 +118,7 @@ class SignUpVC: UIViewController {
                 signUpViewModel.pushToHome = {
                     let vc = TabController()
                     vc.modalPresentationStyle = .fullScreen
-                    present(vc, animated: true)
+                    self.present(vc, animated: true)
                 }
                 signUpViewModel.createUserInFirebase(email: userEmailAdressfield.text!, password: userPasswordfield.text!)
                 
