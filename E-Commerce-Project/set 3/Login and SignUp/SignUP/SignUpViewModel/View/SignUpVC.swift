@@ -107,6 +107,7 @@ class SignUpVC: UIViewController {
     @IBAction func SignUpPressed(_ sender: UIButton) {
         if(textFieldIsNotEmpty()){
             if( signUpViewModel.isDataValid(phoneNumber: userPhoneNumberfield.text!, emailAdress: userEmailAdressfield.text!, userPassword: userPasswordfield.text!)){
+                showAlert(message: "An Verification  link will be  sent to your email please go check it ", actionType: .default)
                 let arr  : [String] = sperateUserName(userName: userNamefield.text!)
                 signUpViewModel.bindresultToProductsViewController = {
                     self.showAlert(message: self.signUpViewModel.messageText, actionType: .default)
@@ -116,7 +117,7 @@ class SignUpVC: UIViewController {
                 print(signUpViewModel.data)
                 print("===============================")
                 signUpViewModel.pushToHome = {
-                    let vc = TabController()
+                    let vc = LoginVC()
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true)
                 }
