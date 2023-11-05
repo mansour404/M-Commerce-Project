@@ -11,6 +11,8 @@ class UserProfileView: UIViewController {
     // MARK: - Vars
     var orderList = [String]()
     var favouriteList = [String]()
+    var favouriteViewModel = FavouriteViewModel()
+
     
     // MARK: - Outlets
     @IBOutlet weak var noUserUIView: UIView!
@@ -26,6 +28,7 @@ class UserProfileView: UIViewController {
         navigationItem.setRightBarButtonItems([addSettingsButton(), addShoppingCartButton()], animated: true)
         registerNibs()
         configureTableViews()
+        bind()
     }
 
     private func registerNibs() {
@@ -60,6 +63,16 @@ class UserProfileView: UIViewController {
             navigationController?.setNavigationBarHidden(true, animated: true)
             noUserUIView.isHidden = false
         }
+    }
+    
+    private func bind() {
+        favouriteViewModel.bindresultToProductsViewController = {
+            DispatchQueue.main.async {
+                self.favouritesTableView.reloadData()
+
+            }
+        }
+        self.favouriteViewModel.getDataFromApiForProduct()
     }
 }
 
@@ -160,8 +173,8 @@ extension UserProfileView: UITableViewDataSource {
             //return  orderList.count < 2 ? orderList.count : 2
             return 2
         } else {
-            //return  favouriteList.count < 2 ? orderList.count : 2
-            return 2
+            guard let count = favouriteViewModel.getNumberOfProduct() else { return 0 }
+            return count < 2 ? count : 2
         }
     }
     
@@ -171,6 +184,9 @@ extension UserProfileView: UITableViewDataSource {
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavouriteCustomTableViewCell", for: indexPath) as? FavouriteCustomTableViewCell else { return UITableViewCell() }
+            
+            cell.configureCell(imageURL: favouriteViewModel.getImageUrl(index: indexPath.row) ?? "", productname: favouriteViewModel.getTitle(index: indexPath.row) ?? "Bag", productPrice: favouriteViewModel.getprice(index: indexPath.row) ?? "10 USD")
+            
             return cell
         }
     }

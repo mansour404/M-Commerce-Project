@@ -108,14 +108,14 @@ extension ShoppingCartView {
     private func isTableViewCount() {
         if viewModel.cartProductsCount != 0 {
             bottomLayoutConstraint.constant = 16
-            UIView.animate(withDuration: 1.2) {
+            UIView.animate(withDuration: 0.8) {
                 self.view.layoutIfNeeded()
                 // request layout on the *superview*
                 //self.view.superview?.layoutIfNeeded()
             }
         } else {
             bottomLayoutConstraint.constant = -220
-            UIView.animate(withDuration: 1.0) {
+            UIView.animate(withDuration: 0.8) {
                 self.view.layoutIfNeeded()
             }
         }
