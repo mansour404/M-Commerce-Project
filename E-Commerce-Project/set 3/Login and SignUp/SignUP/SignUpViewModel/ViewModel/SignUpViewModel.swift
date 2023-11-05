@@ -20,7 +20,7 @@ struct SignUpData {
 class SignUpViewModel {
     let manager  = NetworkServices()
     var messageText : String = ""
-    var bindresultToProductsViewController : (() -> ()) = {} 
+    var bindresultToProductsViewController : (() -> ()) = {}
   
     var data : SignUpData? = nil
     var pushToHome : (() -> ()) = {}

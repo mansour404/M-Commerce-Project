@@ -86,7 +86,7 @@ class SignUpVC: UIViewController {
           // ...
         }
 //        if(signInSuccessfully){
-//            
+//
 //            performLogic(UserData: userData!)
 //        }
     
