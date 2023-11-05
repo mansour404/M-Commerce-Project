@@ -117,14 +117,36 @@ class ShoppingCartService {
         
         print(variantId)
         
-        let parameters = [
+//        let parameters = [
+//            "draft_order": [
+//                "id":draftOrderId,
+//                "line_items": [
+//                    [
+//                        "variant_id":variantId,
+//                        "quantity":quantity,
+//                        "sku": "new sku",
+//                        "properties": [
+//                            [
+//                                "name": "imageSrc",
+//                                "value": image
+//                            ]
+//                        ]
+//                    ] as [String : Any]
+//                ]
+//            ] as [String : Any]
+//        ]
+        
+        let parameters: [String: Any] = [
             "draft_order": [
-                "id":draftOrderId,
-                "line_items": [
+                "id": draftOrderId,
+                "line_items":[
                     [
-                        "variant_id":variantId,
-                        "quantity":quantity,
-                        "sku": "new sku",
+                        //"id": draftOrderId,
+                        "variant_id": variantId,
+                        "title":title,
+                        "price":price,
+                        "quantity":quantity, // USE the new quantity passed from minus or plus button.
+                        "sku": sku,
                         "properties": [
                             [
                                 "name": "imageSrc",
@@ -132,37 +154,15 @@ class ShoppingCartService {
                             ]
                         ]
                     ] as [String : Any]
+                ],
+                "customer": [
+                    "id":customerId
                 ]
             ] as [String : Any]
         ]
         
-        //        let parameters: [String: Any] = [
-        //            "draft_order": [
-        //                "id": draftOrderId,
-        //                "line_items":[
-        //                    [
-        //                        //"id": draftOrderId,
-        //                        "variant_id": variantId,
-        //                        "title":title,
-        //                        "price":price,
-        //                        "quantity":quantity, // USE the new quantity passed from minus or plus button.
-        //                        "sku": sku,
-        //                        "properties": [
-        //                            [
-        //                                "name": "imageSrc",
-        //                                "value": image
-        //                            ]
-        //                        ]
-        //                    ] as [String : Any]
-        //                ],
-        //                "customer": [
-        //                    "id":customerId
-        //                ]
-        //            ] as [String : Any]
-        //        ]
-        
         // Note: if i want to has only one draft order, Pass new array of line items not the last line item.
-        AF.request(stringUrl, method: .put, parameters: parameters, headers: headers).response { response in
+        AF.request(stringUrl, method: .put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).response { response in
             switch response.result {
             case .success(let data):
                 print("UPPPPPPPPPPPPPPPPPPP")
@@ -193,23 +193,3 @@ class ShoppingCartService {
     
 }
 
-/*
- //    func test_put_draft_order () {
- //            let url = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders/1031372177558.json"
- ////            let params = ["draft_order":["id":1031372177558,"line_items":[["variant_id":42798192099478,"quantity":7777, "sku" : "new sku",
- ////                "properties": [["name":"value", "value" : "value2"]]], ["variant_id":42798187446422,"quantity":33, "sku" : "new sku2"]]]]
- //
- //        let params = ["draft_order":["id":1031372177558,"line_items":[["variant_id":42798192099478,"quantity":0, "sku" : "new sku",
- //                                                                       "properties": [["name":"value", "value" : "value2"]]], ["variant_id":42798187446422,"quantity":33, "sku" : "new sku2"]]]]
- //
- //            let header : HTTPHeaders = ["X-Shopify-Access-Token": "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"]
- //
- //            Alamofire.AF.request(url, method: .put, parameters: params, headers: header).response { data in
- //
- //                print("I am done")
- //            }
- //        }
- 
- //        let parameters = ["draft_order":["id":draftOrderId,"line_items":[["variant_id":variantId,"quantity":quantity, "sku" : "new sku",
- //            "properties": [["name":"value", "value" : "value2"]]] ]]]
- */
