@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseCore
+import GoogleSignIn
+import FirebaseAuth
 
 class LoginVC: UIViewController {
 
@@ -30,12 +33,61 @@ class LoginVC: UIViewController {
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
              }
+            else {
+                self.showAlert(message: "User doesn't exi", actionType: .default)
+            }
         }else {
-            print("empty")
+            self.showAlert(message: "you've left a field empty please enter your password and your name", actionType: .default)
         }
     }
     
     @IBAction func GoogleButton(_ sender: UIButton) {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { result, error in
+            guard error == nil else {
+          
+              return
+          }
+
+          guard let user = result?.user,
+            let idToken = user.idToken?.tokenString
+          else {
+              return
+            // ...
+          }
+
+          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                         accessToken: user.accessToken.tokenString)
+           if ( self.performLogic(UserName: user.profile!.name, userEmail: user.profile!.email) == false)
+            {
+               self.showAlert(message: "User doesn't exist please Sign up ", actionType: .default)
+           }
+           
+            
+            }
+       
+    
+   }
+    
+    func performLogic (UserName : String,userEmail : String) -> Bool {
+
+        loginModel.bindresultToProductsViewController = {
+            let vc = TabController()
+            // vc.userEmail =  UserData.userEmail
+            vc.modalPresentationStyle = .fullScreen
+            
+            self.present(vc, animated: true)
+        }
+        return  loginModel.checkCustomerInfoIngoogleSignIn(userName: UserName, userEmail: userEmail)
+            
+        
+        
     }
     func getUserData() -> Bool {
         if UserPasswordTextField.text?.isEmpty == false {
@@ -50,5 +102,10 @@ class LoginVC: UIViewController {
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    
+    func showAlert(message:String , actionType : UIAlertAction.Style){
+        let alert = UIAlertController(title: message, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "okay", style: actionType))
+        
+        self.present(alert, animated: true)
+    }
 }

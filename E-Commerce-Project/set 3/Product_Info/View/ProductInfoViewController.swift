@@ -9,138 +9,135 @@ import UIKit
 
 class ProductInfoViewController: UIViewController {
     
-    // Vars
-    let shoppingCartService = ShoppingCartService()
-    let shoppingCartViewModel = ShoppingCartViewModel()
-    
     // cart code------------------------------------------------------------------------------
-    @IBOutlet weak var variant_price: UILabel!
-    
-    @IBOutlet weak var variant_availability: UILabel!
-    
-    
-    var variant_available_elements : Int = 0
-    
-    var variant_index : Int = 0
-    var variant_Unique_ID : Int = 0 // found variant - mansour - send as a paramter for addToCart
-    var inventory_item_id: Int = 0
-    
-    
-    func get_variant_data () {
+        @IBOutlet weak var variant_price: UILabel!
         
-        print ("get_variant_data")
-        print(view_model.product)
-        let all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
+        @IBOutlet weak var variant_availability: UILabel!
         
-        var found : VariantCompleteModel = VariantCompleteModel()
-        for v in all_variants {
-            //numOptions
+        
+        var variant_available_elements : Int = 0
+        
+        var variant_index : Int = 0
+        var variant_Unique_ID : Int = 0 // found variant - mansour - send as a paramter for addToCart
+        // Vars
+        let shoppingCartService = ShoppingCartService()
+        let shoppingCartViewModel = ShoppingCartViewModel()
+        var inventory_item_id: Int = 0
+        
+        func get_variant_data () {
             
-            print(v)
+            print ("get_variant_data")
+            print(view_model.product)
+            let all_variants : [VariantCompleteModel] = view_model.product?.variants ?? []
             
-            var equal : Bool = true
+            var found : VariantCompleteModel = VariantCompleteModel()
+            for v in all_variants {
+                //numOptions
+                
+                print(v)
+                
+                var equal : Bool = true
+                
+                if numOptions >= 1 {
+                    equal = equal && (v.option1 == view_model.product?.options?[0].values?[selectedOption[0]])
+                }
+                if numOptions >= 2 {
+                    equal = equal && (v.option2 == view_model.product?.options?[1].values?[selectedOption[1]])
+                }
+                if numOptions >= 3 {
+                    equal = equal && (v.option3 == view_model.product?.options?[2].values?[selectedOption[2]])
+                }
+                
+                if (equal) {
+                    print("variant is found")
+                    found = v;
+                    break
+                }
+                else {
+                    print("variant is NOT found")
+                }
+            }
             
-            if numOptions >= 1 {
-                equal = equal && (v.option1 == view_model.product?.options?[0].values?[selectedOption[0]])
-            }
-            if numOptions >= 2 {
-                equal = equal && (v.option2 == view_model.product?.options?[1].values?[selectedOption[1]])
-            }
-            if numOptions >= 3 {
-                equal = equal && (v.option3 == view_model.product?.options?[2].values?[selectedOption[2]])
-            }
-            
-            if (equal) {
-                print("variant is found")
-                found = v;
-                break
-            }
-            else {
-                print("variant is NOT found")
-            }
+            variant_price.text = found.price ?? "not found"
+            variant_availability.text = found.inventory_quantity != nil ? String(found.inventory_quantity!) : "not found"
+            variant_available_elements = found.inventory_quantity ?? 0
+            variant_Unique_ID  = found.id ?? 0
+            inventory_item_id = found.inventory_item_id ?? 0
         }
         
-        variant_price.text = found.price ?? "not found"
-        variant_availability.text = found.inventory_quantity != nil ? String(found.inventory_quantity!) : "not found"
-        variant_available_elements = found.inventory_quantity ?? 0
-        variant_Unique_ID  = found.id ?? 0
-        inventory_item_id = found.inventory_item_id ?? 0
-    }
-    
-    var numberOfCartItems : Int = 0
-    
-    func updateNumberLabel () {
-        number_of_cart_items_label.text = String(numberOfCartItems)
-    }
-    func reset_cart () {
-        numberOfCartItems = 0
-        updateNumberLabel()
-    }
-    
-    @IBAction func plus_button_tapped(_ sender: Any) {
+        var numberOfCartItems : Int = 0
         
-        if (numberOfCartItems < variant_available_elements) {
-            numberOfCartItems += 1;
+        func updateNumberLabel () {
+            number_of_cart_items_label.text = String(numberOfCartItems)
+        }
+        func reset_cart () {
+            numberOfCartItems = 0
+            updateNumberLabel()
         }
         
-        updateNumberLabel()
-        
-        print("plus")
-    }
-    
-    @IBAction func minus_button_tapped(_ sender: Any) {
-        if (numberOfCartItems > 0) {
-            numberOfCartItems -= 1;
+        @IBAction func plus_button_tapped(_ sender: Any) {
+            
+            if (numberOfCartItems < variant_available_elements) {
+                numberOfCartItems += 1;
+            }
+            
+            updateNumberLabel()
+            
+            print("plus")
         }
-        updateNumberLabel()
-        print("minus")
-    }
-    
-    @IBOutlet weak var number_of_cart_items_label: UILabel!
-  
-    @IBAction func add_to_cart_tapped(_ sender: Any) {
-          // mansour starts here
-          
-          print("add to cart")
-          
-          var Mansour_selectedOptionValues : [Int] = selectedOption //
-          
-          guard let product = view_model.product else { return }
-          
-          
-          let elements_to_be_added_to_cart : Int = numberOfCartItems;
-          let quantity = elements_to_be_added_to_cart // same variable with different name.
-          
-          let productTitle = view_model.product?.title ?? "title Does not exist"
-          let productId : Int = view_model.product?.id ?? 0 // use it in case data in variants is insufficient
-          let imageString : String = view_model.product?.images.first?.src ?? "Beware :O .. Image Src is Empty"
-          let price = Double(view_model.product?.variants?.first?.price ?? "1.0")
-          let variantId = variant_Unique_ID
-          let inventory_item_id = self.inventory_item_id
-          let availableElements = variant_available_elements
-        print(availableElements)
         
-        print(variantId)
-          
-          let cartModel = ShoppingCartModel(title: productTitle, quantity: quantity, price: price, image: imageString, draftOrderId: productId, variantId: variantId, availableElements: availableElements, inventory_item_id: inventory_item_id)
-          
-          addToCart(cart: cartModel)
-      }
-
-      func addToCart(cart: ShoppingCartModel) {
-          let customerId = UserDefaultsHelper.shared.getCustomerId()
-          
-          shoppingCartService.addProductToCartShopping(customerId: customerId, variantId: cart.variantId ?? 0, cart: cart) { error in
-              if error != nil {
-                  print(error)
-                  print("Error cann't added to shopping cart")
-              } else {
-                  print("succed added to shopping cart")
+        @IBAction func minus_button_tapped(_ sender: Any) {
+            if (numberOfCartItems > 0) {
+                numberOfCartItems -= 1;
+            }
+            updateNumberLabel()
+            print("minus")
+        }
+        
+        @IBOutlet weak var number_of_cart_items_label: UILabel!
+      
+        @IBAction func add_to_cart_tapped(_ sender: Any) {
+              // mansour starts here
+              
+              print("add to cart")
+              
+              var Mansour_selectedOptionValues : [Int] = selectedOption //
+              
+              guard let product = view_model.product else { return }
+              
+              
+              let elements_to_be_added_to_cart : Int = numberOfCartItems;
+              let quantity = elements_to_be_added_to_cart // same variable with different name.
+              
+              let productTitle = view_model.product?.title ?? "title Does not exist"
+              let productId : Int = view_model.product?.id ?? 0 // use it in case data in variants is insufficient
+              let imageString : String = view_model.product?.images.first?.src ?? "Beware :O .. Image Src is Empty"
+              let price = Double(view_model.product?.variants?.first?.price ?? "1.0")
+              let variantId = variant_Unique_ID
+              let inventory_item_id = self.inventory_item_id
+              let availableElements = variant_available_elements
+            print(availableElements)
+            
+            print(variantId)
+              
+              let cartModel = ShoppingCartModel(title: productTitle, quantity: quantity, price: price, image: imageString, draftOrderId: productId, variantId: variantId, availableElements: availableElements, inventory_item_id: inventory_item_id)
+              
+              addToCart(cart: cartModel)
+          }
+     
+          func addToCart(cart: ShoppingCartModel) {
+              let customerId = UserDefaultsHelper.shared.getCustomerId()
+              
+              shoppingCartService.addProductToCartShopping(customerId: customerId, variantId: cart.variantId ?? 0, cart: cart) { error in
+                  if error != nil {
+                      print(error)
+                      print("Error cann't added to shopping cart")
+                  } else {
+                      print("succed added to shopping cart")
+                  }
               }
           }
-      }
-    //++++++++++++++++++++++++++++++++++++++++++++++ // mansour end here
-    
+        //++++++++++++++++++++++++++++++++++++++++++++++ // mansour end here
     //------------------------------------------------------------------------------
     
     // options code------------------------------------------------------------------------------
@@ -236,21 +233,8 @@ class ProductInfoViewController: UIViewController {
     
     
     
-//    // heart
-//    let heartButton = UIButton(type: .custom) // treat it as an outlet
-//    var heartIsFilled : Bool = true;
-    
-//    func toggleHeart () {
-//        if heartIsFilled {
-//            heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-//        }
-//        else {
-//            heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-//        }
-//        heartIsFilled = !heartIsFilled
-//    }
-    
-  // outlets
+  
+    // outlets
     
     @IBOutlet weak var addToCartView: UIView!
     @IBOutlet weak var scroll_and_add_to_cart_vertical_spacing: NSLayoutConstraint!
@@ -277,7 +261,7 @@ class ProductInfoViewController: UIViewController {
         productImagesCollectionView.delegate = self;
         productImagesCollectionView.dataSource = self;
         
-        productImagesCollectionView.register(UINib(nibName: "CopounCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CopounCollectionViewCell")
+        productImagesCollectionView.register(UINib(nibName: "ProductImageCell", bundle: nil), forCellWithReuseIdentifier: "ProductImageCell")
     }
     
     func setReviewsView () -> Void {
@@ -380,7 +364,9 @@ class ProductInfoViewController: UIViewController {
     @objc func heartButtonPressed(sender: UIButton) {
         print(heartIsFilled)
         if heartIsFilled {
-            view_model.StageDelete()        }
+            view_model.StageDelete(product_id: view_model.product!.id!)
+            
+        }
         else {
             view_model.createFavourite()
         }
@@ -393,7 +379,7 @@ class ProductInfoViewController: UIViewController {
         }
         else {
             heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            
+            heartIsFilled = false
         }
     }
     
@@ -500,17 +486,17 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
             return cell;
         }
         else if (collectionView == productImagesCollectionView) {
-            let cell = productImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "CopounCollectionViewCell", for: indexPath) as! CopounCollectionViewCell
+            let cell = productImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCell
             
             cell.configure(with: "coupon")
             
-            let img = UIImageView()
-            img.downloadImageFrom(view_model.product?.images[indexPath.item].src)
-            img.frame.size.height = img.superview?.frame.size.height ?? img.frame.size.height
-            img.frame.size.width = img.superview?.frame.size.width ?? img.frame.size.height
-            
-            cell.couponImageView.image = img.getImageInsideView()
-
+//            let img = UIImageView()
+//            img.downloadImageFrom(view_model.product?.images[indexPath.item].src)
+//            img.frame.size.height = img.superview?.frame.size.height ?? img.frame.size.height
+//            img.frame.size.width = img.superview?.frame.size.width ?? img.frame.size.height
+//
+//            cell.couponImageView.image = img.getImageInsideView()
+            cell.couponImageView.downloadImageFrom(view_model.product?.images[indexPath.item].src)
             
             cell.layer.cornerRadius = 30
             
