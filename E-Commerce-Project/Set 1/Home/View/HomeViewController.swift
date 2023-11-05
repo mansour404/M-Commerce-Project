@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
         
 //        startTimer()
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
-        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
+//        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
     }
 //    override func viewWillAppear(_ animated: Bool) {
 //        self.tabBarController?.navigationItem.hidesBackButton = true
@@ -80,15 +80,15 @@ class HomeViewController: UIViewController {
         return shoppingCartBarButtonItem
     }
     
-    private func addFSearchButton() -> UIBarButtonItem {
-        let heartButton = UIButton(type: .custom)
-        heartButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        heartButton.tintColor = UIColor.systemPurple
-//        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
-
-        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
-        return heartBarButtonItem
-    }
+//    private func addFSearchButton() -> UIBarButtonItem {
+//        let heartButton = UIButton(type: .custom)
+//        heartButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+//        heartButton.tintColor = UIColor.systemPurple
+////        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
+//
+//        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
+//        return heartBarButtonItem
+//    }
     
     @objc func navigateToFavourites(sender: UIButton) {
         let vc = FavouriteListVCViewController(nibName: "FavouriteListVCViewController", bundle: nil)
