@@ -13,6 +13,7 @@ struct CellIdentifier {
     static let submainCollectionViewCell = "SubmainCollectionViewCell"
     static let UserOrderCell = "UserOrderCell"
     static let coupounCell = "CoupounCell"
+    static let userDetrailsCollectionViewCell = "UserDetrailsCollectionViewCell"
     
     }
 
