@@ -87,6 +87,10 @@ class ProductsViewController: UIViewController {
             cell.productNameLabel.text = productviewModel.getTitle(index: indexPath.row)
             cell.imageView.downloadImageFrom(productviewModel.getid(index: indexPath.row))
             
+            cell.product_title = productviewModel.getTitle(index: indexPath.item)
+            cell.product_id = Int(productviewModel.getProductID(index: indexPath.item))
+
+            
             return cell
             
         }
@@ -94,14 +98,13 @@ class ProductsViewController: UIViewController {
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             let vc = ProductInfoViewController(nibName: "ProductInfoViewController", bundle: nil)
             print("after calling")
-            //vc.modalPresentationStyle = .automatic
+//            vc.modalPresentationStyle = .automatic
             let id = productviewModel.getProductID(index: indexPath.item)
             print(id)
             vc.setID(id: id)
             print("id is set")
-            //self.present(vc, animated: true)
-            navigationController?.pushViewController(vc, animated: true)
-
+            self.navigationController?.pushViewController(vc, animated: true)
+//            self.present(vc, animated: true)
         }
     }
 // MARK: - UICollectionView Delegate
@@ -125,7 +128,12 @@ extension ProductsViewController: UICollectionViewDelegate , UICollectionViewDel
         configureLoadingDataFromApi()
     
     }
-   
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+       //(collectionView, willDisplay: cell, forItemAt: indexPath)
+        let cell = cell as! SubmainCollectionViewCell
+        cell.setControllerFavourite()
+            // Your code here
+       }
 }
 
 

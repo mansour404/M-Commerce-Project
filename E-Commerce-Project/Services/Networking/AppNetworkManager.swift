@@ -209,48 +209,9 @@ class NetworkServices   {
             else{print("There is error in casting data")}
         }
     }
-    //MARK: - Fetching Data From Api to create customer
-    func CreateCustomer (userFirstName : String , userLastName : String , userPassword : String , userEmail : String , userPhoneNumber : String){
-        let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json"
-        let body: [String: Any] =
-        ["customer":[
-            "first_name": userFirstName,
-            "last_name" : userLastName,
-            "tags":  userPassword,
-            "phone": userPhoneNumber,
-            "email": userEmail,
-            "country": "CA"
-            
-        ]]
-        print(body)
-        AF.request(urlFile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response { response in
-            switch response.result {
-            case .success:
-                break
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    func getCustomerByEmail<T : Codable>(userEmail : String,Handler : @escaping (T? ,Error?)->Void){
-        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json?email=\(userEmail)"
-        
-        AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
-            if let validData = data.data {
-                do{
-                    let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
-                    print("Success")
-                    
-                    Handler(dataRetivied, nil)
-                    
-                }catch let error{
-                    print (error)
-                    Handler(nil, error)
-                }
-            }
-            else{print("There is error in casting data")}
-        }
-    }
+   
+  
+   
     //MARK: - Fetching Data From Api to show Coupon Data
     func getDiscountCodes <T:Codable> (priceRuleId: Int,Handler : @escaping (T?,Error?) -> Void){
             let URL = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/price_rules/\(priceRuleId)/discount_codes.json"
@@ -287,9 +248,74 @@ class NetworkServices   {
             }
         }
     
-    
-    
+    func CreateCustomer (userFirstName : String , userLastName : String , userPassword : String , userEmail : String , userPhoneNumber : String,Handler : @escaping (Error?) -> Void){
+        let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json"
+        let body: [String: Any] =
+        ["customer":[
+            "first_name": userFirstName,
+            "last_name" : userLastName,
+            "tags":  userPassword,
+            "phone": userPhoneNumber,
+            "email": userEmail,
+            "country": "CA"
+            
+        ]]
+        print(body)
+        AF.request(urlFile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response { response in
+            switch response.result {
+            case .success:
+                Handler(nil)
+                break
+            case .failure(let error):
+                Handler(error)
+                break
+                
+                
+            }
+        }
     }
+        //MARK: - Fetching Data From Api  to get customer by email
+        func getCustomerByEmail<T : Codable>(userEmail : String,Handler : @escaping (T?,Error?) -> Void){
+            let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json?email=\(userEmail)"
+            
+            AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
+                if let validData = data.data {
+                    do{
+                        let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
+                    
+                        
+                        Handler(dataRetivied, nil)
+                        
+                    }catch let error{
+                     
+                        Handler(nil, error)
+                    }
+                }
+                else{print("There is error in casting data")}
+            }
+        }
+        func editCustomerData(CustomerId : Int , customerPassword: String , customerPhoneNumber : String , Handler : @escaping (Error?)-> Void){
+            let Url = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(CustomerId).json"
+            let body: [String: Any] = ["customer":[
+                "tags" : customerPassword
+                ,"phone" : customerPhoneNumber
+            ]]
+            AF.request(Url ,method: .put, parameters: body, headers: ["X-Shopify-Access-Token": "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"]).response{ response in
+                switch response.result {
+                case .success(_):
+                    print("success from editCustomerData")
+                    Handler(nil)
+                    break
+                case .failure(let error):
+                 Handler(error)
+                }
+            }
+            
+        }
+        
+        }
+    
+   
     
 
 

@@ -12,72 +12,83 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavouriteCell" id="gTV-IL-0wX" customClass="FavouriteCell" customModule="E_Commerce_Project" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="415" height="117"/>
+            <rect key="frame" x="0.0" y="0.0" width="447" height="115"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="415" height="117"/>
+                <rect key="frame" x="0.0" y="0.0" width="447" height="115"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aw1-5a-t8X" userLabel="ContentView">
-                        <rect key="frame" x="0.0" y="0.0" width="415" height="117"/>
+                        <rect key="frame" x="0.0" y="0.0" width="447" height="115"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD 50.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTa-vF-eN0">
-                                <rect key="frame" x="144" y="87" width="70" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adidasBag" translatesAutoresizingMaskIntoConstraints="NO" id="i4I-aW-bgL">
-                                <rect key="frame" x="17" y="10" width="108" height="97"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekZ-Qs-Jvg" userLabel="Card View">
+                                <rect key="frame" x="8" y="8" width="431" height="96"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adidasBag" translatesAutoresizingMaskIntoConstraints="NO" id="ii8-4h-GdW">
+                                        <rect key="frame" x="8" y="4" width="88" height="88"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="88" id="Esn-lS-Bvx"/>
+                                            <constraint firstAttribute="height" constant="88" id="omI-Xb-0cw"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="USD 50.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N24-v4-EHB">
+                                        <rect key="frame" x="112" y="63.666666666666679" width="311" height="20.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ClASSIC SUPER NO SHOW SOCKS 3 PASCK WHITE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HcU-6q-hWY">
+                                        <rect key="frame" x="112" y="12" width="311" height="33.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="108" id="NAX-3M-eKZ"/>
-                                    <constraint firstAttribute="height" constant="97" id="dEM-CF-pMj"/>
+                                    <constraint firstAttribute="trailing" secondItem="HcU-6q-hWY" secondAttribute="trailing" constant="8" id="9mt-f7-QxR"/>
+                                    <constraint firstItem="N24-v4-EHB" firstAttribute="trailing" secondItem="HcU-6q-hWY" secondAttribute="trailing" id="BJI-rH-foA"/>
+                                    <constraint firstAttribute="bottom" secondItem="ii8-4h-GdW" secondAttribute="bottom" constant="4" id="Bbk-fz-2vG"/>
+                                    <constraint firstItem="HcU-6q-hWY" firstAttribute="leading" secondItem="ii8-4h-GdW" secondAttribute="trailing" constant="16" id="NyR-cm-Iqm"/>
+                                    <constraint firstItem="ii8-4h-GdW" firstAttribute="leading" secondItem="ekZ-Qs-Jvg" secondAttribute="leading" constant="8" id="Qui-rT-rnX"/>
+                                    <constraint firstAttribute="height" constant="96" id="QvC-Fd-O1r"/>
+                                    <constraint firstItem="N24-v4-EHB" firstAttribute="leading" secondItem="HcU-6q-hWY" secondAttribute="leading" id="XPX-cU-IH0"/>
+                                    <constraint firstItem="ii8-4h-GdW" firstAttribute="top" secondItem="ekZ-Qs-Jvg" secondAttribute="top" constant="4" id="cPT-Sk-fej"/>
+                                    <constraint firstItem="HcU-6q-hWY" firstAttribute="top" secondItem="ii8-4h-GdW" secondAttribute="top" constant="8" id="nP5-Ud-Xpr"/>
+                                    <constraint firstItem="N24-v4-EHB" firstAttribute="bottom" secondItem="ii8-4h-GdW" secondAttribute="bottom" constant="-8" id="vTA-st-1Tr"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" text="ClASSIC SUPER NO SHOW SOCKS 3 PASCK WHITE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2SP-J9-pfr">
-                                <rect key="frame" x="144" y="10" width="222" height="45"/>
-                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ZTa-vF-eN0" secondAttribute="trailing" constant="201" id="BI4-lB-QgK"/>
-                            <constraint firstAttribute="bottom" secondItem="ZTa-vF-eN0" secondAttribute="bottom" constant="10" id="DmP-3O-rd1"/>
-                            <constraint firstItem="2SP-J9-pfr" firstAttribute="leading" secondItem="i4I-aW-bgL" secondAttribute="trailing" constant="19" id="Iub-2o-Da2"/>
-                            <constraint firstItem="i4I-aW-bgL" firstAttribute="leading" secondItem="Aw1-5a-t8X" secondAttribute="leading" constant="17" id="Jq3-am-KX4"/>
-                            <constraint firstItem="ZTa-vF-eN0" firstAttribute="leading" secondItem="i4I-aW-bgL" secondAttribute="trailing" constant="19" id="MXR-Dx-4ZC"/>
-                            <constraint firstAttribute="trailing" secondItem="2SP-J9-pfr" secondAttribute="trailing" constant="49" id="R45-Hc-Ntw"/>
-                            <constraint firstAttribute="bottom" secondItem="i4I-aW-bgL" secondAttribute="bottom" constant="10" id="d8M-1D-3q2"/>
-                            <constraint firstItem="2SP-J9-pfr" firstAttribute="top" secondItem="Aw1-5a-t8X" secondAttribute="top" constant="10" id="fig-WL-DHc"/>
-                            <constraint firstItem="i4I-aW-bgL" firstAttribute="top" secondItem="Aw1-5a-t8X" secondAttribute="top" constant="10" id="hQI-Y0-OJc"/>
-                            <constraint firstItem="ZTa-vF-eN0" firstAttribute="top" secondItem="2SP-J9-pfr" secondAttribute="bottom" constant="32" id="tOU-As-j9M"/>
+                            <constraint firstItem="ekZ-Qs-Jvg" firstAttribute="leading" secondItem="Aw1-5a-t8X" secondAttribute="leading" constant="8" id="IDE-Vp-bg6"/>
+                            <constraint firstAttribute="trailing" secondItem="ekZ-Qs-Jvg" secondAttribute="trailing" constant="8" id="cWH-NC-2Y8"/>
+                            <constraint firstItem="ekZ-Qs-Jvg" firstAttribute="top" secondItem="Aw1-5a-t8X" secondAttribute="top" constant="8" id="egN-sq-QEX"/>
+                            <constraint firstAttribute="bottom" secondItem="ekZ-Qs-Jvg" secondAttribute="bottom" constant="11" id="fcU-ff-4gv"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Aw1-5a-t8X" secondAttribute="trailing" id="FgK-Ra-elB"/>
-                <constraint firstAttribute="bottom" secondItem="Aw1-5a-t8X" secondAttribute="bottom" id="kMX-JR-awT"/>
-                <constraint firstItem="Aw1-5a-t8X" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rgo-FL-K8F"/>
-                <constraint firstItem="Aw1-5a-t8X" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zsa-a5-clV"/>
+                <constraint firstAttribute="bottom" secondItem="Aw1-5a-t8X" secondAttribute="bottom" id="T0A-Jh-G7u"/>
+                <constraint firstAttribute="trailing" secondItem="Aw1-5a-t8X" secondAttribute="trailing" id="Y48-jc-zuN"/>
+                <constraint firstItem="Aw1-5a-t8X" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YNN-b1-FnU"/>
+                <constraint firstItem="Aw1-5a-t8X" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wpD-VJ-laO"/>
             </constraints>
             <size key="customSize" width="415" height="117"/>
             <connections>
-                <outlet property="FavouriteProductImage" destination="i4I-aW-bgL" id="baa-or-1yO"/>
-                <outlet property="FavouriteProductName" destination="2SP-J9-pfr" id="6J4-ZB-Ona"/>
-                <outlet property="FavouriteProductPrice" destination="ZTa-vF-eN0" id="Gdb-K5-Mni"/>
+                <outlet property="FavouriteProductImage" destination="ii8-4h-GdW" id="bK3-fZ-iRf"/>
+                <outlet property="FavouriteProductName" destination="HcU-6q-hWY" id="aX6-Oe-EGx"/>
+                <outlet property="FavouriteProductPrice" destination="N24-v4-EHB" id="uUz-7i-dQk"/>
+                <outlet property="cardView" destination="ekZ-Qs-Jvg" id="Oyu-Vg-M2y"/>
             </connections>
             <point key="canvasLocation" x="414.50381679389312" y="-33.450704225352112"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="adidasBag" width="840" height="840"/>
-        <systemColor name="secondarySystemGroupedBackgroundColor">
+        <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>

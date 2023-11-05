@@ -14,11 +14,13 @@ class FavouriteListVCViewController: UIViewController {
     var favouriteViewModel = FavouriteViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        namearray = ["Product 1","Product 2","Product 3","Product 4","Product 5","Product 6","Product 7","Product 8","Product 9"]
-        pricearray = ["USD 1","USD 2","USD 3","USD 4","USD 5","USD 6","USD 7","USD 8","USD 9"]
+  
         self.ConfigureUI()
         favouriteViewModel.bindresultToProductsViewController = {
-            self.FavouriteCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.FavouriteCollectionView.reloadData()
+
+            }
         }
       
             self.favouriteViewModel.getDataFromApiForProduct()
@@ -81,10 +83,7 @@ extension FavouriteListVCViewController :UICollectionViewDelegate,UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = FavouriteCollectionView.dequeueReusableCell(withReuseIdentifier: "FavouriteCell", for: indexPath) as! FavouriteCell
-        cell.FavouriteProductImage.image = UIImage(named: "bag")
-        cell.FavouriteProductName.text = favouriteViewModel.getTitle(index: indexPath.row)
-        cell.FavouriteProductPrice.text = pricearray[indexPath.row]
-    
+        cell.configureCell(imageURL: favouriteViewModel.getImageUrl(index: indexPath.row) ?? "", productname: favouriteViewModel.getTitle(index: indexPath.row) ?? "Bag", productPrice: favouriteViewModel.getprice(index: indexPath.row) ?? "10 USD")
         return cell
     }
     

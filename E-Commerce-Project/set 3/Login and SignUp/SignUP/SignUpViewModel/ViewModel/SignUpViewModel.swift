@@ -21,9 +21,9 @@ class SignUpViewModel {
     let manager  = NetworkServices()
     var messageText : String = ""
     var bindresultToProductsViewController : (() -> ()) = {} 
-  //  var getLogindata : (() -> SignUpData?) = {return nil}
+  
     var data : SignUpData? = nil
-    //var createinApi : (() -> ()) = {}
+    var pushToHome : (() -> ()) = {}
     
     private let format = "SELF MATCHES %@"
     //MARK: - Validate user Info
@@ -43,7 +43,18 @@ class SignUpViewModel {
     //MARK: - create customer in api and FireBase
     func CreateUser (userFirstName : String ,userLastName : String ,userPassword : String , userEmail : String , userPhoneNumber : String ) {
         
-        manager.CreateCustomer(userFirstName: userFirstName, userLastName: userLastName, userPassword: userPassword, userEmail: userEmail, userPhoneNumber: userPhoneNumber)
+        manager.CreateCustomer(userFirstName: userFirstName, userLastName: userLastName, userPassword: userPassword, userEmail: userEmail, userPhoneNumber: userPhoneNumber,Handler: { error in
+            if error != nil {
+                
+                self.messageText = "\(error?.localizedDescription)"
+                self.bindresultToProductsViewController()
+            }
+            else {
+                self.pushToHome()
+            }
+            
+            
+        } )
     }
     func sendEmailToUser(email : String){
         Auth.auth().currentUser?.sendEmailVerification { [self] error in
@@ -65,6 +76,7 @@ class SignUpViewModel {
                 print("===============================")
                
                 self.CreateUser(userFirstName: self.data!.userFirstName, userLastName:self.data!.userLastName, userPassword: self.data!.userPassword, userEmail: self.data!.userEmail, userPhoneNumber: self.data!.userPhoneNumber)
+               
                 
             }
         }
@@ -89,7 +101,8 @@ class SignUpViewModel {
             if let mydata = dataValue {
                 
                 UserDefaultsHelper.shared.saveAPI(id: mydata.customers[0].id ?? 0)
-                let customerId = mydata.customers[0].id ?? 0
+              
+                let customerId =  mydata.customers[0].id ?? 0
                 UserDefaultsHelper.shared.setCustomerId(customerId)
                 
             }else {

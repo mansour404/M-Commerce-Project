@@ -32,6 +32,9 @@ class CategoriesViewController: UIViewController {
         configureLoadingDataFromApi()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
     // MARK: - Configure CollectionView
     private func configureCollectionView() {
         subMainCollectionView.dataSource = self
@@ -118,6 +121,10 @@ extension CategoriesViewController:UICollectionViewDataSource {
         
         let cell = subMainCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
         cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: categoryViewModel.getPrice(index: indexPath.row) ?? "10" , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A")
+        
+        cell.product_title = categoryViewModel.getTitle(index: indexPath.item)
+        cell.product_id = categoryViewModel.getID(index: indexPath.item)
+        
         return cell
         
     }
@@ -142,5 +149,12 @@ extension CategoriesViewController: UICollectionViewDelegate , UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (subMainCollectionView.frame.width / 2) - 10 , height: (subMainCollectionView.frame.height) / 2.5 )
     }
+    
+     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        //(collectionView, willDisplay: cell, forItemAt: indexPath)
+         let cell = cell as! SubmainCollectionViewCell
+         cell.setControllerFavourite()
+             // Your code here
+        }
 }
 
