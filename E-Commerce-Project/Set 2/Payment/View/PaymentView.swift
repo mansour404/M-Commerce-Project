@@ -135,12 +135,12 @@ class PaymentView: UIViewController {
     private func isChoosePaymentMethod() {
         if cashState == .selected || creditState == .selected {
             bottomLayoutConstraint.constant = 16
-            UIView.animate(withDuration: 1.2) {
+            UIView.animate(withDuration: 0.8) {
                 self.view.layoutIfNeeded()
             }
         } else {
             bottomLayoutConstraint.constant = -220
-            UIView.animate(withDuration: 1.0) {
+            UIView.animate(withDuration: 0.8) {
                 self.view.layoutIfNeeded()
             }
         }

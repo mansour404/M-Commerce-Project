@@ -27,5 +27,14 @@ class FavouriteCustomTableViewCell: UITableViewCell {
         cardView.dropShadow()
     }
 
+    func configureCell (imageURL : String , productname : String ,productPrice : String ){
+        FavouriteProductImage.downloadImageFrom(imageURL)
+        if (productname.isEmpty == false) {
+            FavouriteProductName.text = productname
+        }
+        if (productPrice.isEmpty == false) {
+            FavouriteProductPrice.text = productPrice
+        }
+    }
     
 }
