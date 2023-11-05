@@ -46,7 +46,7 @@ class SignUpViewModel {
         manager.CreateCustomer(userFirstName: userFirstName, userLastName: userLastName, userPassword: userPassword, userEmail: userEmail, userPhoneNumber: userPhoneNumber,Handler: { error in
             if error != nil {
                 
-                self.messageText = "\(error?.localizedDescription)"
+                self.messageText = "\(String(describing: error?.localizedDescription))"
                 self.bindresultToProductsViewController()
             }
             else {
@@ -69,11 +69,11 @@ class SignUpViewModel {
             }
             else {
                 
-                print("===============================")
-                print("Email sent successfully please go check your emails")
-                self.messageText = "Email sent successfully please go check your emails"
-                self.bindresultToProductsViewController()
-                print("===============================")
+//                print("===============================")
+//                print("Email sent successfully please go check your emails")
+//                self.messageText = "Email sent successfully please go check your emails"
+//                self.bindresultToProductsViewController()
+//                print("===============================")
                
                 self.CreateUser(userFirstName: self.data!.userFirstName, userLastName:self.data!.userLastName, userPassword: self.data!.userPassword, userEmail: self.data!.userEmail, userPhoneNumber: self.data!.userPhoneNumber)
                
