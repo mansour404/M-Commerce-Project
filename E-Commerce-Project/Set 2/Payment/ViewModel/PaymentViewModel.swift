@@ -29,6 +29,7 @@ class PaymentViewModel {
         self.shippingAddress = shippingAddress
     }
     
+    // MARK: - Post Order
     func postOrder() {
         let customerId = UserDefaultsHelper.shared.getCustomerId()
         // TODO: - let shipingAddress = get Address by id from api.
@@ -40,8 +41,8 @@ class PaymentViewModel {
             line_items.append(newItem)
         }
         
-        // TODO: - Don't forget to set shipping address.
-        // TODO: - Don't forget total_discounts
+        // TODO: - Don't forget to set shipping address. // done.
+        // TODO: - Don't forget total_discounts //
         let currency = UserDefaultsHelper.shared.getCurrencySymbol()
         let phone = "+2" + (shippingAddress?.phone ?? "0109999999")
         let order = OrderNewModel(total_tax: "0", currency: currency, phone: phone, total_discounts: "0", user_id: String(customerId), line_items: line_items, shipping_address: shippingAddress)
@@ -55,15 +56,18 @@ class PaymentViewModel {
         let parameters = JsonEncoderHelper.convertObjectToJson(object: orderResult) ?? [:]
         
         paymentNetworkService.postOrder(parameters: parameters) { [weak self] error in
+            guard let self = self else { return }
             if error != nil {
                 print(error)
             } else {
                 print("SIIIIIIIIIIIIII add new order")
-                self?.emptyShoppingCartDraftOrder()
+                self.updateInventoryLevelForProduct()
+                //self?.emptyShoppingCartDraftOrder()
             }
         }
     }
     
+    // MARK: - Empty Shopping Cart
     private func emptyShoppingCartDraftOrder() {
         let customerId = UserDefaultsHelper.shared.getCustomerId()
         for cart in CartList.carts {
@@ -79,33 +83,38 @@ class PaymentViewModel {
         }
     }
     
-    
+    // MARK: - update Inventory Level
     func updateInventoryLevelForProduct() {
         let items = CartList.carts
-        for _ in items {
+        for item in items {
+            item.inventory_item_id
+            guard let inventoryItemId = item.inventory_item_id, let count = item.quantity else {//
+                print("inventory_item_id", item.inventory_item_id)
+                print("quantity", item.quantity)
+                print("found nil before update inventory item.")
+                return
+            }
+            print("******************")
+            print(inventoryItemId, count)
+            // 44895611682966 11 For bag
+            print("******************")
+            
             //TODO: - Update inventory level for product"
-            print("Todo update inventory level for product")
+            paymentNetworkService.postInventoryLevelForProduct(inventory_item_id: inventoryItemId, available_adjustment: (count * -1)) { [weak self] error in
+                guard let self = self else { return }
+                if error != nil {
+                    print(error)
+                    print("Not udated")
+                } else { // succeed
+                    print("Inventory Level Upated Successfully")
+                    self.emptyShoppingCartDraftOrder()
+                    //CartList.carts = []
+                }
+            }
         }
     }
     
 }
-
-struct InventoryLevel: Codable{
-    var inventoryItemId: Int?
-    var locationId: Int?
-    var available: Int?
-    var updatedAt: String?
-    var adminGraphqlApiId: String?
-
-    private enum CodingKeys: String, CodingKey {
-        case inventoryItemId = "inventory_item_id"
-        case locationId = "location_id"
-        case available = "available"
-        case updatedAt = "updated_at"
-        case adminGraphqlApiId = "admin_graphql_api_id"
-    }
-}
-
 
 /*
  {

@@ -39,10 +39,14 @@ class ShoppingCartService {
                         let price = Double(draftOrder.line_items?.first?.price ?? "1")
                         let image = draftOrder.line_items?.first?.properties?.first?.value
                         let quantity = draftOrder.line_items?.first?.quantity
-                        let availableElements = Int(draftOrder.line_items?.first?.sku ?? "1")
-                        //let inventory_item_id = draftOrder.line_items?.first?.variant_id.
+                        //let availableElements = Int(draftOrder.line_items?.first?.sku ?? "1")
+                        let availableElements = draftOrder.line_items?.first?.properties?[2].value
+                        let availableElements_int_value = Int(availableElements ?? "120")
+                        let inventory_item_id = draftOrder.line_items?.first?.properties?[1].value
+                        let inventory_item_id_int_value = Int(inventory_item_id ?? "120")
+                        print("availableElements", availableElements_int_value)
                         
-                        let cartProduct = ShoppingCartModel(title: title, quantity: quantity, price: price, image: image, draftOrderId: orderId, variantId: variant_id, availableElements: availableElements, inventory_item_id: 99)
+                        let cartProduct = ShoppingCartModel(title: title, quantity: quantity, price: price, image: image, draftOrderId: orderId, variantId: variant_id, availableElements: availableElements_int_value, inventory_item_id: inventory_item_id_int_value)
                         items.append(cartProduct)
                         print("added")
                     } else {
@@ -65,7 +69,8 @@ class ShoppingCartService {
         let title = cart.title ?? "Title"
         let image = cart.image ?? "Picture"
         let sku = String(cart.availableElements ?? 0)
-        let inventoryItemId = cart.inventory_item_id
+        let inventoryItemId = String(cart.inventory_item_id ?? 120)
+        let availableElements = String(cart.availableElements ?? 0) // availableElements stored in sku.
         
         print("++++++++++++++++++")
         print(inventoryItemId)
@@ -81,12 +86,20 @@ class ShoppingCartService {
                         "title":title,
                         "price":price,
                         "quantity":quantity,
-                        "sku": sku,
+                        "sku": availableElements,
                         //"fulfillment_service": image,
                         "properties": [
                             [
                                 "name": "imageSrc",
                                 "value": image
+                            ],
+                            [
+                                "name": "inventoryItemId",
+                                "value": inventoryItemId
+                            ],
+                            [
+                                "name": "availableElements",
+                                "value": availableElements
                             ]
                         ]
                     ] as [String : Any]
@@ -122,27 +135,9 @@ class ShoppingCartService {
         let title = cart.title ?? "Title"
         let image = cart.image ?? "Picture"
         let sku = String(cart.availableElements ?? 0)
-        
-        print(variantId)
-        
-//        let parameters = [
-//            "draft_order": [
-//                "id":draftOrderId,
-//                "line_items": [
-//                    [
-//                        "variant_id":variantId,
-//                        "quantity":quantity,
-//                        "sku": "new sku",
-//                        "properties": [
-//                            [
-//                                "name": "imageSrc",
-//                                "value": image
-//                            ]
-//                        ]
-//                    ] as [String : Any]
-//                ]
-//            ] as [String : Any]
-//        ]
+        let availableElements = sku
+        let inventoryItemId = String(cart.inventory_item_id ?? 120)
+        print("inventoryItemId", inventoryItemId)
         
         let parameters: [String: Any] = [
             "draft_order": [
@@ -159,6 +154,14 @@ class ShoppingCartService {
                             [
                                 "name": "imageSrc",
                                 "value": image
+                            ],
+                            [
+                                "name": "inventoryItemId",
+                                "value": inventoryItemId
+                            ],
+                            [
+                                "name": "availableElements",
+                                "value": availableElements
                             ]
                         ]
                     ] as [String : Any]

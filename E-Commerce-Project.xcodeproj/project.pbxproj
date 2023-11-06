@@ -78,6 +78,7 @@
 		DCFA44AA2AF7823600CCF30C /* UserOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFA449C2AF7823600CCF30C /* UserOrderViewController.swift */; };
 		DCFA44AB2AF7823600CCF30C /* userOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFA449E2AF7823600CCF30C /* userOrderViewModel.swift */; };
 		DCFA44AC2AF7823600CCF30C /* userOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFA44A02AF7823600CCF30C /* userOrderModel.swift */; };
+		E550A34A2AF96B9800961664 /* InventoryLevelResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550A3492AF96B9800961664 /* InventoryLevelResult.swift */; };
 		E5814B122AE09BCE00D4D60F /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5814B112AE09BCE00D4D60F /* UIView + Extensions.swift */; };
 		E5814B142AE09BF800D4D60F /* UIImageView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5814B132AE09BF800D4D60F /* UIImageView + Extensions.swift */; };
 		E5814B162AE09C7B00D4D60F /* UIViewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5814B152AE09C7B00D4D60F /* UIViewController + Extensions.swift */; };
@@ -255,6 +256,7 @@
 		DCFA449C2AF7823600CCF30C /* UserOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOrderViewController.swift; sourceTree = "<group>"; };
 		DCFA449E2AF7823600CCF30C /* userOrderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userOrderViewModel.swift; sourceTree = "<group>"; };
 		DCFA44A02AF7823600CCF30C /* userOrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userOrderModel.swift; sourceTree = "<group>"; };
+		E550A3492AF96B9800961664 /* InventoryLevelResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryLevelResult.swift; sourceTree = "<group>"; };
 		E5814B112AE09BCE00D4D60F /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		E5814B132AE09BF800D4D60F /* UIImageView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extensions.swift"; sourceTree = "<group>"; };
 		E5814B152AE09C7B00D4D60F /* UIViewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extensions.swift"; sourceTree = "<group>"; };
@@ -977,6 +979,7 @@
 			children = (
 				E5C7F1E52AF6571500F154F5 /* Networking */,
 				E5C7F1E72AF6571500F154F5 /* OrdersResult.swift */,
+				E550A3492AF96B9800961664 /* InventoryLevelResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1565,6 +1568,7 @@
 				DCFA44632AF706F300CCF30C /* AddInfoViewModel.swift in Sources */,
 				DCFA44682AF706F300CCF30C /* SignUpVC.swift in Sources */,
 				E5C7F2562AF6571600F154F5 /* State.swift in Sources */,
+				E550A34A2AF96B9800961664 /* InventoryLevelResult.swift in Sources */,
 				E5C7F23D2AF6571600F154F5 /* Countries.swift in Sources */,
 				DC851A2D2AE9D69A001BD944 /* CtegoryViewModel.swift in Sources */,
 				DCFA446C2AF706F300CCF30C /* CustomerModel.swift in Sources */,
