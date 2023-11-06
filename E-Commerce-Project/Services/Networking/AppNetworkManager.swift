@@ -123,20 +123,27 @@ class NetworkServices   {
         }
     }
     //MARK: - sending favourite to api
-    func addFavouriteItem(userID : Int,productId : Int,productName: String,Handler: @escaping () -> Void){
-        let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(userID)/metafields.json"
+    func addFavouriteItem(customerId : Int,productId : Int,productName: String,price: String,imageURl : String,Handler: @escaping () -> Void){
+        let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders.json"
         
-        let body: [String: Any] = [
-            "metafield": [
-                "namespace": "wishlist",
-                "key": "\(productId)",
-                "value": "\(productName)",
-                "owner_id": userID,
-                "owner_resource": "customer",
-                "type": "single_line_text_field"
+        let parameters: [String: Any] = [
+            "draft_order": [
+                "note": "Wishlist",
+                "line_items":[
+                    [
+                       // "id": productId,
+                        "product_id": productId, //Optional("{\"errors\":{\"line_items[0].variant_id\":[\"not found\"]}}")
+                        "title":productName,
+                        "price": Double(price)!,
+                        "sku": imageURl,
+                    ]
+                ],
+                "customer": [
+                    "id":customerId
+                ]
             ]
         ]
-        AF.request(urlFile ,method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response{ response in
+        AF.request(urlFile ,method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response{ response in
             switch response.result {
             case .success(_):
                 print("success from add favourites")
