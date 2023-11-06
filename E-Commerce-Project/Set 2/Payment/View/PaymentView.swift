@@ -23,8 +23,8 @@ class PaymentView: UIViewController {
     var isHiddenFlag: Bool = true
     var cashState: PaymentState = .notSelected
     var creditState: PaymentState = .notSelected
-    var finalTotalCost: Double = 0.0
-    var currencySymbol: String = ""
+    var finalTotalCost: Double = UserDefaultsHelper.shared.getFinalTotalCost()
+    var currencySymbol: String = UserDefaultsHelper.shared.getCurrencySymbol()
     
     private var paymentRequest: PKPaymentRequest {
         let request = PKPaymentRequest()
@@ -34,10 +34,7 @@ class PaymentView: UIViewController {
         request.merchantCapabilities = .capability3DS
         
         request.countryCode = "EG"
-        request.currencyCode = "EGP"
-        
-        finalTotalCost = UserDefaultsHelper.shared.getFinalTotalCost()
-        currencySymbol = UserDefaultsHelper.shared.getCurrencySymbol()
+        request.currencyCode = currencySymbol
         
         let roundedCost = Double(String(format:"%.2f", finalTotalCost)) ?? 1.00
         let _ = (finalTotalCost * 100).rounded() / 100

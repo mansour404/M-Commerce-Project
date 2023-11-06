@@ -96,7 +96,9 @@ extension ShoppingCartView {
 //            self?.totalPrice = Double(validPrice) ?? 0.0
 //        }
         viewModel.updateTotalPriceClosure = { [weak self] (totalPrice , symbol) in
-            let roundedCost = Double(String(format:"%.2f", totalPrice)) ?? 1.00
+            var currencyRate =  UserDefaultsHelper.shared.getCurrencyRate()
+            let actualValue = totalPrice * currencyRate
+            let roundedCost = Double(String(format:"%.2f", actualValue)) ?? 1.00
             self?.totalPriceLabel.text = String(roundedCost) + "  " + symbol
 //            var validPrice = totalPrice
 //            validPrice.removeLast(5)

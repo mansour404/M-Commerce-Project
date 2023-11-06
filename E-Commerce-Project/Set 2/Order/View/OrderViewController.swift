@@ -116,12 +116,13 @@ class OrderViewController: UIViewController {
         }
         
         shoppinViewModel.updateTotalPriceClosure = { [weak self] (totalPrice , symbol) in
-            let roundedCost = Double(String(format:"%.2f", totalPrice)) ?? 1.00
+            var currencyRate =  UserDefaultsHelper.shared.getCurrencyRate()
+            let actualValue = totalPrice * currencyRate
+            
+            let roundedCost = Double(String(format:"%.2f", actualValue)) ?? 1.00
             self?.subtotalMoneyLabel.text = String(roundedCost) + "  " + symbol
             self?.totalMoneyLabel.text = String(roundedCost) + "  " + symbol
             self?.discountMoneyLabel.text = "0.00" + "  " + symbol
-//            var validPrice = totalPrice
-//            validPrice.removeLast(5)
             self?.totalPrice = roundedCost
             self?.currencySymbol = symbol
         }

@@ -30,17 +30,24 @@ class ShoppingCartService {
             case .success(let draftOrders):
                 guard let draftOrders = draftOrders.draft_orders else { return }
                 for draftOrder in draftOrders {
-                    let orderId = draftOrder.id
-                    let variant_id = draftOrder.line_items?.first?.variant_id
-                    let title = draftOrder.line_items?.first?.title
-                    let price = Double(draftOrder.line_items?.first?.price ?? "1")
-                    let image = draftOrder.line_items?.first?.properties?.first?.value
-                    let quantity = draftOrder.line_items?.first?.quantity
-                    let availableElements = Int(draftOrder.line_items?.first?.sku ?? "1")
-                    //let inventory_item_id = draftOrder.line_items?.first?.variant_id.
-                    
-                    let cartProduct = ShoppingCartModel(title: title, quantity: quantity, price: price, image: image, draftOrderId: orderId, variantId: variant_id, availableElements: availableElements, inventory_item_id: 99)
-                    items.append(cartProduct)
+                    let check_id = draftOrder.customer?.id
+                    if check_id == customerId {
+                        print("not break")
+                        let orderId = draftOrder.id
+                        let variant_id = draftOrder.line_items?.first?.variant_id
+                        let title = draftOrder.line_items?.first?.title
+                        let price = Double(draftOrder.line_items?.first?.price ?? "1")
+                        let image = draftOrder.line_items?.first?.properties?.first?.value
+                        let quantity = draftOrder.line_items?.first?.quantity
+                        let availableElements = Int(draftOrder.line_items?.first?.sku ?? "1")
+                        //let inventory_item_id = draftOrder.line_items?.first?.variant_id.
+                        
+                        let cartProduct = ShoppingCartModel(title: title, quantity: quantity, price: price, image: image, draftOrderId: orderId, variantId: variant_id, availableElements: availableElements, inventory_item_id: 99)
+                        items.append(cartProduct)
+                        print("added")
+                    } else {
+                        print("not added")
+                    }
                 }
                 CartList.carts = items
                 completion(.success(items))
@@ -66,6 +73,7 @@ class ShoppingCartService {
 
         let parameters: [String: Any] = [
             "draft_order": [
+                "note": "rush order",
                 "line_items":[
                     [
                         "id": variantId,

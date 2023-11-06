@@ -84,12 +84,23 @@ class ProductsViewController: UIViewController {
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             
             let cell = productsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
+            
             cell.productNameLabel.text = productviewModel.getTitle(index: indexPath.row)
             cell.imageView.downloadImageFrom(productviewModel.getid(index: indexPath.row))
             
             cell.product_title = productviewModel.getTitle(index: indexPath.item)
             cell.product_id = Int(productviewModel.getProductID(index: indexPath.item))
+            
+//            let price = productviewModel.getPrice(index: indexPath.row) ?? "10"
+            let price = productviewModel.getPrice(index: indexPath.row) ?? "99"
+            let (priceText, symbol) = CurrencyManager.returnPriceAndSymbol(price: price)
+            print("+++++++++++")
+            print(priceText, symbol)
+            print("+++++++++++")
 
+            //cell.configure(imageName: <#T##String#>, priceText: <#T##String#>, productNameText: <#T##String#>, exchangeText: <#T##String#>)
+            
+            cell.configure(imageName: productviewModel.getImage(index: indexPath.row) ?? "bag", priceText: priceText , productNameText: productviewModel.getTitle(index: indexPath.row) ?? "A", exchangeText: symbol)
             
             return cell
             

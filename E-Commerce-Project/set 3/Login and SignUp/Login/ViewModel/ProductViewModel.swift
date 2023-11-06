@@ -64,10 +64,22 @@ class ProductViewModel {
 func getNumberOfProduct() -> Int? {
     return AllBrandProducts?.products.count
    }
+    
+    func getPrice(index: Int) -> String?{
+        return  AllBrandProducts?.products[index].variants?.first?.price
+        
+    }
+    
     func getTitle(index: Int) -> String?{
         return  AllBrandProducts?.products[index].title
- 
-    } 
+        
+    }
+    
+    func getImage(index: Int) -> String?{
+        return  AllBrandProducts?.products[index].images.first?.src
+        
+    }
+    
     func getid(index: Int) -> String{
         if (AllBrandProducts?.products[index].images.count == 0) {
             return "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
