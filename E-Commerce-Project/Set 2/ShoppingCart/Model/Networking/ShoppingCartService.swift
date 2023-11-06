@@ -31,7 +31,7 @@ class ShoppingCartService {
                 guard let draftOrders = draftOrders.draft_orders else { return }
                 for draftOrder in draftOrders {
                     let check_id = draftOrder.customer?.id
-                    if check_id == customerId {
+                    if check_id == customerId && "rush order" == draftOrder.note {
                         print("not break")
                         let orderId = draftOrder.id
                         let variant_id = draftOrder.line_items?.first?.variant_id
