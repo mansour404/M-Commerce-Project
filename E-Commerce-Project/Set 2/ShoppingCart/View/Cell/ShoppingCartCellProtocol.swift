@@ -14,4 +14,5 @@ protocol ShoppingCartCellProtocol: AnyObject {
 
 protocol ShoppingCartCellDelegate: AnyObject {
     func updateProductCount(index: Int, count: Int)
+    func showAlert(avaibleElements: Int)
 }

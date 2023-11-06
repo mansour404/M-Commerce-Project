@@ -54,12 +54,16 @@ class ShoppingCartCell: UITableViewCell {
 //            button.isEnabled = false
 //        }
         
-        productCount += 1
-        if let index = cellIndex {
-            delegate?.updateProductCount(index: index, count: productCount)
-            updateProductCountLabel()
+        if productCount < availableElements  {
+            productCount += 1
+            if let index = cellIndex {
+                delegate?.updateProductCount(index: index, count: productCount)
+                updateProductCountLabel()
+            }
+            //test_put_draft_order ()
+        } else {
+            delegate?.showAlert(avaibleElements: availableElements)
         }
-        //test_put_draft_order ()
     }
     
     @IBAction func minusItemButtonPressed(_ sender: Any) {
