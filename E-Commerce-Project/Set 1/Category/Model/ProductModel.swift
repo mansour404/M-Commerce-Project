@@ -14,6 +14,7 @@ struct ProductsResponse: Codable {
 
 struct Variant : Codable {
     var  price : String?
+    var id : Int?
     var option1 : String?
     var option2 : String?
     var option3 : String?

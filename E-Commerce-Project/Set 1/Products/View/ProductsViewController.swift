@@ -35,6 +35,13 @@ class ProductsViewController: UIViewController {
         configureCollectionView()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        productviewModel.bindresultToProductsViewController = {
+            DispatchQueue.main.async {
+                self.productsCollectionView.reloadData()
+            }
+        }
+    }
     func configureLoadingDataFromApi(){
         if(isSearchActive ){
             productviewModel.getDataFromApiForProduct_WithFilter(SearchText: searchBar.text!)
@@ -90,7 +97,9 @@ class ProductsViewController: UIViewController {
             
             cell.product_title = productviewModel.getTitle(index: indexPath.item)
             cell.product_id = Int(productviewModel.getProductID(index: indexPath.item))
-            
+            cell.product_Price = productviewModel.getPrice(index: indexPath.row)
+            cell.product_Image = productviewModel.getid(index: indexPath.row)
+            cell.product_Variant_Id = productviewModel.getVariant_Id(index: indexPath.row)
 //            let price = productviewModel.getPrice(index: indexPath.row) ?? "10"
             let price = productviewModel.getPrice(index: indexPath.row) ?? "99"
             let (priceText, symbol) = CurrencyManager.returnPriceAndSymbol(price: price)

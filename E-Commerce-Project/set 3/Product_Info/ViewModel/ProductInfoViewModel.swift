@@ -79,37 +79,58 @@ class ProductInfoViewModel {
         
     }
     func createFavourite(){
-        networkManager.addFavouriteItem(customerId: UserDefaultsHelper.shared.getCustomerId(), productId: product?.variants?[0].id ?? 0, productName: product?.title ?? "no title in productinfovm", price: product?.variants?[0].price ?? "130", imageURl: product?.images[0].src ?? ""  , Handler:{
+        networkManager.addFavouriteItem(customerId: UserDefaultsHelper.shared.getCustomerId(), productId: product?.id ?? 0, variant_id: product?.variants?[0].id ?? 0, productName: product?.title ?? "no title in productinfovm", price: product?.variants?[0].price ?? "130", imageURl: product?.images[0].src ?? ""  , Handler:{
             self.bindresultToProductsViewController(true)
         })
     }
                                       
     func  setControllerFavourite(){
-        networkManager.getfavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()) , productId: Int(id!), Handler: { (dataValue:WhishList?, error: Error?) in
-            print("Success")
+
+        networkManager.getCustomerWishList(Handler: {(dataValue:DraftOrdersResult?, error: Error?) in
+            
             if let mydata = dataValue {
-                print(mydata.metafields)
-                print(mydata.metafields.isEmpty)
-                
-                if(mydata.metafields.isEmpty == true ){
-                    self.bindresultToProductsViewController(false)
-                    
+                print("********************************************")
+                    print("this the filter in product info  ")
+                print("\(String(describing: mydata.draft_orders?.count) )")
+                print("********************************************")
+                if((mydata.draft_orders?.count ?? 0) > 0){
+                    for d in 0..<(mydata.draft_orders?.count ?? 0) {
+                        if(UserDefaultsHelper.shared.getCustomerId() != 0){
+                            if(mydata.draft_orders?[d].note == "Wishlist" ){
+                                let mycustomer : CustomerTwo = (mydata.draft_orders?[d].customer)!
+                                    if(mycustomer.id == UserDefaultsHelper.shared.getCustomerId()){
+                                    print("********************************************")
+                                        print("this the filter in product info  ")
+                                        print("\(mycustomer.id == UserDefaultsHelper.shared.getCustomerId())")
+                                    print("********************************************")
+                                        print("********************************************")
+                                            print("this the filter in product info this is product id  ")
+                                        print("\(String(describing: self.product?.variants?[0].id))")
+                                        print("********************************************")
+                                        print("********************************************")
+                                            print("this the filter in product info this is a product id in draft order ")
+                                        print("\(String(describing: mydata.draft_orders?[d].line_items?[0].variant_id))")
+                                        print("********************************************")
+                                    if(mydata.draft_orders?[d].line_items?[0].variant_id == self.product?.variants?[0].id){
+                                        self.bindresultToProductsViewController(true)
+                                    }else {
+                                        self.bindresultToProductsViewController(false)
+                                    }
+                                }
+                                
+                            }
+                        }
+                        
+                    }
+                }}else {
+                    if let error = error{
+                        self.bindresultToProductsViewController(false)
+                        print(error.localizedDescription)
+                    }
                 }
-                else  {
-                    self.bindresultToProductsViewController(true)
-                  
-                }
-                print("yousof is right")
-            }else {
-                if let error = error{
-                    print(error.localizedDescription)
-                }
-            }
-        })
-       print("ziyad is wrong")
-        
-    }
-    
+            })
+        }
+
     //MARK: - Fetching Data From Api to chech if in favourite
     
 }

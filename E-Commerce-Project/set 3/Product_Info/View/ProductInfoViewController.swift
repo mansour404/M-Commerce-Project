@@ -364,7 +364,7 @@ class ProductInfoViewController: UIViewController {
     @objc func heartButtonPressed(sender: UIButton) {
         print(heartIsFilled)
         if heartIsFilled {
-            view_model.StageDelete(product_id: view_model.product!.id!)
+            view_model.StageDelete(product_id: view_model.product!.variants![0].id!)
             
         }
         else {
@@ -392,7 +392,10 @@ class ProductInfoViewController: UIViewController {
         view_model.id = product_id
         view_model.myView = self
         view_model.bindresultToProductsViewController = {(check : Bool ) -> Void in
-            self.colorheart(colored: check)
+            DispatchQueue.main.async {
+                self.colorheart(colored: check)
+            }
+            
         }
         view_model.initializeProduct()
         

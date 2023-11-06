@@ -22,7 +22,7 @@ class ProductViewModel {
     
     //MARK: -CAll Request of Api
     func getDataFromApiForProduct() {
-        services.getAllProductsForBrandData(BrandId: HomeViewModel.selectedBrandID ?? 303787573398, Handler: { (dataValue:ProductsResponse?, error: Error?) in
+        services.getAllProductsForBrandData(BrandName: HomeViewModel.selectedBrandName ?? "ADIDAS", Handler: { (dataValue:ProductsResponse?, error: Error?) in
             print("Success")
 
             if let mydata = dataValue {
@@ -37,7 +37,7 @@ class ProductViewModel {
         })
     }
     func getDataFromApiForProduct_WithFilter(SearchText : String) {
-        services.getAllProductsForBrandData(BrandId: HomeViewModel.selectedBrandID ?? 303787573398, Handler: { (dataValue:ProductsResponse?, error: Error?) in
+        services.getAllProductsForBrandData(BrandName: HomeViewModel.selectedBrandName ?? "ADIDAS", Handler: { (dataValue:ProductsResponse?, error: Error?) in
             print("Success")
 
             if let mydata = dataValue {
@@ -66,7 +66,7 @@ func getNumberOfProduct() -> Int? {
    }
     
     func getPrice(index: Int) -> String?{
-        return  AllBrandProducts?.products[index].variants?.first?.price
+        return  AllBrandProducts?.products[index].variants?[0].price
         
     }
     
@@ -90,6 +90,9 @@ func getNumberOfProduct() -> Int? {
     func getProductID (index : Int) -> Int64{
             return AllBrandProducts?.products[index].id ?? 0
         }
+    func getVariant_Id (index : Int) -> Int{
+        return AllBrandProducts?.products[index].variants?[0].id ?? 0
+    }
    
 //    func getImage(index: Int) -> String?{
 //        return getAllBrands?.smart_collections[index].image.src

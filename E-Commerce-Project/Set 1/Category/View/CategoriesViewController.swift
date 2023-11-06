@@ -69,15 +69,15 @@ class CategoriesViewController: UIViewController {
         return shoppingCartBarButtonItem
     }
     
-//    private func addFSearchButton() -> UIBarButtonItem {
-//        let heartButton = UIButton(type: .custom)
-//        heartButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-//        heartButton.tintColor = UIColor.systemPurple
-////        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
-//
-//        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
-//        return heartBarButtonItem
-//    }
+    private func addFSearchButton() -> UIBarButtonItem {
+        let heartButton = UIButton(type: .custom)
+        heartButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        heartButton.tintColor = UIColor.systemPurple
+//        heartButton.addTarget(self, action: #selector(navigateToFavourites), for: .touchUpInside)
+
+        let heartBarButtonItem = UIBarButtonItem(customView: heartButton)
+        return heartBarButtonItem
+    }
     
     @objc func navigateToFavourites(sender: UIButton) {
         let vc = FavouriteListVCViewController(nibName: "FavouriteListVCViewController", bundle: nil)
@@ -127,11 +127,17 @@ extension CategoriesViewController:UICollectionViewDataSource {
         print(priceText, symbol)
         print("+++++++++++")
 //        cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: categoryViewModel.getPrice(index: indexPath.row) ?? "10" , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A")
-        
+        print("++++++++++++++++++++++++++++++++++++")
+        print(categoryViewModel.getImage(index: indexPath.row) )
+        print("++++++++++++++++++++++++++++++++++++")
         cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: priceText , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A", exchangeText: symbol)
         
         cell.product_title = categoryViewModel.getTitle(index: indexPath.item)
         cell.product_id = categoryViewModel.getID(index: indexPath.item)
+        cell.product_Image = categoryViewModel.getImage(index: indexPath.row) ?? "bag"
+        cell.product_Variant_Id = categoryViewModel.getVariantId(index: indexPath.row)
+        cell.product_Price = categoryViewModel.getPrice(index: indexPath.row) ?? "10"
+        //cell.product_Variant_Id =
         
         cell.layer.cornerRadius = 20
         cell.layer.borderWidth = 1

@@ -32,7 +32,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="USD 50.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N24-v4-EHB">
-                                        <rect key="frame" x="112" y="63.666666666666679" width="311" height="20.333333333333336"/>
+                                        <rect key="frame" x="112" y="71.666666666666671" width="311" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                     <constraint firstItem="N24-v4-EHB" firstAttribute="leading" secondItem="HcU-6q-hWY" secondAttribute="leading" id="XPX-cU-IH0"/>
                                     <constraint firstItem="ii8-4h-GdW" firstAttribute="top" secondItem="ekZ-Qs-Jvg" secondAttribute="top" constant="4" id="cPT-Sk-fej"/>
                                     <constraint firstItem="HcU-6q-hWY" firstAttribute="top" secondItem="ii8-4h-GdW" secondAttribute="top" constant="8" id="nP5-Ud-Xpr"/>
-                                    <constraint firstItem="N24-v4-EHB" firstAttribute="bottom" secondItem="ii8-4h-GdW" secondAttribute="bottom" constant="-8" id="vTA-st-1Tr"/>
+                                    <constraint firstItem="N24-v4-EHB" firstAttribute="bottom" secondItem="ii8-4h-GdW" secondAttribute="bottom" id="vTA-st-1Tr"/>
                                 </constraints>
                             </view>
                         </subviews>

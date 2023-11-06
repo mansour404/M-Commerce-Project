@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FavouriteCell: UICollectionViewCell {
     @IBOutlet weak var cardView: UIView!
@@ -23,7 +24,7 @@ class FavouriteCell: UICollectionViewCell {
         cardView.dropShadow()
     }
     func configureCell (imageURL : String , productname : String ,productPrice : String ){
-        FavouriteProductImage.downloadImageFrom(imageURL)
+        FavouriteProductImage.kf.setImage(with: URL(string: imageURL),placeholder:  "adidasBag" as? Placeholder)
         if (productname.isEmpty == false) {
             FavouriteProductName.text = productname
         }

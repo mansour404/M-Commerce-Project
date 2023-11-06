@@ -145,16 +145,19 @@ func getNumberOfProducts() -> Int? {
     func getProductID(index : Int ) -> Int64{
         return getAllProducts?.products[index].id ?? 7827742130326
     }
+    func getVariantId(index: Int) ->Int? {
+        return getAllProducts?.products[index].variants?[0].id
+    }
     
-//    func filter(mainCategoryName:String)->[Product]{
-//        var arr : [Product] = []
-//        for i in 0..<(getAllProducts?.products.count ?? 1){
-//            if ((getAllProducts?.products[i].tags?.contains(mainCategoryName)) == true){
-//                arr.append(getAllProducts!.products[i])
-//            }
-//        }
-//        return arr
-//    }
+    func filter(mainCategoryName:String)->[Product]{
+        var arr : [Product] = []
+        for i in 0..<(getAllProducts?.products.count ?? 1){
+            if ((getAllProducts?.products[i].tags?.contains(mainCategoryName)) == true){
+                arr.append(getAllProducts!.products[i])
+            }
+        }
+        return arr
+    }
 }
     
 
