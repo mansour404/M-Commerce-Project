@@ -79,11 +79,11 @@ class ProductInfoViewModel {
         
     }
     func createFavourite(){
-        networkManager.addFavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), productId: Int(id!), productName: (product?.title)!, Handler:{
+        networkManager.addFavouriteItem(customerId: UserDefaultsHelper.shared.getCustomerId(), productId: product?.variants?[0].id ?? 0, productName: product?.title ?? "no title in productinfovm", price: product?.variants?[0].price ?? "130", imageURl: product?.images[0].src ?? ""  , Handler:{
             self.bindresultToProductsViewController(true)
         })
     }
-    
+                                      
     func  setControllerFavourite(){
         networkManager.getfavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()) , productId: Int(id!), Handler: { (dataValue:WhishList?, error: Error?) in
             print("Success")

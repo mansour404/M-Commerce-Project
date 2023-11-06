@@ -71,9 +71,9 @@ class NetworkServices   {
         }
     }
     //MARK: - Fetching Data From Api to favourites
-    func getCustomerWishList<T :Codable>(CustomerId : Int? ,Handler: @escaping (T?,Error?) -> Void){
+    func getCustomerWishList<T :Codable>(Handler: @escaping (T?,Error?) -> Void){
         
-        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/6866434621590/metafields.json?namespace=wishlist"
+        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/6866434621590/draft_orders.json"
         
         Alamofire.AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
             if let validData = data.data {
@@ -123,22 +123,44 @@ class NetworkServices   {
         }
     }
     //MARK: - sending favourite to api
-    func addFavouriteItem(userID : Int,productId : Int,productName: String,Handler: @escaping () -> Void){
-        let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/\(userID)/metafields.json"
+    func addFavouriteItem(customerId : Int,productId : Int,productName: String,price: String,imageURl : String,Handler: @escaping () -> Void){
+        let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders.json"
+        print ("============================")
+        print ("this is from a add favourite item")
+        print ("============================")
+        print(customerId)
+        print ("============================")
+        print(productId)
+        print ("============================")
+        print(productName)
+        print ("============================")
+        print(price)
+        print ("============================")
+        print(imageURl)
+        print ("============================")
         
-        let body: [String: Any] = [
-            "metafield": [
-                "namespace": "wishlist",
-                "key": "\(productId)",
-                "value": "\(productName)",
-                "owner_id": userID,
-                "owner_resource": "customer",
-                "type": "single_line_text_field"
-            ]
+        let parameters: [String: Any] = [
+            "draft_order": [
+                "note": "Wishlist",
+                "line_items":[
+                    [
+                        "id": productId,
+                        "variant_id": productId, //Optional("{\"errors\":{\"line_items[0].variant_id\":[\"not found\"]}}")
+                        "title":productName,
+                        "price": Double(price)!,
+                        "quantity":1,
+                        "sku": imageURl,
+                    ]as [String : Any]
+                ],
+                "customer": [
+                    "id":customerId
+                ]
+            ]as [String : Any]
         ]
-        AF.request(urlFile ,method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response{ response in
+        AF.request(urlFile ,method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response{ response in
             switch response.result {
-            case .success(_):
+            case .success(let data):
+                print(String(data: data!, encoding: .utf8))
                 print("success from add favourites")
                 Handler()
                 break
@@ -248,7 +270,7 @@ class NetworkServices   {
             }
         }
     
-    func CreateCustomer (userFirstName : String , userLastName : String , userPassword : String , userEmail : String , userPhoneNumber : String,Handler : @escaping (Error?) -> Void){
+    func CreateCustomer<T:Codable> (userFirstName : String , userLastName : String , userPassword : String , userEmail : String , userPhoneNumber : String,Handler : @escaping (T?,Error?) -> Void){
         let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json"
         let body: [String: Any] =
         ["customer":[
@@ -261,19 +283,24 @@ class NetworkServices   {
             
         ]]
         print(body)
-        AF.request(urlFile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response { response in
-            switch response.result {
-            case .success:
-                Handler(nil)
-                break
-            case .failure(let error):
-                Handler(error)
-                break
+        AF.request(urlFile, method: .post, parameters: body, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response {data in
+            if let validData = data.data {
+                do{
+                    let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
                 
-                
+                    
+                    Handler(dataRetivied, nil)
+                    
+                }catch let error{
+                 
+                    Handler(nil, error)
+                }
             }
+            else{print("There is error in casting data")}
         }
-    }
+            }
+        
+
         //MARK: - Fetching Data From Api  to get customer by email
         func getCustomerByEmail<T : Codable>(userEmail : String ,Handler : @escaping (T?,Error?) -> Void){
             let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json?email=\(userEmail)"
@@ -312,6 +339,7 @@ class NetworkServices   {
             }
             
         }
+
     //MARK: - Fetching Data From Api to show User Orders
     func getUserOrders <T:Codable> (Handler : @escaping (T?,Error?) -> Void){
         let URL = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/orders.json?status=any"
@@ -331,9 +359,9 @@ class NetworkServices   {
             else{print("There is error in casting data")}
         }
     }
-        }
+        
     
-   
+}
     
 
 

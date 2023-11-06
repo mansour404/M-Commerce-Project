@@ -50,7 +50,7 @@ class GoogleLoginVC: UIViewController {
 //                        self.showAlert(message: self.addUserDetailsModel.messageText)
 //                    }
                     addUserDetailsModel.bindresultToProductsViewController = { // set alert message
-                        let vc = TabController()
+                        let vc = NewAddressView()
                         vc.modalPresentationStyle = .fullScreen
                     
                         self.present(vc, animated: true)

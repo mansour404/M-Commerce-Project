@@ -107,13 +107,13 @@ class SubmainCollectionViewCell: UICollectionViewCell {
         
     }
     func createFavourite(){
-        networkManager.addFavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), productId: Int(product_id!), productName: (product_title)!, Handler:{
-            DispatchQueue.main.async {
-                
-                
-                self.bindresultToProductsViewController(true)
-            }
-        })
+//        networkManager.addFavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), productId: Int(product_id!), productName: (product_title)!, Handler:{
+//            DispatchQueue.main.async {
+//                
+//                
+//                self.bindresultToProductsViewController(true)
+//            }
+//        })
     }
     
     func  setControllerFavourite(){
