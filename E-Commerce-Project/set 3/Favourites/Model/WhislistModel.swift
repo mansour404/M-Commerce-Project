@@ -21,3 +21,11 @@ struct FavouriteProduct : Codable{
     var owner_resource : String?
     var type : String?
 }
+
+
+
+
+
+
+
+

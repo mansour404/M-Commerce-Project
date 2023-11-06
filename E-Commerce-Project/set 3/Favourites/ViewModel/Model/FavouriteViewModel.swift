@@ -8,17 +8,16 @@
 import Foundation
 import Alamofire
 class FavouriteViewModel {
-     private var productArray : [Product] = []
+    
         var handerDataOfHome: (() -> Void)?
         var  bindresultToProductsViewController: ( () -> () ) = {}
     var compiltionHandler: ((_ id : Int) -> ()) = {id in }
         var services = NetworkServices()
-        
-        var AllUserWishList: WhishList? {
+    var CustomerWishlist : [Draft_orders] = []
+    var AllDraftOrdersZiyad: DraftOrdersResult? {
             didSet{
-                if let validHander =  handerDataOfHome {
-                    validHander()
-                }
+                
+                self.getwishlistforCustomer()
             }
         }
         
@@ -27,13 +26,15 @@ class FavouriteViewModel {
             print("======================")
             print("============\(UserDefaultsHelper.shared.getCustomerId())")
             print("======================")
-            services.getCustomerWishList(CustomerId: UserDefaultsHelper.shared.getCustomerId(), Handler: { (dataValue:WhishList?, error: Error?) in
+            services.getCustomerWishList( Handler: { (dataValue:DraftOrdersResult?, error: Error?) in
                 
                 if let mydata = dataValue {
-                    self.AllUserWishList = mydata
-                    print(mydata.metafields.count)
+                    print("==========================================")
+                    print(mydata.draft_orders?.count)
+                    print("==========================================")
+                    self.AllDraftOrdersZiyad = mydata
                     
-                    self.getproducts()
+                   
                 }else {
                     if let error = error{
                         print(error.localizedDescription)
@@ -46,46 +47,40 @@ class FavouriteViewModel {
         
         //MARK: -Getting Number of Brands
     func getNumberOfProduct() -> Int? {
-        return productArray.count
+        return CustomerWishlist.count
        }
-        func getTitle(index: Int) -> String?{
-            return  productArray[index].title
-        }
+    func getTitle(index: Int) -> String?{
+        return  CustomerWishlist[index].line_items![0].title
+    }
     func getprice(index : Int) ->String? {
-        return  productArray[index].variants?[0].price
+        return   CustomerWishlist[index].line_items![0].price
     }
     func getImageUrl(index : Int)->String? {
-        return productArray[index].images[0].src
+        return  CustomerWishlist[index].line_items![0].sku
     }
-    let dispatchGroup = DispatchGroup()
-    func getproducts(){
-        productArray = []
-        
-        for i in 0..<(AllUserWishList?.metafields.count)! {
-            dispatchGroup.enter()
-            services.getProductById(ProductId: AllUserWishList!.metafields[i].key! , Handler: { (dataValue:MyProductcontainer?, error: Error?) in
-                print("Success")
-                
-                if let mydata = dataValue {
-                    self.productArray.append( mydata.product)
-                //    self.bindresultToProductsViewController()
-                    self.dispatchGroup.leave()
-                }else {
-                    if let error = error{
-                        print(error.localizedDescription)
+    func getwishlistforCustomer(){
+        CustomerWishlist = []
+        print("\(String(describing: AllDraftOrdersZiyad?.draft_orders?.count))")
+        if((AllDraftOrdersZiyad?.draft_orders?.count ?? 0) > 0){
+            for i in 0..<(AllDraftOrdersZiyad?.draft_orders?.count)! {
+                print("\(String(describing: AllDraftOrdersZiyad?.draft_orders?.count))")
+                if(UserDefaultsHelper.shared.getCustomerId() > 0){
+                    if(AllDraftOrdersZiyad?.draft_orders?[i].note == "Wishlist" ){
+                        
+                        let mycustomer : CustomerTwo = (AllDraftOrdersZiyad?.draft_orders?[i].customer)!
+                        if(mycustomer.id == UserDefaultsHelper.shared.getCustomerId()){
+                            CustomerWishlist.append(AllDraftOrdersZiyad!.draft_orders![i])
+                            print("added from getwishlistforCustomer ")
+                        }
                     }
                 }
-            })
-            
-        }
-        dispatchGroup.notify(queue: DispatchQueue.main){
-            DispatchQueue.main.async {
-                self.bindresultToProductsViewController()
             }
+        }
+
             
         }
         
-    }
+    
        
     
     func sendWishId(userID : Int64 ,productId : Int) {

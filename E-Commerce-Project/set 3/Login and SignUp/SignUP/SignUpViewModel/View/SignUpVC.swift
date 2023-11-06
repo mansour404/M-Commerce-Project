@@ -115,7 +115,7 @@ class SignUpVC: UIViewController {
                 signUpViewModel.data = SignUpData(userFirstName: arr[0], userLastName: arr[1], userPassword: self.userPasswordfield.text! , userEmail: self.userEmailAdressfield.text!, userPhoneNumber: self.userPhoneNumberfield.text!)
               
                 signUpViewModel.pushToHome = {
-                    let vc = TabController()
+                    let vc = NewAddressView()
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true)
                 }
