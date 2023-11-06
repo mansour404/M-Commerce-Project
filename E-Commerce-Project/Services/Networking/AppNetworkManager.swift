@@ -125,27 +125,42 @@ class NetworkServices   {
     //MARK: - sending favourite to api
     func addFavouriteItem(customerId : Int,productId : Int,productName: String,price: String,imageURl : String,Handler: @escaping () -> Void){
         let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders.json"
+        print ("============================")
+        print ("this is from a add favourite item")
+        print ("============================")
+        print(customerId)
+        print ("============================")
+        print(productId)
+        print ("============================")
+        print(productName)
+        print ("============================")
+        print(price)
+        print ("============================")
+        print(imageURl)
+        print ("============================")
         
         let parameters: [String: Any] = [
             "draft_order": [
                 "note": "Wishlist",
                 "line_items":[
                     [
-                       // "id": productId,
-                        "product_id": productId, //Optional("{\"errors\":{\"line_items[0].variant_id\":[\"not found\"]}}")
+                        "id": productId,
+                        "variant_id": productId, //Optional("{\"errors\":{\"line_items[0].variant_id\":[\"not found\"]}}")
                         "title":productName,
                         "price": Double(price)!,
+                        "quantity":1,
                         "sku": imageURl,
-                    ]
+                    ]as [String : Any]
                 ],
                 "customer": [
                     "id":customerId
                 ]
-            ]
+            ]as [String : Any]
         ]
         AF.request(urlFile ,method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["X-Shopify-Access-Token": "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"]).response{ response in
             switch response.result {
-            case .success(_):
+            case .success(let data):
+                print(String(data: data!, encoding: .utf8))
                 print("success from add favourites")
                 Handler()
                 break
