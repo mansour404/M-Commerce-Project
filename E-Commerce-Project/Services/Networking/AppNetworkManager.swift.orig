@@ -125,8 +125,25 @@ class NetworkServices   {
     //MARK: - sending favourite to api
     func addFavouriteItem(customerId : Int,productId : Int,productName: String,price: String,imageURl : String,Handler: @escaping () -> Void){
         let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders.json"
+<<<<<<< HEAD
+        print ("============================")
+        print ("this is from a add favourite item")
+        print ("============================")
+        print(customerId)
+        print ("============================")
+        print(productId)
+        print ("============================")
+        print(productName)
+        print ("============================")
+        print(price)
+        print ("============================")
+        print(imageURl)
+        print ("============================")
+        
+=======
         
         
+>>>>>>> ad6e6c8 (new updates for final test)
         let parameters: [String: Any] = [
             "draft_order": [
                 "note": "Wishlist",

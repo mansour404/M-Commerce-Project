@@ -118,7 +118,7 @@
 		E5C7F23A2AF6571600F154F5 /* PaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5C7F1EB2AF6571500F154F5 /* PaymentView.xib */; };
 		E5C7F23B2AF6571600F154F5 /* AddressCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7F1EE2AF6571500F154F5 /* AddressCellViewModel.swift */; };
 		E5C7F23C2AF6571600F154F5 /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7F1EF2AF6571500F154F5 /* AddressViewModel.swift */; };
-		E5C7F23D2AF6571600F154F5 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7F1F12AF6571500F154F5 /* Address.swift */; };
+		E5C7F23D2AF6571600F154F5 /* Countries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7F1F12AF6571500F154F5 /* Countries.swift */; };
 		E5C7F23E2AF6571600F154F5 /* AddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7F1F32AF6571600F154F5 /* AddressService.swift */; };
 		E5C7F23F2AF6571600F154F5 /* AddressServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7F1F42AF6571600F154F5 /* AddressServiceProtocol.swift */; };
 		E5C7F2402AF6571600F154F5 /* CustomerAddresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7F1F52AF6571600F154F5 /* CustomerAddresses.swift */; };
@@ -294,7 +294,7 @@
 		E5C7F1EB2AF6571500F154F5 /* PaymentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentView.xib; sourceTree = "<group>"; };
 		E5C7F1EE2AF6571500F154F5 /* AddressCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCellViewModel.swift; sourceTree = "<group>"; };
 		E5C7F1EF2AF6571500F154F5 /* AddressViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
-		E5C7F1F12AF6571500F154F5 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		E5C7F1F12AF6571500F154F5 /* Countries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Countries.swift; sourceTree = "<group>"; };
 		E5C7F1F32AF6571600F154F5 /* AddressService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressService.swift; sourceTree = "<group>"; };
 		E5C7F1F42AF6571600F154F5 /* AddressServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressServiceProtocol.swift; sourceTree = "<group>"; };
 		E5C7F1F52AF6571600F154F5 /* CustomerAddresses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerAddresses.swift; sourceTree = "<group>"; };
@@ -1022,7 +1022,7 @@
 			isa = PBXGroup;
 			children = (
 				E5C7F1F22AF6571600F154F5 /* Networking */,
-				E5C7F1F12AF6571500F154F5 /* Address.swift */,
+				E5C7F1F12AF6571500F154F5 /* Countries.swift */,
 				E5C7F1F52AF6571600F154F5 /* CustomerAddresses.swift */,
 			);
 			path = Model;
@@ -1565,7 +1565,7 @@
 				DCFA44632AF706F300CCF30C /* AddInfoViewModel.swift in Sources */,
 				DCFA44682AF706F300CCF30C /* SignUpVC.swift in Sources */,
 				E5C7F2562AF6571600F154F5 /* State.swift in Sources */,
-				E5C7F23D2AF6571600F154F5 /* Address.swift in Sources */,
+				E5C7F23D2AF6571600F154F5 /* Countries.swift in Sources */,
 				DC851A2D2AE9D69A001BD944 /* CtegoryViewModel.swift in Sources */,
 				DCFA446C2AF706F300CCF30C /* CustomerModel.swift in Sources */,
 				DCFA44AC2AF7823600CCF30C /* userOrderModel.swift in Sources */,

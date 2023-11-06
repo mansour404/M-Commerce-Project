@@ -83,7 +83,15 @@ extension ShoppingCartCell: ShoppingCartCellProtocol {
     func configureCell(_ product: ShoppingCartModel, index: Int) {
         productImageView.downloadImageFrom(product.image, placeHolder: "lazaApp")
         productTitleLabel.text = product.title
-        productPriceLabel.text = "\(product.price ?? 100)  EGP"
+        
+        let stringPrice = String(product.price ?? 100)
+        //let stringPrice = String(format: "%.1f", product.price ?? 100)
+        let (priceText, symbol) = CurrencyManager.returnPriceAndSymbol(price: stringPrice)
+        
+//        productPriceLabel.text = "\(product.price ?? 100)  EGP"
+//        productCountLabel.text = "\(product.quantity ?? 1)"
+        
+        productPriceLabel.text = priceText + "  " + symbol
         productCountLabel.text = "\(product.quantity ?? 1)"
         
         // set product count & available count for the product.

@@ -100,6 +100,11 @@ extension NewAddressView {
             return
         }
         
+        guard Countries.country_list.contains(country) else {
+            configureAlertController(title: "Invaild Country", message: "Please insert valid country name")
+            return
+        }
+        
         guard let city = cityTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !city.isEmpty else {
             configureAlertController(title: "City is required", message: "Please insert your city")
             return
@@ -151,6 +156,7 @@ extension NewAddressView {
         view.endEditing(true)
         creatNewAddress()
         delegate?.backValue(address: newAddress)  // protocol call
-        self.dismiss(animated: true)
+//        self.dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }

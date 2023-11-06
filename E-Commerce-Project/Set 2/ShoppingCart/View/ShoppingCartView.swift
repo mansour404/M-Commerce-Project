@@ -96,7 +96,9 @@ extension ShoppingCartView {
 //            self?.totalPrice = Double(validPrice) ?? 0.0
 //        }
         viewModel.updateTotalPriceClosure = { [weak self] (totalPrice , symbol) in
-            let roundedCost = Double(String(format:"%.2f", totalPrice)) ?? 1.00
+            var currencyRate =  UserDefaultsHelper.shared.getCurrencyRate()
+            let actualValue = totalPrice * currencyRate
+            let roundedCost = Double(String(format:"%.2f", actualValue)) ?? 1.00
             self?.totalPriceLabel.text = String(roundedCost) + "  " + symbol
 //            var validPrice = totalPrice
 //            validPrice.removeLast(5)
@@ -108,14 +110,14 @@ extension ShoppingCartView {
     private func isTableViewCount() {
         if viewModel.cartProductsCount != 0 {
             bottomLayoutConstraint.constant = 16
-            UIView.animate(withDuration: 1.2) {
+            UIView.animate(withDuration: 0.8) {
                 self.view.layoutIfNeeded()
                 // request layout on the *superview*
                 //self.view.superview?.layoutIfNeeded()
             }
         } else {
             bottomLayoutConstraint.constant = -220
-            UIView.animate(withDuration: 1.0) {
+            UIView.animate(withDuration: 0.8) {
                 self.view.layoutIfNeeded()
             }
         }

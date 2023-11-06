@@ -130,3 +130,13 @@ final class UserDefaultsHelper {
     }
     
 }
+
+class CurrencyManager {
+    class func returnPriceAndSymbol(price: String) -> (String, String) {
+        let doublePrice = (price as NSString).doubleValue
+        let currency = UserDefaultsHelper.shared.getCurrencyRate()
+        let symbol = UserDefaultsHelper.shared.getCurrencySymbol()
+        let roundedCost = Double(String(format:"%.2f", (doublePrice * currency))) ?? 1.00
+        return (String(roundedCost), symbol)
+    }
+}

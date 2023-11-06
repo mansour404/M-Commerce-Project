@@ -120,7 +120,15 @@ extension CategoriesViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = subMainCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
-        cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: categoryViewModel.getPrice(index: indexPath.row) ?? "10" , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A")
+        
+        let price = categoryViewModel.getPrice(index: indexPath.row) ?? "10"
+        let (priceText, symbol) = CurrencyManager.returnPriceAndSymbol(price: price)
+        print("+++++++++++")
+        print(priceText, symbol)
+        print("+++++++++++")
+//        cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: categoryViewModel.getPrice(index: indexPath.row) ?? "10" , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A")
+        
+        cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: priceText , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A", exchangeText: symbol)
         
         cell.product_title = categoryViewModel.getTitle(index: indexPath.item)
         cell.product_id = categoryViewModel.getID(index: indexPath.item)
