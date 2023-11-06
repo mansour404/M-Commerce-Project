@@ -33,7 +33,11 @@ class CategoriesViewController: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        categoryViewModel.bindresultToHomeViewController = {
+            DispatchQueue.main.async {
+                self.subMainCollectionView.reloadData()
+            }
+        }
     }
     // MARK: - Configure CollectionView
     private func configureCollectionView() {

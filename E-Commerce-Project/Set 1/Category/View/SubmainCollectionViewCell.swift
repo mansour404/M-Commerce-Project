@@ -73,13 +73,21 @@ class SubmainCollectionViewCell: UICollectionViewCell {
         
             
     }
-    
+
     override func didMoveToWindow() {
-        setControllerFavourite()
+        DispatchQueue.main.async {
+            self.setControllerFavourite()
+
+        }
+        
     }
     
     override func layerWillDraw(_ layer: CALayer) {
-        setControllerFavourite()
+        DispatchQueue.main.async {
+            self.setControllerFavourite()
+
+        }
+
     }
     
     
@@ -110,13 +118,7 @@ class SubmainCollectionViewCell: UICollectionViewCell {
         
     }
     func createFavourite(){
-//        networkManager.addFavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), productId: Int(product_id!), productName: (product_title)!, Handler:{
-//            DispatchQueue.main.async {
-//                
-//                
-//                self.bindresultToProductsViewController(true)
-//            }
-//        })
+
         networkManager.addFavouriteItem(customerId: (UserDefaultsHelper.shared.getCustomerId()), productId: Int(product_id!), variant_id: product_Variant_Id!, productName: (product_title)!, price: product_Price!, imageURl: product_Image!, Handler:{
                         DispatchQueue.main.async {
             
@@ -155,6 +157,7 @@ class SubmainCollectionViewCell: UICollectionViewCell {
                                         print("********************************************")
                                         if(mydata.draft_orders?[d].line_items?[0].variant_id == self.product_Variant_Id){
                                         self.bindresultToProductsViewController(true)
+                                            break
                                     }else {
                                         self.bindresultToProductsViewController(false)
                                     }
