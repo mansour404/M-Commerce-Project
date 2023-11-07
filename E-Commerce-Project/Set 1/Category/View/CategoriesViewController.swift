@@ -38,6 +38,8 @@ class CategoriesViewController: UIViewController {
                 self.subMainCollectionView.reloadData()
             }
         }
+        
+        configureLoadingDataFromApi()
     }
     // MARK: - Configure CollectionView
     private func configureCollectionView() {
@@ -49,7 +51,8 @@ class CategoriesViewController: UIViewController {
     //MARK: - Configure The Loading Data
     func configureLoadingDataFromApi(){
 
-        categoryViewModel.getDataFromApiForHome()
+        //categoryViewModel.getDataFromApiForHome()
+        categoryViewModel.getFavouriteItems()
 
     }
         
@@ -127,13 +130,9 @@ extension CategoriesViewController:UICollectionViewDataSource {
         
         let price = categoryViewModel.getPrice(index: indexPath.row) ?? "10"
         let (priceText, symbol) = CurrencyManager.returnPriceAndSymbol(price: price)
-        print("+++++++++++")
-        print(priceText, symbol)
-        print("+++++++++++")
+        
 //        cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: categoryViewModel.getPrice(index: indexPath.row) ?? "10" , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A")
-        print("++++++++++++++++++++++++++++++++++++")
-        print(categoryViewModel.getImage(index: indexPath.row) )
-        print("++++++++++++++++++++++++++++++++++++")
+        
         cell.configure(imageName: categoryViewModel.getImage(index: indexPath.row) ?? "bag", priceText: priceText , productNameText: categoryViewModel.getTitle(index: indexPath.row) ?? "A", exchangeText: symbol)
         
         cell.product_title = categoryViewModel.getTitle(index: indexPath.item)
@@ -146,6 +145,25 @@ extension CategoriesViewController:UICollectionViewDataSource {
         cell.layer.cornerRadius = 20
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGray.cgColor
+        
+        var isFavorite = false
+        for item in categoryViewModel.favourite_items_array {
+            
+            
+            if item.line_items![0].variant_id == categoryViewModel.getVariantId(index: indexPath.item) &&
+                item.line_items![0].title == categoryViewModel.getTitle(index: indexPath.item)
+            {
+                
+                print("found a match")
+                print(item.line_items![0].title, categoryViewModel.getTitle(index: indexPath.item))
+                isFavorite = true
+                //cell.draftOrder = item.id
+            }
+        }
+        //cell.favoriteButton?.isSelected = isFavorite
+        cell.colorheart(colored: isFavorite)
+        
+        //cell.setControllerFavourite()
         
         return cell
         
@@ -174,8 +192,8 @@ extension CategoriesViewController: UICollectionViewDelegate , UICollectionViewD
     
      func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         //(collectionView, willDisplay: cell, forItemAt: indexPath)
-         let cell = cell as! SubmainCollectionViewCell
-         cell.setControllerFavourite()
+//         let cell = cell as! SubmainCollectionViewCell
+//         cell.setControllerFavourite()
              // Your code here
         }
 }

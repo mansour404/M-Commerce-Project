@@ -93,6 +93,9 @@ class ProductInfoViewModel {
                     print("this the filter in product info  ")
                 print("\(String(describing: mydata.draft_orders?.count) )")
                 print("********************************************")
+                
+                var ok = false;
+                
                 if((mydata.draft_orders?.count ?? 0) > 0){
                     for d in 0..<(mydata.draft_orders?.count ?? 0) {
                         if(UserDefaultsHelper.shared.getCustomerId() != 0){
@@ -112,9 +115,10 @@ class ProductInfoViewModel {
                                         print("\(String(describing: mydata.draft_orders?[d].line_items?[0].variant_id))")
                                         print("********************************************")
                                     if(mydata.draft_orders?[d].line_items?[0].variant_id == self.product?.variants?[0].id){
-                                        self.bindresultToProductsViewController(true)
+                                        //self.bindresultToProductsViewController(true)
+                                        ok = true
                                     }else {
-                                        self.bindresultToProductsViewController(false)
+                                        //self.bindresultToProductsViewController(false)
                                     }
                                 }
                                 
@@ -122,7 +126,10 @@ class ProductInfoViewModel {
                         }
                         
                     }
-                }}else {
+                }
+                self.bindresultToProductsViewController(ok);
+                
+            }else {
                     if let error = error{
                         self.bindresultToProductsViewController(false)
                         print(error.localizedDescription)

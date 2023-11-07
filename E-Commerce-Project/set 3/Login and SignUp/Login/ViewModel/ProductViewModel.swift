@@ -11,6 +11,7 @@ class ProductViewModel {
     var  bindresultToProductsViewController: ( () -> () ) = {}
     
     var services = NetworkServices()
+    var networkManager = NetworkServices()
     
     var AllBrandProducts: ProductsResponse? {
         didSet{
@@ -18,6 +19,54 @@ class ProductViewModel {
                 validHander()
             }
         }
+    }
+    
+    var favourite_items_array : [Draft_orders] = []
+    var is_id_in_favourites : [Int: Bool] = [:]
+    
+    
+    var f_handler : ( () -> () ) = {}
+    func getFavouriteItems (handler : @escaping ( () -> () )) {
+        
+        f_handler = handler
+        
+        //let mycustomer : CustomerTwo = (mydata.draft_orders?[d].customer)!
+        favourite_items_array  = []
+        networkManager.getCustomerWishList( Handler: {(dataValue:DraftOrdersResult?, error: Error?) in
+            
+            if let mydata = dataValue {
+                
+                for d in mydata.draft_orders! {
+                    
+                    if d.note != "Wishlist" {
+                        continue
+                    }
+                    
+                    //let mycustomer : CustomerTwo = (mydata.draft_orders?[d].customer)!
+                    if d.customer?.id == UserDefaultsHelper.shared.getCustomerId() {
+                        self.favourite_items_array.append(d);
+                    }
+                    
+                    print(d.customer?.id, "vs.", UserDefaultsHelper.shared.getCustomerId())
+                }
+                
+            }else {
+                if let error = error{
+                    
+                    print(error.localizedDescription)
+                }
+            }
+            if(UserDefaultsHelper.shared.getCustomerId() == 0){
+                self.favourite_items_array = []
+                
+            }
+            print("favourites are done")
+            //self.getDataFromApiForProduct()
+            
+            self.f_handler()
+            
+        }
+        )
     }
     
     //MARK: -CAll Request of Api

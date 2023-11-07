@@ -74,21 +74,21 @@ class SubmainCollectionViewCell: UICollectionViewCell {
             
     }
 
-    override func didMoveToWindow() {
-        DispatchQueue.main.async {
-            self.setControllerFavourite()
-
-        }
-        
-    }
-    
-    override func layerWillDraw(_ layer: CALayer) {
-        DispatchQueue.main.async {
-            self.setControllerFavourite()
-
-        }
-
-    }
+//    override func didMoveToWindow() {
+////        DispatchQueue.main.async {
+////            self.setControllerFavourite()
+////
+////        }
+//        
+//    }
+//    
+//    override func layerWillDraw(_ layer: CALayer) {
+////        DispatchQueue.main.async {
+////            self.setControllerFavourite()
+////
+////        }
+//
+//    }
     
     
     var  bindresultToProductsViewController: ( (_ colored : Bool) -> () ) = {colored in}
@@ -128,11 +128,18 @@ class SubmainCollectionViewCell: UICollectionViewCell {
                     })
     }
     
-    func  setControllerFavourite(){
+    func setControllerFavourite () {
+        
+    }
+    
+    func  setControllerFavourite2(){
 
         networkManager.getCustomerWishList(Handler: {(dataValue:DraftOrdersResult?, error: Error?) in
             
             if let mydata = dataValue {
+                
+                var ok = false;
+                
                 print("********************************************")
                     print("this the filter in product info  ")
                 print("\(String(describing: mydata.draft_orders?.count) )")
@@ -156,10 +163,11 @@ class SubmainCollectionViewCell: UICollectionViewCell {
                                          print("\(String(describing: mydata.draft_orders?[d].line_items?[0].variant_id))")
                                         print("********************************************")
                                         if(mydata.draft_orders?[d].line_items?[0].variant_id == self.product_Variant_Id){
-                                        self.bindresultToProductsViewController(true)
-                                            break
+                                        //self.bindresultToProductsViewController(true)
+                                            //break
+                                            ok = true;
                                     }else {
-                                        self.bindresultToProductsViewController(false)
+                                        //self.bindresultToProductsViewController(false)
                                     }
                                 }
                                 
@@ -167,7 +175,14 @@ class SubmainCollectionViewCell: UICollectionViewCell {
                         }
                         
                     }
-                }}else {
+                }
+                DispatchQueue.main.async {
+    
+    
+                    self.bindresultToProductsViewController(ok)
+                }
+                
+            }else {
                     if let error = error{
                         self.bindresultToProductsViewController(false)
                         print(error.localizedDescription)

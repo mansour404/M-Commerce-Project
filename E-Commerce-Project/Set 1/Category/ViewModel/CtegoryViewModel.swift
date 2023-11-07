@@ -13,6 +13,7 @@ class CategoryViewModel{
    
     var handerDataOfHome: (() -> Void)?
     var services = NetworkServices()
+    var networkManager = NetworkServices()
     
     var getAllProducts: ProductsResponse? {
         didSet{
@@ -27,6 +28,50 @@ class CategoryViewModel{
         return getAllProducts
     }
     
+    var favourite_items_array : [Draft_orders] = []
+    var is_id_in_favourites : [Int: Bool] = [:]
+    
+    func getFavouriteItems () {
+        
+        
+    
+        favourite_items_array  = []
+        //let mycustomer : CustomerTwo = (mydata.draft_orders?[d].customer)!
+        networkManager.getCustomerWishList(Handler: {(dataValue:DraftOrdersResult?, error: Error?) in
+            
+            if let mydata = dataValue {
+                
+                for d in mydata.draft_orders! {
+                    
+                    if d.note != "Wishlist" {
+                        continue
+                    }
+                    
+                    //let mycustomer : CustomerTwo = (mydata.draft_orders?[d].customer)!
+                    if d.customer?.id == UserDefaultsHelper.shared.getCustomerId() {
+                        self.favourite_items_array.append(d);
+                    }
+                    
+                    print(d.customer?.id, "vs.", UserDefaultsHelper.shared.getCustomerId())
+                }
+                
+            }else {
+                if let error = error{
+                    
+                    print(error.localizedDescription)
+                }
+            }
+            if(UserDefaultsHelper.shared.getCustomerId() == 0){
+                self.favourite_items_array = []
+                
+            }
+            print("favourites are done")
+            self.getDataFromApiForHome()
+            
+        }
+        )
+    }
+    
     
     //MARK: -CAll Request of Api
     func getDataFromApiForHome() {
@@ -35,6 +80,8 @@ class CategoryViewModel{
 
             if let mydata = dataValue {
                 self.getAllProducts = mydata
+                
+                print("bind result")
                 self.bindresultToHomeViewController()
 
             }else {
@@ -42,6 +89,8 @@ class CategoryViewModel{
                     print(error.localizedDescription)
                 }
             }
+            
+            print("products are done")
         })
     }
     func getDataFromApiForHome(filter1 : String , filter2 :String) {

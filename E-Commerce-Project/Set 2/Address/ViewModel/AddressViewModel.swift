@@ -97,7 +97,7 @@ class AddressViewModel {
                         self.defaultAddress = address
                     }
                 }
-                self.processFetcheditems(items)
+                self.processFetcheditems(self.items)
             case .failure(let error):
                 print(error.localizedDescription)
             }
