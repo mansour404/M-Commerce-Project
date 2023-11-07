@@ -98,9 +98,20 @@ class ProductInfoViewController: UIViewController {
       
         @IBAction func add_to_cart_tapped(_ sender: Any) {
               // mansour starts here
-              
+            let customerId = UserDefaultsHelper.shared.getCustomerId()
+            
+            guard customerId != 0 else {
+                let cancelAction = UIAlertAction(title: "Close", style: .cancel)
+
+                let joinAction = UIAlertAction(title: "Join us", style: .default) { [weak self] _ in
+                    AppDelegate.resetViewController()
+                }
+
+                Alert.showAlert(target: self, title: "Can't Add to shop cart!", message: "Would you like to join us!", actions: [cancelAction, joinAction])
+                return
+            }
+            
               print("add to cart")
-              
               var Mansour_selectedOptionValues : [Int] = selectedOption //
               
               guard let product = view_model.product else { return }
