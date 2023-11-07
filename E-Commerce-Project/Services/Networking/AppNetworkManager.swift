@@ -73,7 +73,7 @@ class NetworkServices   {
     //MARK: - Fetching Data From Api to favourites
     func getCustomerWishList<T :Codable>(Handler: @escaping (T?,Error?) -> Void){
         
-        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers/6866434621590/draft_orders.json"
+        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders.json"
         
         Alamofire.AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
             if let validData = data.data {
@@ -110,7 +110,7 @@ class NetworkServices   {
     }
     //MARK: - Fetching Data From Api to  remove product from favourites
     func removefavouriteItem (userID : Int, wishId: Int ,Handler: @escaping () -> Void){
-        let URL = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/metafields/\(wishId).json?"
+        let URL = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders/\(wishId).json?"
         Alamofire.AF.request(URL,method: Alamofire.HTTPMethod.delete,headers: ["X-Shopify-Access-Token":"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"]).response { response in
             switch response.result {
             case .success(_):
@@ -123,7 +123,7 @@ class NetworkServices   {
         }
     }
     //MARK: - sending favourite to api
-    func addFavouriteItem(customerId : Int,productId : Int,productName: String,price: String,imageURl : String,Handler: @escaping () -> Void){
+    func addFavouriteItem(customerId : Int,productId : Int,variant_id : Int ,productName: String,price: String,imageURl : String,Handler: @escaping () -> Void){
         let urlFile = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders.json"
         
         
@@ -133,13 +133,19 @@ class NetworkServices   {
                 "line_items":[
                     [
                         "id": productId,
-                        "variant_id": productId, //Optional("{\"errors\":{\"line_items[0].variant_id\":[\"not found\"]}}")
+                        "variant_id": variant_id, //Optional("{\"errors\":{\"line_items[0].variant_id\":[\"not found\"]}}")
+                        "product_id": productId,
                         "title":productName,
                         "price": Double(price)!,
                         "quantity":1,
-                        "sku": imageURl,
-                    ]as [String : Any]
-                ],
+                        "properties": [
+                            [
+                                "name": "imageSrc",
+                                "value": imageURl
+                            ]
+                    ]
+                ]as [String : Any]
+                    ],
                 "customer": [
                     "id":customerId
                 ]
@@ -180,8 +186,8 @@ class NetworkServices   {
         }
     }
     //MARK: - Fetching Data From Api to show all brand product
-    func getAllProductsForBrandData<T :Codable>(BrandId: Int ,Handler: @escaping (T?,Error?) -> Void) {
-        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/collections/\(BrandId)/products.json"
+    func getAllProductsForBrandData<T :Codable>(BrandName: String ,Handler: @escaping (T?,Error?) -> Void) {
+        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10//products.json?vendor=\(BrandName)"
         
         AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
             if let validData = data.data {

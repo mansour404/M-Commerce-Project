@@ -11,6 +11,7 @@ class ProductViewModel {
     var  bindresultToProductsViewController: ( () -> () ) = {}
     
     var services = NetworkServices()
+    var networkManager = NetworkServices()
     
     var AllBrandProducts: ProductsResponse? {
         didSet{
@@ -20,9 +21,57 @@ class ProductViewModel {
         }
     }
     
+    var favourite_items_array : [Draft_orders] = []
+    var is_id_in_favourites : [Int: Bool] = [:]
+    
+    
+    var f_handler : ( () -> () ) = {}
+    func getFavouriteItems (handler : @escaping ( () -> () )) {
+        
+        f_handler = handler
+        
+        //let mycustomer : CustomerTwo = (mydata.draft_orders?[d].customer)!
+        favourite_items_array  = []
+        networkManager.getCustomerWishList( Handler: {(dataValue:DraftOrdersResult?, error: Error?) in
+            
+            if let mydata = dataValue {
+                
+                for d in mydata.draft_orders! {
+                    
+                    if d.note != "Wishlist" {
+                        continue
+                    }
+                    
+                    //let mycustomer : CustomerTwo = (mydata.draft_orders?[d].customer)!
+                    if d.customer?.id == UserDefaultsHelper.shared.getCustomerId() {
+                        self.favourite_items_array.append(d);
+                    }
+                    
+                    print(d.customer?.id, "vs.", UserDefaultsHelper.shared.getCustomerId())
+                }
+                
+            }else {
+                if let error = error{
+                    
+                    print(error.localizedDescription)
+                }
+            }
+            if(UserDefaultsHelper.shared.getCustomerId() == 0){
+                self.favourite_items_array = []
+                
+            }
+            print("favourites are done")
+            //self.getDataFromApiForProduct()
+            
+            self.f_handler()
+            
+        }
+        )
+    }
+    
     //MARK: -CAll Request of Api
     func getDataFromApiForProduct() {
-        services.getAllProductsForBrandData(BrandId: HomeViewModel.selectedBrandID ?? 303787573398, Handler: { (dataValue:ProductsResponse?, error: Error?) in
+        services.getAllProductsForBrandData(BrandName: HomeViewModel.selectedBrandName ?? "ADIDAS", Handler: { (dataValue:ProductsResponse?, error: Error?) in
             print("Success")
 
             if let mydata = dataValue {
@@ -37,7 +86,7 @@ class ProductViewModel {
         })
     }
     func getDataFromApiForProduct_WithFilter(SearchText : String) {
-        services.getAllProductsForBrandData(BrandId: HomeViewModel.selectedBrandID ?? 303787573398, Handler: { (dataValue:ProductsResponse?, error: Error?) in
+        services.getAllProductsForBrandData(BrandName: HomeViewModel.selectedBrandName ?? "ADIDAS", Handler: { (dataValue:ProductsResponse?, error: Error?) in
             print("Success")
 
             if let mydata = dataValue {
@@ -66,7 +115,7 @@ func getNumberOfProduct() -> Int? {
    }
     
     func getPrice(index: Int) -> String?{
-        return  AllBrandProducts?.products[index].variants?.first?.price
+        return  AllBrandProducts?.products[index].variants?[0].price
         
     }
     
@@ -90,6 +139,9 @@ func getNumberOfProduct() -> Int? {
     func getProductID (index : Int) -> Int64{
             return AllBrandProducts?.products[index].id ?? 0
         }
+    func getVariant_Id (index : Int) -> Int{
+        return AllBrandProducts?.products[index].variants?[0].id ?? 0
+    }
    
 //    func getImage(index: Int) -> String?{
 //        return getAllBrands?.smart_collections[index].image.src

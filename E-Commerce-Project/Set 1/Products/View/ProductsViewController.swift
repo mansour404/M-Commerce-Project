@@ -35,12 +35,30 @@ class ProductsViewController: UIViewController {
         configureCollectionView()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        productviewModel.bindresultToProductsViewController = {
+            DispatchQueue.main.async {
+                self.productsCollectionView.reloadData()
+            }
+        }
+        
+        productviewModel.getFavouriteItems {
+            self.productviewModel.getDataFromApiForProduct()
+        }
+    }
     func configureLoadingDataFromApi(){
+        
         if(isSearchActive ){
-            productviewModel.getDataFromApiForProduct_WithFilter(SearchText: searchBar.text!)
+            //productviewModel.getDataFromApiForProduct_WithFilter(SearchText: searchBar.text!)
+            productviewModel.getFavouriteItems {
+                self.productviewModel.getDataFromApiForProduct_WithFilter(SearchText: self.searchBar.text!)
+            }
         }
         else {
-            productviewModel.getDataFromApiForProduct()
+            //productviewModel.getDataFromApiForProduct()
+            productviewModel.getFavouriteItems {
+                self.productviewModel.getDataFromApiForProduct()
+            }
         }
     }
     // MARK: - Configure CollectionView
@@ -90,7 +108,9 @@ class ProductsViewController: UIViewController {
             
             cell.product_title = productviewModel.getTitle(index: indexPath.item)
             cell.product_id = Int(productviewModel.getProductID(index: indexPath.item))
-            
+            cell.product_Price = productviewModel.getPrice(index: indexPath.row)
+            cell.product_Image = productviewModel.getid(index: indexPath.row)
+            cell.product_Variant_Id = productviewModel.getVariant_Id(index: indexPath.row)
 //            let price = productviewModel.getPrice(index: indexPath.row) ?? "10"
             let price = productviewModel.getPrice(index: indexPath.row) ?? "99"
             let (priceText, symbol) = CurrencyManager.returnPriceAndSymbol(price: price)
@@ -101,6 +121,23 @@ class ProductsViewController: UIViewController {
             //cell.configure(imageName: <#T##String#>, priceText: <#T##String#>, productNameText: <#T##String#>, exchangeText: <#T##String#>)
             
             cell.configure(imageName: productviewModel.getImage(index: indexPath.row) ?? "bag", priceText: priceText , productNameText: productviewModel.getTitle(index: indexPath.row) ?? "A", exchangeText: symbol)
+            
+            var isFavorite = false
+            for item in productviewModel.favourite_items_array {
+                
+                
+                if item.line_items![0].variant_id == productviewModel.getVariant_Id(index: indexPath.item) &&
+                    item.line_items![0].title == productviewModel.getTitle(index: indexPath.item)
+                {
+                    
+                    print("found a match")
+                    print(item.line_items![0].title, productviewModel.getTitle(index: indexPath.item))
+                    isFavorite = true
+                    //cell.draftOrder = item.id
+                }
+            }
+            //cell.favoriteButton?.isSelected = isFavorite
+            cell.colorheart(colored: isFavorite)
             
             return cell
             
@@ -141,8 +178,8 @@ extension ProductsViewController: UICollectionViewDelegate , UICollectionViewDel
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
        //(collectionView, willDisplay: cell, forItemAt: indexPath)
-        let cell = cell as! SubmainCollectionViewCell
-        cell.setControllerFavourite()
+//        let cell = cell as! SubmainCollectionViewCell
+//        cell.setControllerFavourite()
             // Your code here
        }
 }

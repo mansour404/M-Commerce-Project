@@ -67,19 +67,19 @@ class OrderViewController: UIViewController {
                     let precentageValueInDouble = self.totalPrice / positiveAmount // positive value
                     let priceAfterDiscount = self.totalPrice - precentageValueInDouble
                     // Update Labels
-                    self.discountMoneyLabel.text = "\(precentageValueInDouble)" + "  " + currencySymbol
-                    self.totalMoneyLabel.text = "\(priceAfterDiscount)"  + "  " + currencySymbol
+                    self.discountMoneyLabel.text = "\(precentageValueInDouble)" + "  " + self.currencySymbol
+                    self.totalMoneyLabel.text = "\(priceAfterDiscount)"  + "  " + self.currencySymbol
                     // Update final cost
                     UserDefaultsHelper.shared.setFinalTotalCost(priceAfterDiscount)
-                    enjoyCouponAlert()
+                    self.enjoyCouponAlert()
                 } else /* "fixed_amount"*/ {
-                    let priceAfterDiscount = totalPrice + amount!
-                    self.discountMoneyLabel.text = "\(amount!)" + "  " + currencySymbol
+                    let priceAfterDiscount = self.totalPrice + amount!
+                    self.discountMoneyLabel.text = "\(amount!)" + "  " + self.currencySymbol
                     // Update Labels
-                    self.totalMoneyLabel.text = String(priceAfterDiscount) + "  " + currencySymbol
+                    self.totalMoneyLabel.text = String(priceAfterDiscount) + "  " + self.currencySymbol
                     // Update final cost
                     UserDefaultsHelper.shared.setFinalTotalCost(priceAfterDiscount)
-                    enjoyCouponAlert()
+                    self.enjoyCouponAlert()
                 }
             }
         }

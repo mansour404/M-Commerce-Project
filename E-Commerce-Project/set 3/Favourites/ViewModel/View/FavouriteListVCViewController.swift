@@ -29,6 +29,14 @@ class FavouriteListVCViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        favouriteViewModel.bindresultToProductsViewController = {
+            DispatchQueue.main.async {
+                self.FavouriteCollectionView.reloadData()
+
+            }
+        }
+    }
     func ConfigureUI() {
         let layout = UICollectionViewCompositionalLayout(section: Favouriteitemssection())
         FavouriteCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

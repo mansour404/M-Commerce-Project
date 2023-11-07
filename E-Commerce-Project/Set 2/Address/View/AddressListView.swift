@@ -105,8 +105,8 @@ extension AddressListView: UITableViewDelegate {
                 let confirmAction = UIAlertAction(title: "Confirm", style: .destructive) { [weak self] action in
                     guard let self = self else { return }
                     
-                    viewModel.removeAddress(indexPath: indexPath)
-                    initVM()
+                    self.viewModel.removeAddress(indexPath: indexPath)
+                    self.initVM()
                 }
                 alertController.addAction(cancelAction)
                 alertController.addAction(confirmAction)
@@ -156,9 +156,9 @@ extension AddressListView {
     func updateTableView(at indexPath: IndexPath) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.endUpdates()
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.tableView.endUpdates()
         }
     }
 }
