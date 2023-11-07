@@ -55,7 +55,6 @@ class OrderViewModel: OrderViewModelProtocol {
     // VM
     func fetchPriceRules() {
         networkingService.getPriceRule(Handler: {(dataValue:AllPriceRules? , error: Error?) in
-            print("Success to fetch price rules")
             
             if let mydata = dataValue {
                 self.getAllPriceRules = mydata
@@ -66,10 +65,12 @@ class OrderViewModel: OrderViewModelProtocol {
                 }
                 //self.bindresultToHomeViewController()
                 self.fetchDiscountCodes()
-                
+                print("Success to fetch price rules")
             } else {
                 if let error = error{
                     print(error.localizedDescription)
+                    print("Fail to fetch price rules")
+
                 }
             }
         })
@@ -88,6 +89,8 @@ class OrderViewModel: OrderViewModelProtocol {
                         if self.priceRuleDiscountCodes[price_rule.id] == nil {
                             
                             self.priceRuleDiscountCodes[price_rule.id] = []
+                            print("Success to fetch discount codes")
+
                         }
                         
                         //self.priceRuleDiscountCodes[p.id]?.append(mydata.discount_codes[0].code)
@@ -95,6 +98,7 @@ class OrderViewModel: OrderViewModelProtocol {
                             self.priceRuleDiscountCodes[price_rule.id]?.append(discount_code.code)
                             
                             self.DiscountCode_PriceRuleId[discount_code.code] = price_rule.id
+                            print("Success to fetch discount codes")
                         }
                         
                         //  mydata.discount_codes[0].code
@@ -103,6 +107,8 @@ class OrderViewModel: OrderViewModelProtocol {
                 } else {
                     if let error = error{
                         print(error.localizedDescription)
+                        print("Fail to fetch discount codes")
+
                     }
                 }
                 self.downloadGroup.leave()

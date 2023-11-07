@@ -28,7 +28,7 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHx-jy-7rc">
                     <rect key="frame" x="32" y="297" width="329" height="223.33333333333337"/>
-                    <string key="text">LAZA app is all about fashion. We have a wide selection of trendy clothes and cool sneakers for you to choose from. It's easy to browse through our collections and find what you like. Our app is designed to make shopping simple and secure. We believe that fashion is a way to show off your personal style, and our app is here to help you do that. Stay up-to-date with the latest trends and enjoy a great shopping experience with LAZA!</string>
+                    <string key="text">MODISH app is all about fashion. We have a wide selection of trendy clothes and cool sneakers for you to choose from. It's easy to browse through our collections and find what you like. Our app is designed to make shopping simple and secure. We believe that fashion is a way to show off your personal style, and our app is here to help you do that. Stay up-to-date with the latest trends and enjoy a great shopping experience with MODISH!</string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -36,10 +36,10 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7SX-WM-LYU">
                     <rect key="frame" x="32" y="552.33333333333337" width="329" height="101.66666666666663"/>
                     <string key="text">BY
-First
-Second
-Third
-Fourth</string>
+Abdallah Ellawindy
+Ziyad  Qassem
+Yousof Khaled
+Mohamed Mansour</string>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>

@@ -145,12 +145,14 @@ class PaymentView: UIViewController {
     
     private func resetOrderSetup() {
         self.finalTotalCost = 0.0
+        // TODO: - Get currency Symbol and add it after final cost on label
         UserDefaultsHelper.shared.setFinalTotalCost(finalTotalCost)
         UserDefaultsHelper.shared.setContinueToPayment(false)
-        // TODO: - Get currency Symbol and add it after final cost on label
+        // TODO: - Get currency Symbol and add it after final cost on label // done
         //self.totalLabel.text = "\(finalTotalCost) EGP"
         self.totalLabel.text = String(finalTotalCost) + "  " + currencySymbol
         self.viewModel.postOrder()
+        //self.viewModel.updateInventoryLevelForProduct()
         self.playAnimation()
     }
     
@@ -206,14 +208,6 @@ extension PaymentView: PKPaymentAuthorizationViewControllerDelegate {
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         controller.dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
-//            self.finalTotalCost = 0.0
-//            UserDefaultsHelper.shared.setFinalTotalCost(finalTotalCost)
-//            UserDefaultsHelper.shared.setContinueToPayment(false)
-//            // TODO: - Get currency Symbol and add it after final cost on label
-//            self.totalLabel.text = "\(finalTotalCost) EGP"
-//            //viewModel.decreaseVariantCountByOrderAmount()
-//            self.viewModel.postOrder()
-//            self.playAnimation()
             self.resetOrderSetup()
         }
     }
@@ -244,18 +238,9 @@ extension PaymentView {
     func navigateToRootVC(){
         let alert = Alert.showAlertWithMessage(title: "Congratulations", message: "Successful payment done", buttonTitle: "Ok") { action in
             self.navigationController?.popToRootViewController(animated: true)
-            //self.view.window?.rootViewController?.dismiss(animated: true, completion: nil) // doesn't work
-            //self.dismissViewControllers() // doesn't work
         }
         self.present(alert, animated: true)
     }
-    
-//    func dismissViewControllers() {
-//        guard let vc = self.presentingViewController else { return }
-//        while (vc.presentingViewController != nil) {
-//            vc.dismiss(animated: true, completion: nil)
-//        }
-//    }
     
 }
 

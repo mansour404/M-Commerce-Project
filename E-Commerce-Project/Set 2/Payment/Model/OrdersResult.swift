@@ -63,6 +63,7 @@ struct OrderNewModel : Codable {
     let user_id : String?
     let line_items : [Line_items]?
     let shipping_address : Shipping_address? // don't forget to set shipping address.
+    let note: String?
 }
 
 struct OrdersResultNewModel : Codable {

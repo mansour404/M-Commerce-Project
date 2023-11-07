@@ -207,6 +207,14 @@ extension ShoppingCartView: ShoppingCartCellDelegate {
         }
         
     }
+    
+    func showAlert(avaibleElements: Int) {
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { _ in
+            self.tableView.reloadData()
+        }
+
+        Alert.showAlert(target: self, title: "Sorry", message: "The maximum number of products available is \(avaibleElements)" , actions: [okAction])
+    }
 
 //    func test_put_draft_order () {
 //        let url = "https://ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/draft_orders/1031372177558.json"

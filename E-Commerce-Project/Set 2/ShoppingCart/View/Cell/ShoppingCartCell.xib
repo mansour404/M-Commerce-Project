@@ -74,23 +74,34 @@ BACKPACK | LEGEND INK</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price per item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZM5-6O-x9X">
+                                <rect key="frame" x="144" y="72" width="87" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="pwS-1N-ccX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ZM5-6O-x9X" firstAttribute="leading" secondItem="Cmh-8U-ZBT" secondAttribute="trailing" constant="16" id="2ej-iX-8mQ"/>
                             <constraint firstItem="0CD-4M-dvR" firstAttribute="leading" secondItem="Cmh-8U-ZBT" secondAttribute="trailing" constant="16" id="6Hb-XV-b42"/>
                             <constraint firstItem="Cmh-8U-ZBT" firstAttribute="leading" secondItem="GWp-HP-sJn" secondAttribute="leading" constant="8" id="8OO-yJ-hEa"/>
-                            <constraint firstItem="0aP-06-Ad3" firstAttribute="leading" secondItem="0CD-4M-dvR" secondAttribute="trailing" constant="8" id="9ve-CT-rUk"/>
                             <constraint firstItem="Ol6-2P-fiM" firstAttribute="leading" secondItem="0aP-06-Ad3" secondAttribute="trailing" constant="8" symbolic="YES" id="EJG-hL-fIb"/>
                             <constraint firstItem="Ol6-2P-fiM" firstAttribute="centerY" secondItem="9Vu-mG-YIj" secondAttribute="centerY" id="L5d-f8-tNG"/>
                             <constraint firstItem="Cmh-8U-ZBT" firstAttribute="top" secondItem="GWp-HP-sJn" secondAttribute="top" constant="8" id="OIb-Pc-gkZ"/>
                             <constraint firstAttribute="bottom" secondItem="9Vu-mG-YIj" secondAttribute="bottom" constant="16" id="Os2-D9-UOD"/>
+                            <constraint firstItem="0aP-06-Ad3" firstAttribute="leading" secondItem="0CD-4M-dvR" secondAttribute="trailing" constant="8" id="QcI-Cf-m8k"/>
                             <constraint firstAttribute="trailing" secondItem="7dU-8r-l33" secondAttribute="trailing" constant="16" id="R8i-WV-Hz5"/>
                             <constraint firstAttribute="bottom" secondItem="0aP-06-Ad3" secondAttribute="bottom" constant="16" id="Ygj-lg-zmz"/>
+                            <constraint firstItem="0CD-4M-dvR" firstAttribute="baseline" secondItem="Ol6-2P-fiM" secondAttribute="firstBaseline" id="a6J-yb-NXK"/>
+                            <constraint firstItem="0CD-4M-dvR" firstAttribute="top" secondItem="ZM5-6O-x9X" secondAttribute="bottom" constant="6" id="bKv-BC-B3z"/>
                             <constraint firstItem="9Vu-mG-YIj" firstAttribute="leading" secondItem="Ol6-2P-fiM" secondAttribute="trailing" constant="8" symbolic="YES" id="frV-Xp-h1f"/>
                             <constraint firstAttribute="bottom" secondItem="Cmh-8U-ZBT" secondAttribute="bottom" constant="8" id="iR0-QE-e2C"/>
                             <constraint firstItem="7dU-8r-l33" firstAttribute="top" secondItem="GWp-HP-sJn" secondAttribute="top" constant="24" id="kHi-a6-5we"/>
                             <constraint firstItem="7dU-8r-l33" firstAttribute="leading" secondItem="Cmh-8U-ZBT" secondAttribute="trailing" constant="16" id="kdT-HF-CKP"/>
-                            <constraint firstAttribute="bottom" secondItem="0CD-4M-dvR" secondAttribute="bottom" constant="24" id="mn8-IB-E3S"/>
                             <constraint firstAttribute="trailing" secondItem="9Vu-mG-YIj" secondAttribute="trailing" constant="8" id="vCs-ol-1bD"/>
                         </constraints>
                     </view>
