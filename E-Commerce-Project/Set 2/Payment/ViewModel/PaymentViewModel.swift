@@ -13,7 +13,7 @@ class PaymentViewModel {
     private let paymentNetworkService: PaymentService
     private let draftOrderNetworkService: ShoppingCartService
     private let shippingAddress: Shipping_address?
-    
+    let customerId = UserDefaultsHelper.shared.getCustomerId()
     
     // MARK: - Properties
 //    private let customerId = UserDefaultsHelper.shared.getCustomerId()
@@ -45,7 +45,8 @@ class PaymentViewModel {
         // TODO: - Don't forget total_discounts //
         let currency = UserDefaultsHelper.shared.getCurrencySymbol()
         let phone = "+2" + (shippingAddress?.phone ?? "0109999999")
-        let order = OrderNewModel(total_tax: "0", currency: currency, phone: phone, total_discounts: "0", user_id: String(customerId), line_items: line_items, shipping_address: shippingAddress)
+        let customerIdString = String(customerId)
+        let order = OrderNewModel(total_tax: "0", currency: currency, phone: phone, total_discounts: "0", user_id: String(customerId), line_items: line_items, shipping_address: shippingAddress, note: customerIdString)
         
         print("*************")
         print(order)

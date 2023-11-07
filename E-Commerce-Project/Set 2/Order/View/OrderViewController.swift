@@ -38,6 +38,11 @@ class OrderViewController: UIViewController {
         applyCouponButton?.alpha = 0.5
     }
 
+    // override this func to hide keyboard when touch any empty part of screen
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     // MARK: - Actions
     @IBAction func applyCouponButtonPressed(_ sender: Any) {
         // binding
@@ -53,7 +58,9 @@ class OrderViewController: UIViewController {
             guard let couponText = self.couponTextField.text else { return }
             let type = self.orderViewModel.get_discount_type(code: couponText)
             let amount = self.orderViewModel.get_discount_amount(code: couponText)
-            
+            print("------------")
+            print(amount, type)
+            print("------------")
             if (type != nil && amount != nil) {
                 // Print
                 print("+++++++++++++")
@@ -81,6 +88,8 @@ class OrderViewController: UIViewController {
                     UserDefaultsHelper.shared.setFinalTotalCost(priceAfterDiscount)
                     enjoyCouponAlert()
                 }
+            } else {
+                invalidCouponAlert()
             }
         }
         
@@ -133,6 +142,12 @@ class OrderViewController: UIViewController {
         self.present(alert, animated: true)
         self.couponTextField.text = ""
     }
+    
+    private func invalidCouponAlert() {
+        let alert = Alert.showAlertWithMessage(title: "Sorry", message: "Invaild coupon", buttonTitle: "Close")
+        self.present(alert, animated: true)
+        self.couponTextField.text = ""
+    }
 }
 
 // MARK: - Data source
@@ -179,14 +194,20 @@ extension OrderViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-
-        if !text.isEmpty{
-            applyCouponButton?.isUserInteractionEnabled = true
-            applyCouponButton?.alpha = 1.0
-        } else {
+        let str = text.trimmingCharacters(in: .whitespacesAndNewlines)
+//        if str.isEmpty {
+        if str == "" {
             applyCouponButton?.isUserInteractionEnabled = false
             applyCouponButton?.alpha = 0.5
+        } else {
+            applyCouponButton?.isUserInteractionEnabled = true
+            applyCouponButton?.alpha = 1.0
         }
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        applyCouponButton?.isUserInteractionEnabled = false
+        applyCouponButton?.alpha = 0.5
     }
 }
