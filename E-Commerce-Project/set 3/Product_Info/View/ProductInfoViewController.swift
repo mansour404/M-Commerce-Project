@@ -9,14 +9,25 @@ import UIKit
 
 class ProductInfoViewController: UIViewController {
     
-    // cart code------------------------------------------------------------------------------
-        @IBOutlet weak var variant_price: UILabel!
-        
-        @IBOutlet weak var variant_availability: UILabel!
+
+    // MARK: - Variables
+    @IBOutlet weak var variant_price: UILabel!
+    @IBOutlet weak var variant_availability: UILabel!
+    @IBOutlet weak var addToCartView: UIView!
+    @IBOutlet weak var scroll_and_add_to_cart_vertical_spacing: NSLayoutConstraint!
+    @IBOutlet weak var reviewsHeight: NSLayoutConstraint!
+    @IBOutlet weak var reviewsCollectionView: UICollectionView!
+    @IBOutlet weak var productImagesCollectionView: UICollectionView!
+    @IBOutlet weak var optionsCollectionView: UICollectionView!
+    @IBOutlet weak var optionsHeight: NSLayoutConstraint!
+    @IBOutlet weak var productName: UILabel!
+    @IBOutlet weak var productTags: UILabel!
+    @IBOutlet weak var productDescription: UILabel!
+    @IBOutlet weak var number_of_cart_items_label: UILabel!
+
         
         
         var variant_available_elements : Int = 0
-        
         var variant_index : Int = 0
         var variant_Unique_ID : Int = 0 // found variant - mansour - send as a paramter for addToCart
         // Vars
@@ -75,66 +86,7 @@ class ProductInfoViewController: UIViewController {
             updateNumberLabel()
         }
         
-        @IBAction func plus_button_tapped(_ sender: Any) {
-            
-            if (numberOfCartItems < variant_available_elements) {
-                numberOfCartItems += 1;
-            }
-            
-            updateNumberLabel()
-            
-            print("plus")
-        }
-        
-        @IBAction func minus_button_tapped(_ sender: Any) {
-            if (numberOfCartItems > 0) {
-                numberOfCartItems -= 1;
-            }
-            updateNumberLabel()
-            print("minus")
-        }
-        
-        @IBOutlet weak var number_of_cart_items_label: UILabel!
-      
-        @IBAction func add_to_cart_tapped(_ sender: Any) {
-              // mansour starts here
-            let customerId = UserDefaultsHelper.shared.getCustomerId()
-            
-            guard customerId != 0 else {
-                let cancelAction = UIAlertAction(title: "Close", style: .cancel)
-
-                let joinAction = UIAlertAction(title: "Join us", style: .default) { [weak self] _ in
-                    AppDelegate.resetViewController()
-                }
-
-                Alert.showAlert(target: self, title: "Can't Add to shop cart!", message: "Would you like to join us!", actions: [cancelAction, joinAction])
-                return
-            }
-            
-              print("add to cart")
-              var Mansour_selectedOptionValues : [Int] = selectedOption //
-              
-              guard let product = view_model.product else { return }
-              
-              
-              let elements_to_be_added_to_cart : Int = numberOfCartItems;
-              let quantity = elements_to_be_added_to_cart // same variable with different name.
-              
-              let productTitle = view_model.product?.title ?? "title Does not exist"
-              let productId : Int = view_model.product?.id ?? 0 // use it in case data in variants is insufficient
-              let imageString : String = view_model.product?.images.first?.src ?? "Beware :O .. Image Src is Empty"
-              let price = Double(view_model.product?.variants?.first?.price ?? "1.0")
-              let variantId = variant_Unique_ID
-              let inventory_item_id = self.inventory_item_id
-              let availableElements = variant_available_elements
-            print(availableElements)
-            
-            print(variantId)
-              
-              let cartModel = ShoppingCartModel(title: productTitle, quantity: quantity, price: price, image: imageString, draftOrderId: productId, variantId: variantId, availableElements: availableElements, inventory_item_id: inventory_item_id)
-              
-              addToCart(cart: cartModel)
-          }
+    
      
           func addToCart(cart: ShoppingCartModel) {
               let customerId = UserDefaultsHelper.shared.getCustomerId()
@@ -218,9 +170,6 @@ class ProductInfoViewController: UIViewController {
         }
     }
     
-    //------------------------------------------------------------------------------
-    
-    
     func viewReload () {
         optionsCollectionView.reloadData()
         productName.text = view_model.product?.title
@@ -241,32 +190,6 @@ class ProductInfoViewController: UIViewController {
         print("inside set id : \(id)")
         self.product_id = id;
     }
-    
-    
-    
-  
-    // outlets
-    
-    @IBOutlet weak var addToCartView: UIView!
-    @IBOutlet weak var scroll_and_add_to_cart_vertical_spacing: NSLayoutConstraint!
-    
-    @IBOutlet weak var reviewsHeight: NSLayoutConstraint!
-    @IBOutlet weak var reviewsCollectionView: UICollectionView!
-    
-    @IBOutlet weak var productImagesCollectionView: UICollectionView!
-    
-    
-    @IBOutlet weak var optionsCollectionView: UICollectionView!
-    
-    
-    
-    @IBOutlet weak var optionsHeight: NSLayoutConstraint!
-    
-    
-    
-    @IBOutlet weak var productName: UILabel!
-    @IBOutlet weak var productTags: UILabel!
-    @IBOutlet weak var productDescription: UILabel!
     
     func setproductImagesCollectionView () -> Void {
         productImagesCollectionView.delegate = self;
@@ -351,9 +274,6 @@ class ProductInfoViewController: UIViewController {
         optionsCollectionView.register(sectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeader.identifier)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
     
     private func addFavouriteButton() -> UIBarButtonItem {
         
@@ -394,34 +314,38 @@ class ProductInfoViewController: UIViewController {
         }
     }
     
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         print("view did load")
-        
         view_model.id = product_id
         view_model.myView = self
         view_model.bindresultToProductsViewController = {(check : Bool ) -> Void in
             DispatchQueue.main.async {
                 self.colorheart(colored: check)
             }
-            
         }
         view_model.initializeProduct()
-        
-        //print(view_model.product)
-        
         setOptionsView ()
         setproductImagesCollectionView()
         setReviewsView()
-        
         hideAddToCart()
-        
         navigationItem.setRightBarButtonItems([addFavouriteButton()], animated: true)
-        
        setHeartButton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         
+        optionsCollectionView.reloadData()
+        
+        var height = optionsCollectionView.collectionViewLayout.collectionViewContentSize.height
+        optionsHeight.constant = height
+        
+        height = reviewsCollectionView.collectionViewLayout.collectionViewContentSize.height
+        reviewsHeight.constant = height
+        view.layoutIfNeeded()
         
     }
     
@@ -441,24 +365,68 @@ class ProductInfoViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    @IBAction func plus_button_tapped(_ sender: Any) {
         
-        optionsCollectionView.reloadData()
+        if (numberOfCartItems < variant_available_elements) {
+            numberOfCartItems += 1;
+        }
         
-        var height = optionsCollectionView.collectionViewLayout.collectionViewContentSize.height
-        optionsHeight.constant = height
+        updateNumberLabel()
         
-        height = reviewsCollectionView.collectionViewLayout.collectionViewContentSize.height
-        reviewsHeight.constant = height
-        
-        
-        
-        view.layoutIfNeeded()
-        
+        print("plus")
     }
+    
+    @IBAction func minus_button_tapped(_ sender: Any) {
+        if (numberOfCartItems > 0) {
+            numberOfCartItems -= 1;
+        }
+        updateNumberLabel()
+        print("minus")
+    }
+    
+  
+    @IBAction func add_to_cart_tapped(_ sender: Any) {
+          // mansour starts here
+        let customerId = UserDefaultsHelper.shared.getCustomerId()
+        
+        guard customerId != 0 else {
+            let cancelAction = UIAlertAction(title: "Close", style: .cancel)
 
+            let joinAction = UIAlertAction(title: "Join us", style: .default) { [weak self] _ in
+                AppDelegate.resetViewController()
+            }
 
+            Alert.showAlert(target: self, title: "Can't Add to shop cart!", message: "Would you like to join us!", actions: [cancelAction, joinAction])
+            return
+        }
+        
+          print("add to cart")
+          var Mansour_selectedOptionValues : [Int] = selectedOption //
+          
+          guard let product = view_model.product else { return }
+          
+          
+          let elements_to_be_added_to_cart : Int = numberOfCartItems;
+          let quantity = elements_to_be_added_to_cart // same variable with different name.
+          
+          let productTitle = view_model.product?.title ?? "title Does not exist"
+          let productId : Int = view_model.product?.id ?? 0 // use it in case data in variants is insufficient
+          let imageString : String = view_model.product?.images.first?.src ?? "Beware :O .. Image Src is Empty"
+          let price = Double(view_model.product?.variants?.first?.price ?? "1.0")
+          let variantId = variant_Unique_ID
+          let inventory_item_id = self.inventory_item_id
+          let availableElements = variant_available_elements
+        print(availableElements)
+        
+        print(variantId)
+          
+          let cartModel = ShoppingCartModel(title: productTitle, quantity: quantity, price: price, image: imageString, draftOrderId: productId, variantId: variantId, availableElements: availableElements, inventory_item_id: inventory_item_id)
+          
+          addToCart(cart: cartModel)
+      }
+  
 }
+// MARK: - Extension
 
 extension ProductInfoViewController : UICollectionViewDataSource, UICollectionViewDelegate{
     
@@ -536,24 +504,22 @@ extension ProductInfoViewController : UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-            if kind == UICollectionView.elementKindSectionHeader{
-                let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeader.identifier, for: indexPath) as! sectionHeader
-                
-                
-                if collectionView == optionsCollectionView {
-                    header.setHeaderValue(value: getOptionsCollectionViewHeaderName(indexPath: indexPath))
-                }
-                else if collectionView == reviewsCollectionView {
-                    header.setHeaderValue(value: "Reviews")
-                }
-                
-                return header
+        if kind == UICollectionView.elementKindSectionHeader{
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: sectionHeader.identifier, for: indexPath) as! sectionHeader
+            
+            
+            if collectionView == optionsCollectionView {
+                header.setHeaderValue(value: getOptionsCollectionViewHeaderName(indexPath: indexPath))
             }
-            return UICollectionViewCell()
+            else if collectionView == reviewsCollectionView {
+                header.setHeaderValue(value: "Reviews")
+            }
+            
+            return header
         }
-    
+        return UICollectionViewCell()
+    }
 }
-
 
 extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -568,16 +534,12 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
         return CGSize (width: 100, height: 100)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == optionsCollectionView {
             
             let row = indexPath.section
             let value = indexPath.item
-            
-            
-            
             toggleOption(row: row, value: value)
             
             if selectedOptionsCount == get_number_of_options() {
@@ -587,17 +549,9 @@ extension ProductInfoViewController : UICollectionViewDelegateFlowLayout {
             else {
                 hideAddToCart()
             }
-            
             print("toggle add to cart")
-            
             print(selectedOptionsCount)
-            
             reset_cart()
-            
-            
         }
-        
     }
-    
-    
 }

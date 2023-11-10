@@ -16,7 +16,7 @@ class HomeViewModel{
         var cellTitle : [String] = []
         var cellDiscountCode : [String] = []
 //    var data : Brands?
- static  var selectedBrandName : String?
+ static  var selectedBrandName : Int?
     var handerDataOfHome: (() -> Void)?
     var services = NetworkServices()
     
@@ -148,11 +148,11 @@ class HomeViewModel{
    }
     
     func setSelectedBrandID (Index :Int){
-        HomeViewModel.selectedBrandName = getAllBrands?.smart_collections[Index].title
+        HomeViewModel.selectedBrandName = getAllBrands?.smart_collections[Index].id
     }
     
     func getTitle(index: Int) -> String?{
-        return getAllBrands?.smart_collections[index].title ?? "NO"
+        return getAllBrands?.smart_collections[index].title ?? " "
     }
     
     func getImage(index: Int) -> String?{

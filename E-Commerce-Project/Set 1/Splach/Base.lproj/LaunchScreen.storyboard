@@ -16,18 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modish" translatesAutoresizingMaskIntoConstraints="NO" id="7ge-nr-viT">
-                                <rect key="frame" x="34" y="203" width="325" height="447"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App Logo" translatesAutoresizingMaskIntoConstraints="NO" id="lBi-fN-las">
+                                <rect key="frame" x="59" y="255.66666666666666" width="275" height="340.66666666666674"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7ge-nr-viT" secondAttribute="bottom" constant="168" id="X0t-gW-vxg"/>
-                            <constraint firstItem="7ge-nr-viT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="144" id="hrT-Pa-DoJ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7ge-nr-viT" secondAttribute="trailing" constant="34" id="oj3-Rw-D8O"/>
-                            <constraint firstItem="7ge-nr-viT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="34" id="pfG-N2-dJZ"/>
+                            <constraint firstItem="lBi-fN-las" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1Rf-ob-fOQ"/>
+                            <constraint firstItem="lBi-fN-las" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Dqs-ri-DFu"/>
+                            <constraint firstItem="lBi-fN-las" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.4" id="Igk-e9-8cs"/>
+                            <constraint firstItem="lBi-fN-las" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.7" id="aXG-3K-6L5"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,6 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="modish" width="890" height="850"/>
+        <image name="App Logo" width="1578" height="1204"/>
     </resources>
 </document>

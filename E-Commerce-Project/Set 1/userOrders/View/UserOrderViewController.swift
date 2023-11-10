@@ -60,7 +60,9 @@ extension UserOrderViewController:UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = UserOrderDetailsViewController()
-        guard let orderDetails = userOrderViewModel.getAllOrders?.orders?[indexPath.row] else{ return }
+//        guard let orderDetails = userOrderViewModel.getAllOrders?.orders?[indexPath.row] else{ return }
+        let orderDetails = userOrderViewModel.orderArr[indexPath.row]
+
         vc.orderDetails = orderDetails
 //        print(orderDetails )
         navigationController?.pushViewController(vc, animated: true)

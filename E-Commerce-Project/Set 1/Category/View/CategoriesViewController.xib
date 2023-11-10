@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoriesViewController" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
+                <outlet property="indicator" destination="fzO-oF-7Kc" id="Zo1-CW-KpS"/>
+                <outlet property="noItemImage" destination="4l0-xB-Lmi" id="xNH-1X-ITa"/>
                 <outlet property="subMainCollectionView" destination="qlS-Kd-GWF" id="Kfw-Es-t9F"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="secondOutletCollection" destination="Ptt-uh-gzM" collectionClass="NSMutableArray" id="oRm-lW-JEY"/>
@@ -173,6 +175,16 @@
                         <outlet property="delegate" destination="-1" id="XC4-Ye-W3z"/>
                     </connections>
                 </searchBar>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Noitems" translatesAutoresizingMaskIntoConstraints="NO" id="4l0-xB-Lmi">
+                    <rect key="frame" x="0.0" y="259" width="393" height="359"/>
+                </imageView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="fzO-oF-7Kc">
+                    <rect key="frame" x="171.66666666666666" y="401" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="CUh-Vj-JDd"/>
+                        <constraint firstAttribute="height" constant="50" id="i70-rU-FR6"/>
+                    </constraints>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -184,20 +196,26 @@
                 <constraint firstItem="Eba-rA-9h6" firstAttribute="leading" secondItem="VTN-xp-NBw" secondAttribute="trailing" constant="6" id="EZA-wm-0df"/>
                 <constraint firstItem="A2z-Gj-BdS" firstAttribute="top" secondItem="Hm1-tK-mwn" secondAttribute="bottom" constant="10" id="I6a-W4-jDR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qlS-Kd-GWF" secondAttribute="trailing" constant="13" id="I7d-gp-my2"/>
+                <constraint firstItem="4l0-xB-Lmi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="200" id="IGZ-4O-Kux"/>
+                <constraint firstItem="4l0-xB-Lmi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="JYN-P6-Bxn"/>
                 <constraint firstItem="Eba-rA-9h6" firstAttribute="top" secondItem="A2z-Gj-BdS" secondAttribute="bottom" constant="10" id="KMP-uM-j5t"/>
                 <constraint firstItem="m8U-YR-S7C" firstAttribute="leading" secondItem="A2z-Gj-BdS" secondAttribute="trailing" constant="6" id="L5r-Tp-dW4"/>
+                <constraint firstItem="fzO-oF-7Kc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Lh7-pU-zQ1"/>
                 <constraint firstItem="m8U-YR-S7C" firstAttribute="top" secondItem="Hm1-tK-mwn" secondAttribute="bottom" constant="10" id="OA4-VD-b3u"/>
                 <constraint firstItem="1bV-yI-ZVH" firstAttribute="top" secondItem="sPL-Fj-xUv" secondAttribute="bottom" constant="10" id="P5G-Sz-91j"/>
                 <constraint firstItem="VTN-xp-NBw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="TSr-H5-2KR"/>
+                <constraint firstItem="4l0-xB-Lmi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="TpI-x1-tgZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qlS-Kd-GWF" secondAttribute="bottom" id="Wts-3Z-Sev"/>
                 <constraint firstItem="qlS-Kd-GWF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="YUj-ic-0v6"/>
                 <constraint firstItem="sPL-Fj-xUv" firstAttribute="top" secondItem="Hm1-tK-mwn" secondAttribute="bottom" constant="10" id="au7-kg-57Z"/>
                 <constraint firstItem="Hm1-tK-mwn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="fvQ-3m-4h8"/>
                 <constraint firstItem="A2z-Gj-BdS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="iwB-3j-2qE"/>
+                <constraint firstItem="fzO-oF-7Kc" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="nQj-jP-sdw"/>
                 <constraint firstItem="VTN-xp-NBw" firstAttribute="top" secondItem="A2z-Gj-BdS" secondAttribute="bottom" constant="10" id="sGt-E6-ts9"/>
                 <constraint firstItem="1bV-yI-ZVH" firstAttribute="leading" secondItem="Ptt-uh-gzM" secondAttribute="trailing" constant="6" id="tsj-j9-8rw"/>
                 <constraint firstItem="qlS-Kd-GWF" firstAttribute="top" secondItem="Eba-rA-9h6" secondAttribute="bottom" constant="15" id="uC8-u0-qYN"/>
                 <constraint firstItem="Ywr-pn-IKN" firstAttribute="leading" secondItem="sPL-Fj-xUv" secondAttribute="trailing" constant="6" id="wCC-2N-Xly"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4l0-xB-Lmi" secondAttribute="bottom" constant="200" id="xZ6-QX-bBq"/>
                 <constraint firstItem="sPL-Fj-xUv" firstAttribute="leading" secondItem="m8U-YR-S7C" secondAttribute="trailing" constant="6" id="xwF-HI-wf0"/>
                 <constraint firstItem="Ptt-uh-gzM" firstAttribute="top" secondItem="m8U-YR-S7C" secondAttribute="bottom" constant="10" id="yCA-aw-7CE"/>
             </constraints>
@@ -205,6 +223,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Noitems" width="1000" height="660"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

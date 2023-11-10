@@ -17,6 +17,7 @@ struct UserOrders : Codable {
     let order_number : Int?
     let total_price : String?
     let line_items : [Items]?
+    let note : String
 }
 
 struct CustomerOrder : Codable {

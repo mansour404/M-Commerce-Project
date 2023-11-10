@@ -9,10 +9,12 @@ import Foundation
 
 class UserOrderViewModel{
     var  bindresultToHomeViewController: ( () -> () ) = {}
-   
+    //HERE
+    var orderArr = [UserOrders]()
+    var customerID = UserDefaultsHelper.shared.getCustomerId()
+
     var handerDataOfHome: (() -> Void)?
     var services = NetworkServices()
-    
     var getAllOrders: AllOrders? {
         didSet{
             if let validHander =  handerDataOfHome {
@@ -28,11 +30,21 @@ class UserOrderViewModel{
     
     
     //MARK: -CAll Request of Api
+    //HERE
     func getDataFromApiForUserOrders() {
         services.getUserOrders(Handler: { (dataValue:AllOrders?, error: Error?) in
             print("Success")
             if let mydata = dataValue {
-                self.getAllOrders = mydata
+//                self.getAllOrders = mydata
+                guard let orders = mydata.orders else { return }
+                for order in orders {
+                    let orderString = Int(order.note ?? "6866434621590" )
+                    if self.customerID == orderString {
+                        self.orderArr.append(order)
+                    }
+                }
+                
+//                self.getAllOrders?.orders = self.orderArr
                 self.bindresultToHomeViewController()
 //             print(mydata)
             }else {
@@ -46,22 +58,22 @@ class UserOrderViewModel{
     //MARK: -Getting Orders
     func getNumberOfOrders() -> Int {
         //    print(getAllOrders?.orders?.count)
-        guard let numberOfOrder = getAllOrders?.orders?.count else{
-            return 0
-        }
-        return numberOfOrder
+//        guard let numberOfOrder = orderArr.count else{
+//            return 0
+//        }
+        return orderArr.count
     }
     
     func getOrderNumber(index: Int) -> String?{
-        return "\(getAllOrders?.orders?[index].order_number ?? 1)"
+        return "\(orderArr[index].order_number ?? 1)"
     }
     
     func getNumberOfItems(index: Int) -> String?{
-        return "\(getAllOrders?.orders?[index].line_items?[0].quantity ?? 2)"
+        return "\(orderArr[index].line_items?[0].quantity ?? 2)"
     }
     
     func getTotalPrice(index: Int) -> String?{
-        return getAllOrders?.orders?[index].total_price ?? "100"
+        return orderArr[index].total_price ?? "100"
     }
     
 //    func getUserAddress(index : Int ) -> String?{
@@ -69,7 +81,7 @@ class UserOrderViewModel{
 //    }
     
     func getOrderTitle(index : Int ) -> String?{
-        return getAllOrders?.orders?[index].line_items?[0].title ?? "Adidas"
+        return orderArr[index].line_items?[0].title ?? "Adidas"
     }
     
     
@@ -77,6 +89,7 @@ class UserOrderViewModel{
 //        return getAllOrders?.orders?[index].customer?.phone ?? "01025966867"
 //    }
 }
+
 
 
 

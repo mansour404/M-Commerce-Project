@@ -10,17 +10,15 @@ import Cosmos
 
 class SubmainCollectionViewCell: UICollectionViewCell {
     // MARK: - Variables
-    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var exchangeLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var myView: UIView!
-    
+    @IBOutlet weak var heart_button_outlet: UIButton!
+
     var obj = FavouriteViewModel()
-    
     var networkManager = NetworkServices()
-    
     // important
     var product_id : Int? = 0
     var product_title : String? = ""
@@ -29,20 +27,19 @@ class SubmainCollectionViewCell: UICollectionViewCell {
     var product_Image : String? = ""
     var heartIsFilled : Bool = false;
     
-    @IBAction func heart_button_pressed(_ sender: UIButton) {
+
+    // MARK: - LifeCycle Method
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        myView.layer.cornerRadius = 15
+        heart_button_outlet.setImage(UIImage(systemName: "heart"), for: .normal)
+        heart_button_outlet.tintColor = UIColor.systemPurple
         
-        if heartIsFilled {
-            StageDelete(product_id: product_Variant_Id!)
-            
+        bindresultToProductsViewController = {(check : Bool ) -> Void in
+            self.colorheart(colored: check)
         }
-        else {
-            createFavourite()
-        }
-        
     }
-    
-    
-    @IBOutlet weak var heart_button_outlet: UIButton!
     
     func colorheart(colored : Bool){
         if colored {
@@ -57,45 +54,23 @@ class SubmainCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        myView.layer.cornerRadius = 15
+    // MARK: - Actions
+    @IBAction func heart_button_pressed(_ sender: UIButton) {
         
-        heart_button_outlet.setImage(UIImage(systemName: "heart"), for: .normal)
-        
-        bindresultToProductsViewController = {(check : Bool ) -> Void in
+        if heartIsFilled {
+            StageDelete(product_id: product_Variant_Id!)
             
-                self.colorheart(colored: check)
-            
-           
         }
-        
-            
+        else {
+            createFavourite()
+        }
     }
-
-//    override func didMoveToWindow() {
-////        DispatchQueue.main.async {
-////            self.setControllerFavourite()
-////
-////        }
-//        
-//    }
-//    
-//    override func layerWillDraw(_ layer: CALayer) {
-////        DispatchQueue.main.async {
-////            self.setControllerFavourite()
-////
-////        }
-//
-//    }
-    
-    
+        
     var  bindresultToProductsViewController: ( (_ colored : Bool) -> () ) = {colored in}
     
     
     func StageDelete(product_id : Int){
-     
+        
         obj.compiltionHandler = { id in
             if id != -1 {
                 print(id)
@@ -105,43 +80,38 @@ class SubmainCollectionViewCell: UICollectionViewCell {
         }
         obj.sendWishId(userID: Int64(UserDefaultsHelper.shared.getCustomerId()), productId: product_id)
         
-          
+        
     }
     
-        func deleteProductFromFavourites(wishId : Int){
-            networkManager.removefavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), wishId: wishId ,Handler: {
-                DispatchQueue.main.async {
-                    
-                    self.bindresultToProductsViewController(false)
-                }
+    func deleteProductFromFavourites(wishId : Int){
+        networkManager.removefavouriteItem(userID: (UserDefaultsHelper.shared.getCustomerId()), wishId: wishId ,Handler: {
+            DispatchQueue.main.async {
+                
+                self.bindresultToProductsViewController(false)
+            }
         })
         
     }
     func createFavourite(){
-
-        networkManager.addFavouriteItem(customerId: (UserDefaultsHelper.shared.getCustomerId()), productId: Int(product_id!), variant_id: product_Variant_Id!, productName: (product_title)!, price: product_Price!, imageURl: product_Image!, Handler:{
-                        DispatchQueue.main.async {
-            
-            
-                            self.bindresultToProductsViewController(true)
-                        }
-                    })
-    }
-    
-    func setControllerFavourite () {
         
+        networkManager.addFavouriteItem(customerId: (UserDefaultsHelper.shared.getCustomerId()), productId: Int(product_id!), variant_id: product_Variant_Id!, productName: (product_title)!, price: product_Price!, imageURl: product_Image!, Handler:{
+            DispatchQueue.main.async {
+                
+                
+                self.bindresultToProductsViewController(true)
+            }
+        })
     }
     
-    func  setControllerFavourite2(){
 
+    func  setControllerFavourite2(){
+        
         networkManager.getCustomerWishList(Handler: {(dataValue:DraftOrdersResult?, error: Error?) in
-            
             if let mydata = dataValue {
-                
                 var ok = false;
                 
                 print("********************************************")
-                    print("this the filter in product info  ")
+                print("this the filter in product info  ")
                 print("\(String(describing: mydata.draft_orders?.count) )")
                 print("********************************************")
                 if((mydata.draft_orders?.count ?? 0) > 0){
@@ -149,23 +119,23 @@ class SubmainCollectionViewCell: UICollectionViewCell {
                         if(UserDefaultsHelper.shared.getCustomerId() != 0){
                             if(mydata.draft_orders?[d].note == "Wishlist" ){
                                 let mycustomer : CustomerTwo = (mydata.draft_orders?[d].customer)!
-                                    if(mycustomer.id == UserDefaultsHelper.shared.getCustomerId()){
+                                if(mycustomer.id == UserDefaultsHelper.shared.getCustomerId()){
                                     print("********************************************")
-                                        print("this the filter in product info  ")
-                                        print("\(mycustomer.id == UserDefaultsHelper.shared.getCustomerId())")
+                                    print("this the filter in product info  ")
+                                    print("\(mycustomer.id == UserDefaultsHelper.shared.getCustomerId())")
                                     print("********************************************")
-                                        print("********************************************")
-                                            print("this the filter in product info this is product id  ")
-                                        print("\(String(describing: self.product_Variant_Id))")
-                                        print("********************************************")
-                                        print("********************************************")
-                                            print("this the filter in product info this is a product id in draft order ")
-                                         print("\(String(describing: mydata.draft_orders?[d].line_items?[0].variant_id))")
-                                        print("********************************************")
-                                        if(mydata.draft_orders?[d].line_items?[0].variant_id == self.product_Variant_Id){
+                                    print("********************************************")
+                                    print("this the filter in product info this is product id  ")
+                                    print("\(String(describing: self.product_Variant_Id))")
+                                    print("********************************************")
+                                    print("********************************************")
+                                    print("this the filter in product info this is a product id in draft order ")
+                                    print("\(String(describing: mydata.draft_orders?[d].line_items?[0].variant_id))")
+                                    print("********************************************")
+                                    if(mydata.draft_orders?[d].line_items?[0].variant_id == self.product_Variant_Id){
                                         //self.bindresultToProductsViewController(true)
-                                            //break
-                                            ok = true;
+                                        //break
+                                        ok = true;
                                     }else {
                                         //self.bindresultToProductsViewController(false)
                                     }
@@ -177,18 +147,16 @@ class SubmainCollectionViewCell: UICollectionViewCell {
                     }
                 }
                 DispatchQueue.main.async {
-    
-    
                     self.bindresultToProductsViewController(ok)
-                }
+               }
                 
             }else {
-                    if let error = error{
-                        self.bindresultToProductsViewController(false)
-                        print(error.localizedDescription)
-                    }
+                if let error = error{
+                    self.bindresultToProductsViewController(false)
+                    print(error.localizedDescription)
                 }
-            })
+            }
+        })
     }
     
     // MARK: - configure Nib
@@ -199,7 +167,6 @@ class SubmainCollectionViewCell: UICollectionViewCell {
             titleLabel.text = productNameText
         }
         if let titleLabel = priceLabel {
-            
             titleLabel.text = priceText
         }
         
@@ -207,9 +174,5 @@ class SubmainCollectionViewCell: UICollectionViewCell {
             titleLabel.text = exchangeText
         }
         imageView.downloadImageFrom(imageName)
-        
-//        if let ratingView = rating {
-//            ratingView = rating
-//        }
     }
 }

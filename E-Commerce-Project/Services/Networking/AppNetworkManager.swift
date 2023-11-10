@@ -186,25 +186,25 @@ class NetworkServices   {
         }
     }
     //MARK: - Fetching Data From Api to show all brand product
-    func getAllProductsForBrandData<T :Codable>(BrandName: String ,Handler: @escaping (T?,Error?) -> Void) {
-        let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10//products.json?vendor=\(BrandName)"
-        
-        AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
-            if let validData = data.data {
-                do{
-                    let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
-                    print("Success")
-                    
-                    Handler(dataRetivied, nil)
-                    
-                }catch let error{
-                    print (error)
-                    Handler(nil, error)
+    func getAllProductsForBrandData<T :Codable>(BrandId: Int ,Handler: @escaping (T?,Error?) -> Void) {
+            let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/products.json?collection_id=\(BrandId)"
+            
+            AF.request(urlFile,method: Alamofire.HTTPMethod.get).response { data in
+                if let validData = data.data {
+                    do{
+                        let dataRetivied = try JSONDecoder().decode(T.self, from: validData)
+                        print("Success")
+                        
+                        Handler(dataRetivied, nil)
+                        
+                    }catch let error{
+                        print (error)
+                        Handler(nil, error)
+                    }
                 }
+                else{print("There is error in casting data")}
             }
-            else{print("There is error in casting data")}
         }
-    }
     //MARK: - Fetching Data From Api to show customer Data
     func getCustomerData<T :Codable>(Handler: @escaping (T?,Error?) -> Void){
         let urlFile = "https://a6cdf13b3aee85b07964a84ccc1bd762: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@ios-q1-new-capital-admin2-2023.myshopify.com/admin/api/2023-10/customers.json"

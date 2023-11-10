@@ -13,7 +13,8 @@ class HomeViewController: UIViewController {
     var currentCellIndex = 0
         var homeViewModel = HomeViewModel()
 
-
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
     var brandData : Brands?
     @IBOutlet weak var couponsCollectionView: UICollectionView!
     @IBOutlet weak var pageConroller: UIPageControl!
@@ -23,12 +24,18 @@ class HomeViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        indicator.startAnimating()
+        brandsCollectionView.isHidden = true
+
 //        navigationItem.title = "Home"
         self.configureLoadingDataFromApi()
         homeViewModel.bindresultToHomeViewController = {
             DispatchQueue.main.async {
                 self.brandsCollectionView.reloadData()
                 self.couponsCollectionView.reloadData()
+                self.indicator.stopAnimating()
+                self.indicator.hidesWhenStopped = true
+                self.brandsCollectionView.isHidden = false
             }
         }
         configureCollectionView()
@@ -36,11 +43,8 @@ class HomeViewController: UIViewController {
         
 //        startTimer()
         navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
-//        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.tabBarController?.navigationItem.hidesBackButton = true
-//    }
+
     //MARK: - Configure The Loading Data
     func configureLoadingDataFromApi(){
         homeViewModel.getDataFromApiForHome()
@@ -139,8 +143,7 @@ extension HomeViewController:UICollectionViewDataSource {
             cell.priceRoleLabel.text = homeViewModel.getPriceRulesTitle(index: indexPath.row) ?? "A"
             cell.discountTitle.text = homeViewModel.getPriceRuleDiscountCode(index: indexPath.row)
             cell.layer.cornerRadius = 20
-            cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor.lightGray.cgColor
+            
             return cell
         } else {
             let cell = brandsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.brandsCollectionViewCell, for: indexPath)as! BrandsCollectionViewCell
@@ -162,6 +165,9 @@ extension HomeViewController:UICollectionViewDataSource {
         } else {
                 let vc = ProductsViewController()
             homeViewModel.setSelectedBrandID(Index: indexPath.row)
+            print("=============================")
+            print("this is brand name \(HomeViewModel.selectedBrandName)")
+            print("=============================")
                 navigationController?.pushViewController(vc, animated: true)
 //            vc.modalPresentationStyle = .automatic
 //                self.present(vc, animated: true)
@@ -176,7 +182,7 @@ extension HomeViewController: UICollectionViewDelegate , UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == couponsCollectionView {
-            return CGSize(width: couponsCollectionView.frame.width , height: couponsCollectionView.frame.height)
+            return CGSize(width: couponsCollectionView.frame.width , height: couponsCollectionView.frame.height - 10 )
         }else{
             return CGSize(width: (brandsCollectionView.frame.width - 20)/2  , height: brandsCollectionView.frame.height/2)
             

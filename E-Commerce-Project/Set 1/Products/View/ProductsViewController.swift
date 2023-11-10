@@ -15,29 +15,38 @@ class ProductsViewController: UIViewController {
     @IBOutlet weak var rateFilterButtonOutlet: UIButton!
     @IBOutlet weak var priceFilterButtonOutlet: UIButton!
     @IBOutlet weak var charFilterButtonOutlet: UIButton!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+
     var productviewModel = ProductViewModel()
-    var buttonHidden:Bool = true
     var isSearchActive  = false
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Products"
-        searchBar.delegate = self
-        rateFilterButtonOutlet.isHidden = true
-        priceFilterButtonOutlet.isHidden = true
-        charFilterButtonOutlet.isHidden = true
-        productviewModel.bindresultToProductsViewController = {
-            DispatchQueue.main.async {
-                self.productsCollectionView.reloadData()
-            }
-        }
-        self.configureLoadingDataFromApi()
-        configureCollectionView()
         
+        navigationItem.title = "Products"
+        indicator.startAnimating()
+        productsCollectionView.isHidden = true
+        searchBar.delegate = self
+        
+        self.configureLoadingDataFromApi()
+
+//        productviewModel.bindresultToProductsViewController = {
+//            DispatchQueue.main.async {
+//                self.productsCollectionView.reloadData()
+//                self.indicator.stopAnimating()
+//                self.indicator.hidesWhenStopped = true
+//                self.productsCollectionView.isHidden = false
+//            }
+//        }
+        configureCollectionView()
+
     }
     override func viewWillAppear(_ animated: Bool) {
         productviewModel.bindresultToProductsViewController = {
             DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+                self.indicator.hidesWhenStopped = true
+                self.productsCollectionView.isHidden = false
                 self.productsCollectionView.reloadData()
             }
         }
@@ -69,29 +78,8 @@ class ProductsViewController: UIViewController {
         productsCollectionView.register(UINib(nibName: CellIdentifier.submainCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.submainCollectionViewCell)
         
     }
-    // MARK: - ACTIONS
-    @IBAction func filterButtonTapped(_ sender: Any) {
-        if buttonHidden{
-            rateFilterButtonOutlet.isHidden = false
-            priceFilterButtonOutlet.isHidden = false
-            charFilterButtonOutlet.isHidden = false
-            buttonHidden = false
-        } else {
-            rateFilterButtonOutlet.isHidden = true
-            priceFilterButtonOutlet.isHidden = true
-            charFilterButtonOutlet.isHidden = true
-            buttonHidden = true
-        }
 
-    }
-    @IBAction func rateFilterButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func priceFilterButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func charFilterButtonTapped(_ sender: Any) {
-    }
+  
 }
     // MARK: - UICollectionView DataSource
     extension ProductsViewController:UICollectionViewDataSource {
@@ -104,7 +92,7 @@ class ProductsViewController: UIViewController {
             let cell = productsCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
             
             cell.productNameLabel.text = productviewModel.getTitle(index: indexPath.row)
-            cell.imageView.downloadImageFrom(productviewModel.getid(index: indexPath.row))
+           cell.imageView.downloadImageFrom(productviewModel.getid(index: indexPath.row))
             
             cell.product_title = productviewModel.getTitle(index: indexPath.item)
             cell.product_id = Int(productviewModel.getProductID(index: indexPath.item))
@@ -120,7 +108,7 @@ class ProductsViewController: UIViewController {
 
             //cell.configure(imageName: <#T##String#>, priceText: <#T##String#>, productNameText: <#T##String#>, exchangeText: <#T##String#>)
             
-            cell.configure(imageName: productviewModel.getImage(index: indexPath.row) ?? "bag", priceText: priceText , productNameText: productviewModel.getTitle(index: indexPath.row) ?? "A", exchangeText: symbol)
+            cell.configure(imageName: productviewModel.getid(index: indexPath.row) ?? "bag", priceText: priceText , productNameText: productviewModel.getTitle(index: indexPath.row) ?? "A", exchangeText: symbol)
             
             var isFavorite = false
             for item in productviewModel.favourite_items_array {
@@ -138,7 +126,9 @@ class ProductsViewController: UIViewController {
             }
             //cell.favoriteButton?.isSelected = isFavorite
             cell.colorheart(colored: isFavorite)
-            
+            cell.layer.cornerRadius = 20
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor.lightGray.cgColor
             return cell
             
         }
@@ -160,7 +150,7 @@ class ProductsViewController: UIViewController {
 extension ProductsViewController: UICollectionViewDelegate , UICollectionViewDelegateFlowLayout , UISearchBarDelegate
 {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (productsCollectionView.frame.width / 2) - 10 , height: (productsCollectionView.frame.height) / 2.5 )
+        return CGSize(width: (productsCollectionView.frame.width / 2) - 10 , height: (productsCollectionView.frame.height) / 3.5 )
     }
 //    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 //        <#code#>
