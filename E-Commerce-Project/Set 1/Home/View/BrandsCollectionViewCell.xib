@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BrandsCollectionViewCell" customModule="E_Commerce_Project" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="238" height="211"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="238" height="211"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0nz-Qo-0dP">
+                        <rect key="frame" x="0.0" y="0.0" width="238" height="211"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adidas" translatesAutoresizingMaskIntoConstraints="NO" id="CY3-7j-j9e">
+                                <rect key="frame" x="20" y="10" width="198" height="159"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adidas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6q-Tu-PDb">
+                                <rect key="frame" x="81.666666666666657" y="161" width="74.666666666666657" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CY3-7j-j9e" secondAttribute="trailing" constant="20" id="2MN-AQ-8mB"/>
+                            <constraint firstItem="CY3-7j-j9e" firstAttribute="leading" secondItem="0nz-Qo-0dP" secondAttribute="leading" constant="20" id="62f-SZ-CvS"/>
+                            <constraint firstItem="CY3-7j-j9e" firstAttribute="centerX" secondItem="0nz-Qo-0dP" secondAttribute="centerX" id="6R8-Q4-gkl"/>
+                            <constraint firstItem="O6q-Tu-PDb" firstAttribute="centerX" secondItem="0nz-Qo-0dP" secondAttribute="centerX" id="BiP-eq-wUs"/>
+                            <constraint firstItem="O6q-Tu-PDb" firstAttribute="top" secondItem="CY3-7j-j9e" secondAttribute="bottom" constant="-8" id="U2H-Gu-6QE"/>
+                            <constraint firstItem="CY3-7j-j9e" firstAttribute="top" secondItem="0nz-Qo-0dP" secondAttribute="top" constant="10" id="UiX-R3-EGu"/>
+                            <constraint firstAttribute="bottom" secondItem="O6q-Tu-PDb" secondAttribute="bottom" constant="20" symbolic="YES" id="hSl-Qh-gFd"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" red="0.90516390069999997" green="0.58034432920000001" blue="0.20647052120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="0nz-Qo-0dP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="3O6-tF-slL"/>
+                <constraint firstAttribute="bottom" secondItem="0nz-Qo-0dP" secondAttribute="bottom" id="PEC-ug-3LA"/>
+                <constraint firstAttribute="trailing" secondItem="0nz-Qo-0dP" secondAttribute="trailing" id="iVi-lE-XVH"/>
+                <constraint firstItem="0nz-Qo-0dP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xDA-Qs-gHe"/>
+            </constraints>
+            <size key="customSize" width="238" height="211"/>
+            <connections>
+                <outlet property="brandsImageView" destination="CY3-7j-j9e" id="H6a-OG-kKG"/>
+                <outlet property="brandsNamesLabel" destination="O6q-Tu-PDb" id="BkV-gk-Pjm"/>
+            </connections>
+            <point key="canvasLocation" x="198.47328244274809" y="77.112676056338032"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="adidas" width="318" height="159"/>
+    </resources>
+</document>

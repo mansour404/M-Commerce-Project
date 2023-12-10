@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavouriteCustomTableViewCell" rowHeight="130" id="KGk-i7-Jjw" customClass="FavouriteCustomTableViewCell" customModule="E_Commerce_Project" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="447" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM" userLabel="View1">
+                <rect key="frame" x="0.0" y="0.0" width="447" height="115"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEH-f5-QBa">
+                        <rect key="frame" x="8" y="8" width="431" height="96"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adidasBag" translatesAutoresizingMaskIntoConstraints="NO" id="rGc-Jw-ETM">
+                                <rect key="frame" x="8" y="4" width="88" height="88"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="88" id="cnN-Rx-0Xw"/>
+                                    <constraint firstAttribute="height" constant="88" id="uAU-j9-jjm"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="USD 50.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckm-gw-YDP">
+                                <rect key="frame" x="112" y="63.666666666666679" width="311" height="20.333333333333336"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="topRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ClASSIC SUPER NO SHOW SOCKS 3 PASCK WHITE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yet-Qi-XT6">
+                                <rect key="frame" x="112" y="12" width="311" height="33.666666666666664"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rGc-Jw-ETM" firstAttribute="leading" secondItem="bEH-f5-QBa" secondAttribute="leading" constant="8" id="ONd-Ko-fHY"/>
+                            <constraint firstItem="ckm-gw-YDP" firstAttribute="bottom" secondItem="rGc-Jw-ETM" secondAttribute="bottom" constant="-8" id="W4e-HA-Syd"/>
+                            <constraint firstItem="ckm-gw-YDP" firstAttribute="trailing" secondItem="yet-Qi-XT6" secondAttribute="trailing" id="XCd-se-p7R"/>
+                            <constraint firstAttribute="bottom" secondItem="rGc-Jw-ETM" secondAttribute="bottom" constant="4" id="Z6n-Qj-Ouo"/>
+                            <constraint firstItem="ckm-gw-YDP" firstAttribute="leading" secondItem="yet-Qi-XT6" secondAttribute="leading" id="bDm-Fv-6lA"/>
+                            <constraint firstItem="yet-Qi-XT6" firstAttribute="top" secondItem="rGc-Jw-ETM" secondAttribute="top" constant="8" id="fXq-1G-Np2"/>
+                            <constraint firstItem="rGc-Jw-ETM" firstAttribute="top" secondItem="bEH-f5-QBa" secondAttribute="top" constant="4" id="suL-b6-2Ru"/>
+                            <constraint firstItem="yet-Qi-XT6" firstAttribute="leading" secondItem="rGc-Jw-ETM" secondAttribute="trailing" constant="16" id="wDp-72-MyS"/>
+                            <constraint firstAttribute="height" constant="96" id="xVt-k9-cFP"/>
+                            <constraint firstAttribute="trailing" secondItem="yet-Qi-XT6" secondAttribute="trailing" constant="8" id="zxn-s1-bQO"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="bEH-f5-QBa" secondAttribute="trailing" constant="8" id="0aP-k1-yFr"/>
+                    <constraint firstItem="bEH-f5-QBa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="8KR-SG-et1"/>
+                    <constraint firstAttribute="bottom" secondItem="bEH-f5-QBa" secondAttribute="bottom" constant="8" id="hFJ-Ma-bpY"/>
+                    <constraint firstItem="bEH-f5-QBa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="wS5-zr-Nza"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="FavouriteProductImage" destination="rGc-Jw-ETM" id="vjp-vd-Rul"/>
+                <outlet property="FavouriteProductName" destination="ckm-gw-YDP" id="b5I-CY-Zgs"/>
+                <outlet property="FavouriteProductPrice" destination="ckm-gw-YDP" id="uA6-pV-z9B"/>
+                <outlet property="cardView" destination="bEH-f5-QBa" id="kNL-aW-PhZ"/>
+            </connections>
+            <point key="canvasLocation" x="171.75572519083968" y="-19.014084507042256"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="adidasBag" width="840" height="840"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
