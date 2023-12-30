@@ -19,6 +19,8 @@ class GoogleLoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         userEmaillabel.text = userEmail
+        NewPasswordFiell.isSecureTextEntry = true
+        ConfirmPasswordField.isSecureTextEntry = true
         addUserDetailsModel.bindresultToProductsViewController = { // set alert message
             let vc = TabController()
             vc.modalPresentationStyle = .fullScreen

@@ -20,6 +20,8 @@ class ProductViewModel {
             }
         }
     }
+    var dataArr : [Product]?
+
     
     var favourite_items_array : [Draft_orders] = []
     var is_id_in_favourites : [Int: Bool] = [:]
@@ -68,10 +70,42 @@ class ProductViewModel {
         }
         )
     }
+    //MARK: - Sorting
+    //HERE
+
+    func sortByPrice(){
+            dataArr?.sort { (product1, product2) -> Bool in
+                if let price1 = product1.variants?.first?.price, let price2 = product2.variants?.first?.price {
+                    if let priceValue1 = Double(price1), let priceValue2 = Double(price2) {
+                        return priceValue1 < priceValue2
+                    }
+                }
+                
+                return false
+            }
+        }
+    
+    func sortByArrangingTheLetters(){
+        dataArr?.sort { (product1, product2) -> Bool in
+            if let title1 = product1.title, let title2 = product2.title {
+                return title1.localizedCompare(title2) == .orderedAscending
+            }
+            
+            // If titles are not available, keep the order unchanged
+            return false
+        }
+    }
     
     //MARK: -CAll Request of Api
     func getDataFromApiForProduct() {
-        services.getAllProductsForBrandData(BrandName: HomeViewModel.selectedBrandName ?? "ADIDAS", Handler: { (dataValue:ProductsResponse?, error: Error?) in
+        guard let name  = HomeViewModel.selectedBrandName else {
+            print("error in brand name")
+            return
+        }
+        print("===============================")
+        print("\(name)")
+        print("++++++++++++++++++++++++++++++++")
+        services.getAllProductsForBrandData(BrandId: name, Handler: { (dataValue:ProductsResponse?, error: Error?) in
             print("Success")
 
             if let mydata = dataValue {
@@ -86,7 +120,7 @@ class ProductViewModel {
         })
     }
     func getDataFromApiForProduct_WithFilter(SearchText : String) {
-        services.getAllProductsForBrandData(BrandName: HomeViewModel.selectedBrandName ?? "ADIDAS", Handler: { (dataValue:ProductsResponse?, error: Error?) in
+        services.getAllProductsForBrandData(BrandId: HomeViewModel.selectedBrandName ?? 0, Handler: { (dataValue:ProductsResponse?, error: Error?) in
             print("Success")
 
             if let mydata = dataValue {
@@ -120,20 +154,20 @@ func getNumberOfProduct() -> Int? {
     }
     
     func getTitle(index: Int) -> String?{
-        return  AllBrandProducts?.products[index].title
+        return   AllBrandProducts?.products[index].title
         
     }
     
     func getImage(index: Int) -> String?{
-        return  AllBrandProducts?.products[index].images.first?.src
+        return   AllBrandProducts?.products[index].images.first?.src
         
     }
     
     func getid(index: Int) -> String{
-        if (AllBrandProducts?.products[index].images.count == 0) {
+        if ( AllBrandProducts?.products[index].images.count == 0) {
             return "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
         }
-        return  AllBrandProducts?.products[index].images[0].src ?? "none"
+        return   AllBrandProducts?.products[index].images[0].src ?? "none"
  
     }
     func getProductID (index : Int) -> Int64{

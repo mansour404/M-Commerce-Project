@@ -16,6 +16,8 @@ class UserProfileView: UIViewController {
 
     
     // MARK: - Outlets
+    @IBOutlet weak var noOrdersView: UIView!
+    @IBOutlet weak var noFavouritesView: UIView!
     @IBOutlet weak var noUserUIView: UIView!
     @IBOutlet weak var userUIView: UIView!
     @IBOutlet weak var favouritesTableView: UITableView!
@@ -24,6 +26,7 @@ class UserProfileView: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideNoViews()
         userProfileIsEmpty()
         // Setup bar button items
         navigationItem.setRightBarButtonItems([addSettingsButton(), addShoppingCartButton()], animated: true)
@@ -31,6 +34,10 @@ class UserProfileView: UIViewController {
         configureTableViews()
         bindFavourites()
         bindOrders()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     private func registerNibs() {
@@ -65,6 +72,11 @@ class UserProfileView: UIViewController {
             }
         }
         self.userOrderViewModel.getDataFromApiForUserOrders()
+    }
+    
+    private func hideNoViews() {
+        noFavouritesView.isHidden = true
+        noOrdersView.isHidden = true
     }
     
 }
@@ -142,7 +154,15 @@ extension UserProfileView {
         CartList.carts = []
         UserDefaultsHelper.shared.setCustomerId(0)
         UserDefaultsHelper.shared.saveAPI(id: 0)
-        AppDelegate.resetViewController()
+//        AppDelegate.resetViewController()
+        let alert = UIAlertController(title: "Thank You", message: "Please Sign Up or Login", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {_ in
+            let vc = Login_or_Singup()
+            vc.modalPresentationStyle = .fullScreen 
+            self.present(vc, animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    
     }
     
     @IBAction func seeAllOrdersButtonPressed(_ sender: Any) {
@@ -176,9 +196,23 @@ extension UserProfileView: UITableViewDataSource {
         if tableView == ordersTableView {
             //return  orderList.count < 2 ? orderList.count : 2
             let count = userOrderViewModel.getNumberOfOrders()
+            if count == 0 {
+                ordersTableView.isHidden = true
+                noOrdersView.isHidden = false
+            } else {
+                ordersTableView.isHidden = false
+                noOrdersView.isHidden = true
+            }
             return count < 2 ? count : 2
         } else {
             guard let count = favouriteViewModel.getNumberOfProduct() else { return 0 }
+            if count == 0 {
+                favouritesTableView.isHidden = true
+                noFavouritesView.isHidden = false
+            } else {
+                favouritesTableView.isHidden = false
+                noFavouritesView.isHidden = true
+            }
             return count < 2 ? count : 2
         }
     }
@@ -209,19 +243,26 @@ extension UserProfileView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: - Run did select function
         if tableView == ordersTableView {
+//            let vc = UserOrderDetailsViewController()
+//            guard let orderDetails = userOrderViewModel.getAllOrders?.orders?[indexPath.row] else{ return }
+//            vc.orderDetails = orderDetails
+//            //        print(orderDetails )
+//            navigationController?.pushViewController(vc, animated: true)
+            
             let vc = UserOrderDetailsViewController()
-            guard let orderDetails = userOrderViewModel.getAllOrders?.orders?[indexPath.row] else{ return }
+            //HERE
+            let orderDetails = userOrderViewModel.orderArr[indexPath.row]
             vc.orderDetails = orderDetails
-            //        print(orderDetails )
+    //        print(orderDetails )
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            let vc = ProductInfoViewController()
+//            let vc = ProductInfoViewController()
 //            let productId = favouriteViewModel.productId
 //            vc.view_model.id = Int64(productId!)
 //            guard let orderDetails = userOrderViewModel.getAllOrders?.orders?[indexPath.row] else{ return }
 //            vc.orderDetails = orderDetails
             //        print(orderDetails )
-            navigationController?.pushViewController(vc, animated: true)
+//            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

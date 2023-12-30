@@ -22,6 +22,7 @@ class LoginVC: UIViewController {
         googleBtnOutlet.layer.cornerRadius = 13
         loginBtnOutlet.layer.cornerRadius = 13
         loginModel.getDataFromApiForCustom()
+        UserPasswordTextField.isSecureTextEntry = true
 
     }
     //MARK: - ACTIONS

@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="brandsCollectionView" destination="hRz-IZ-uCW" id="tEr-FN-OTm"/>
                 <outlet property="couponsCollectionView" destination="JPp-t9-WUX" id="RJY-Pt-Nv3"/>
+                <outlet property="indicator" destination="0nv-RU-IR8" id="yY2-Ww-3KP"/>
                 <outlet property="pageConroller" destination="QIH-bt-SXZ" id="sXX-Qp-COs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -62,6 +63,13 @@
                         <outlet property="delegate" destination="-1" id="Rsr-XG-Due"/>
                     </connections>
                 </searchBar>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="0nv-RU-IR8">
+                    <rect key="frame" x="171.66666666666666" y="401" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="Ob3-RU-y3n"/>
+                        <constraint firstAttribute="height" constant="50" id="w4k-kS-dOY"/>
+                    </constraints>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -75,7 +83,9 @@
                 <constraint firstItem="JPp-t9-WUX" firstAttribute="top" secondItem="cCH-jP-M4F" secondAttribute="bottom" constant="10" id="Htp-au-kCE"/>
                 <constraint firstItem="JPp-t9-WUX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="U27-jJ-DHM"/>
                 <constraint firstItem="QIH-bt-SXZ" firstAttribute="top" secondItem="JPp-t9-WUX" secondAttribute="bottom" constant="8" symbolic="YES" id="Zej-BY-DRl"/>
+                <constraint firstItem="0nv-RU-IR8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cGF-zP-gvb"/>
                 <constraint firstItem="cCH-jP-M4F" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="eeg-cU-YXT"/>
+                <constraint firstItem="0nv-RU-IR8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="l9Q-3r-0Pf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="hRz-IZ-uCW" secondAttribute="bottom" id="pUT-J9-VVt"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JPp-t9-WUX" secondAttribute="trailing" constant="16" id="q4E-VA-sdu"/>
                 <constraint firstItem="QIH-bt-SXZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ucQ-I2-mTC"/>

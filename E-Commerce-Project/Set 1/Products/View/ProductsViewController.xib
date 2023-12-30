@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,11 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductsViewController" customModule="E_Commerce_Project" customModuleProvider="target">
             <connections>
-                <outlet property="charFilterButtonOutlet" destination="3UK-z7-g6y" id="b60-qO-u8O"/>
-                <outlet property="filterButtonOutlet" destination="LhN-dC-pLM" id="9bN-ZN-DHp"/>
-                <outlet property="priceFilterButtonOutlet" destination="GGh-Od-D7m" id="Nsf-W7-YaN"/>
+                <outlet property="indicator" destination="TkB-lC-2Bh" id="tgJ-bX-3pI"/>
                 <outlet property="productsCollectionView" destination="2LE-4z-brp" id="wTd-3J-ifG"/>
-                <outlet property="rateFilterButtonOutlet" destination="zG6-4Y-ypU" id="1yS-Pt-5tL"/>
                 <outlet property="searchBar" destination="M07-LV-TVD" id="4ix-2F-nTd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,26 +23,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <searchBar contentMode="redraw" placeholder="Search..." translatesAutoresizingMaskIntoConstraints="NO" id="M07-LV-TVD">
-                    <rect key="frame" x="14" y="64" width="314" height="56"/>
+                    <rect key="frame" x="14" y="64" width="364" height="56"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="mSp-c9-Vxl"/>
                     </connections>
                 </searchBar>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhN-dC-pLM">
-                    <rect key="frame" x="337" y="72" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="40" id="KRa-iH-eGt"/>
-                        <constraint firstAttribute="height" constant="40" id="PCy-RJ-1BK"/>
-                    </constraints>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="gray" image="filter" cornerStyle="medium">
-                        <color key="baseBackgroundColor" red="0.57254904510000004" green="0.46274507050000002" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </buttonConfiguration>
-                    <connections>
-                        <action selector="filterButtonTapped:" destination="-1" eventType="touchUpInside" id="gWK-s4-6uF"/>
-                    </connections>
-                </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="2LE-4z-brp">
                     <rect key="frame" x="20" y="125" width="353" height="727"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -57,53 +39,13 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zG6-4Y-ypU">
-                    <rect key="frame" x="337" y="120" width="40" height="40"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="TkB-lC-2Bh">
+                    <rect key="frame" x="171.66666666666666" y="401" width="50" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Ssa-d4-95c"/>
-                        <constraint firstAttribute="width" constant="40" id="ZUf-l7-BUV"/>
+                        <constraint firstAttribute="height" constant="50" id="JBP-gM-bzV"/>
+                        <constraint firstAttribute="width" constant="50" id="L9N-IH-Vhh"/>
                     </constraints>
-                    <color key="tintColor" red="0.94901961089999998" green="0.94901961089999998" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="gray" image="star.fill" catalog="system" cornerStyle="capsule">
-                        <color key="baseBackgroundColor" red="0.57254904510000004" green="0.46274507050000002" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </buttonConfiguration>
-                    <connections>
-                        <action selector="rateFilterButtonTapped:" destination="-1" eventType="touchUpInside" id="Qha-1C-hth"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGh-Od-D7m">
-                    <rect key="frame" x="337" y="168" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="40" id="dXc-0C-2d4"/>
-                        <constraint firstAttribute="height" constant="40" id="fTO-tp-O6b"/>
-                    </constraints>
-                    <color key="tintColor" red="0.96078431610000004" green="0.96470588450000005" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="gray" cornerStyle="capsule">
-                        <imageReference key="image" image="dollarsign" catalog="system" symbolScale="large"/>
-                        <color key="baseBackgroundColor" red="0.57254904510000004" green="0.46274507050000002" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </buttonConfiguration>
-                    <connections>
-                        <action selector="priceFilterButtonTapped:" destination="-1" eventType="touchUpInside" id="Uak-md-oFM"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3UK-z7-g6y">
-                    <rect key="frame" x="337" y="216" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="90I-f4-6u1"/>
-                        <constraint firstAttribute="width" constant="40" id="rW0-v6-1Pa"/>
-                    </constraints>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="gray" title="A" cornerStyle="capsule">
-                        <fontDescription key="titleFontDescription" type="system" weight="heavy" pointSize="20"/>
-                        <color key="baseBackgroundColor" red="0.57254904510000004" green="0.46274507050000002" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </buttonConfiguration>
-                    <connections>
-                        <action selector="charFilterButtonTapped:" destination="-1" eventType="touchUpInside" id="tNp-Dp-gSJ"/>
-                    </connections>
-                </button>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -111,26 +53,17 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2LE-4z-brp" secondAttribute="trailing" constant="20" id="4pf-8b-gha"/>
                 <constraint firstItem="M07-LV-TVD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="14" id="8xy-xc-h5G"/>
                 <constraint firstAttribute="bottom" secondItem="2LE-4z-brp" secondAttribute="bottom" id="F1f-zA-hXh"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3UK-z7-g6y" secondAttribute="trailing" constant="16" id="Jul-Vx-3xk"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LhN-dC-pLM" secondAttribute="trailing" constant="16" id="LWd-Mz-8Nc"/>
-                <constraint firstItem="zG6-4Y-ypU" firstAttribute="top" secondItem="LhN-dC-pLM" secondAttribute="bottom" constant="8" id="MVu-46-oIu"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zG6-4Y-ypU" secondAttribute="trailing" constant="16" id="Rzv-06-X03"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GGh-Od-D7m" secondAttribute="trailing" constant="16" id="cfk-Hv-drb"/>
                 <constraint firstItem="M07-LV-TVD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="5" id="gwE-kF-g3W"/>
                 <constraint firstItem="2LE-4z-brp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="isa-JL-fGw"/>
-                <constraint firstItem="GGh-Od-D7m" firstAttribute="top" secondItem="zG6-4Y-ypU" secondAttribute="bottom" constant="8" symbolic="YES" id="mRV-J5-rdH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="M07-LV-TVD" secondAttribute="trailing" constant="15" id="o4w-Q3-1sX"/>
+                <constraint firstItem="TkB-lC-2Bh" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="oYw-4n-syc"/>
                 <constraint firstItem="2LE-4z-brp" firstAttribute="top" secondItem="M07-LV-TVD" secondAttribute="bottom" constant="5" id="rED-Ae-Cd8"/>
-                <constraint firstItem="3UK-z7-g6y" firstAttribute="top" secondItem="GGh-Od-D7m" secondAttribute="bottom" constant="8" symbolic="YES" id="rjZ-xo-WcK"/>
-                <constraint firstItem="LhN-dC-pLM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="xTB-Kg-Tj8"/>
-                <constraint firstItem="LhN-dC-pLM" firstAttribute="leading" secondItem="M07-LV-TVD" secondAttribute="trailing" constant="9" id="xWD-no-QeG"/>
+                <constraint firstItem="TkB-lC-2Bh" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zxk-pD-803"/>
             </constraints>
             <point key="canvasLocation" x="38.931297709923662" y="19.718309859154932"/>
         </view>
     </objects>
     <resources>
-        <image name="dollarsign" catalog="system" width="89" height="128"/>
-        <image name="filter" width="14" height="14"/>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

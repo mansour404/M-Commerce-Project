@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,7 +27,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="393" height="818"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.slash.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="9FJ-bV-cr4">
-                            <rect key="frame" x="76.666666666666686" y="309.33333333333331" width="240" height="119"/>
+                            <rect key="frame" x="76.666666666666686" y="310" width="240" height="118.33333333333331"/>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" id="EDN-XN-NsQ"/>
@@ -68,15 +68,20 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aew-Zh-YhQ">
                             <rect key="frame" x="86.666666666666686" y="7.6666666666666288" width="220" height="45"/>
-                            <color key="backgroundColor" red="0.59215686270000001" green="0.45882352939999999" blue="0.98039215690000003" alpha="0.875" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="220" id="cfr-nZ-Ct6"/>
                                 <constraint firstAttribute="height" constant="45" id="drG-TS-MPN"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="  Continue" image="arrowshape.turn.up.right.fill" catalog="system"/>
+                            <buttonConfiguration key="configuration" style="filled" image="arrowshape.turn.up.right.fill" catalog="system" title="  Continue">
+                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="baseBackgroundColor" red="0.57254904510000004" green="0.46274507050000002" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </buttonConfiguration>
                             <connections>
                                 <action selector="continueButtonPressed:" destination="-1" eventType="touchUpInside" id="vNd-CL-yAG"/>
                             </connections>
@@ -90,14 +95,18 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7d-MW-371">
                     <rect key="frame" x="225" y="49" width="160" height="50"/>
-                    <color key="backgroundColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="AQx-dF-Bd1"/>
                         <constraint firstAttribute="width" constant="160" id="YRB-3I-YCm"/>
                     </constraints>
-                    <color key="tintColor" red="0.90588235859999999" green="0.90980386729999996" blue="0.91764706370000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="add new address"/>
+                    <buttonConfiguration key="configuration" style="filled" title="add new address" cornerStyle="large">
+                        <fontDescription key="titleFontDescription" type="boldSystem" pointSize="15"/>
+                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="baseBackgroundColor" red="0.57254904510000004" green="0.46274507050000002" blue="0.94901961089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </buttonConfiguration>
                     <connections>
                         <action selector="addNewAddressButtonPressed:" destination="-1" eventType="touchUpInside" id="asc-ce-g7A"/>
                     </connections>
@@ -125,7 +134,7 @@
     </objects>
     <resources>
         <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="104"/>
-        <image name="location.slash.fill" catalog="system" width="128" height="123"/>
+        <image name="location.slash.fill" catalog="system" width="128" height="119"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

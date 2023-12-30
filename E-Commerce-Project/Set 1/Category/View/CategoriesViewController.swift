@@ -11,7 +11,9 @@ class CategoriesViewController: UIViewController {
     // MARK: - Variables
     @IBOutlet weak var subMainCollectionView: UICollectionView!
     
-   
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var noItemImage: UIImageView!
+    
     @IBOutlet var secondOutletCollection: [UIButton]!
     let categoryViewModel = CategoryViewModel()
     
@@ -20,27 +22,25 @@ class CategoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationItem.title = "Categories"
+        indicator.startAnimating()
+        subMainCollectionView.isHidden = true
+        configureLoadingDataFromApi()
+
         configureCollectionView()
         categoryViewModel.bindresultToHomeViewController = {
             DispatchQueue.main.async {
                 self.subMainCollectionView.reloadData()
-            }
-        }
+                self.indicator.stopAnimating()
+                self.indicator.hidesWhenStopped = true
+                self.subMainCollectionView.isHidden = false
 
-        navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
-//        navigationItem.setLeftBarButton(addFSearchButton(), animated: true)
-       configureLoadingDataFromApi()
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        categoryViewModel.bindresultToHomeViewController = {
-            DispatchQueue.main.async {
-                self.subMainCollectionView.reloadData()
             }
         }
+        noItemImage.isHidden = true
+        navigationItem.setRightBarButtonItems([addFavouriteButton(), addShoppingCartButton()], animated: true)
         
-        configureLoadingDataFromApi()
     }
+
     // MARK: - Configure CollectionView
     private func configureCollectionView() {
         subMainCollectionView.dataSource = self
@@ -121,9 +121,14 @@ class CategoriesViewController: UIViewController {
 // MARK: - UICollectionView DataSource
 extension CategoriesViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categoryViewModel.getNumberOfProducts() ?? 3
+        if categoryViewModel.getNumberOfProducts() == 0 {
+            noItemImage.isHidden = false
+        } else {
+            noItemImage.isHidden = true
+        }
+        
+        return categoryViewModel.getNumberOfProducts() ?? 3
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = subMainCollectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.submainCollectionViewCell, for: indexPath) as! SubmainCollectionViewCell
@@ -190,11 +195,5 @@ extension CategoriesViewController: UICollectionViewDelegate , UICollectionViewD
         return CGSize(width: (subMainCollectionView.frame.width / 2) - 10 , height: (subMainCollectionView.frame.height) / 2.5 )
     }
     
-     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //(collectionView, willDisplay: cell, forItemAt: indexPath)
-//         let cell = cell as! SubmainCollectionViewCell
-//         cell.setControllerFavourite()
-             // Your code here
-        }
 }
 

@@ -24,6 +24,7 @@ class SignUpVC: UIViewController {
         super.viewDidLoad()
         signInButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(googleSigninTapped)))
         userData = SignUpData(userFirstName: "", userLastName: "", userPassword: "", userEmail: "", userPhoneNumber: "")
+        userPasswordfield.isSecureTextEntry = true
         
     }
     @objc func googleSigninTapped(){
@@ -107,15 +108,15 @@ class SignUpVC: UIViewController {
     @IBAction func SignUpPressed(_ sender: UIButton) {
         if(textFieldIsNotEmpty()){
             if( signUpViewModel.isDataValid(phoneNumber: userPhoneNumberfield.text!, emailAdress: userEmailAdressfield.text!, userPassword: userPasswordfield.text!)){
-                showAlert(message: "An Verification  link will be  sent to your email please go check it ", actionType: .default)
+//                showAlert(message: "An Verification  link will be  sent to your email please go check it ", actionType: .default)
                 let arr  : [String] = sperateUserName(userName: userNamefield.text!)
-                signUpViewModel.bindresultToProductsViewController = {
-                    self.showAlert(message: self.signUpViewModel.messageText, actionType: .default)
-                }
+//                signUpViewModel.bindresultToProductsViewController = {
+//                    self.showAlert(message: self.signUpViewModel.messageText, actionType: .default)
+//                }
                 signUpViewModel.data = SignUpData(userFirstName: arr[0], userLastName: arr[1], userPassword: self.userPasswordfield.text! , userEmail: self.userEmailAdressfield.text!, userPhoneNumber: self.userPhoneNumberfield.text!)
               
                 signUpViewModel.pushToHome = {
-                    let vc = NewAddressView()
+                    let vc = TabController()
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true)
                 }
